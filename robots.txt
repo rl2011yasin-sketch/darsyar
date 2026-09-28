@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://rl2011yasin-sketch.github.io/darsyar/sitemap.xml
+Sitemap: https://rl2011yasin-sketch.github.io/darsyar/sitemap.html
