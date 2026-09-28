@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6366f1">
+<title>درسیار</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --primary:#6366f1;--primary-dark:#4f46e5;--primary-light:#eef2ff;
+  --bg:#f6f7fb;--card:#fff;--text:#0f172a;--muted:#64748b;--dim:#94a3b8;
+  --border:#eaedf3;--r:18px;
+  --sh:0 1px 2px rgba(15,23,42,.05);
+  --safe:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:Vazirmatn,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font-family:inherit;color:inherit;outline:none}
+button{border:0;background:none;cursor:pointer}
+input,textarea,select{border:0;background:none}
+.app{min-height:100vh;display:flex;flex-direction:column;max-width:640px;margin:0 auto;background:var(--bg)}
+.header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#a855f7);display:grid;place-items:center;font-size:19px;box-shadow:0 6px 16px -6px rgba(99,102,241,.7)}
+.brand-name{font-weight:800;font-size:16px;letter-spacing:-.3px;line-height:1.2}
+.brand-sub{font-size:10.5px;color:var(--dim);font-weight:500;line-height:1.2}
+.hspace{flex:1}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:20px;font-size:11px;font-weight:700;background:#f1f5f9;color:var(--muted);transition:.3s}
+.status-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:#cbd5e1;transition:.3s}
+.status-pill.online{background:#ecfdf5;color:#059669}
+.status-pill.online::before{background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+.status-pill.offline{background:#fef2f2;color:#dc2626}
+.status-pill.offline::before{background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.2)}
+.main{flex:1;padding:16px 18px calc(110px + var(--safe))}
+.screen{display:none}
+.screen.active{display:block;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);border-radius:22px;padding:20px;color:#fff;margin-bottom:20px;box-shadow:0 20px 40px -18px rgba(99,102,241,.7)}
+.hero::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.12);top:-70px;left:-50px}
+.hero::after{content:'';position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08);bottom:-60px;right:-30px}
+.hero-in{position:relative;z-index:1}
+.hero-title{font-size:19px;font-weight:800;letter-spacing:-.4px}
+.hero-sub{font-size:12.5px;opacity:.9;margin-bottom:14px;font-weight:500}
+.hero-stats{display:flex;gap:24px}
+.hero-stat b{display:block;font-size:22px;font-weight:800;line-height:1.2;letter-spacing:-.5px}
+.hero-stat span{font-size:11px;opacity:.85;font-weight:500}
+.section{display:flex;align-items:center;justify-content:space-between;margin:0 4px 10px}
+.section h2{font-size:14.5px;font-weight:800;letter-spacing:-.2px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 18px 14px;margin:0 -18px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;background:#fff;border:1.5px solid var(--border);font-size:13px;font-weight:600;color:var(--text);transition:.18s;white-space:nowrap}
+.chip:active{transform:scale(.95)}
+.chip .cnt{font-size:10.5px;background:#f1f5f9;color:var(--muted);padding:1px 7px;border-radius:20px;font-weight:700}
+.chip.active{background:linear-gradient(135deg,var(--primary),#8b5cf6);border-color:transparent;color:#fff;box-shadow:0 8px 18px -8px rgba(99,102,241,.85)}
+.chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
+.notes{display:flex;flex-direction:column;gap:11px}
+.note-card{background:var(--card);border-radius:var(--r);padding:15px 16px 13px;box-shadow:var(--sh);border:1.5px solid var(--border);transition:.18s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:9px}
+.note-card:active{transform:scale(.985);background:#fafbff}
+.note-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--sc,var(--primary))}
+.nc-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-right:8px}
+.nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5)}
+.nc-grade{font-size:11px;font-weight:700;color:var(--muted);background:#f1f5f9;padding:3px 9px;border-radius:20px}
+.nc-pdf-badge{font-size:10.5px;font-weight:700;background:#fef2f2;color:#dc2626;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.nc-title{font-size:15px;font-weight:700;line-height:1.7;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.nc-preview{font-size:12.5px;color:var(--muted);line-height:1.9;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.nc-foot{display:flex;align-items:center;gap:14px;padding-top:9px;margin-top:3px;border-top:1px solid var(--border);font-size:11px;color:var(--dim);font-weight:600;padding-right:8px}
+.nc-foot .item{display:inline-flex;align-items:center;gap:5px}
+.empty{background:var(--card);border-radius:var(--r);padding:40px 22px;text-align:center;border:1.5px dashed var(--border)}
+.empty-icon{width:64px;height:64px;border-radius:20px;background:var(--primary-light);display:grid;place-items:center;font-size:28px;margin:0 auto 14px}
+.empty b{display:block;font-size:15px;font-weight:800;margin-bottom:6px}
+.empty p{font-size:13px;color:var(--muted);line-height:1.9}
+.search-box{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:11px 14px;margin-bottom:16px;transition:.18s}
+.search-box:focus-within{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,102,241,.1)}
+.search-box input{flex:1;font-size:14px}
+.search-box input::placeholder{color:var(--dim)}
+.lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
+.lib-grade-head{display:flex;align-items:center;gap:10px;padding:13px 15px;cursor:pointer;transition:.15s}
+.lib-grade-head:active{background:#fafbff}
+.lib-grade-num{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#a855f7);display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;flex-shrink:0}
+.lib-grade-title{flex:1;font-weight:700;font-size:14px}
+.lib-grade-meta{font-size:11px;color:var(--dim);font-weight:600}
+.lib-grade-arrow{color:var(--dim);font-size:18px;transition:.2s}
+.lib-grade.open .lib-grade-arrow{transform:rotate(-90deg)}
+.lib-subs{display:none;border-top:1px solid var(--border);padding:6px 0}
+.lib-grade.open .lib-subs{display:block}
+.lib-sub{display:flex;align-items:center;gap:10px;padding:10px 15px;font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s}
+.lib-sub:active{background:#fafbff}
+.lib-sub-icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;background:var(--sb,#eef2ff)}
+.profile-card{background:var(--card);border-radius:var(--r);padding:22px;box-shadow:var(--sh);border:1.5px solid var(--border);text-align:center;margin-bottom:14px}
+.profile-av{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a855f7);display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;margin:0 auto 12px;box-shadow:0 12px 26px -12px rgba(99,102,241,.9)}
+.profile-card h3{font-size:16px;font-weight:800;margin-bottom:3px}
+.profile-card p{font-size:12.5px;color:var(--muted)}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-card{background:var(--card);border-radius:14px;padding:14px 8px;text-align:center;border:1.5px solid var(--border)}
+.stat-card b{display:block;font-size:20px;font-weight:800;color:var(--primary);letter-spacing:-.5px}
+.stat-card span{font-size:11px;color:var(--muted);font-weight:600}
+.menu{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);overflow:hidden}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%;text-align:right;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;transition:.15s}
+.menu-item:last-child{border-bottom:0}
+.menu-item:active{background:#f8fafc}
+.menu-icon{width:34px;height:34px;border-radius:10px;background:var(--primary-light);color:var(--primary);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.menu-item .arrow{color:var(--dim);margin-right:auto;font-size:18px}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-top:1px solid var(--border);padding:8px 10px calc(8px + var(--safe));display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:12px;color:var(--dim);font-size:10.5px;font-weight:700;transition:.18s}
+.nav-btn svg{width:22px;height:22px;transition:.2s}
+.nav-btn.active{color:var(--primary);background:var(--primary-light)}
+.nav-btn:active{transform:scale(.94)}
+.detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:80;background:var(--bg);display:flex;flex-direction:column;animation:slideIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+.detail-header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px}
+.back-btn{width:38px;height:38px;border-radius:12px;background:#f1f5f9;display:grid;place-items:center;color:var(--text);transition:.15s;flex-shrink:0}
+.back-btn:active{background:#e2e8f0;transform:scale(.94)}
+.detail-title{font-size:14.5px;font-weight:800;flex:1;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail-body{flex:1;overflow-y:auto;padding:18px 18px calc(30px + var(--safe))}
+.note-head{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--border);margin-bottom:14px}
+.chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.note-title{font-size:21px;font-weight:800;letter-spacing:-.5px;line-height:1.6;margin-bottom:8px}
+.note-meta{font-size:11.5px;color:var(--dim);font-weight:600}
+.note-content{background:var(--card);border-radius:var(--r);padding:22px;box-shadow:var(--sh);border:1.5px solid var(--border);font-size:15px;line-height:2.15;color:#334155;margin-bottom:14px;word-break:break-word}
+.note-content h2{font-size:19px;font-weight:800;color:var(--primary-dark);margin:16px 0 8px;letter-spacing:-.3px}
+.note-content h3{font-size:17px;font-weight:800;color:#7c3aed;margin:14px 0 7px}
+.note-content h4{font-size:15.5px;font-weight:800;color:#0f172a;margin:12px 0 6px}
+.note-content p{margin:5px 0}
+.note-content ul{margin:8px 20px 8px 0;padding-right:6px}
+.note-content li{margin:3px 0}
+.note-content strong{color:#0f172a;font-weight:800}
+.note-content .sp{height:8px}
+/* PDF box */
+.pdf-box{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:var(--sh);border:1.5px solid var(--border);margin-bottom:14px}
+.pdf-box-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.pdf-icon{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,#ef4444,#dc2626);display:grid;place-items:center;color:#fff;font-size:22px;flex-shrink:0;box-shadow:0 8px 18px -8px rgba(220,38,38,.7)}
+.pdf-info{flex:1;min-width:0}
+.pdf-label{font-size:10.5px;color:var(--dim);font-weight:700;letter-spacing:.3px}
+.pdf-name{font-size:14px;font-weight:700;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-size{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.pdf-actions{display:flex;gap:8px;flex-wrap:wrap}
+.pdf-actions .btn{flex:1;justify-content:center;min-width:120px}
+.pdf-not-synced{background:#fef3c7;color:#92400e;padding:10px 12px;border-radius:10px;font-size:12px;font-weight:600;line-height:1.8;margin-top:10px;border:1px solid #fde68a}
+/* Comments */
+.comments{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--border)}
+.comments h3{font-size:15px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.cnt-pill{font-size:11px;background:var(--primary-light);color:var(--primary);padding:2px 8px;border-radius:20px;font-weight:800}
+.cmt{display:flex;gap:11px;padding:12px 0;border-bottom:1px solid var(--border)}
+.cmt:last-of-type{border-bottom:0}
+.cmt-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px}
+.cmt-body{flex:1;min-width:0}
+.cmt-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px}
+.cmt-head b{font-size:13.5px;font-weight:800}
+.cmt-head span{font-size:10.5px;color:var(--dim);font-weight:600}
+.cmt-text{font-size:13.5px;color:#334155;line-height:2;word-break:break-word}
+.cmt-form{margin-top:16px;padding-top:16px;border-top:2px dashed var(--border);display:flex;flex-direction:column;gap:9px}
+.cmt-form input,.cmt-form textarea{border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;font-size:13.5px;transition:.15s;background:#fafbff;resize:vertical;width:100%}
+.cmt-form input:focus,.cmt-form textarea:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 4px rgba(99,102,241,.1)}
+.cmt-form button{align-self:flex-start;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:11px 26px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
+.cmt-form button:active{transform:scale(.96)}
+.cmt-form button:disabled{opacity:.6;cursor:wait}
+/* Sheet */
+.sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:100;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(3px)}
+.sheet-overlay.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:640px;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px calc(24px + var(--safe));z-index:101;transition:transform .3s cubic-bezier(.2,.8,.2,1);max-height:80vh;overflow-y:auto}
+.sheet.show{transform:translate(-50%,0)}
+.sheet-handle{width:38px;height:4px;border-radius:20px;background:#cbd5e1;margin:6px auto 16px}
+.sheet h3{font-size:16px;font-weight:800;margin-bottom:14px;padding:0 4px}
+.grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grade-opt{padding:16px 8px;border-radius:14px;border:1.5px solid var(--border);background:#fafbff;font-size:14px;font-weight:700;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.grade-opt:active{transform:scale(.95)}
+.grade-opt .num{font-size:22px;font-weight:800;letter-spacing:-.5px;line-height:1}
+.grade-opt .lbl{font-size:11px;color:var(--muted);font-weight:600}
+.grade-opt.active{background:linear-gradient(135deg,var(--primary),#8b5cf6);border-color:transparent;color:#fff}
+.grade-opt.active .num,.grade-opt.active .lbl{color:#fff}
+.toast{position:fixed;bottom:calc(110px + var(--safe));left:50%;transform:translate(-50%,60px);background:#0f172a;color:#fff;padding:11px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:200;box-shadow:0 14px 34px -10px rgba(0,0,0,.5);max-width:88vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* PDF Viewer */
+.pdf-viewer{position:fixed;inset:0;z-index:500;background:#0f172a;display:flex;flex-direction:column}
+.pdf-viewer.hidden{display:none}
+.pdf-viewer-header{background:#1e293b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.pdf-viewer-header .back-btn{background:rgba(255,255,255,.12);color:#fff}
+.pdf-viewer-header .back-btn:active{background:rgba(255,255,255,.22)}
+.pdf-viewer-title{flex:1;font-size:13.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-viewer-body{flex:1;position:relative;background:#0f172a}
+.pdf-viewer-body iframe{width:100%;height:100%;border:0;background:#fff}
+.pdf-viewer-loading{position:absolute;inset:0;display:grid;place-items:center;color:#94a3b8;font-size:13px;font-weight:600;background:#0f172a}
+/* Admin */
+.admin{position:fixed;inset:0;z-index:1000;background:#f6f7fb;display:flex;flex-direction:column}
+.admin.hidden{display:none}
+.admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 20px -6px rgba(0,0,0,.3)}
+.admin-header-logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#6366f1,#a855f7);display:grid;place-items:center;font-size:18px}
+.admin-header-title{font-weight:800;font-size:15px;line-height:1.2}
+.admin-header-sub{font-size:10.5px;opacity:.7;font-weight:500}
+.admin-header-spacer{flex:1}
+.admin-close{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700;transition:.15s}
+.admin-close:active{background:rgba(255,255,255,.25);transform:scale(.94)}
+.admin-tabs{display:flex;background:#fff;border-bottom:1px solid var(--border);padding:0 12px;overflow-x:auto;scrollbar-width:none}
+.admin-tabs::-webkit-scrollbar{display:none}
+.admin-tab{padding:14px 16px;font-size:13.5px;font-weight:700;color:var(--muted);border-bottom:2.5px solid transparent;transition:.15s;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.admin-tab.active{color:var(--primary);border-color:var(--primary)}
+.admin-tab .cnt-mini{font-size:10.5px;background:#f1f5f9;color:var(--muted);padding:1px 7px;border-radius:20px;font-weight:700}
+.admin-tab.active .cnt-mini{background:var(--primary-light);color:var(--primary)}
+.admin-body{flex:1;overflow-y:auto;padding:16px;max-width:900px;margin:0 auto;width:100%}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.admin-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;cursor:pointer;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
+.btn-primary:active{transform:scale(.97)}
+.btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border)}
+.btn-ghost:active{background:#f8fafc}
+.btn-danger{background:#fef2f2;color:#dc2626;border:1.5px solid #fecaca}
+.btn-danger:active{background:#fee2e2}
+.btn-sm{padding:7px 12px;font-size:12px;border-radius:9px}
+.admin-list{display:flex;flex-direction:column;gap:9px}
+.admin-item{background:#fff;border-radius:14px;padding:14px 15px;border:1.5px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.admin-item-icon{width:42px;height:42px;border-radius:11px;flex-shrink:0;display:grid;place-items:center;font-size:18px}
+.admin-item-body{flex:1;min-width:0}
+.admin-item-title{font-size:14px;font-weight:700;margin-bottom:3px;line-height:1.6}
+.admin-item-meta{font-size:11px;color:var(--dim);font-weight:600;display:flex;gap:10px;flex-wrap:wrap}
+.admin-item-actions{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.admin-empty{background:#fff;border-radius:14px;padding:40px 20px;text-align:center;border:1.5px dashed var(--border);color:var(--muted);font-size:13.5px;line-height:2}
+.editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column}
+.editor.hidden{display:none}
+.editor-header{background:#fff;border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:12px}
+.editor-header h3{font-size:15px;font-weight:800;flex:1}
+.editor-body{flex:1;overflow-y:auto;padding:18px;max-width:700px;margin:0 auto;width:100%}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px;padding:0 4px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px;background:#fff;transition:.15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,102,241,.1)}
+.field textarea{resize:vertical;min-height:120px;line-height:2;font-family:inherit}
+.field textarea.content-area{min-height:260px;font-size:14px}
+.field .hint{font-size:11px;color:var(--dim);margin-top:5px;padding:0 4px;line-height:1.7}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.pdf-upload-area{display:flex;align-items:center;gap:10px;background:#fafbff;border:1.5px dashed var(--border);border-radius:12px;padding:14px}
+.pdf-upload-area.has-file{background:#f0fdf4;border-color:#86efac;border-style:solid}
+.pdf-upload-icon{width:40px;height:40px;border-radius:11px;background:#fef2f2;color:#dc2626;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.pdf-upload-info{flex:1;min-width:0}
+.pdf-upload-name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdf-upload-size{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
+.pdf-upload-remove{width:30px;height:30px;border-radius:9px;background:#fee2e2;color:#dc2626;display:grid;place-items:center;font-size:14px;flex-shrink:0;cursor:pointer}
+.editor-actions{display:flex;gap:8px;padding:14px 18px;border-top:1px solid var(--border);background:#fff;max-width:700px;margin:0 auto;width:100%;flex-wrap:wrap}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <div class="brand-logo">📚</div>
+      <div>
+        <div class="brand-name">درسیار</div>
+        <div class="brand-sub">جزوه‌های کتاب درسی</div>
+      </div>
+    </div>
+    <div class="hspace"></div>
+    <div class="status-pill" id="statusPill"><span id="statusLbl">آفلاین</span></div>
+  </header>
+
+  <main class="main">
+    <!-- HOME -->
+    <section class="screen active" id="screen-home">
+      <div class="hero">
+        <div class="hero-in">
+          <div class="hero-title" id="heroTitle">سلام 👋</div>
+          <div class="hero-sub" id="heroSub">جزوه‌های کتاب درسی</div>
+          <div class="hero-stats">
+            <div class="hero-stat"><b id="statNotes">۰</b><span>جزوه</span></div>
+            <div class="hero-stat"><b id="statSubjects">۰</b><span>درس</span></div>
+            <div class="hero-stat"><b id="statComments">۰</b><span>نظر</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="section"><h2>درس‌های این پایه</h2></div>
+      <div class="chips" id="subjectChips"></div>
+      <div class="section"><h2>آخرین جزوه‌ها</h2></div>
+      <div class="notes" id="notesList"></div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="screen" id="screen-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" placeholder="جستجو در همه جزوه‌ها…" autocomplete="off">
+      </div>
+      <div class="notes" id="searchResults"></div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="screen" id="screen-library">
+      <div class="section"><h2>کتابخانه درسی</h2></div>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 4px 14px">روی هر پایه بزنید تا درس‌های آن را ببینید.</p>
+      <div id="libraryList"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="screen" id="screen-profile">
+      <div class="profile-card">
+        <div class="profile-av" id="profileAv">👤</div>
+        <h3 id="profileName">دانش‌آموز مهمان</h3>
+        <p id="profileGrade">پایه هفتم</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><b id="pStatNotes">۰</b><span>جزوه</span></div>
+        <div class="stat-card"><b id="pStatComments">۰</b><span>نظر</span></div>
+        <div class="stat-card"><b id="pStatSubjects">۰</b><span>درس</span></div>
+      </div>
+      <div class="menu">
+        <button class="menu-item" id="menuGrade" type="button">
+          <div class="menu-icon">🎓</div><div>تغییر پایه تحصیلی</div><span class="arrow">‹</span>
+        </button>
+        <button class="menu-item" id="menuName" type="button">
+          <div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span>
+        </button>
+        <button class="menu-item" id="menuSync" type="button">
+          <div class="menu-icon">🔄</div><div>همگام‌سازی با سرور</div><span class="arrow">‹</span>
+        </button>
+      </div>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:20px;line-height:1.9">
+        درسیار • نسخه ۲.۰<br>پنل مدیر: Ctrl + Shift + A
+      </p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-btn active" data-nav="home" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      <span>خانه</span>
+    </button>
+    <button class="nav-btn" data-nav="search" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>جستجو</span>
+    </button>
+    <button class="nav-btn" data-nav="library" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>کتابخانه</span>
+    </button>
+    <button class="nav-btn" data-nav="profile" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+      <span>پروفایل</span>
+    </button>
+  </nav>
+</div>
+
+<!-- NOTE DETAIL -->
+<div class="detail hidden" id="detail">
+  <div class="detail-header">
+    <button class="back-btn" id="detailBack" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="detail-title" id="detailTitle">جزوه</div>
+  </div>
+  <div class="detail-body" id="detailBody"></div>
+</div>
+
+<!-- PDF VIEWER -->
+<div class="pdf-viewer hidden" id="pdfViewer">
+  <div class="pdf-viewer-header">
+    <button class="back-btn" id="pdfViewerClose" type="button">✕</button>
+    <div class="pdf-viewer-title" id="pdfViewerTitle">مشاهده PDF</div>
+    <a class="btn btn-ghost btn-sm" id="pdfViewerDownload" download style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.25)">⬇ دانلود</a>
+  </div>
+  <div class="pdf-viewer-body">
+    <div class="pdf-viewer-loading" id="pdfViewerLoading">در حال بارگذاری PDF…</div>
+    <iframe id="pdfViewerFrame" src="about:blank"></iframe>
+  </div>
+</div>
+
+<!-- SHEET -->
+<div class="sheet-overlay" id="sheetOverlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <h3 id="sheetTitle">انتخاب پایه</h3>
+  <div class="grade-grid" id="gradeGrid"></div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin hidden" id="admin">
+  <div class="admin-header">
+    <div class="admin-header-logo">🛠</div>
+    <div>
+      <div class="admin-header-title">پنل مدیر درسیار</div>
+      <div class="admin-header-sub">مدیریت جزوه‌ها و درس‌ها</div>
+    </div>
+    <div class="admin-header-spacer"></div>
+    <button class="admin-close" id="adminClose" type="button">✕</button>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="notes" type="button">📝 جزوه‌ها <span class="cnt-mini" id="tabNotesCount">۰</span></button>
+    <button class="admin-tab" data-tab="subjects" type="button">📚 درس‌های سفارشی <span class="cnt-mini" id="tabSubjectsCount">۰</span></button>
+    <button class="admin-tab" data-tab="settings" type="button">⚙️ تنظیمات</button>
+  </div>
+
+  <div class="admin-body">
+    <div class="admin-panel active" id="panel-notes">
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="btnNewNote" type="button"><span>＋</span> جزوه جدید</button>
+        <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 به‌روزرسانی</button>
+      </div>
+      <div id="adminNotesFilter" style="margin-bottom:14px"></div>
+      <div class="admin-list" id="adminNotesList"></div>
+    </div>
+
+    <div class="admin-panel" id="panel-subjects">
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="btnNewSubject" type="button"><span>＋</span> درس سفارشی جدید</button>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.9;padding:0 4px">
+        ℹ️ درس‌های پیش‌فرض کتاب‌های درسی به‌صورت خودکار برای هر پایه نمایش داده می‌شوند. از این بخش می‌توانید درس‌های اضافی اضافه کنید.
+      </p>
+      <div class="admin-list" id="adminSubjectsList"></div>
+    </div>
+
+    <div class="admin-panel" id="panel-settings">
+      <div class="field">
+        <label>موضوع سرور (Topic) — ntfy.sh</label>
+        <input id="setTopic" placeholder="darsyar-classroom-1404">
+        <div class="hint">⚠️ این موضوع، کلاس مجازی شما است. تمام دستگاه‌هایی که همین موضوع را وارد کنند، داده‌های یکسانی را می‌بینند. پس از تغییر، اپ را دوباره باز کنید.</div>
+      </div>
+      <div class="field">
+        <label>آدرس سرور</label>
+        <input id="setServer" value="https://ntfy.sh" readonly style="background:#f8fafc;color:var(--muted)">
+      </div>
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="btnSaveSettings" type="button">💾 ذخیره تنظیمات</button>
+        <button class="btn btn-ghost" id="btnForceSync" type="button">🔄 همگام‌سازی کامل</button>
+        <button class="btn btn-danger" id="btnClearLocal" type="button">🗑 پاک‌کردن داده‌های محلی</button>
+      </div>
+      <div class="field" style="margin-top:20px">
+        <label>خروجی JSON از داده‌های محلی</label>
+        <textarea id="setExport" readonly style="min-height:120px;font-size:11px;font-family:monospace;direction:ltr;text-align:left"></textarea>
+        <div class="hint">برای پشتیبان‌گیری، این متن را کپی کنید (بدون PDF ها).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE EDITOR -->
+<div class="editor hidden" id="editor">
+  <div class="editor-header">
+    <button class="back-btn" id="editorBack" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <h3 id="editorTitle">جزوه جدید</h3>
+  </div>
+  <div class="editor-body" id="editorBody">
+    <div class="field-row">
+      <div class="field">
+        <label>پایه تحصیلی</label>
+        <select id="edGrade"></select>
+      </div>
+      <div class="field">
+        <label>درس</label>
+        <select id="edSubject"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label>عنوان جزوه</label>
+      <input id="edTitle" placeholder="مثلاً: فصل اول — عددهای صحیح" maxlength="120">
+    </div>
+    <div class="field">
+      <label>متن جزوه</label>
+      <textarea id="edContent" class="content-area"
+        placeholder="متن جزوه را اینجا بنویسید…&#10;&#10;قواعد قالب‌بندی:&#10;# عنوان بزرگ&#10;## عنوان متوسط&#10;### عنوان کوچک&#10;- آیتم لیست&#10;**متن مهم**"></textarea>
+      <div class="hint">از # برای عنوان، - برای لیست و ** برای متن پررنگ استفاده کنید.</div>
+    </div>
+
+    <div style="background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px">
+      <div style="font-size:13px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:7px">
+        📄 فایل PDF (اختیاری)
+      </div>
+      
+      <div class="field">
+        <label>بارگذاری فایل PDF</label>
+        <input type="file" id="edPdfFile" accept="application/pdf" style="display:none">
+        <div class="pdf-upload-area" id="pdfUploadArea">
+          <div class="pdf-upload-icon">📄</div>
+          <div class="pdf-upload-info">
+            <div class="pdf-upload-name" id="pdfUploadName">هیچ فایلی انتخاب نشده</div>
+            <div class="pdf-upload-size" id="pdfUploadSize">حداکثر ۵۰۰ کیلوبایت</div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="btnChoosePdf">انتخاب</button>
+          <button type="button" class="pdf-upload-remove hidden" id="btnRemovePdf">✕</button>
+        </div>
+        <div class="hint">
+          ⚠️ فایل‌های زیر ۲۰۰ کیلوبایت به‌صورت خودکار با سرور همگام می‌شوند.<br>
+          برای فایل‌های بزرگ‌تر، از «لینک PDF» استفاده کنید.
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:0">
+        <label>یا لینک PDF خارجی</label>
+        <input id="edPdfUrl" placeholder="https://example.com/file.pdf" dir="ltr" style="text-align:left">
+        <div class="hint">اگر فایل PDF را جای دیگری (گوگل درایو، تلگرام، آپلودسنتر و…) گذاشته‌اید، لینک مستقیم آن را اینجا بگذارید.</div>
+      </div>
+    </div>
+  </div>
+  <div class="editor-actions">
+    <button class="btn btn-primary" id="editorSave" type="button">💾 ذخیره و انتشار</button>
+    <button class="btn btn-ghost" id="editorCancel" type="button">انصراف</button>
+    <div style="flex:1"></div>
+    <button class="btn btn-danger hidden" id="editorDelete" type="button">🗑 حذف</button>
+  </div>
+</div>
+
+<!-- SUBJECT EDITOR -->
+<div class="editor hidden" id="subjectEditor">
+  <div class="editor-header">
+    <button class="back-btn" id="subjectEditorBack" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <h3>درس سفارشی جدید</h3>
+  </div>
+  <div class="editor-body">
+    <div class="field">
+      <label>پایه تحصیلی</label>
+      <select id="subEdGrade"></select>
+    </div>
+    <div class="field">
+      <label>نام درس</label>
+      <input id="subEdName" placeholder="مثلاً: المپیاد ریاضی" maxlength="60">
+      <div class="hint">این درس به لیست درس‌های این پایه اضافه می‌شود.</div>
+    </div>
+  </div>
+  <div class="editor-actions">
+    <button class="btn btn-primary" id="subjectEditorSave" type="button">💾 ذخیره و انتشار</button>
+    <button class="btn btn-ghost" id="subjectEditorCancel" type="button">انصراف</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   درسیار نسخه ۲.۰ — با پشتیبانی PDF
+   سرور: ntfy.sh | پنل مدیر: Ctrl+Shift+A
+   ========================================================= */
+
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
+  ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+function dateFa(ts){
+  try{ return new Date(ts).toLocaleString('fa-IR', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
+  catch(e){ return ''; }
+}
+function dateFullFa(ts){
+  try{ return new Date(ts).toLocaleString('fa-IR', { year:'numeric', month:'long', day:'numeric' }); }
+  catch(e){ return ''; }
+}
+function formatSize(b){
+  if(!b) return '';
+  if(b < 1024) return fa(b) + ' بایت';
+  if(b < 1024*1024) return fa((b/1024).toFixed(0)) + ' کیلوبایت';
+  return fa((b/1024/1024).toFixed(1)) + ' مگابایت';
+}
+
+/* ---------- کتاب‌های درسی هر پایه ---------- */
+const TEXTBOOK_SUBJECTS = {
+  1: ['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
+  2: ['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
+  3: ['ریاضی','علوم','فارسی','مطالعات اجتماعی','قرآن','هدیه‌های آسمان'],
+  4: ['ریاضی','علوم','فارسی','مطالعات اجتماعی','قرآن','هدیه‌های آسمان'],
+  5: ['ریاضی','علوم','فارسی','مطالعات اجتماعی','قرآن','هدیه‌های آسمان'],
+  6: ['ریاضی','علوم','فارسی','مطالعات اجتماعی','قرآن','هدیه‌های آسمان','تفکر و پژوهش'],
+  7: ['ریاضی','علوم تجربی','فارسی','عربی','زبان انگلیسی','مطالعات اجتماعی','پیام‌های آسمان','کار و فناوری','تفکر و سبک زندگی'],
+  8: ['ریاضی','علوم تجربی','فارسی','عربی','زبان انگلیسی','مطالعات اجتماعی','پیام‌های آسمان','کار و فناوری','تفکر و سبک زندگی'],
+  9: ['ریاضی','علوم تجربی','فارسی','عربی','زبان انگلیسی','مطالعات اجتماعی','پیام‌های آسمان','کار و فناوری','آمادگی دفاعی']
+};
+
+const SUBJ_STYLE = {
+  'ریاضی':{c:'#2563eb',bg:'#eff6ff',i:'🔢'},
+  'علوم':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},
+  'علوم تجربی':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},
+  'فارسی':{c:'#9333ea',bg:'#faf5ff',i:'📖'},
+  'قرآن':{c:'#059669',bg:'#ecfdf5',i:'📿'},
+  'هدیه‌های آسمان':{c:'#e11d48',bg:'#fff1f2',i:'🎁'},
+  'پیام‌های آسمان':{c:'#0d9488',bg:'#f0fdfa',i:'🕌'},
+  'مطالعات اجتماعی':{c:'#ea580c',bg:'#fff7ed',i:'🗺️'},
+  'عربی':{c:'#ca8a04',bg:'#fefce8',i:'📜'},
+  'زبان انگلیسی':{c:'#db2777',bg:'#fdf2f8',i:'🌍'},
+  'کار و فناوری':{c:'#475569',bg:'#f8fafc',i:'🔧'},
+  'تفکر و پژوهش':{c:'#7c3aed',bg:'#f5f3ff',i:'💡'},
+  'تفکر و سبک زندگی':{c:'#0891b2',bg:'#ecfeff',i:'🧠'},
+  'آمادگی دفاعی':{c:'#b91c1c',bg:'#fef2f2',i:'🛡'}
+};
+const subjStyle = s => SUBJ_STYLE[s] || {c:'#6366f1',bg:'#eef2ff',i:'📘'};
+
+/* ---------- انبار داده ---------- */
+const DATA_KEY='darsyar_v4_data';
+const TOPIC_KEY='darsyar_v4_topic';
+const NAME_KEY='darsyar_v4_name';
+const GRADE_KEY='darsyar_v4_grade';
+const DEFAULT_TOPIC='darsyar-classroom-1404';
+const MAX_PDF_SYNC = 200*1024; // 200KB
+
+let store = { notes:{}, comments:{}, subjects:{} };
+
+function loadStore(){
+  try{
+    const d = JSON.parse(localStorage.getItem(DATA_KEY)||'null');
+    if(d && typeof d==='object'){
+      store.notes=d.notes||{};store.comments=d.comments||{};store.subjects=d.subjects||{};
+    }
+  }catch(e){}
+}
+function saveStore(){
+  try{ localStorage.setItem(DATA_KEY, JSON.stringify(store)); }
+  catch(e){ console.warn('حافظه پر است'); toast('⚠️ حافظه مرورگر پر است'); }
+}
+
+/* ---------- ntfy ---------- */
+const NTFY='https://ntfy.sh';
+const enc = new TextEncoder();
+const pendingChunks = {};
+
+function getTopic(){
+  const u = new URLSearchParams(location.search).get('t');
+  if(u){ localStorage.setItem(TOPIC_KEY,u); return u; }
+  return localStorage.getItem(TOPIC_KEY) || DEFAULT_TOPIC;
+}
+let TOPIC = getTopic();
+
+async function ntfyPost(body){
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), 12000);
+  try{
+    const r = await fetch(`${NTFY}/${encodeURIComponent(TOPIC)}`,
+      {method:'POST', body, signal:ctrl.signal, headers:{'Content-Type':'text/plain'}});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return true;
+  } finally { clearTimeout(t); }
+}
+
+async function publish(item){
+  const s = JSON.stringify(item);
+  const bytes = enc.encode(s).length;
+  if(bytes <= 3500){ await ntfyPost(s); return; }
+  const cid = item.kind+'|'+item.id+'|'+item.ts;
+  const SIZE = 1200;
+  const total = Math.ceil(s.length/SIZE);
+  for(let i=0;i<total;i++){
+    await ntfyPost(JSON.stringify({
+      kind:'chunk', cid, i, total, data: s.substr(i*SIZE, SIZE)
+    }));
+    // وقفه کوچک برای جلوگیری از rate limit
+    if(i % 10 === 9) await new Promise(r => setTimeout(r, 200));
+  }
+}
+
+function applyItem(it){
+  if(!it||!it.id||!it.kind) return false;
+  const bucket = it.kind==='note' ? store.notes
+               : it.kind==='comment' ? store.comments
+               : it.kind==='subject' ? store.subjects : null;
+  if(!bucket) return false;
+  const cur = bucket[it.id];
+  if(cur && (cur.ts||0) >= (it.ts||0)) return false;
+  bucket[it.id] = it;
+  return true;
+}
+
+function handleRaw(obj){
+  if(obj && obj.kind==='chunk'){
+    const p = pendingChunks[obj.cid] || (pendingChunks[obj.cid]={total:obj.total,parts:[],n:0});
+    if(p.parts[obj.i]===undefined){ p.parts[obj.i]=obj.data; p.n++; }
+    if(p.n===p.total){
+      delete pendingChunks[obj.cid];
+      try{ handleRaw(JSON.parse(p.parts.join(''))); }catch(e){}
+    }
+    return false;
+  }
+  return applyItem(obj);
+}
+
+let isOnline=false, statusTimer=null;
+function setStatus(state){
+  const pill=$('#statusPill'), lbl=$('#statusLbl');
+  clearTimeout(statusTimer);
+  if(state==='online'){isOnline=true;pill.className='status-pill online';lbl.textContent='آنلاین';}
+  else if(state==='offline'){isOnline=false;pill.className='status-pill offline';lbl.textContent='آفلاین';}
+  else{pill.className='status-pill';lbl.textContent='اتصال…';}
+}
+function armStatusTimeout(){
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(()=>{ if(!isOnline) setStatus('offline'); }, 4000);
+}
+
+async function pullAll(silent=false){
+  if(!silent){setStatus('connecting');armStatusTimeout();}
+  const ctrl=new AbortController();
+  const t=setTimeout(()=>ctrl.abort(), 12000);
+  try{
+    const r = await fetch(`${NTFY}/${encodeURIComponent(TOPIC)}/json?poll=1&since=all`, {signal:ctrl.signal});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const txt = await r.text();
+    let changed=false;
+    txt.split('\n').filter(Boolean).forEach(line=>{
+      try{
+        const m = JSON.parse(line);
+        if(m.event!=='message'||!m.message) return;
+        if(handleRaw(JSON.parse(m.message))) changed=true;
+      }catch(e){}
+    });
+    if(changed){ saveStore(); refreshAll(); }
+    setStatus('online');
+    return true;
+  }catch(e){ setStatus('offline'); return false; }
+  finally { clearTimeout(t); }
+}
+
+let es=null;
+function connectSSE(){
+  if(es) try{es.close();}catch(e){}
+  try{
+    es = new EventSource(`${NTFY}/${encodeURIComponent(TOPIC)}/sse`);
+    es.onopen = ()=>setStatus('online');
+    es.onmessage = e=>{
+      setStatus('online');
+      try{
+        const m = JSON.parse(e.data);
+        if(m.event!=='message'||!m.message) return;
+        if(handleRaw(JSON.parse(m.message))){ saveStore(); refreshAll(); }
+      }catch(err){}
+    };
+    es.onerror = ()=>{};
+  }catch(e){}
+}
+
+function getSubjects(grade){
+  const base = TEXTBOOK_SUBJECTS[grade] || [];
+  const custom = Object.values(store.subjects)
+    .filter(s=>!s.deleted && s.grade===grade)
+    .sort((a,b)=>a.ts-b.ts).map(s=>s.name);
+  return [...new Set([...base, ...custom])];
+}
+
+/* ---------- قالب‌بندی متن ---------- */
+function fmt(text){
+  const lines = String(text||'').split('\n');
+  const out=[]; let inList=false;
+  const closeList=()=>{ if(inList){out.push('</ul>');inList=false;} };
+  for(const raw of lines){
+    let l = esc(raw).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    if(/^###\s/.test(l)){closeList();out.push('<h4>'+l.slice(4)+'</h4>');}
+    else if(/^##\s/.test(l)){closeList();out.push('<h3>'+l.slice(3)+'</h3>');}
+    else if(/^#\s/.test(l)){closeList();out.push('<h2>'+l.slice(2)+'</h2>');}
+    else if(/^[-*]\s/.test(l)){if(!inList){out.push('<ul>');inList=true;}out.push('<li>'+l.slice(2)+'</li>');}
+    else if(l.trim()===''){closeList();out.push('<div class="sp"></div>');}
+    else{closeList();out.push('<p>'+l+'</p>');}
+  }
+  closeList();
+  return out.join('');
+}
+
+/* ---------- Base64 ↔ Blob ---------- */
+function base64ToBlob(b64, mime='application/pdf'){
+  const byteChars = atob(b64);
+  const bytes = new Uint8Array(byteChars.length);
+  for(let i=0;i<byteChars.length;i++) bytes[i] = byteChars.charCodeAt(i);
+  return new Blob([bytes], {type:mime});
+}
+function blobToBase64(blob){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+/* ---------- وضعیت ---------- */
+const state = {
+  screen:'home',
+  grade:+(localStorage.getItem(GRADE_KEY)||7),
+  subject:null,
+  noteId:null,
+  searchQuery:''
+};
+let draft = {name:'', text:''};
+let editingPdfFile = null;      // File object
+let editingPdfExisting = null;  // existing pdfData from note being edited
+let editingPdfExistingName = '';
+let editingPdfExistingSize = 0;
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function renderHome(){
+  const notes = Object.values(store.notes)
+    .filter(n=>!n.deleted && n.grade===state.grade)
+    .sort((a,b)=>b.ts-a.ts);
+  const subs = getSubjects(state.grade);
+  const activeSubs = subs.filter(s=>notes.some(n=>n.subject===s)).length;
+  const cc = Object.values(store.comments)
+    .filter(c=>!c.deleted && notes.some(n=>n.id===c.noteId)).length;
+
+  $('#heroTitle').textContent = 'سلام 👋';
+  $('#heroSub').textContent = `جزوه‌های کتاب درسی پایه ${fa(state.grade)}م`;
+  $('#statNotes').textContent = fa(notes.length);
+  $('#statSubjects').textContent = fa(activeSubs);
+  $('#statComments').textContent = fa(cc);
+
+  const chipsEl = $('#subjectChips');
+  let chipsHtml = `<button class="chip ${!state.subject?'active':''}" data-act="allsubj" type="button">
+    <span>📚 همه</span><span class="cnt">${fa(notes.length)}</span></button>`;
+  chipsHtml += subs.map(s=>{
+    const c = notes.filter(n=>n.subject===s).length;
+    const st = subjStyle(s);
+    return `<button class="chip ${state.subject===s?'active':''}" data-act="subj" data-s="${esc(s)}" type="button">
+      <span>${st.i}</span><span>${esc(s)}</span>${c?`<span class="cnt">${fa(c)}</span>`:''}</button>`;
+  }).join('');
+  chipsEl.innerHTML = chipsHtml;
+
+  const list = state.subject ? notes.filter(n=>n.subject===state.subject) : notes;
+  const listEl = $('#notesList');
+  if(!notes.length){
+    listEl.innerHTML = `<div class="empty">
+      <div class="empty-icon">📭</div>
+      <b>هنوز جزوه‌ای ثبت نشده</b>
+      <p>برای پایه ${fa(state.grade)} هنوز جزوه‌ای اضافه نشده است.</p></div>`;
+    return;
+  }
+  if(!list.length){
+    listEl.innerHTML = `<div class="empty">
+      <div class="empty-icon">📂</div>
+      <b>این درس خالی است</b>
+      <p>برای «${esc(state.subject)}» هنوز جزوه‌ای ثبت نشده است.</p></div>`;
+    return;
+  }
+  listEl.innerHTML = list.map(noteCard).join('');
+}
+
+function noteCard(n){
+  const st = subjStyle(n.subject);
+  const cc = Object.values(store.comments).filter(c=>!c.deleted && c.noteId===n.id).length;
+  const preview = (n.content||'').replace(/[#*\-]/g,'').replace(/\s+/g,' ').trim().slice(0,110);
+  const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
+  return `<article class="note-card" data-act="open" data-id="${n.id}" style="--sc:${st.c};--sb:${st.bg}">
+    <div class="nc-top">
+      <span class="nc-chip">${st.i} ${esc(n.subject)}</span>
+      <span class="nc-grade">پایه ${fa(n.grade)}</span>
+      ${hasPdf?`<span class="nc-pdf-badge">📄 PDF</span>`:''}
+    </div>
+    <div class="nc-title">${esc(n.title||'بدون عنوان')}</div>
+    <div class="nc-preview">${esc(preview)}${preview.length>=110?'…':''}</div>
+    <div class="nc-foot">
+      <span class="item">💬 ${fa(cc)} نظر</span>
+      <span class="item">🕒 ${dateFa(n.ts)}</span>
+    </div>
+  </article>`;
+}
+
+function renderSearch(){
+  const q = state.searchQuery.trim().toLowerCase();
+  const el = $('#searchResults');
+  if(!q){
+    el.innerHTML = `<div class="empty">
+      <div class="empty-icon">🔍</div><b>جستجو در جزوه‌ها</b>
+      <p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`;
+    return;
+  }
+  const all = Object.values(store.notes).filter(n=>!n.deleted);
+  const results = all.filter(n=>
+    (n.title||'').toLowerCase().includes(q) ||
+    (n.subject||'').toLowerCase().includes(q) ||
+    (n.content||'').toLowerCase().includes(q)
+  ).sort((a,b)=>b.ts-a.ts);
+  if(!results.length){
+    el.innerHTML = `<div class="empty">
+      <div class="empty-icon">😶‍🌫️</div><b>نتیجه‌ای یافت نشد</b>
+      <p>برای «${esc(state.searchQuery)}» چیزی پیدا نشد.</p></div>`;
+    return;
+  }
+  el.innerHTML = results.map(noteCard).join('');
+}
+
+function renderLibrary(){
+  const el = $('#libraryList');
+  let html='';
+  for(let g=1;g<=9;g++){
+    const subs = getSubjects(g);
+    const notes = Object.values(store.notes).filter(n=>!n.deleted && n.grade===g);
+    html += `<div class="lib-grade" data-grade="${g}">
+      <div class="lib-grade-head" data-act="toggle-lib">
+        <div class="lib-grade-num">${fa(g)}</div>
+        <div style="flex:1">
+          <div class="lib-grade-title">پایه ${fa(g)}م</div>
+          <div class="lib-grade-meta">${fa(subs.length)} درس • ${fa(notes.length)} جزوه</div>
+        </div>
+        <div class="lib-grade-arrow">‹</div>
+      </div>
+      <div class="lib-subs">
+        ${subs.map(s=>{
+          const st = subjStyle(s);
+          const c = notes.filter(n=>n.subject===s).length;
+          return `<div class="lib-sub" data-act="lib-sub" data-g="${g}" data-s="${esc(s)}">
+            <div class="lib-sub-icon" style="--sb:${st.bg};color:${st.c}">${st.i}</div>
+            <div style="flex:1">${esc(s)}</div>
+            <div style="font-size:11px;color:var(--dim);font-weight:600">${fa(c)} جزوه</div>
+          </div>`;
+        }).join('')}
+      </div></div>`;
+  }
+  el.innerHTML = html;
+}
+
+function renderProfile(){
+  const name = localStorage.getItem(NAME_KEY)||'دانش‌آموز مهمان';
+  $('#profileName').textContent = name;
+  $('#profileAv').textContent = (name.trim().charAt(0)||'👤').toUpperCase();
+  $('#profileGrade').textContent = `پایه ${fa(state.grade)}م`;
+  const notes = Object.values(store.notes).filter(n=>!n.deleted && n.grade===state.grade);
+  const comments = Object.values(store.comments).filter(c=>!c.deleted);
+  const subs = new Set(notes.map(n=>n.subject));
+  $('#pStatNotes').textContent = fa(notes.length);
+  $('#pStatComments').textContent = fa(comments.length);
+  $('#pStatSubjects').textContent = fa(subs.size);
+}
+
+function renderDetail(){
+  const n = store.notes[state.noteId];
+  if(!n){ closeDetail(); return; }
+  const st = subjStyle(n.subject);
+  $('#detailTitle').textContent = n.title || 'جزوه';
+
+  const comments = Object.values(store.comments)
+    .filter(c=>!c.deleted && c.noteId===n.id).sort((a,b)=>a.ts-b.ts);
+
+  const avColors = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981','#0ea5e9','#ef4444'];
+  const avColor = name => avColors[(name.charCodeAt(0)||0)%avColors.length];
+
+  const commentsHtml = comments.length ? comments.map(c=>{
+    const initial = (c.author||'ن').trim().charAt(0)||'ن';
+    const color = avColor(c.author||'ن');
+    return `<div class="cmt">
+      <div class="cmt-av" style="background:${color}">${esc(initial)}</div>
+      <div class="cmt-body">
+        <div class="cmt-head">
+          <b>${esc(c.author||'ناشناس')}</b><span>${dateFa(c.ts)}</span>
+        </div>
+        <div class="cmt-text">${esc(c.text).replace(/\n/g,'<br>')}</div>
+      </div></div>`;
+  }).join('') : `<div class="empty" style="padding:24px 12px;border:0;background:transparent">
+      <div class="empty-icon" style="width:48px;height:48px;font-size:22px;border-radius:14px">✍️</div>
+      <b>هنوز نظری نیست</b><p>اولین نفری باشید که نظر می‌دهد.</p></div>`;
+
+  // PDF section
+  let pdfHtml = '';
+  if(n.pdfUrl || (n.pdfData && n.pdfData.length)){
+    const pdfName = n.pdfName || 'جزوه.pdf';
+    const pdfSize = n.pdfSize || 0;
+    const isUrl = !!n.pdfUrl;
+    pdfHtml = `<div class="pdf-box">
+      <div class="pdf-box-head">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info">
+          <div class="pdf-label">فایل PDF ضمیمه</div>
+          <div class="pdf-name">${esc(pdfName)}</div>
+          ${pdfSize ? `<div class="pdf-size">${formatSize(pdfSize)}</div>` : `<div class="pdf-size">${isUrl?'لینک خارجی':'فایل داخلی'}</div>`}
+        </div>
+      </div>
+      <div class="pdf-actions">
+        <button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده PDF</button>
+        <button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود PDF</button>
+      </div>
+    </div>`;
+  }
+
+  $('#detailBody').innerHTML = `
+    <div class="note-head">
+      <div class="chips-row">
+        <span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span>
+        <span class="nc-grade">پایه ${fa(n.grade)}</span>
+      </div>
+      <div class="note-title">${esc(n.title||'بدون عنوان')}</div>
+      <div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div>
+    </div>
+    ${pdfHtml}
+    <article class="note-content">${fmt(n.content||'')}</article>
+    <section class="comments">
+      <h3>💬 نظرات و پرسش‌ها ${comments.length?`<span class="cnt-pill">${fa(comments.length)}</span>`:''}</h3>
+      <div id="cmtList">${commentsHtml}</div>
+      <form class="cmt-form" id="cmtForm">
+        <input id="cName" placeholder="نام شما (اختیاری)" maxlength="30"
+               value="${esc(draft.name||localStorage.getItem(NAME_KEY)||'')}">
+        <textarea id="cText" placeholder="نظر، پرسش یا توضیح خود را بنویسید…" rows="3" maxlength="800">${esc(draft.text||'')}</textarea>
+        <button type="submit">📨 ارسال نظر</button>
+      </form>
+    </section>`;
+}
+
+function refreshAll(){
+  if(state.screen==='home') renderHome();
+  else if(state.screen==='search') renderSearch();
+  else if(state.screen==='library') renderLibrary();
+  else if(state.screen==='profile') renderProfile();
+  if(state.noteId) renderDetail();
+  if(!$('#admin').classList.contains('hidden')) renderAdmin();
+}
+
+/* =========================================================
+   PDF Viewer
+   ========================================================= */
+let currentPdfBlobUrl = null;
+
+window.openPdfViewer = function(){
+  const n = store.notes[state.noteId];
+  if(!n) return;
+  const pdfName = n.pdfName || 'document.pdf';
+  const frame = $('#pdfViewerFrame');
+  const dl = $('#pdfViewerDownload');
+  const loading = $('#pdfViewerLoading');
+
+  loading.classList.remove('hidden');
+  $('#pdfViewerTitle').textContent = pdfName;
+
+  // پاک‌سازی URL قدیمی
+  if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
+
+  if(n.pdfUrl){
+    frame.src = n.pdfUrl;
+    dl.href = n.pdfUrl;
+    dl.setAttribute('download', pdfName);
+    loading.classList.add('hidden');
+  } else if(n.pdfData){
+    try{
+      const blob = base64ToBlob(n.pdfData, 'application/pdf');
+      const url = URL.createObjectURL(blob);
+      currentPdfBlobUrl = url;
+      frame.src = url;
+      dl.href = url;
+      dl.setAttribute('download', pdfName);
+      loading.classList.add('hidden');
+    }catch(e){
+      loading.textContent = 'خطا در باز کردن PDF';
+    }
+  }
+  $('#pdfViewer').classList.remove('hidden');
+};
+
+window.downloadPdf = function(){
+  const n = store.notes[state.noteId];
+  if(!n) return;
+  const pdfName = n.pdfName || 'document.pdf';
+  if(n.pdfUrl){
+    const a = document.createElement('a');
+    a.href = n.pdfUrl; a.download = pdfName; a.target = '_blank';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  } else if(n.pdfData){
+    try{
+      const blob = base64ToBlob(n.pdfData, 'application/pdf');
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = pdfName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url), 2000);
+    }catch(e){ toast('خطا در دانلود'); }
+  }
+  toast('📥 دانلود شروع شد');
+};
+
+$('#pdfViewerClose').addEventListener('click', ()=>{
+  $('#pdfViewer').classList.add('hidden');
+  $('#pdfViewerFrame').src = 'about:blank';
+  if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
+});
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+function showScreen(name){
+  state.screen = name;
+  $$('.screen').forEach(s=>s.classList.remove('active'));
+  const sc = document.getElementById('screen-'+name);
+  if(sc) sc.classList.add('active');
+  $$('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.nav===name));
+  if(name==='home') renderHome();
+  if(name==='search') renderSearch();
+  if(name==='library') renderLibrary();
+  if(name==='profile') renderProfile();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    showScreen(this.dataset.nav);
+  });
+});
+
+document.addEventListener('click', e=>{
+  const t = e.target.closest('[data-act]');
+  if(t){
+    const act = t.dataset.act;
+    if(act==='subj'){ state.subject = t.dataset.s; renderHome(); window.scrollTo({top:0}); }
+    else if(act==='allsubj'){ state.subject = null; renderHome(); }
+    else if(act==='open'){ openDetail(t.dataset.id); }
+    else if(act==='toggle-lib'){
+      const g = t.closest('.lib-grade');
+      if(g) g.classList.toggle('open');
+    }
+    else if(act==='lib-sub'){
+      state.grade = +t.dataset.g;
+      state.subject = t.dataset.s;
+      state.noteId = null;
+      localStorage.setItem(GRADE_KEY, state.grade);
+      showScreen('home');
+    }
+  }
+});
+
+function openDetail(id){
+  state.noteId = id;
+  draft = {name:'', text:''};
+  $('#detail').classList.remove('hidden');
+  renderDetail();
+}
+function closeDetail(){
+  state.noteId = null;
+  $('#detail').classList.add('hidden');
+  refreshAll();
+}
+$('#detailBack').addEventListener('click', closeDetail);
+
+function openGradeSheet(){
+  const grid = $('#gradeGrid');
+  grid.innerHTML = Array.from({length:9},(_,i)=>i+1).map(g=>`
+    <button class="grade-opt ${g===state.grade?'active':''}" data-grade="${g}" type="button">
+      <span class="num">${fa(g)}</span><span class="lbl">پایه</span>
+    </button>`).join('');
+  $('#sheetTitle').textContent = 'انتخاب پایه تحصیلی';
+  $('#sheetOverlay').classList.add('show');
+  $('#sheet').classList.add('show');
+}
+function closeSheet(){
+  $('#sheetOverlay').classList.remove('show');
+  $('#sheet').classList.remove('show');
+}
+$('#sheetOverlay').addEventListener('click', closeSheet);
+$('#gradeGrid').addEventListener('click', e=>{
+  const b = e.target.closest('[data-grade]');
+  if(!b) return;
+  state.grade = +b.dataset.grade;
+  state.subject = null; state.noteId = null;
+  localStorage.setItem(GRADE_KEY, state.grade);
+  closeSheet();
+  renderHome(); renderProfile();
+  toast(`پایه ${fa(state.grade)}م انتخاب شد`);
+});
+
+$('#menuGrade').addEventListener('click', openGradeSheet);
+$('#menuName').addEventListener('click', ()=>{
+  const cur = localStorage.getItem(NAME_KEY)||'';
+  const v = prompt('نام نمایشی خود را وارد کنید:', cur);
+  if(v===null) return;
+  const name = v.trim();
+  if(name) localStorage.setItem(NAME_KEY, name);
+  else localStorage.removeItem(NAME_KEY);
+  renderProfile(); toast('نام ذخیره شد');
+});
+$('#menuSync').addEventListener('click', async ()=>{
+  toast('در حال همگام‌سازی…');
+  await pullAll();
+  toast(isOnline?'همگام‌سازی انجام شد ✅':'اتصال برقرار نشد ⚠️');
+});
+
+$('#searchInput').addEventListener('input', e=>{
+  state.searchQuery = e.target.value;
+  renderSearch();
+});
+
+document.addEventListener('input', e=>{
+  if(e.target.id==='cName') draft.name = e.target.value;
+  if(e.target.id==='cText') draft.text = e.target.value;
+});
+
+document.addEventListener('submit', async e=>{
+  if(e.target.id!=='cmtForm') return;
+  e.preventDefault();
+  const nameEl = $('#cName'), textEl = $('#cText');
+  const author = (nameEl.value||'').trim()||'ناشناس';
+  const text = (textEl.value||'').trim();
+  if(!text){ toast('متن نظر خالی است'); return; }
+  localStorage.setItem(NAME_KEY, author);
+  draft.name = author; draft.text = '';
+  const item = {kind:'comment', id:uid(), noteId:state.noteId, author, text, ts:Date.now()};
+  applyItem(item); saveStore();
+  textEl.value = ''; renderDetail(); toast('نظر شما ثبت شد ✅');
+  const btn = e.target.querySelector('button'); btn.disabled = true;
+  try{ await publish(item); setStatus('online'); }
+  catch(err){ toast('ذخیره شد ولی ارسال آنلاین ناموفق ⚠️'); setStatus('offline'); }
+  finally{ btn.disabled = false; }
+});
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+let adminFilterGrade = 0;
+
+function toggleAdmin(){
+  const a = $('#admin');
+  if(a.classList.contains('hidden')){ a.classList.remove('hidden'); renderAdmin(); }
+  else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); }
+}
+$('#adminClose').addEventListener('click', toggleAdmin);
+
+document.addEventListener('keydown', e=>{
+  if(e.ctrlKey && e.shiftKey && e.code==='KeyA'){
+    e.preventDefault(); toggleAdmin();
+  }
+});
+
+document.querySelectorAll('.admin-tab').forEach(tab=>{
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('panel-'+this.dataset.tab).classList.add('active');
+  });
+});
+
+function renderAdminFilter(){
+  const el = $('#adminNotesFilter');
+  let html = `<select id="filterGrade" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13.5px;font-weight:600;background:#fff">`;
+  html += `<option value="0">همه پایه‌ها</option>`;
+  for(let g=1;g<=9;g++) html += `<option value="${g}" ${adminFilterGrade===g?'selected':''}>پایه ${fa(g)}م</option>`;
+  html += `</select>`;
+  el.innerHTML = html;
+  document.getElementById('filterGrade').addEventListener('change', function(){
+    adminFilterGrade = +this.value; renderAdminNotes();
+  });
+}
+
+function renderAdminNotes(){
+  const el = $('#adminNotesList');
+  let notes = Object.values(store.notes).filter(n=>!n.deleted);
+  if(adminFilterGrade) notes = notes.filter(n=>n.grade===adminFilterGrade);
+  notes.sort((a,b)=>b.ts-a.ts);
+  $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n=>!n.deleted).length);
+  if(!notes.length){
+    el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده. با دکمه «جزوه جدید» شروع کنید.</div>`;
+    return;
+  }
+  el.innerHTML = notes.map(n=>{
+    const st = subjStyle(n.subject);
+    const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
+    return `<div class="admin-item">
+      <div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
+      <div class="admin-item-body">
+        <div class="admin-item-title">${esc(n.title||'بدون عنوان')} ${hasPdf?'📄':''}</div>
+        <div class="admin-item-meta">
+          <span>${esc(n.subject)}</span><span>•</span>
+          <span>پایه ${fa(n.grade)}</span><span>•</span>
+          <span>${dateFa(n.ts)}</span>
+          ${hasPdf?`<span>•</span><span style="color:#dc2626">PDF</span>`:''}
+        </div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️ ویرایش</button>
+      </div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-admin-edit]').forEach(b=>{
+    b.addEventListener('click', ()=>openEditor(b.dataset.adminEdit));
+  });
+}
+
+function renderAdminSubjects(){
+  const el = $('#adminSubjectsList');
+  const subjects = Object.values(store.subjects).filter(s=>!s.deleted).sort((a,b)=>(a.grade-b.grade)||(a.ts-b.ts));
+  $('#tabSubjectsCount').textContent = fa(subjects.length);
+  if(!subjects.length){
+    el.innerHTML = `<div class="admin-empty">هنوز درس سفارشی اضافه نشده. درس‌های پیش‌فرض کتاب‌های درسی به‌صورت خودکار نمایش داده می‌شوند.</div>`;
+    return;
+  }
+  el.innerHTML = subjects.map(s=>{
+    const st = subjStyle(s.name);
+    return `<div class="admin-item">
+      <div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
+      <div class="admin-item-body">
+        <div class="admin-item-title">${esc(s.name)}</div>
+        <div class="admin-item-meta"><span>پایه ${fa(s.grade)}م</span><span>•</span><span>${dateFa(s.ts)}</span></div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn btn-danger btn-sm" data-admin-del-subj="${s.id}" type="button">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-admin-del-subj]').forEach(b=>{
+    b.addEventListener('click', ()=>deleteSubject(b.dataset.adminDelSubj));
+  });
+}
+
+function renderAdminSettings(){
+  $('#setTopic').value = TOPIC;
+  $('#setServer').value = NTFY;
+  try{
+    // نسخه سبک بدون pdfData برای پیش‌نمایش
+    const lightStore = {
+      notes:{}, comments:store.comments, subjects:store.subjects
+    };
+    Object.entries(store.notes).forEach(([k,v])=>{
+      lightStore.notes[k] = {...v};
+      if(lightStore.notes[k].pdfData) lightStore.notes[k].pdfData = '[' + formatSize(lightStore.notes[k].pdfSize||0) + ']';
+    });
+    $('#setExport').value = JSON.stringify(lightStore, null, 2);
+  }catch(e){}
+}
+
+function renderAdmin(){
+  renderAdminFilter();
+  renderAdminNotes();
+  renderAdminSubjects();
+  renderAdminSettings();
+}
+
+/* ---------- Note Editor ---------- */
+let editingNoteId = null;
+
+function openEditor(id){
+  editingNoteId = id || null;
+  editingPdfFile = null;
+  editingPdfExisting = null;
+  editingPdfExistingName = '';
+  editingPdfExistingSize = 0;
+
+  const gradeSel = $('#edGrade');
+  gradeSel.innerHTML = Array.from({length:9},(_,i)=>i+1)
+    .map(g=>`<option value="${g}">پایه ${fa(g)}م</option>`).join('');
+
+  if(id){
+    const n = store.notes[id];
+    if(!n) return;
+    $('#editorTitle').textContent = 'ویرایش جزوه';
+    gradeSel.value = n.grade;
+    populateSubjects(n.grade, n.subject);
+    $('#edTitle').value = n.title||'';
+    $('#edContent').value = n.content||'';
+    $('#edPdfUrl').value = n.pdfUrl||'';
+    if(n.pdfData && n.pdfData.length){
+      editingPdfExisting = n.pdfData;
+      editingPdfExistingName = n.pdfName || 'file.pdf';
+      editingPdfExistingSize = n.pdfSize || 0;
+      showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
+    } else {
+      resetPdfUpload();
+    }
+    $('#editorDelete').classList.remove('hidden');
+  } else {
+    $('#editorTitle').textContent = 'جزوه جدید';
+    gradeSel.value = state.grade;
+    populateSubjects(state.grade);
+    $('#edTitle').value = '';
+    $('#edContent').value = '';
+    $('#edPdfUrl').value = '';
+    resetPdfUpload();
+    $('#editorDelete').classList.add('hidden');
+  }
+  $('#editor').classList.remove('hidden');
+}
+
+function populateSubjects(grade, selected){
+  const sel = $('#edSubject');
+  const subs = getSubjects(grade);
+  sel.innerHTML = subs.map(s=>`<option value="${esc(s)}" ${s===selected?'selected':''}>${esc(s)}</option>`).join('');
+}
+
+function showPdfUpload(name, size, existing){
+  $('#pdfUploadName').textContent = name;
+  $('#pdfUploadSize').textContent = formatSize(size) + (existing?' — ذخیره‌شده روی دستگاه':' — آماده انتشار');
+  $('#pdfUploadArea').classList.add('has-file');
+  $('#btnRemovePdf').classList.remove('hidden');
+}
+function resetPdfUpload(){
+  $('#pdfUploadName').textContent = 'هیچ فایلی انتخاب نشده';
+  $('#pdfUploadSize').textContent = 'حداکثر ۵۰۰ کیلوبایت';
+  $('#pdfUploadArea').classList.remove('has-file');
+  $('#btnRemovePdf').classList.add('hidden');
+  $('#edPdfFile').value = '';
+}
+
+$('#edGrade').addEventListener('change', function(){ populateSubjects(+this.value); });
+$('#editorBack').addEventListener('click', closeEditor);
+$('#editorCancel').addEventListener('click', closeEditor);
+function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; }
+
+$('#btnChoosePdf').addEventListener('click', ()=>$('#edPdfFile').click());
+$('#btnRemovePdf').addEventListener('click', ()=>{
+  editingPdfFile = null;
+  editingPdfExisting = null;
+  editingPdfExistingName = '';
+  editingPdfExistingSize = 0;
+  resetPdfUpload();
+  toast('فایل PDF حذف شد');
+});
+
+$('#edPdfFile').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.type !== 'application/pdf'){
+    toast('فقط فایل PDF مجاز است');
+    resetPdfUpload();
+    return;
+  }
+  if(file.size > 500*1024){
+    toast('⚠️ حداکثر ۵۰۰ کیلوبایت مجاز است');
+    resetPdfUpload();
+    return;
+  }
+  editingPdfFile = file;
+  editingPdfExisting = null;
+  showPdfUpload(file.name, file.size, false);
+});
+
+$('#editorSave').addEventListener('click', async ()=>{
+  const grade = +$('#edGrade').value;
+  const subject = $('#edSubject').value;
+  const title = $('#edTitle').value.trim();
+  const content = $('#edContent').value.trim();
+  const pdfUrl = $('#edPdfUrl').value.trim();
+
+  if(!title){ toast('عنوان را وارد کنید'); return; }
+  if(!content && !pdfUrl && !editingPdfFile && !editingPdfExisting){
+    toast('حداقل متن یا PDF لازم است');
+    return;
+  }
+
+  const id = editingNoteId || uid();
+  const item = {
+    kind:'note', id, grade, subject, title, content, ts:Date.now()
+  };
+
+  // اولویت: فایل آپلودی جدید > PDF ذخیره‌شده قبلی > لینک خارجی
+  let pdfData = null, pdfName = '', pdfSize = 0;
+  if(editingPdfFile){
+    pdfData = await blobToBase64(editingPdfFile);
+    pdfName = editingPdfFile.name;
+    pdfSize = editingPdfFile.size;
+  } else if(editingPdfExisting){
+    pdfData = editingPdfExisting;
+    pdfName = editingPdfExistingName;
+    pdfSize = editingPdfExistingSize;
+  } else if(pdfUrl){
+    item.pdfUrl = pdfUrl;
+    item.pdfName = pdfUrl.split('/').pop()?.split('?')[0] || 'file.pdf';
+  }
+
+  if(pdfData){
+    if(pdfSize > MAX_PDF_SYNC){
+      // فایل بزرگ - فقط ذخیره محلی
+      item.pdfData = pdfData;
+      item.pdfName = pdfName;
+      item.pdfSize = pdfSize;
+      item.pdfLocalOnly = true;
+    } else {
+      item.pdfData = pdfData;
+      item.pdfName = pdfName;
+      item.pdfSize = pdfSize;
+    }
+  }
+
+  applyItem(item); saveStore();
+  closeEditor();
+  renderAdmin();
+  renderHome();
+  toast(editingNoteId ? 'جزوه ویرایش شد ✅' : 'جزوه منتشر شد ✅');
+
+  const btn = $('#editorSave');
+  btn.disabled = true;
+  const isLargePdf = item.pdfLocalOnly;
+  if(isLargePdf){
+    toast('📄 PDF بزرگ — فقط روی این دستگاه ذخیره شد');
+  }
+  try{
+    await publish(item);
+    setStatus('online');
+  }catch(err){
+    toast('ذخیره شد ولی ارسال آنلاین ناموفق بود ⚠️');
+    setStatus('offline');
+  } finally { btn.disabled = false; }
+});
+
+$('#editorDelete').addEventListener('click', async ()=>{
+  if(!editingNoteId) return;
+  if(!confirm('این جزوه برای همه حذف شود؟')) return;
+  const tomb = {
+    kind:'note', id: editingNoteId,
+    grade: store.notes[editingNoteId].grade,
+    subject: store.notes[editingNoteId].subject,
+    title:'', content:'', deleted:true, ts:Date.now()
+  };
+  applyItem(tomb); saveStore();
+  closeEditor(); renderAdmin(); renderHome();
+  toast('جزوه حذف شد');
+  try{ await publish(tomb); }catch(e){}
+});
+
+/* ---------- Subject Editor ---------- */
+function openSubjectEditor(){
+  const sel = $('#subEdGrade');
+  sel.innerHTML = Array.from({length:9},(_,i)=>i+1)
+    .map(g=>`<option value="${g}" ${g===state.grade?'selected':''}>پایه ${fa(g)}م</option>`).join('');
+  $('#subEdName').value = '';
+  $('#subjectEditor').classList.remove('hidden');
+}
+function closeSubjectEditor(){ $('#subjectEditor').classList.add('hidden'); }
+
+$('#btnNewSubject').addEventListener('click', openSubjectEditor);
+$('#subjectEditorBack').addEventListener('click', closeSubjectEditor);
+$('#subjectEditorCancel').addEventListener('click', closeSubjectEditor);
+
+$('#subjectEditorSave').addEventListener('click', async ()=>{
+  const grade = +$('#subEdGrade').value;
+  const name = $('#subEdName').value.trim();
+  if(!name){ toast('نام درس را وارد کنید'); return; }
+  if(getSubjects(grade).includes(name)){ toast('این درس قبلاً وجود دارد'); return; }
+  const item = {kind:'subject', id:uid(), grade, name, ts:Date.now()};
+  applyItem(item); saveStore();
+  closeSubjectEditor(); renderAdmin(); renderHome(); renderLibrary();
+  toast('درس اضافه شد ✅');
+  try{ await publish(item); setStatus('online'); }
+  catch(e){ toast('ارسال آنلاین ناموفق ⚠️'); }
+});
+
+async function deleteSubject(id){
+  if(!confirm('این درس سفارشی حذف شود؟')) return;
+  const s = store.subjects[id];
+  if(!s) return;
+  const tomb = {kind:'subject', id, grade:s.grade, name:s.name, deleted:true, ts:Date.now()};
+  applyItem(tomb); saveStore();
+  renderAdmin(); renderHome(); toast('درس حذف شد');
+  try{ await publish(tomb); }catch(e){}
+}
+
+/* ---------- Admin Buttons ---------- */
+$('#btnNewNote').addEventListener('click', ()=>openEditor(null));
+$('#btnRefreshNotes').addEventListener('click', async ()=>{
+  toast('در حال دریافت…');
+  await pullAll();
+  renderAdmin();
+  toast(isOnline?'به‌روزرسانی شد ✅':'اتصال برقرار نشد ⚠️');
+});
+$('#btnSaveSettings').addEventListener('click', ()=>{
+  const t = $('#setTopic').value.trim();
+  if(!t){ toast('موضوع نمی‌تواند خالی باشد'); return; }
+  localStorage.setItem(TOPIC_KEY, t); TOPIC = t;
+  toast('ذخیره شد. اپ را دوباره باز کنید.');
+});
+$('#btnForceSync').addEventListener('click', async ()=>{
+  toast('همگام‌سازی کامل…');
+  await pullAll();
+  renderAdmin();
+  toast(isOnline?'انجام شد ✅':'اتصال ناموفق ⚠️');
+});
+$('#btnClearLocal').addEventListener('click', ()=>{
+  if(!confirm('تمام داده‌های محلی پاک شوند؟ (داده‌های سرور باقی می‌مانند)')) return;
+  localStorage.removeItem(DATA_KEY);
+  store = {notes:{},comments:{},subjects:{}};
+  saveStore(); renderAdmin(); renderHome();
+  toast('داده‌های محلی پاک شد');
+});
+
+/* ---------- Toast ---------- */
+let toastT;
+function toast(msg){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>el.classList.remove('show'), 3200);
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+(async function init(){
+  loadStore();
+  renderHome();
+  renderProfile();
+  renderLibrary();
+
+  setStatus('connecting');
+  armStatusTimeout();
+  await pullAll();
+
+  connectSSE();
+  setInterval(()=>pullAll(true), 30000);
+  setInterval(()=>{ if(!isOnline) pullAll(true); }, 10000);
+})();
+</script>
+</body>
+</html>
