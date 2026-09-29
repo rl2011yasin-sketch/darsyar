@@ -1,11 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6366f1">
-<meta name="description" content="درسیار، مرجع رایگان جزوه‌های کتاب درسی پایه اول تا نهم.">
-<meta name="keywords" content="درسیار, درس یار, جزوه درسی, جزوه کتاب درسی">
+<meta name="description" content="درسیار، مرجع رایگان جزوه‌های کتاب درسی پایه اول تا نهم">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="درسیار | جزوه‌های کتاب درسی">
 <meta property="og:description" content="مرجع رایگان جزوه‌های کتاب درسی">
@@ -23,89 +22,44 @@
   --success:#10b981;--success-bg:#ecfdf5;--success-txt:#059669;
   --danger:#ef4444;--danger-bg:#fef2f2;--danger-txt:#dc2626;
   --warning:#f59e0b;--warning-bg:#fffbeb;--warning-txt:#d97706;
-  --r:18px;--r-sm:12px;
+  --r:18px;
   --sh-1:0 1px 2px rgba(15,23,42,.05);
-  --sh-2:0 4px 18px -6px rgba(15,23,42,.1);
   --sh-3:0 20px 40px -18px rgba(99,102,241,.55);
   --safe-b:env(safe-area-inset-bottom,0px);
-  --safe-t:env(safe-area-inset-top,0px);
 }
 html[data-theme="dark"]{
   --bg:#0b1020;--bg-2:#0f172a;--card:#141b2d;--card-2:#1a2237;
   --text:#f1f5f9;--text-2:#cbd5e1;--muted:#94a3b8;--dim:#64748b;
-  --border:#25304a;--border-2:#334155;
-  --primary-light:#1e1b4b;
-  --sh-1:0 1px 2px rgba(0,0,0,.3);
-  --sh-2:0 4px 18px -6px rgba(0,0,0,.4);
+  --border:#25304a;--border-2:#334155;--primary-light:#1e1b4b;
 }
 html,body{height:100%;overflow-x:hidden}
-body{
-  font-family:Vazirmatn,'Segoe UI',Tahoma,sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.85;
-  -webkit-font-smoothing:antialiased;
-  transition:background .3s,color .3s;
-  overscroll-behavior-y:none;
-}
+body{font-family:Vazirmatn,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font-family:inherit;color:inherit;outline:none;border:0;background:none}
 button{cursor:pointer;user-select:none}
-::selection{background:var(--primary);color:#fff}
 ::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:6px}
-.app{
-  min-height:100vh;display:flex;flex-direction:column;
-  max-width:640px;margin:0 auto;background:var(--bg);
-  position:relative;transition:background .3s;
-}
-.header{
-  position:sticky;top:0;z-index:30;
-  background:color-mix(in srgb,var(--card) 88%,transparent);
-  backdrop-filter:saturate(180%) blur(22px);
-  -webkit-backdrop-filter:saturate(180%) blur(22px);
-  border-bottom:1px solid var(--border);
-  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;
-  display:flex;align-items:center;gap:11px;
-}
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.brand-logo{
-  width:38px;height:38px;border-radius:12px;
-  background:linear-gradient(135deg,var(--primary),var(--primary-3));
-  display:grid;place-items:center;font-size:19px;
-  box-shadow:0 8px 20px -8px rgba(99,102,241,.8);flex-shrink:0;
-}
+.app{min-height:100vh;display:flex;flex-direction:column;max-width:640px;margin:0 auto;background:var(--bg)}
+.header{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:11px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-3));display:grid;place-items:center;font-size:19px;box-shadow:0 8px 20px -8px rgba(99,102,241,.8)}
 .brand-name{font-weight:800;font-size:16.5px;letter-spacing:-.4px;line-height:1.15}
 .brand-sub{font-size:10.5px;color:var(--dim);font-weight:500;line-height:1.15}
 .hspace{flex:1}
-.icon-btn{
-  width:36px;height:36px;border-radius:11px;
-  display:grid;place-items:center;color:var(--muted);
-  transition:.15s;background:transparent;
-}
-.icon-btn:hover{background:var(--bg-2);color:var(--text)}
+.icon-btn{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:var(--muted);transition:.15s}
 .icon-btn:active{transform:scale(.92)}
-.status-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--dim);transition:.3s;flex-shrink:0;
-}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--dim);transition:.3s}
 .status-dot.online{background:var(--success);box-shadow:0 0 0 3px rgba(16,185,129,.2)}
 .status-dot.offline{background:var(--danger);box-shadow:0 0 0 3px rgba(239,68,68,.2)}
 .status-dot.connecting{background:var(--warning);animation:pulse 1.4s infinite}
+.status-dot.saving{background:var(--primary);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .main{flex:1;padding:16px 16px calc(110px + var(--safe-b))}
 .screen{display:none}
 .screen.active{display:block;animation:fadeUp .28s cubic-bezier(.2,.8,.2,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.hero{
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);
-  border-radius:22px;padding:20px 20px 18px;color:#fff;margin-bottom:22px;
-  box-shadow:0 20px 42px -20px rgba(99,102,241,.75);
-}
-html[data-theme="dark"] .hero{
-  background:linear-gradient(135deg,#4338ca 0%,#6d28d9 55%,#7c3aed 100%);
-}
-.hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1);top:-80px;left:-60px;pointer-events:none}
-.hero::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.07);bottom:-70px;right:-40px;pointer-events:none}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);border-radius:22px;padding:20px;color:#fff;margin-bottom:22px;box-shadow:0 20px 42px -20px rgba(99,102,241,.75)}
+.hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1);top:-80px;left:-60px}
+.hero::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.07);bottom:-70px;right:-40px}
 .hero-in{position:relative;z-index:1}
 .hero-title{font-size:20px;font-weight:800;letter-spacing:-.4px;margin-bottom:2px}
 .hero-sub{font-size:12.5px;opacity:.9;margin-bottom:16px;font-weight:500}
@@ -117,134 +71,92 @@ html[data-theme="dark"] .hero{
 .section .count{font-size:12px;color:var(--dim);font-weight:700}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 16px;margin:0 -16px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{
-  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:30px;background:var(--card);
-  border:1.5px solid var(--border);font-size:13px;font-weight:600;
-  color:var(--text);transition:.18s;white-space:nowrap;
-}
+.chip{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;background:var(--card);border:1.5px solid var(--border);font-size:13px;font-weight:600;color:var(--text);transition:.18s;white-space:nowrap}
 .chip:active{transform:scale(.95)}
 .chip .cnt{font-size:10.5px;background:var(--bg-2);color:var(--muted);padding:1px 7px;border-radius:20px;font-weight:700}
-.chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;color:#fff;box-shadow:0 8px 20px -8px rgba(99,102,241,.9)}
+.chip.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;color:#fff}
 .chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
 .notes{display:flex;flex-direction:column;gap:11px}
-.note-card{
-  background:var(--card);border-radius:var(--r);padding:15px 16px 13px;
-  box-shadow:var(--sh-1);border:1.5px solid var(--border);
-  transition:transform .18s,box-shadow .18s,background .3s;
-  cursor:pointer;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;gap:9px;
-}
+.note-card{background:var(--card);border-radius:var(--r);padding:15px 16px 13px;box-shadow:var(--sh-1);border:1.5px solid var(--border);transition:.18s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:9px}
 .note-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--sc,var(--primary))}
-.note-card:hover{box-shadow:var(--sh-2)}
 .note-card:active{transform:scale(.985);background:var(--card-2)}
 .nc-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-right:8px}
 .nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5)}
 .nc-grade{font-size:11px;font-weight:700;color:var(--muted);background:var(--bg-2);padding:3px 9px;border-radius:20px}
-.nc-pdf{font-size:10.5px;font-weight:700;background:var(--danger-bg);color:var(--danger-txt);padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.nc-pdf{font-size:10.5px;font-weight:700;background:var(--danger-bg);color:var(--danger-txt);padding:3px 8px;border-radius:20px}
 .nc-title{font-size:15.5px;font-weight:700;line-height:1.65;padding-right:8px;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-preview{font-size:12.5px;color:var(--muted);line-height:1.9;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-foot{display:flex;align-items:center;gap:14px;padding-top:9px;margin-top:3px;border-top:1px solid var(--border);font-size:11px;color:var(--dim);font-weight:600;padding-right:8px}
-.nc-foot .item{display:inline-flex;align-items:center;gap:5px}
 .empty{background:var(--card);border-radius:var(--r);padding:42px 22px;text-align:center;border:1.5px dashed var(--border-2)}
 .empty-icon{width:68px;height:68px;border-radius:22px;background:var(--primary-light);color:var(--primary);display:grid;place-items:center;font-size:30px;margin:0 auto 16px}
 .empty b{display:block;font-size:15.5px;font-weight:800;margin-bottom:7px}
 .empty p{font-size:13px;color:var(--muted);line-height:1.9}
-.search-wrap{position:relative;margin-bottom:16px}
-.search-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--border);border-radius:15px;padding:12px 15px;transition:.18s}
-.search-box:focus-within{border-color:var(--primary);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 12%,transparent)}
-.search-box svg{color:var(--dim);flex-shrink:0}
-.search-box input{flex:1;font-size:14.5px;background:transparent}
-.search-box input::placeholder{color:var(--dim)}
-.search-clear{width:24px;height:24px;border-radius:8px;display:none;place-items:center;color:var(--muted);background:var(--bg-2);font-size:14px;font-weight:700}
-.search-clear.show{display:grid}
-.lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden;transition:.2s}
-.lib-head{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer;transition:.15s}
-.lib-head:active{background:var(--card-2)}
-.lib-num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:15.5px;flex-shrink:0;box-shadow:0 6px 14px -6px rgba(99,102,241,.7)}
+.search-wrap{margin-bottom:16px}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--border);border-radius:15px;padding:12px 15px}
+.search-box input{flex:1;font-size:14.5px}
+.lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);margin-bottom:10px;overflow:hidden}
+.lib-head{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer}
+.lib-num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:15.5px;flex-shrink:0}
 .lib-title{flex:1;font-weight:700;font-size:14.5px}
 .lib-meta{font-size:11px;color:var(--dim);font-weight:600;margin-top:2px}
-.lib-arrow{color:var(--dim);font-size:20px;transition:.25s;display:grid;place-items:center;width:22px;height:22px}
+.lib-arrow{color:var(--dim);font-size:20px;transition:.25s}
 .lib-grade.open .lib-arrow{transform:rotate(-90deg)}
 .lib-subs{display:none;border-top:1px solid var(--border);padding:6px 0}
-.lib-grade.open .lib-subs{display:block;animation:slideDown .25s ease}
-@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.lib-sub{display:flex;align-items:center;gap:11px;padding:10px 15px;font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s}
-.lib-sub:active{background:var(--card-2)}
-.lib-sub-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5);flex-shrink:0}
-.lib-sub-body{flex:1;min-width:0}
-.lib-sub-count{font-size:11px;color:var(--dim);font-weight:600}
-.profile-card{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-radius:var(--r);padding:24px 22px;color:#fff;text-align:center;margin-bottom:14px;box-shadow:var(--sh-3);position:relative;overflow:hidden}
-.profile-card::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.1);top:-90px;left:-60px}
-.profile-card::after{content:'';position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08);bottom:-60px;right:-30px}
-.profile-av{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);display:grid;place-items:center;color:#fff;font-size:32px;font-weight:800;margin:0 auto 12px;position:relative;z-index:1;border:2px solid rgba(255,255,255,.3)}
-.profile-card h3{font-size:17px;font-weight:800;margin-bottom:4px;position:relative;z-index:1}
-.profile-card p{font-size:12.5px;opacity:.9;position:relative;z-index:1}
+.lib-grade.open .lib-subs{display:block}
+.lib-sub{display:flex;align-items:center;gap:11px;padding:10px 15px;font-size:13.5px;cursor:pointer}
+.lib-sub-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:var(--sb);color:var(--sc)}
+.profile-card{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-radius:var(--r);padding:24px 22px;color:#fff;text-align:center;margin-bottom:14px;box-shadow:var(--sh-3)}
+.profile-av{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;color:#fff;font-size:32px;font-weight:800;margin:0 auto 12px;border:2px solid rgba(255,255,255,.3)}
+.profile-card h3{font-size:17px;font-weight:800;margin-bottom:4px}
+.profile-card p{font-size:12.5px;opacity:.9}
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
 .stat-card{background:var(--card);border-radius:15px;padding:14px 8px;text-align:center;border:1.5px solid var(--border)}
-.stat-card b{display:block;font-size:21px;font-weight:800;color:var(--primary);letter-spacing:-.6px}
+.stat-card b{display:block;font-size:21px;font-weight:800;color:var(--primary)}
 .stat-card span{font-size:11px;color:var(--muted);font-weight:600}
 .menu{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);overflow:hidden}
-.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%;text-align:right;border-bottom:1px solid var(--border);font-size:14px;font-weight:600;transition:.15s}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%;text-align:right;border-bottom:1px solid var(--border);font-size:14px;font-weight:600}
 .menu-item:last-child{border-bottom:0}
-.menu-item:active{background:var(--card-2)}
-.menu-icon{width:36px;height:36px;border-radius:11px;background:var(--primary-light);color:var(--primary);display:grid;place-items:center;font-size:17px;flex-shrink:0}
+.menu-icon{width:36px;height:36px;border-radius:11px;background:var(--primary-light);color:var(--primary);display:grid;place-items:center;font-size:17px}
 .menu-item .arrow{color:var(--dim);margin-right:auto;font-size:18px;font-weight:700}
-.bottom-nav{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;z-index:60;
-  background:color-mix(in srgb,var(--card) 90%,transparent);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
-  border-top:1px solid var(--border);
-  padding:8px 10px calc(8px + var(--safe-b));
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
-}
-.nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:12px;color:var(--dim);font-size:10.5px;font-weight:700;transition:color .18s,background .18s,transform .15s}
-.nav-btn svg{width:22px;height:22px;transition:.2s}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:60;background:var(--card);border-top:1px solid var(--border);padding:8px 10px calc(8px + var(--safe-b));display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:12px;color:var(--dim);font-size:10.5px;font-weight:700;transition:.18s}
+.nav-btn svg{width:22px;height:22px}
 .nav-btn.active{color:var(--primary);background:var(--primary-light)}
-.nav-btn.active svg{transform:translateY(-1px)}
-.nav-btn:active{transform:scale(.94)}
-.detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:80;background:var(--bg);display:flex;flex-direction:column;animation:slideIn .3s cubic-bezier(.2,.8,.2,1)}
-@keyframes slideIn{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1;transform:translate(-50%,0)}}
-.detail-header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;display:flex;align-items:center;gap:11px}
-.progress-bar{position:absolute;bottom:0;right:0;left:0;height:2.5px;background:var(--border);overflow:hidden}
-.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--primary-2));transition:width .1s}
-.back-btn{width:38px;height:38px;border-radius:12px;background:var(--bg-2);display:grid;place-items:center;color:var(--text);transition:.15s;flex-shrink:0}
-.back-btn:active{background:var(--border);transform:scale(.94)}
-.detail-title{font-size:14.5px;font-weight:800;flex:1;letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:80;background:var(--bg);display:flex;flex-direction:column}
+.detail.hidden{display:none}
+.detail-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:11px}
+.back-btn{width:38px;height:38px;border-radius:12px;background:var(--bg-2);display:grid;place-items:center;color:var(--text);flex-shrink:0;font-size:20px;font-weight:700}
+.detail-title{font-size:14.5px;font-weight:800;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .detail-body{flex:1;overflow-y:auto;padding:16px 16px calc(28px + var(--safe-b))}
 .note-head{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh-1);border:1.5px solid var(--border);margin-bottom:13px}
 .chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.note-title{font-size:21px;font-weight:800;letter-spacing:-.5px;line-height:1.55;margin-bottom:8px}
+.note-title{font-size:21px;font-weight:800;line-height:1.55;margin-bottom:8px}
 .note-meta{font-size:11.5px;color:var(--dim);font-weight:600}
 .note-content{background:var(--card);border-radius:var(--r);padding:22px 20px;box-shadow:var(--sh-1);border:1.5px solid var(--border);font-size:15px;line-height:2.15;color:var(--text-2);margin-bottom:13px;word-break:break-word}
-.note-content h2{font-size:19px;font-weight:800;color:var(--primary-dark);margin:18px 0 9px;letter-spacing:-.3px}
+.note-content h2{font-size:19px;font-weight:800;color:var(--primary-dark);margin:18px 0 9px}
 .note-content h3{font-size:17px;font-weight:800;color:var(--primary-2);margin:16px 0 8px}
 .note-content h4{font-size:15.5px;font-weight:800;color:var(--text);margin:14px 0 7px}
 .note-content p{margin:6px 0}
 .note-content ul{margin:8px 20px 8px 0;padding-right:6px}
-.note-content li{margin:4px 0}
 .note-content strong{color:var(--text);font-weight:800}
 .note-content .sp{height:8px}
 .pdf-box{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:var(--sh-1);border:1.5px solid var(--border);margin-bottom:13px}
 .pdf-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.pdf-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#ef4444,#dc2626);display:grid;place-items:center;color:#fff;font-size:23px;flex-shrink:0;box-shadow:0 10px 22px -10px rgba(220,38,38,.7)}
+.pdf-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#ef4444,#dc2626);display:grid;place-items:center;color:#fff;font-size:23px;flex-shrink:0}
 .pdf-info{flex:1;min-width:0}
-.pdf-label{font-size:10.5px;color:var(--dim);font-weight:700;letter-spacing:.4px}
+.pdf-label{font-size:10.5px;color:var(--dim);font-weight:700}
 .pdf-name{font-size:14px;font-weight:700;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pdf-size{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.pdf-size{font-size:11.5px;color:var(--muted);font-weight:600}
 .pdf-actions{display:flex;gap:8px;flex-wrap:wrap}
 .pdf-actions .btn{flex:1;justify-content:center;min-width:110px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:700;transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;white-space:nowrap}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
 .btn-ghost{background:var(--card);color:var(--text);border:1.5px solid var(--border)}
-.btn-ghost:active{background:var(--card-2)}
-.btn-danger{background:var(--danger-bg);color:var(--danger-txt);border:1.5px solid color-mix(in srgb,var(--danger) 30%,transparent)}
+.btn-danger{background:var(--danger-bg);color:var(--danger-txt);border:1.5px solid #fecaca}
 .btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
 .btn-block{width:100%}
-.btn:disabled{opacity:.55;cursor:wait;transform:none !important}
+.btn:disabled{opacity:.55;cursor:wait}
 .comments{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh-1);border:1.5px solid var(--border)}
 .comments h3{font-size:15.5px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .cnt-pill{font-size:11px;background:var(--primary-light);color:var(--primary);padding:2px 9px;border-radius:20px;font-weight:800}
@@ -257,96 +169,97 @@ html[data-theme="dark"] .hero{
 .cmt-head span{font-size:10.5px;color:var(--dim);font-weight:600}
 .cmt-text{font-size:13.5px;color:var(--text-2);line-height:2;word-break:break-word}
 .cmt-form{margin-top:16px;padding-top:16px;border-top:2px dashed var(--border);display:flex;flex-direction:column;gap:9px}
-.cmt-form input,.cmt-form textarea{border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;font-size:13.5px;transition:.15s;background:var(--card-2);resize:vertical;width:100%}
-.cmt-form input:focus,.cmt-form textarea:focus{border-color:var(--primary);background:var(--card);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 12%,transparent)}
-.cmt-form button{align-self:flex-start;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:11px 28px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
-.cmt-form button:active{transform:scale(.96)}
-.sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;opacity:0;pointer-events:none;transition:.28s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.cmt-form input,.cmt-form textarea{border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;font-size:13.5px;background:var(--card-2);width:100%}
+.cmt-form button{align-self:flex-start;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;padding:11px 28px;border-radius:12px;font-size:13.5px;font-weight:700}
+.sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;opacity:0;pointer-events:none;transition:.28s}
 .sheet-overlay.show{opacity:1;pointer-events:auto}
 .sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:640px;background:var(--card);border-radius:24px 24px 0 0;padding:10px 18px calc(24px + var(--safe-b));z-index:101;transition:transform .32s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
 .sheet.show{transform:translate(-50%,0)}
 .sheet-handle{width:38px;height:4px;border-radius:20px;background:var(--border-2);margin:6px auto 16px}
-.sheet h3{font-size:16.5px;font-weight:800;margin-bottom:16px;padding:0 4px}
+.sheet h3{font-size:16.5px;font-weight:800;margin-bottom:16px}
 .grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.grade-opt{padding:16px 8px;border-radius:14px;border:1.5px solid var(--border);background:var(--card-2);font-size:14px;font-weight:700;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:4px}
-.grade-opt:active{transform:scale(.95)}
-.grade-opt .num{font-size:22px;font-weight:800;letter-spacing:-.6px;line-height:1}
+.grade-opt{padding:16px 8px;border-radius:14px;border:1.5px solid var(--border);background:var(--card-2);display:flex;flex-direction:column;align-items:center;gap:4px}
+.grade-opt .num{font-size:22px;font-weight:800}
 .grade-opt .lbl{font-size:11px;color:var(--muted);font-weight:600}
-.grade-opt.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
-.grade-opt.active .num,.grade-opt.active .lbl{color:#fff}
-.toast{position:fixed;bottom:calc(100px + var(--safe-b));left:50%;transform:translate(-50%,80px);background:var(--text);color:var(--card);padding:12px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.32s cubic-bezier(.2,.8,.2,1);z-index:200;box-shadow:0 16px 38px -12px rgba(0,0,0,.55);max-width:88vw;text-align:center;display:flex;align-items:center;gap:8px}
+.grade-opt.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;color:#fff}
+.grade-opt.active .lbl{color:#fff}
+.toast{position:fixed;bottom:calc(100px + var(--safe-b));left:50%;transform:translate(-50%,80px);background:var(--text);color:var(--card);padding:12px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.32s;z-index:200;max-width:88vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.success{background:var(--success-txt);color:#fff}
 .toast.error{background:var(--danger-txt);color:#fff}
-.pdf-viewer{position:fixed;inset:0;z-index:500;background:#0b1020;display:flex;flex-direction:column;animation:fadeIn .22s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.pdf-viewer{position:fixed;inset:0;z-index:500;background:#0b1020;display:flex;flex-direction:column}
 .pdf-viewer.hidden{display:none}
-.pdf-viewer-header{background:rgba(15,23,42,.95);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;display:flex;align-items:center;gap:10px;flex-shrink:0;backdrop-filter:blur(20px)}
+.pdf-viewer-header{background:#1e293b;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
 .pdf-viewer-header .back-btn{background:rgba(255,255,255,.12);color:#fff}
-.pdf-viewer-header .back-btn:active{background:rgba(255,255,255,.22)}
 .pdf-viewer-title{flex:1;font-size:13.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pdf-viewer-body{flex:1;position:relative;background:#0b1020}
+.pdf-viewer-body{flex:1;position:relative}
 .pdf-viewer-body iframe{width:100%;height:100%;border:0;background:#fff}
-.pdf-viewer-loading{position:absolute;inset:0;display:grid;place-items:center;color:#94a3b8;font-size:13px;font-weight:600;background:#0b1020;flex-direction:column;gap:14px}
-.spinner{width:36px;height:36px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column;animation:fadeIn .22s ease}
+.admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
 .admin.hidden{display:none}
-.admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 6px 24px -8px rgba(0,0,0,.4)}
+.admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px}
 .admin-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-3));display:grid;place-items:center;font-size:18px}
 .admin-title{font-weight:800;font-size:15px;line-height:1.2}
-.admin-sub{font-size:10.5px;opacity:.7;font-weight:500;margin-top:1px}
+.admin-sub{font-size:10.5px;opacity:.7}
 .admin-spacer{flex:1}
-.admin-close{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;font-size:17px;font-weight:700;transition:.15s}
-.admin-close:active{background:rgba(255,255,255,.25);transform:scale(.94)}
+.admin-close{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;font-size:17px;font-weight:700}
 .admin-tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 10px;overflow-x:auto;scrollbar-width:none}
 .admin-tabs::-webkit-scrollbar{display:none}
-.admin-tab{padding:14px 15px;font-size:13.5px;font-weight:700;color:var(--muted);border-bottom:2.5px solid transparent;transition:.15s;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.admin-tab{padding:14px 15px;font-size:13.5px;font-weight:700;color:var(--muted);border-bottom:2.5px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:7px}
 .admin-tab.active{color:var(--primary);border-color:var(--primary)}
 .cnt-mini{font-size:10.5px;background:var(--bg-2);color:var(--muted);padding:1px 7px;border-radius:20px;font-weight:700}
 .admin-tab.active .cnt-mini{background:var(--primary-light);color:var(--primary)}
 .admin-body{flex:1;overflow-y:auto;padding:16px;max-width:900px;margin:0 auto;width:100%}
 .admin-panel{display:none}
-.admin-panel.active{display:block;animation:fadeUp .22s ease}
+.admin-panel.active{display:block}
 .admin-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .admin-list{display:flex;flex-direction:column;gap:9px}
-.admin-item{background:var(--card);border-radius:14px;padding:14px 15px;border:1.5px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.admin-item{background:var(--card);border-radius:14px;padding:14px 15px;border:1.5px solid var(--border);display:flex;gap:12px}
 .admin-item-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;font-size:19px}
 .admin-item-body{flex:1;min-width:0}
 .admin-item-title{font-size:14px;font-weight:700;margin-bottom:3px;line-height:1.6}
 .admin-item-meta{font-size:11px;color:var(--dim);font-weight:600;display:flex;gap:9px;flex-wrap:wrap}
-.admin-item-actions{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.admin-item-actions{display:flex;gap:5px}
 .admin-empty{background:var(--card);border-radius:14px;padding:42px 20px;text-align:center;border:1.5px dashed var(--border-2);color:var(--muted);font-size:13.5px;line-height:2}
-.editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column;animation:fadeIn .2s ease}
+.editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column}
 .editor.hidden{display:none}
-.editor-header{background:var(--card);border-bottom:1px solid var(--border);padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
+.editor-header{background:var(--card);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:12px}
 .editor-header h3{font-size:15px;font-weight:800;flex:1}
 .editor-body{flex:1;overflow-y:auto;padding:18px;max-width:700px;margin:0 auto;width:100%}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px;padding:0 4px}
-.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px;background:var(--card);transition:.15s}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 12%,transparent)}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;font-size:14px;background:var(--card)}
 .field textarea{resize:vertical;min-height:120px;line-height:2}
-.field textarea.content-area{min-height:260px;font-size:14px}
+.field textarea.content-area{min-height:260px}
 .field .hint{font-size:11px;color:var(--dim);margin-top:5px;padding:0 4px;line-height:1.8}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:480px){.field-row{grid-template-columns:1fr}}
-.pdf-upload-area{display:flex;align-items:center;gap:10px;background:var(--card-2);border:1.5px dashed var(--border-2);border-radius:12px;padding:14px;transition:.15s}
+.pdf-upload-area{display:flex;align-items:center;gap:10px;background:var(--card-2);border:1.5px dashed var(--border-2);border-radius:12px;padding:14px}
 .pdf-upload-area.has-file{background:var(--success-bg);border-color:var(--success);border-style:solid}
 .pdf-upload-icon{width:42px;height:42px;border-radius:12px;background:var(--danger-bg);color:var(--danger-txt);display:grid;place-items:center;font-size:19px;flex-shrink:0}
 .pdf-upload-info{flex:1;min-width:0}
 .pdf-upload-name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-upload-size{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
-.pdf-remove{width:32px;height:32px;border-radius:10px;background:var(--danger-bg);color:var(--danger-txt);display:grid;place-items:center;font-size:15px;flex-shrink:0}
-.editor-actions{display:flex;gap:8px;padding:14px 18px calc(14px + var(--safe-b));border-top:1px solid var(--border);background:var(--card);max-width:700px;margin:0 auto;width:100%;flex-wrap:wrap}
+.pdf-remove{width:32px;height:32px;border-radius:10px;background:var(--danger-bg);color:var(--danger-txt);display:grid;place-items:center;font-size:15px}
+.editor-actions{display:flex;gap:8px;padding:14px 18px;border-top:1px solid var(--border);background:var(--card);max-width:700px;margin:0 auto;width:100%;flex-wrap:wrap}
 .editor-actions .spacer{flex:1}
 .settings-section{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);padding:18px;margin-bottom:14px}
 .settings-section h4{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .settings-section h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--primary)}
 .hidden{display:none !important}
+.loading-overlay{position:fixed;inset:0;background:var(--bg);z-index:900;display:grid;place-items:center;flex-direction:column;gap:16px}
+.loading-overlay.hidden{display:none}
+.loading-spinner{width:48px;height:48px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--primary);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;font-weight:700;color:var(--muted)}
 </style>
 </head>
 <body>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loadingText">در حال دریافت داده‌ها از GitHub…</div>
+</div>
 
 <div class="app">
   <header class="header">
@@ -358,17 +271,17 @@ html[data-theme="dark"] .hero{
       </div>
     </div>
     <div class="hspace"></div>
-    <button class="icon-btn" id="themeToggle" title="حالت شب/روز" type="button">
+    <button class="icon-btn" id="themeToggle" type="button">
       <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
-    <div class="status-dot" id="statusDot" title="وضعیت اتصال"></div>
+    <div class="status-dot" id="statusDot" title="وضعیت"></div>
   </header>
 
   <main class="main">
     <section class="screen active" id="screen-home">
       <div class="hero">
         <div class="hero-in">
-          <div class="hero-title" id="heroTitle">سلام 👋</div>
+          <div class="hero-title">سلام 👋</div>
           <div class="hero-sub" id="heroSub">جزوه‌های کتاب درسی</div>
           <div class="hero-stats">
             <div class="hero-stat"><b id="statNotes">۰</b><span>جزوه</span></div>
@@ -386,9 +299,8 @@ html[data-theme="dark"] .hero{
     <section class="screen" id="screen-search">
       <div class="search-wrap">
         <div class="search-box">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="searchInput" placeholder="جستجو در همه جزوه‌ها…" autocomplete="off" enterkeyhint="search">
-          <button class="search-clear" id="searchClear" type="button">✕</button>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="searchInput" placeholder="جستجو در همه جزوه‌ها…">
         </div>
       </div>
       <div class="notes" id="searchResults"></div>
@@ -412,37 +324,29 @@ html[data-theme="dark"] .hero{
         <div class="stat-card"><b id="pStatSubjects">۰</b><span>درس</span></div>
       </div>
       <div class="menu">
-        <button class="menu-item" id="menuGrade" type="button">
-          <div class="menu-icon">🎓</div><div>تغییر پایه تحصیلی</div><span class="arrow">‹</span>
-        </button>
-        <button class="menu-item" id="menuName" type="button">
-          <div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span>
-        </button>
-        <button class="menu-item" id="menuSync" type="button">
-          <div class="menu-icon">🔄</div><div>همگام‌سازی با سرور</div><span class="arrow">‹</span>
-        </button>
+        <button class="menu-item" id="menuGrade" type="button"><div class="menu-icon">🎓</div><div>تغییر پایه تحصیلی</div><span class="arrow">‹</span></button>
+        <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
+        <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">
-        درسیار • نسخه ۳.۰<br>ساخته‌شده با ❤️ برای دانش‌آموزان
-      </p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه ۶.۰<br>همه داده‌ها روی GitHub ذخیره می‌شوند</p>
     </section>
   </main>
 
-  <nav class="bottom-nav" id="bottomNav">
+  <nav class="bottom-nav">
     <button class="nav-btn active" data-nav="home" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
       <span>خانه</span>
     </button>
     <button class="nav-btn" data-nav="search" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       <span>جستجو</span>
     </button>
     <button class="nav-btn" data-nav="library" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       <span>کتابخانه</span>
     </button>
     <button class="nav-btn" data-nav="profile" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
       <span>پروفایل</span>
     </button>
   </nav>
@@ -450,11 +354,8 @@ html[data-theme="dark"] .hero{
 
 <div class="detail hidden" id="detail">
   <div class="detail-header">
-    <button class="back-btn" id="detailBack" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
+    <button class="back-btn" id="detailBack" type="button">‹</button>
     <div class="detail-title" id="detailTitle">جزوه</div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
   <div class="detail-body" id="detailBody"></div>
 </div>
@@ -462,32 +363,23 @@ html[data-theme="dark"] .hero{
 <div class="pdf-viewer hidden" id="pdfViewer">
   <div class="pdf-viewer-header">
     <button class="back-btn" id="pdfViewerClose" type="button">✕</button>
-    <div class="pdf-viewer-title" id="pdfViewerTitle">مشاهده PDF</div>
-    <a class="btn btn-ghost btn-sm" id="pdfViewerDownload" download style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.25)">⬇ دانلود</a>
+    <div class="pdf-viewer-title" id="pdfViewerTitle">PDF</div>
+    <a class="btn btn-ghost btn-sm" id="pdfViewerDownload" download style="background:rgba(255,255,255,.15);color:#fff">⬇</a>
   </div>
-  <div class="pdf-viewer-body">
-    <div class="pdf-viewer-loading" id="pdfViewerLoading">
-      <div class="spinner"></div>
-      <span>در حال بارگذاری PDF…</span>
-    </div>
-    <iframe id="pdfViewerFrame" src="about:blank"></iframe>
-  </div>
+  <div class="pdf-viewer-body"><iframe id="pdfViewerFrame" src="about:blank"></iframe></div>
 </div>
 
 <div class="sheet-overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
-  <h3 id="sheetTitle">انتخاب پایه</h3>
+  <h3>انتخاب پایه</h3>
   <div class="grade-grid" id="gradeGrid"></div>
 </div>
 
 <div class="admin hidden" id="admin">
   <div class="admin-header">
     <div class="admin-logo">🛠</div>
-    <div>
-      <div class="admin-title">پنل مدیر درسیار</div>
-      <div class="admin-sub">مدیریت جزوه‌ها و درس‌ها</div>
-    </div>
+    <div><div class="admin-title">پنل مدیر</div><div class="admin-sub">مدیریت جزوه‌ها</div></div>
     <div class="admin-spacer"></div>
     <button class="admin-close" id="adminClose" type="button">✕</button>
   </div>
@@ -500,8 +392,7 @@ html[data-theme="dark"] .hero{
     <div class="admin-panel active" id="panel-notes">
       <div class="admin-actions">
         <button class="btn btn-primary" id="btnNewNote" type="button">＋ جزوه جدید</button>
-        <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 به‌روزرسانی</button>
-        <button class="btn btn-ghost" id="btnRestore" type="button">♻️ بازیابی داده‌های قدیمی</button>
+        <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 دریافت از GitHub</button>
       </div>
       <div id="adminNotesFilter" style="margin-bottom:14px"></div>
       <div class="admin-list" id="adminNotesList"></div>
@@ -510,39 +401,27 @@ html[data-theme="dark"] .hero{
       <div class="admin-actions">
         <button class="btn btn-primary" id="btnNewSubject" type="button">＋ درس سفارشی</button>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.9;padding:0 4px">
-        ℹ️ درس‌های پیش‌فرض کتاب‌های درسی خودکار نمایش داده می‌شوند.
-      </p>
       <div class="admin-list" id="adminSubjectsList"></div>
     </div>
     <div class="admin-panel" id="panel-settings">
       <div class="settings-section">
-        <h4><span class="dot"></span> سرور همگام‌سازی (ntfy.sh)</h4>
+        <h4><span class="dot" style="background:var(--success)"></span> اتصال به GitHub</h4>
         <div class="field">
-          <label>موضوع سرور (Topic)</label>
-          <input id="setTopic" placeholder="darsyar-classroom-1404" dir="ltr" style="text-align:left">
-          <div class="hint">⚠️ این موضوع، کلاس مجازی شماست. تمام دستگاه‌هایی که همین موضوع را وارد کنند، داده‌های یکسانی را می‌بینند.</div>
+          <label>مخزن GitHub</label>
+          <input id="setGhRepo" dir="ltr" style="text-align:left" readonly>
+          <div class="hint">داده‌ها در فایل <code>data.json</code> کنار فایل سایت ذخیره می‌شوند.</div>
         </div>
         <div class="field">
-          <label>آدرس سرور</label>
-          <input id="setServer" value="https://ntfy.sh" readonly style="background:var(--card-2);color:var(--muted);direction:ltr;text-align:left">
+          <label>توکن GitHub (فقط برای مدیر)</label>
+          <input id="setGhToken" type="password" placeholder="ghp_..." dir="ltr" style="text-align:left">
+          <div class="hint">توکن فقط روی مرورگر خودت ذخیره می‌شود و به GitHub ارسال می‌شود. کاربران عادی نیازی ندارند.</div>
         </div>
-        <button class="btn btn-primary btn-block" id="btnSaveSettings" type="button">💾 ذخیره تنظیمات</button>
+        <button class="btn btn-primary btn-block" id="btnSaveGh" type="button">💾 ذخیره و اتصال</button>
+        <button class="btn btn-ghost btn-block" id="btnDisconnect" type="button" style="margin-top:8px">🔓 قطع اتصال (پاک کردن توکن)</button>
+        <div id="ghStatus" style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.9"></div>
       </div>
       <div class="settings-section">
-        <h4><span class="dot" style="background:var(--success)"></span> همگام‌سازی و پشتیبان</h4>
-        <div class="admin-actions">
-          <button class="btn btn-ghost" id="btnForceSync" type="button">🔄 همگام‌سازی کامل</button>
-          <button class="btn btn-danger" id="btnClearLocal" type="button">🗑 پاک‌کردن داده‌های محلی</button>
-        </div>
-        <div class="field" style="margin-top:14px;margin-bottom:0">
-          <label>خروجی JSON (بدون PDF)</label>
-          <textarea id="setExport" readonly style="min-height:120px;font-size:11px;font-family:monospace;direction:ltr;text-align:left"></textarea>
-          <div class="hint">برای پشتیبان‌گیری، این متن را کپی کنید.</div>
-        </div>
-      </div>
-      <div class="settings-section">
-        <h4><span class="dot" style="background:var(--warning)"></span> آمار</h4>
+        <h4><span class="dot" style="background:var(--warning)"></span> آمار داده‌ها</h4>
         <div id="adminStats" style="font-size:13px;color:var(--muted);line-height:2.2"></div>
       </div>
     </div>
@@ -551,52 +430,37 @@ html[data-theme="dark"] .hero{
 
 <div class="editor hidden" id="editor">
   <div class="editor-header">
-    <button class="back-btn" id="editorBack" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
+    <button class="back-btn" id="editorBack" type="button">‹</button>
     <h3 id="editorTitle">جزوه جدید</h3>
   </div>
-  <div class="editor-body" id="editorBody">
+  <div class="editor-body">
     <div class="field-row">
-      <div class="field">
-        <label>پایه تحصیلی</label>
-        <select id="edGrade"></select>
-      </div>
-      <div class="field">
-        <label>درس</label>
-        <select id="edSubject"></select>
-      </div>
+      <div class="field"><label>پایه</label><select id="edGrade"></select></div>
+      <div class="field"><label>درس</label><select id="edSubject"></select></div>
     </div>
-    <div class="field">
-      <label>عنوان جزوه</label>
-      <input id="edTitle" placeholder="مثلاً: فصل اول — عددهای صحیح" maxlength="120">
-    </div>
+    <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: فصل اول" maxlength="120"></div>
     <div class="field">
       <label>متن جزوه</label>
-      <textarea id="edContent" class="content-area"
-        placeholder="متن جزوه را اینجا بنویسید…&#10;&#10;قواعد قالب‌بندی:&#10;# عنوان بزرگ&#10;## عنوان متوسط&#10;### عنوان کوچک&#10;- آیتم لیست&#10;**متن مهم**"></textarea>
-      <div class="hint">از # برای عنوان، - برای لیست و ** برای متن پررنگ استفاده کنید.</div>
+      <textarea id="edContent" class="content-area" placeholder="متن جزوه...&#10;&#10;# عنوان&#10;## زیرعنوان&#10;- آیتم&#10;**متن مهم**"></textarea>
     </div>
     <div class="settings-section">
-      <h4><span class="dot" style="background:var(--danger)"></span> فایل PDF (اختیاری)</h4>
+      <h4><span class="dot" style="background:var(--danger)"></span> PDF (اختیاری)</h4>
       <div class="field">
-        <label>بارگذاری فایل PDF</label>
         <input type="file" id="edPdfFile" accept="application/pdf" style="display:none">
         <div class="pdf-upload-area" id="pdfUploadArea">
           <div class="pdf-upload-icon">📄</div>
           <div class="pdf-upload-info">
             <div class="pdf-upload-name" id="pdfUploadName">هیچ فایلی انتخاب نشده</div>
-            <div class="pdf-upload-size" id="pdfUploadSize">حداکثر ۵۰۰ کیلوبایت</div>
+            <div class="pdf-upload-size" id="pdfUploadSize">حداکثر ۵۰۰KB برای ذخیره در data.json</div>
           </div>
           <button type="button" class="btn btn-ghost btn-sm" id="btnChoosePdf">انتخاب</button>
           <button type="button" class="pdf-remove hidden" id="btnRemovePdf">✕</button>
         </div>
-        <div class="hint">⚠️ فایل‌های زیر ۲۰۰ کیلوبایت با سرور همگام می‌شوند.</div>
       </div>
-      <div class="field" style="margin-bottom:0">
+      <div class="field">
         <label>یا لینک PDF خارجی</label>
-        <input id="edPdfUrl" placeholder="https://example.com/file.pdf" dir="ltr" style="text-align:left">
-        <div class="hint">اگر فایل PDF را جای دیگری گذاشته‌اید، لینک مستقیم آن را اینجا بگذارید.</div>
+        <input id="edPdfUrl" placeholder="https://..." dir="ltr" style="text-align:left">
+        <div class="hint">برای فایل‌های بزرگ‌تر از ۵۰۰KB، از لینک مستقیم استفاده کن (گوگل درایو، تلگرام، و…).</div>
       </div>
     </div>
   </div>
@@ -610,21 +474,12 @@ html[data-theme="dark"] .hero{
 
 <div class="editor hidden" id="subjectEditor">
   <div class="editor-header">
-    <button class="back-btn" id="subjectEditorBack" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
-    <h3>درس سفارشی جدید</h3>
+    <button class="back-btn" id="subjectEditorBack" type="button">‹</button>
+    <h3>درس سفارشی</h3>
   </div>
   <div class="editor-body">
-    <div class="field">
-      <label>پایه تحصیلی</label>
-      <select id="subEdGrade"></select>
-    </div>
-    <div class="field">
-      <label>نام درس</label>
-      <input id="subEdName" placeholder="مثلاً: المپیاد ریاضی" maxlength="60">
-      <div class="hint">این درس به لیست درس‌های این پایه اضافه می‌شود.</div>
-    </div>
+    <div class="field"><label>پایه</label><select id="subEdGrade"></select></div>
+    <div class="field"><label>نام درس</label><input id="subEdName" placeholder="مثلاً: المپیاد ریاضی" maxlength="60"></div>
   </div>
   <div class="editor-actions">
     <button class="btn btn-primary" id="subjectEditorSave" type="button">💾 ذخیره</button>
@@ -636,32 +491,75 @@ html[data-theme="dark"] .hero{
 
 <script>
 /* =========================================================
-   درسیار v3.1 — با بازیابی خودکار داده‌ها
+   درسیار v6.0 — ذخیره کامل روی GitHub
+   مخزن: rl2011yasin-sketch/darsyar
+   فایل داده: data.json (کنار index.html)
    ========================================================= */
 
+/* =========================================================
+   ۱. تنظیمات
+   ========================================================= */
+const GH_OWNER = 'rl2011yasin-sketch';
+const GH_REPO = 'darsyar';
+const GH_BRANCH = 'main';
+const DATA_FILE = 'data.json';
+const GH_API = 'https://api.github.com';
+const TOKEN_KEY = 'darsyar_admin_token';
+const THEME_KEY = 'darsyar_theme';
+const GRADE_KEY = 'darsyar_grade';
+const NAME_KEY = 'darsyar_name';
+const CACHE_KEY = 'darsyar_cache';
+
+/* =========================================================
+   ۲. ابزارهای پایه
+   ========================================================= */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
-  ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-function dateFa(ts){
-  try{ return new Date(ts).toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
-  catch(e){ return ''; }
-}
-function dateFullFa(ts){
-  try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }
-  catch(e){ return ''; }
-}
-function formatSize(b){
-  if(!b) return '';
-  if(b < 1024) return fa(b) + ' بایت';
-  if(b < 1024*1024) return fa((b/1024).toFixed(0)) + ' کیلوبایت';
-  return fa((b/1024/1024).toFixed(1)) + ' مگابایت';
-}
-function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
+function dateFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
+function dateFullFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ return ''; } }
+function formatSize(b){ if(!b) return ''; if(b<1024) return fa(b)+' بایت'; if(b<1024*1024) return fa((b/1024).toFixed(0))+' KB'; return fa((b/1024/1024).toFixed(1))+' MB'; }
+function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(()=>fn(...args), ms); }; }
 
+/* =========================================================
+   ۳. UTF-8 ↔ Base64 (پشتیبانی کامل از فارسی)
+   ========================================================= */
+function utf8ToBase64(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  const chunk = 0x8000;
+  for(let i = 0; i < bytes.length; i += chunk){
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+  }
+  return btoa(bin);
+}
+function base64ToUtf8(b64){
+  const bin = atob(b64.replace(/\s/g, ''));
+  const bytes = new Uint8Array(bin.length);
+  for(let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+/* =========================================================
+   ۴. متغیرهای اصلی
+   ========================================================= */
+let store = { notes:{}, comments:{}, subjects:{}, updatedAt:0 };
+let fileSha = null;       // SHA فعلی data.json
+let isAdmin = false;      // آیا توکن ذخیره شده؟
+
+const state = { screen:'home', grade:+(localStorage.getItem(GRADE_KEY)||7), subject:null, noteId:null, searchQuery:'' };
+let draft = {name:'', text:''};
+let editingPdfFile = null;
+let editingPdfExisting = null;
+let editingPdfExistingName = '';
+let editingPdfExistingSize = 0;
+
+/* =========================================================
+   ۵. کتاب‌های درسی
+   ========================================================= */
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
   2:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -673,253 +571,194 @@ const TEXTBOOK = {
   8:['ریاضی','علوم تجربی','فارسی','عربی','زبان انگلیسی','مطالعات اجتماعی','پیام‌های آسمان','کار و فناوری','تفکر و سبک زندگی'],
   9:['ریاضی','علوم تجربی','فارسی','عربی','زبان انگلیسی','مطالعات اجتماعی','پیام‌های آسمان','کار و فناوری','آمادگی دفاعی']
 };
-
 const SUBJ_STYLE = {
-  'ریاضی':{c:'#2563eb',bg:'#eff6ff',i:'🔢'},
-  'علوم':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},
-  'علوم تجربی':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},
-  'فارسی':{c:'#9333ea',bg:'#faf5ff',i:'📖'},
-  'قرآن':{c:'#059669',bg:'#ecfdf5',i:'📿'},
-  'هدیه‌های آسمان':{c:'#e11d48',bg:'#fff1f2',i:'🎁'},
-  'پیام‌های آسمان':{c:'#0d9488',bg:'#f0fdfa',i:'🕌'},
-  'مطالعات اجتماعی':{c:'#ea580c',bg:'#fff7ed',i:'🗺️'},
-  'عربی':{c:'#ca8a04',bg:'#fcefe8',i:'📜'},
-  'زبان انگلیسی':{c:'#db2777',bg:'#fdf2f8',i:'🌍'},
-  'کار و فناوری':{c:'#475569',bg:'#f8fafc',i:'🔧'},
-  'تفکر و پژوهش':{c:'#7c3aed',bg:'#f5f3ff',i:'💡'},
-  'تفکر و سبک زندگی':{c:'#0891b2',bg:'#ecfeff',i:'🧠'},
-  'آمادگی دفاعی':{c:'#b91c1c',bg:'#fef2f2',i:'🛡'}
+  'ریاضی':{c:'#2563eb',bg:'#eff6ff',i:'🔢'},'علوم':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},
+  'علوم تجربی':{c:'#16a34a',bg:'#f0fdf4',i:'🔬'},'فارسی':{c:'#9333ea',bg:'#faf5ff',i:'📖'},
+  'قرآن':{c:'#059669',bg:'#ecfdf5',i:'📿'},'هدیه‌های آسمان':{c:'#e11d48',bg:'#fff1f2',i:'🎁'},
+  'پیام‌های آسمان':{c:'#0d9488',bg:'#f0fdfa',i:'🕌'},'مطالعات اجتماعی':{c:'#ea580c',bg:'#fff7ed',i:'🗺️'},
+  'عربی':{c:'#ca8a04',bg:'#fcefe8',i:'📜'},'زبان انگلیسی':{c:'#db2777',bg:'#fdf2f8',i:'🌍'},
+  'کار و فناوری':{c:'#475569',bg:'#f8fafc',i:'🔧'},'تفکر و پژوهش':{c:'#7c3aed',bg:'#f5f3ff',i:'💡'},
+  'تفکر و سبک زندگی':{c:'#0891b2',bg:'#ecfeff',i:'🧠'},'آمادگی دفاعی':{c:'#b91c1c',bg:'#fef2f2',i:'🛡'}
 };
 const subjStyle = s => SUBJ_STYLE[s] || {c:'#6366f1',bg:'#eef2ff',i:'📘'};
+const getSubjects = g => {
+  const base = TEXTBOOK[g] || [];
+  const custom = Object.values(store.subjects).filter(s => !s.deleted && s.grade === g).sort((a,b) => a.ts - b.ts).map(s => s.name);
+  return [...new Set([...base, ...custom])];
+};
 
-/* ---------- کلیدها ---------- */
-const DATA_KEY='darsyar_v5_data';
-const TOPIC_KEY='darsyar_v5_topic';
-const NAME_KEY='darsyar_v5_name';
-const GRADE_KEY='darsyar_v5_grade';
-const THEME_KEY='darsyar_v5_theme';
-const DEFAULT_TOPIC='darsyar-classroom-1404';
-const MAX_PDF_SYNC = 200*1024;
+/* =========================================================
+   ۶. GitHub API
+   ========================================================= */
+const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
+const setToken = t => t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY);
 
-const OLD_DATA_KEYS = ['darsyar_v4_data','darsyar_v3_data','darsyar_data_v2','darsyar_data_v1'];
-const OLD_TOPIC_KEYS = ['darsyar_v4_topic','darsyar_v3_topic','darsyar_topic'];
-const OLD_NAME_KEYS = ['darsyar_v4_name','darsyar_v3_name','darsyar_name'];
-const OLD_GRADE_KEYS = ['darsyar_v4_grade','darsyar_v3_grade','darsyar_grade'];
+async function githubGet(path){
+  const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
+  const headers = { 'Accept': 'application/vnd.github.v3+json' };
+  const token = getToken();
+  if(token) headers['Authorization'] = `token ${token}`;
+  const r = await fetch(url, { headers, cache: 'no-store' });
+  if(r.status === 404) return null;
+  if(!r.ok) throw new Error('GitHub GET ' + r.status);
+  return await r.json();
+}
 
-let store = { notes:{}, comments:{}, subjects:{} };
-
-/* ---------- بازیابی خودکار از نسخه‌های قبلی ---------- */
-function migrateOldData(){
-  let migrated = false;
-
-  // داده‌های اصلی
-  if(!Object.keys(store.notes).length){
-    for(const k of OLD_DATA_KEYS){
-      try{
-        const old = JSON.parse(localStorage.getItem(k)||'null');
-        if(old && old.notes && Object.keys(old.notes).length){
-          store.notes = old.notes || {};
-          store.comments = old.comments || store.comments;
-          store.subjects = old.subjects || store.subjects;
-          console.log('✅ بازیابی از: ' + k + ' (' + Object.keys(store.notes).length + ' جزوه)');
-          migrated = true;
-          break;
-        }
-      }catch(e){}
-    }
-  }
-
-  // تنظیمات
-  const migrateKey = (oldKeys, newKey) => {
-    if(localStorage.getItem(newKey)) return;
-    for(const k of oldKeys){
-      const v = localStorage.getItem(k);
-      if(v){ localStorage.setItem(newKey, v); break; }
-    }
+async function githubPut(path, content, message, sha){
+  const token = getToken();
+  if(!token) throw new Error('توکن تنظیم نشده');
+  const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const body = {
+    message: message || 'به‌روزرسانی درسیار',
+    content: utf8ToBase64(content),
+    branch: GH_BRANCH
   };
-  migrateKey(OLD_TOPIC_KEYS, TOPIC_KEY);
-  migrateKey(OLD_NAME_KEYS, NAME_KEY);
-  migrateKey(OLD_GRADE_KEYS, GRADE_KEY);
+  if(sha) body.sha = sha;
 
-  if(migrated){
-    saveStore();
-    setTimeout(()=>toast('♻️ ' + Object.keys(store.notes).length + ' جزوه بازیابی شد','success'), 800);
-  }
-  return migrated;
+  const r = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+
+  if(r.status === 401) throw new Error('توکن نامعتبر است');
+  if(r.status === 403) throw new Error('دسترسی ندارید - توکن را چک کنید');
+  if(r.status === 409) throw new Error('تضاد در SHA - صفحه را رفرش کنید');
+  if(!r.ok) throw new Error('GitHub PUT ' + r.status);
+
+  return await r.json();
 }
 
-function loadStore(){
+/* =========================================================
+   ۷. خواندن/نوشتن داده‌ها
+   ========================================================= */
+async function loadFromGitHub(showLoading = true){
+  if(showLoading) setLoading(true, 'در حال دریافت داده‌ها از GitHub…');
+  setStatus('connecting');
   try{
-    const d = JSON.parse(localStorage.getItem(DATA_KEY)||'null');
-    if(d && typeof d==='object'){
-      store.notes = d.notes || {};
-      store.comments = d.comments || {};
-      store.subjects = d.subjects || {};
+    const file = await githubGet(DATA_FILE);
+    if(file){
+      fileSha = file.sha;
+      const text = base64ToUtf8(file.content);
+      const data = JSON.parse(text);
+      store = {
+        notes: data.notes || {},
+        comments: data.comments || {},
+        subjects: data.subjects || {},
+        updatedAt: data.updatedAt || 0
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(store));
+      setStatus('online');
+    } else {
+      // فایل وجود ندارد - منتظر ایجاد توسط مدیر
+      fileSha = null;
+      setStatus('online');
     }
-  }catch(e){}
-  // سپس تلاش برای بازیابی
-  migrateOldData();
-}
-function saveStore(){
-  try{ localStorage.setItem(DATA_KEY, JSON.stringify(store)); }
-  catch(e){ toast('⚠️ حافظه مرورگر پر است','error'); }
-}
-
-/* ---------- ntfy ---------- */
-const NTFY='https://ntfy.sh';
-const enc = new TextEncoder();
-const pendingChunks = {};
-
-function getTopic(){
-  const u = new URLSearchParams(location.search).get('t');
-  if(u){ localStorage.setItem(TOPIC_KEY,u); return u; }
-  return localStorage.getItem(TOPIC_KEY) || DEFAULT_TOPIC;
-}
-let TOPIC = getTopic();
-
-async function ntfyPost(body){
-  const ctrl = new AbortController();
-  const t = setTimeout(()=>ctrl.abort(), 12000);
-  try{
-    const r = await fetch(`${NTFY}/${encodeURIComponent(TOPIC)}`,
-      {method:'POST', body, signal:ctrl.signal, headers:{'Content-Type':'text/plain'}});
-    if(!r.ok) throw new Error('HTTP '+r.status);
+    refreshAll();
     return true;
-  } finally { clearTimeout(t); }
-}
-
-async function publish(item){
-  const s = JSON.stringify(item);
-  const bytes = enc.encode(s).length;
-  if(bytes <= 3500){ await ntfyPost(s); return; }
-  const cid = item.kind+'|'+item.id+'|'+item.ts;
-  const SIZE = 1200;
-  const total = Math.ceil(s.length/SIZE);
-  for(let i=0;i<total;i++){
-    await ntfyPost(JSON.stringify({kind:'chunk', cid, i, total, data: s.substr(i*SIZE, SIZE)}));
-    if(i % 10 === 9) await new Promise(r => setTimeout(r, 200));
-  }
-}
-
-function applyItem(it){
-  if(!it||!it.id||!it.kind) return false;
-  const bucket = it.kind==='note' ? store.notes
-               : it.kind==='comment' ? store.comments
-               : it.kind==='subject' ? store.subjects : null;
-  if(!bucket) return false;
-  const cur = bucket[it.id];
-  if(cur && (cur.ts||0) >= (it.ts||0)) return false;
-  bucket[it.id] = it;
-  return true;
-}
-
-function handleRaw(obj){
-  if(obj && obj.kind==='chunk'){
-    const p = pendingChunks[obj.cid] || (pendingChunks[obj.cid]={total:obj.total,parts:[],n:0});
-    if(p.parts[obj.i]===undefined){ p.parts[obj.i]=obj.data; p.n++; }
-    if(p.n===p.total){
-      delete pendingChunks[obj.cid];
-      try{ handleRaw(JSON.parse(p.parts.join(''))); }catch(e){}
-    }
+  }catch(e){
+    console.warn('load error:', e);
+    setStatus('offline');
+    // تلاش برای بارگذاری از کش
+    try{
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if(cached && cached.notes){
+        store = cached;
+        refreshAll();
+        toast('حالت آفلاین - نمایش داده‌های ذخیره‌شده', 'error');
+      }
+    }catch(_){}
     return false;
+  }finally{
+    if(showLoading) setLoading(false);
   }
-  return applyItem(obj);
 }
 
-let isOnline=false, statusTimer=null;
-function setStatus(state){
-  const dot = $('#statusDot');
-  clearTimeout(statusTimer);
-  if(state==='online'){isOnline=true;dot.className='status-dot online';dot.title='آنلاین';}
-  else if(state==='offline'){isOnline=false;dot.className='status-dot offline';dot.title='آفلاین';}
-  else{dot.className='status-dot connecting';dot.title='در حال اتصال…';}
-}
-function armStatusTimeout(){
-  clearTimeout(statusTimer);
-  statusTimer = setTimeout(()=>{ if(!isOnline) setStatus('offline'); }, 4000);
-}
+async function saveToGitHub(){
+  if(!isAdmin) throw new Error('فقط مدیر می‌تواند ذخیره کند');
+  setStatus('saving');
+  setLoading(true, 'در حال ذخیره روی GitHub…');
 
-async function pullAll(silent=false){
-  if(!silent){setStatus('connecting');armStatusTimeout();}
-  const ctrl=new AbortController();
-  const t=setTimeout(()=>ctrl.abort(), 15000);
   try{
-    const r = await fetch(`${NTFY}/${encodeURIComponent(TOPIC)}/json?poll=1&since=all`, {signal:ctrl.signal});
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    const txt = await r.text();
-    let changed=false;
-    txt.split('\n').filter(Boolean).forEach(line=>{
-      try{
-        const m = JSON.parse(line);
-        if(m.event!=='message'||!m.message) return;
-        if(handleRaw(JSON.parse(m.message))) changed=true;
-      }catch(e){}
-    });
-    if(changed){ saveStore(); refreshAll(); }
+    store.updatedAt = Date.now();
+    const content = JSON.stringify(store, null, 2);
+
+    // اگر فایل موجود است، اول SHA جدید رو بگیر (چون ممکنه تغییر کرده باشه)
+    if(!fileSha){
+      const existing = await githubGet(DATA_FILE);
+      if(existing) fileSha = existing.sha;
+    }
+
+    const result = await githubPut(
+      DATA_FILE,
+      content,
+      '📚 به‌روزرسانی درسیار — ' + new Date().toLocaleString('fa-IR'),
+      fileSha
+    );
+
+    fileSha = result.content?.sha || null;
+    localStorage.setItem(CACHE_KEY, JSON.stringify(store));
     setStatus('online');
     return true;
-  }catch(e){ setStatus('offline'); return false; }
-  finally { clearTimeout(t); }
+  }catch(e){
+    setStatus('offline');
+    console.error('save error:', e);
+    throw e;
+  }finally{
+    setLoading(false);
+  }
 }
 
-let es=null;
-function connectSSE(){
-  if(es) try{es.close();}catch(e){}
-  try{
-    es = new EventSource(`${NTFY}/${encodeURIComponent(TOPIC)}/sse`);
-    es.onopen = ()=>setStatus('online');
-    es.onmessage = e=>{
-      setStatus('online');
-      try{
-        const m = JSON.parse(e.data);
-        if(m.event!=='message'||!m.message) return;
-        if(handleRaw(JSON.parse(m.message))){ saveStore(); refreshAll(); }
-      }catch(err){}
-    };
-    es.onerror = ()=>{};
-  }catch(e){}
+/* =========================================================
+   ۸. وضعیت و بارگذاری
+   ========================================================= */
+let isOnline = false, statusTimer = null;
+function setStatus(s){
+  const dot = $('#statusDot'); if(!dot) return;
+  clearTimeout(statusTimer);
+  if(s === 'online'){ isOnline = true; dot.className = 'status-dot online'; dot.title = 'آنلاین'; }
+  else if(s === 'offline'){ isOnline = false; dot.className = 'status-dot offline'; dot.title = 'آفلاین'; }
+  else if(s === 'saving'){ dot.className = 'status-dot saving'; dot.title = 'در حال ذخیره…'; }
+  else { dot.className = 'status-dot connecting'; dot.title = 'در حال اتصال…'; statusTimer = setTimeout(() => { if(!isOnline) setStatus('offline'); }, 6000); }
 }
 
-function getSubjects(grade){
-  const base = TEXTBOOK[grade] || [];
-  const custom = Object.values(store.subjects)
-    .filter(s=>!s.deleted && s.grade===grade)
-    .sort((a,b)=>a.ts-b.ts).map(s=>s.name);
-  return [...new Set([...base, ...custom])];
+function setLoading(show, text){
+  const ov = $('#loadingOverlay');
+  if(!ov) return;
+  if(show){ if(text) $('#loadingText').textContent = text; ov.classList.remove('hidden'); }
+  else ov.classList.add('hidden');
 }
 
+/* =========================================================
+   ۹. قالب‌بندی متن و Base64
+   ========================================================= */
 function fmt(text){
-  const lines = String(text||'').split('\n');
-  const out=[]; let inList=false;
-  const closeList=()=>{ if(inList){out.push('</ul>');inList=false;} };
+  const lines = String(text || '').split('\n');
+  const out = []; let inList = false;
+  const closeList = () => { if(inList){ out.push('</ul>'); inList = false; } };
   for(const raw of lines){
-    let l = esc(raw).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-    if(/^###\s/.test(l)){closeList();out.push('<h4>'+l.slice(4)+'</h4>');}
-    else if(/^##\s/.test(l)){closeList();out.push('<h3>'+l.slice(3)+'</h3>');}
-    else if(/^#\s/.test(l)){closeList();out.push('<h2>'+l.slice(2)+'</h2>');}
-    else if(/^[-*]\s/.test(l)){if(!inList){out.push('<ul>');inList=true;}out.push('<li>'+l.slice(2)+'</li>');}
-    else if(l.trim()===''){closeList();out.push('<div class="sp"></div>');}
-    else{closeList();out.push('<p>'+l+'</p>');}
+    let l = esc(raw).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    if(/^###\s/.test(l)){ closeList(); out.push('<h4>' + l.slice(4) + '</h4>'); }
+    else if(/^##\s/.test(l)){ closeList(); out.push('<h3>' + l.slice(3) + '</h3>'); }
+    else if(/^#\s/.test(l)){ closeList(); out.push('<h2>' + l.slice(2) + '</h2>'); }
+    else if(/^[-*]\s/.test(l)){ if(!inList){ out.push('<ul>'); inList = true; } out.push('<li>' + l.slice(2) + '</li>'); }
+    else if(l.trim() === ''){ closeList(); out.push('<div class="sp"></div>'); }
+    else { closeList(); out.push('<p>' + l + '</p>'); }
   }
   closeList();
   return out.join('');
 }
 
-function base64ToBlob(b64, mime='application/pdf'){
-  const byteChars = atob(b64);
-  const bytes = new Uint8Array(byteChars.length);
-  for(let i=0;i<byteChars.length;i++) bytes[i] = byteChars.charCodeAt(i);
-  return new Blob([bytes], {type:mime});
-}
-function blobToBase64(blob){
-  return new Promise((resolve, reject)=>{
-    const reader = new FileReader();
-    reader.onload = e => resolve(e.target.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+function base64ToBlob(b64){ const c = atob(b64); const u = new Uint8Array(c.length); for(let i = 0; i < c.length; i++) u[i] = c.charCodeAt(i); return new Blob([u], {type:'application/pdf'}); }
+function blobToBase64(blob){ return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(e.target.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); }); }
 
+/* =========================================================
+   ۱۰. تم
+   ========================================================= */
 function initTheme(){
   const saved = localStorage.getItem(THEME_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -935,66 +774,44 @@ function toggleTheme(){
   updateThemeIcon(next);
 }
 function updateThemeIcon(theme){
-  $('#themeIcon').innerHTML = theme === 'dark'
+  const el = $('#themeIcon'); if(!el) return;
+  el.innerHTML = theme === 'dark'
     ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>'
     : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 }
 
-const state = {
-  screen:'home',
-  grade:+(localStorage.getItem(GRADE_KEY)||7),
-  subject:null,
-  noteId:null,
-  searchQuery:''
-};
-let draft = {name:'', text:''};
-let editingPdfFile = null;
-let editingPdfExisting = null;
-let editingPdfExistingName = '';
-let editingPdfExistingSize = 0;
-
+/* =========================================================
+   ۱۱. رندر
+   ========================================================= */
 function renderHome(){
-  const notes = Object.values(store.notes)
-    .filter(n=>!n.deleted && n.grade===state.grade)
-    .sort((a,b)=>b.ts-a.ts);
+  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade).sort((a,b) => b.ts - a.ts);
   const subs = getSubjects(state.grade);
-  const activeSubs = subs.filter(s=>notes.some(n=>n.subject===s)).length;
-  const cc = Object.values(store.comments)
-    .filter(c=>!c.deleted && notes.some(n=>n.id===c.noteId)).length;
+  const activeSubs = subs.filter(s => notes.some(n => n.subject === s)).length;
+  const cc = Object.values(store.comments).filter(c => !c.deleted && notes.some(n => n.id === c.noteId)).length;
 
-  $('#heroTitle').textContent = 'سلام 👋';
   $('#heroSub').textContent = `جزوه‌های کتاب درسی پایه ${fa(state.grade)}م`;
   $('#statNotes').textContent = fa(notes.length);
   $('#statSubjects').textContent = fa(activeSubs);
   $('#statComments').textContent = fa(cc);
   $('#subjectCount').textContent = `${fa(subs.length)} درس`;
-  $('#notesCount').textContent = state.subject ? fa(notes.filter(n=>n.subject===state.subject).length) + ' جزوه' : fa(notes.length) + ' جزوه';
+  $('#notesCount').textContent = state.subject ? fa(notes.filter(n => n.subject === state.subject).length) + ' جزوه' : fa(notes.length) + ' جزوه';
 
-  const chipsEl = $('#subjectChips');
-  let chipsHtml = `<button class="chip ${!state.subject?'active':''}" data-act="allsubj" type="button">
-    <span>📚 همه</span><span class="cnt">${fa(notes.length)}</span></button>`;
-  chipsHtml += subs.map(s=>{
-    const c = notes.filter(n=>n.subject===s).length;
+  let chipsHtml = `<button class="chip ${!state.subject ? 'active' : ''}" data-act="allsubj" type="button"><span>📚 همه</span><span class="cnt">${fa(notes.length)}</span></button>`;
+  chipsHtml += subs.map(s => {
+    const c = notes.filter(n => n.subject === s).length;
     const st = subjStyle(s);
-    return `<button class="chip ${state.subject===s?'active':''}" data-act="subj" data-s="${esc(s)}" type="button">
-      <span>${st.i}</span><span>${esc(s)}</span>${c?`<span class="cnt">${fa(c)}</span>`:''}</button>`;
+    return `<button class="chip ${state.subject === s ? 'active' : ''}" data-act="subj" data-s="${esc(s)}" type="button"><span>${st.i}</span><span>${esc(s)}</span>${c ? `<span class="cnt">${fa(c)}</span>` : ''}</button>`;
   }).join('');
-  chipsEl.innerHTML = chipsHtml;
+  $('#subjectChips').innerHTML = chipsHtml;
 
-  const list = state.subject ? notes.filter(n=>n.subject===state.subject) : notes;
+  const list = state.subject ? notes.filter(n => n.subject === state.subject) : notes;
   const listEl = $('#notesList');
   if(!notes.length){
-    listEl.innerHTML = `<div class="empty">
-      <div class="empty-icon">📭</div>
-      <b>هنوز جزوه‌ای ثبت نشده</b>
-      <p>برای پایه ${fa(state.grade)} هنوز جزوه‌ای اضافه نشده است.</p></div>`;
+    listEl.innerHTML = `<div class="empty"><div class="empty-icon">📭</div><b>هنوز جزوه‌ای ثبت نشده</b><p>برای پایه ${fa(state.grade)} هنوز جزوه‌ای اضافه نشده است.</p></div>`;
     return;
   }
   if(!list.length){
-    listEl.innerHTML = `<div class="empty">
-      <div class="empty-icon">📂</div>
-      <b>این درس خالی است</b>
-      <p>برای «${esc(state.subject)}» هنوز جزوه‌ای ثبت نشده است.</p></div>`;
+    listEl.innerHTML = `<div class="empty"><div class="empty-icon">📂</div><b>این درس خالی است</b><p>برای «${esc(state.subject)}» هنوز جزوه‌ای ثبت نشده است.</p></div>`;
     return;
   }
   listEl.innerHTML = list.map(noteCard).join('');
@@ -1002,89 +819,51 @@ function renderHome(){
 
 function noteCard(n){
   const st = subjStyle(n.subject);
-  const cc = Object.values(store.comments).filter(c=>!c.deleted && c.noteId===n.id).length;
-  const preview = (n.content||'').replace(/[#*\-]/g,'').replace(/\s+/g,' ').trim().slice(0,110);
+  const cc = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).length;
+  const preview = (n.content || '').replace(/[#*\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 110);
   const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
   return `<article class="note-card" data-act="open" data-id="${n.id}" style="--sc:${st.c};--sb:${st.bg}">
-    <div class="nc-top">
-      <span class="nc-chip">${st.i} ${esc(n.subject)}</span>
-      <span class="nc-grade">پایه ${fa(n.grade)}</span>
-      ${hasPdf?`<span class="nc-pdf">📄 PDF</span>`:''}
-    </div>
-    <div class="nc-title">${esc(n.title||'بدون عنوان')}</div>
-    <div class="nc-preview">${esc(preview)}${preview.length>=110?'…':''}</div>
-    <div class="nc-foot">
-      <span class="item">💬 ${fa(cc)} نظر</span>
-      <span class="item">🕒 ${dateFa(n.ts)}</span>
-    </div>
+    <div class="nc-top"><span class="nc-chip">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span>${hasPdf ? '<span class="nc-pdf">📄 PDF</span>' : ''}</div>
+    <div class="nc-title">${esc(n.title || 'بدون عنوان')}</div>
+    <div class="nc-preview">${esc(preview)}${preview.length >= 110 ? '…' : ''}</div>
+    <div class="nc-foot"><span>💬 ${fa(cc)} نظر</span><span>🕒 ${dateFa(n.ts)}</span></div>
   </article>`;
 }
 
 function renderSearch(){
   const q = state.searchQuery.trim().toLowerCase();
   const el = $('#searchResults');
-  const clearBtn = $('#searchClear');
-  if(state.searchQuery) clearBtn.classList.add('show'); else clearBtn.classList.remove('show');
   if(!q){
-    el.innerHTML = `<div class="empty">
-      <div class="empty-icon">🔍</div><b>جستجو در جزوه‌ها</b>
-      <p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`;
+    el.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><b>جستجو در جزوه‌ها</b><p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`;
     return;
   }
-  const all = Object.values(store.notes).filter(n=>!n.deleted);
-  const results = all.filter(n=>
-    (n.title||'').toLowerCase().includes(q) ||
-    (n.subject||'').toLowerCase().includes(q) ||
-    (n.content||'').toLowerCase().includes(q)
-  ).sort((a,b)=>b.ts-a.ts);
+  const all = Object.values(store.notes).filter(n => !n.deleted);
+  const results = all.filter(n => (n.title || '').toLowerCase().includes(q) || (n.subject || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)).sort((a,b) => b.ts - a.ts);
   if(!results.length){
-    el.innerHTML = `<div class="empty">
-      <div class="empty-icon">😶‍🌫️</div><b>نتیجه‌ای یافت نشد</b>
-      <p>برای «${esc(state.searchQuery)}» چیزی پیدا نشد.</p></div>`;
+    el.innerHTML = `<div class="empty"><div class="empty-icon">😶‍🌫️</div><b>نتیجه‌ای یافت نشد</b><p>برای «${esc(state.searchQuery)}» چیزی پیدا نشد.</p></div>`;
     return;
   }
-  el.innerHTML = `<div class="section"><h2>نتایج</h2><span class="count">${fa(results.length)} مورد</span></div>` +
-    results.map(noteCard).join('');
+  el.innerHTML = results.map(noteCard).join('');
 }
 
 function renderLibrary(){
-  const el = $('#libraryList');
-  let html='';
-  for(let g=1;g<=9;g++){
+  let html = '';
+  for(let g = 1; g <= 9; g++){
     const subs = getSubjects(g);
-    const notes = Object.values(store.notes).filter(n=>!n.deleted && n.grade===g);
-    html += `<div class="lib-grade" data-grade="${g}">
-      <div class="lib-head" data-act="toggle-lib">
-        <div class="lib-num">${fa(g)}</div>
-        <div style="flex:1">
-          <div class="lib-title">پایه ${fa(g)}م</div>
-          <div class="lib-meta">${fa(subs.length)} درس • ${fa(notes.length)} جزوه</div>
-        </div>
-        <div class="lib-arrow">‹</div>
-      </div>
-      <div class="lib-subs">
-        ${subs.map(s=>{
-          const st = subjStyle(s);
-          const c = notes.filter(n=>n.subject===s).length;
-          return `<div class="lib-sub" data-act="lib-sub" data-g="${g}" data-s="${esc(s)}">
-            <div class="lib-sub-icon" style="--sb:${st.bg};color:${st.c}">${st.i}</div>
-            <div class="lib-sub-body">${esc(s)}</div>
-            <div class="lib-sub-count">${fa(c)} جزوه</div>
-          </div>`;
-        }).join('')}
-      </div></div>`;
+    const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === g);
+    html += `<div class="lib-grade"><div class="lib-head" data-act="toggle-lib"><div class="lib-num">${fa(g)}</div><div style="flex:1"><div class="lib-title">پایه ${fa(g)}م</div><div class="lib-meta">${fa(subs.length)} درس • ${fa(notes.length)} جزوه</div></div><div class="lib-arrow">‹</div></div><div class="lib-subs">${subs.map(s => { const st = subjStyle(s); const c = notes.filter(n => n.subject === s).length; return `<div class="lib-sub" data-act="lib-sub" data-g="${g}" data-s="${esc(s)}"><div class="lib-sub-icon" style="--sb:${st.bg};--sc:${st.c}">${st.i}</div><div style="flex:1">${esc(s)}</div><div style="font-size:11px;color:var(--dim);font-weight:600">${fa(c)} جزوه</div></div>`; }).join('')}</div></div>`;
   }
-  el.innerHTML = html;
+  $('#libraryList').innerHTML = html;
 }
 
 function renderProfile(){
-  const name = localStorage.getItem(NAME_KEY)||'دانش‌آموز مهمان';
+  const name = localStorage.getItem(NAME_KEY) || 'دانش‌آموز مهمان';
   $('#profileName').textContent = name;
-  $('#profileAv').textContent = (name.trim().charAt(0)||'👤').toUpperCase();
+  $('#profileAv').textContent = (name.trim().charAt(0) || '👤').toUpperCase();
   $('#profileGrade').textContent = `پایه ${fa(state.grade)}م`;
-  const notes = Object.values(store.notes).filter(n=>!n.deleted && n.grade===state.grade);
-  const comments = Object.values(store.comments).filter(c=>!c.deleted);
-  const subs = new Set(notes.map(n=>n.subject));
+  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade);
+  const comments = Object.values(store.comments).filter(c => !c.deleted);
+  const subs = new Set(notes.map(n => n.subject));
   $('#pStatNotes').textContent = fa(notes.length);
   $('#pStatComments').textContent = fa(comments.length);
   $('#pStatSubjects').textContent = fa(subs.size);
@@ -1096,286 +875,192 @@ function renderDetail(){
   const st = subjStyle(n.subject);
   $('#detailTitle').textContent = n.title || 'جزوه';
 
-  const comments = Object.values(store.comments)
-    .filter(c=>!c.deleted && c.noteId===n.id).sort((a,b)=>a.ts-b.ts);
-
+  const comments = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).sort((a,b) => a.ts - b.ts);
   const avColors = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981','#0ea5e9','#ef4444'];
-  const avColor = name => avColors[(name.charCodeAt(0)||0)%avColors.length];
+  const avColor = name => avColors[(name.charCodeAt(0) || 0) % avColors.length];
 
-  const commentsHtml = comments.length ? comments.map(c=>{
-    const initial = (c.author||'ن').trim().charAt(0)||'ن';
-    const color = avColor(c.author||'ن');
-    return `<div class="cmt">
-      <div class="cmt-av" style="background:${color}">${esc(initial)}</div>
-      <div class="cmt-body">
-        <div class="cmt-head">
-          <b>${esc(c.author||'ناشناس')}</b><span>${dateFa(c.ts)}</span>
-        </div>
-        <div class="cmt-text">${esc(c.text).replace(/\n/g,'<br>')}</div>
-      </div></div>`;
-  }).join('') : `<div class="empty" style="padding:24px 12px;border:0;background:transparent">
-      <div class="empty-icon" style="width:52px;height:52px;font-size:24px;border-radius:16px">✍️</div>
-      <b>هنوز نظری نیست</b><p>اولین نفری باشید که نظر می‌دهد.</p></div>`;
+  const commentsHtml = comments.length ? comments.map(c => {
+    const initial = (c.author || 'ن').trim().charAt(0) || 'ن';
+    return `<div class="cmt"><div class="cmt-av" style="background:${avColor(c.author || 'ن')}">${esc(initial)}</div><div class="cmt-body"><div class="cmt-head"><b>${esc(c.author || 'ناشناس')}</b><span>${dateFa(c.ts)}</span></div><div class="cmt-text">${esc(c.text).replace(/\n/g, '<br>')}</div></div></div>`;
+  }).join('') : `<div class="empty" style="padding:24px 12px;border:0;background:transparent"><div class="empty-icon" style="width:52px;height:52px;font-size:24px;border-radius:16px">✍️</div><b>هنوز نظری نیست</b><p>اولین نفری باشید که نظر می‌دهد.</p></div>`;
 
   let pdfHtml = '';
   if(n.pdfUrl || (n.pdfData && n.pdfData.length)){
     const pdfName = n.pdfName || 'جزوه.pdf';
-    const pdfSize = n.pdfSize || 0;
-    const isUrl = !!n.pdfUrl;
-    pdfHtml = `<div class="pdf-box">
-      <div class="pdf-head">
-        <div class="pdf-icon">📄</div>
-        <div class="pdf-info">
-          <div class="pdf-label">فایل PDF ضمیمه</div>
-          <div class="pdf-name">${esc(pdfName)}</div>
-          <div class="pdf-size">${pdfSize ? formatSize(pdfSize) : (isUrl?'لینک خارجی':'فایل داخلی')}</div>
-        </div>
-      </div>
-      <div class="pdf-actions">
-        <button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button>
-        <button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button>
-      </div>
-    </div>`;
+    pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${n.pdfSize ? formatSize(n.pdfSize) : (n.pdfUrl ? 'لینک خارجی' : 'فایل داخلی')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
   }
+
+  const canComment = isAdmin;
 
   $('#detailBody').innerHTML = `
     <div class="note-head">
-      <div class="chips-row">
-        <span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span>
-        <span class="nc-grade">پایه ${fa(n.grade)}</span>
-      </div>
-      <div class="note-title">${esc(n.title||'بدون عنوان')}</div>
+      <div class="chips-row"><span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span></div>
+      <div class="note-title">${esc(n.title || 'بدون عنوان')}</div>
       <div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div>
     </div>
     ${pdfHtml}
-    <article class="note-content">${fmt(n.content||'')}</article>
+    <article class="note-content">${fmt(n.content || '')}</article>
     <section class="comments">
-      <h3>💬 نظرات و پرسش‌ها ${comments.length?`<span class="cnt-pill">${fa(comments.length)}</span>`:''}</h3>
-      <div id="cmtList">${commentsHtml}</div>
-      <form class="cmt-form" id="cmtForm">
-        <input id="cName" placeholder="نام شما (اختیاری)" maxlength="30"
-               value="${esc(draft.name||localStorage.getItem(NAME_KEY)||'')}">
-        <textarea id="cText" placeholder="نظر، پرسش یا توضیح خود را بنویسید…" rows="3" maxlength="800">${esc(draft.text||'')}</textarea>
+      <h3>💬 نظرات ${comments.length ? `<span class="cnt-pill">${fa(comments.length)}</span>` : ''}</h3>
+      <div>${commentsHtml}</div>
+      ${canComment ? `<form class="cmt-form" id="cmtForm">
+        <input id="cName" placeholder="نام شما (اختیاری)" maxlength="30" value="${esc(draft.name || localStorage.getItem(NAME_KEY) || '')}">
+        <textarea id="cText" placeholder="نظر خود را بنویسید…" rows="3" maxlength="800">${esc(draft.text || '')}</textarea>
         <button type="submit">📨 ارسال نظر</button>
-      </form>
+      </form>` : `<p style="text-align:center;font-size:12px;color:var(--dim);margin-top:12px;padding-top:12px;border-top:1px dashed var(--border)">برای ثبت نظر، مدیر باید وارد شود</p>`}
     </section>`;
-  setTimeout(updateProgress, 50);
 }
 
 function refreshAll(){
-  if(state.screen==='home') renderHome();
-  else if(state.screen==='search') renderSearch();
-  else if(state.screen==='library') renderLibrary();
-  else if(state.screen==='profile') renderProfile();
+  if(state.screen === 'home') renderHome();
+  else if(state.screen === 'search') renderSearch();
+  else if(state.screen === 'library') renderLibrary();
+  else if(state.screen === 'profile') renderProfile();
   if(state.noteId) renderDetail();
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
 }
 
-function updateProgress(){
-  const body = $('#detailBody');
-  if(!body) return;
-  const max = body.scrollHeight - body.clientHeight;
-  const pct = max > 0 ? (body.scrollTop / max) * 100 : 0;
-  $('#progressFill').style.width = pct + '%';
-}
-document.addEventListener('scroll', updateProgress, true);
-
+/* =========================================================
+   ۱۲. PDF Viewer
+   ========================================================= */
 let currentPdfBlobUrl = null;
-
 window.openPdfViewer = function(){
-  const n = store.notes[state.noteId];
-  if(!n) return;
+  const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
-  const frame = $('#pdfViewerFrame');
-  const dl = $('#pdfViewerDownload');
-  const loading = $('#pdfViewerLoading');
-
-  loading.classList.remove('hidden');
-  $('#pdfViewerTitle').textContent = pdfName;
-
+  const frame = $('#pdfViewerFrame'), dl = $('#pdfViewerDownload');
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
-
-  if(n.pdfUrl){
-    frame.src = n.pdfUrl;
-    dl.href = n.pdfUrl;
-    dl.setAttribute('download', pdfName);
-    setTimeout(()=>loading.classList.add('hidden'), 500);
-  } else if(n.pdfData){
+  $('#pdfViewerTitle').textContent = pdfName;
+  if(n.pdfUrl){ frame.src = n.pdfUrl; dl.href = n.pdfUrl; dl.setAttribute('download', pdfName); }
+  else if(n.pdfData){
     try{
-      const blob = base64ToBlob(n.pdfData, 'application/pdf');
+      const blob = base64ToBlob(n.pdfData);
       const url = URL.createObjectURL(blob);
       currentPdfBlobUrl = url;
-      frame.src = url;
-      dl.href = url;
-      dl.setAttribute('download', pdfName);
-      setTimeout(()=>loading.classList.add('hidden'), 400);
-    }catch(e){
-      loading.innerHTML = '<span>خطا در باز کردن PDF</span>';
-    }
+      frame.src = url; dl.href = url; dl.setAttribute('download', pdfName);
+    }catch(e){ toast('خطا در PDF', 'error'); }
   }
   $('#pdfViewer').classList.remove('hidden');
 };
-
 window.downloadPdf = function(){
-  const n = store.notes[state.noteId];
-  if(!n) return;
+  const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
-  if(n.pdfUrl){
-    const a = document.createElement('a');
-    a.href = n.pdfUrl; a.download = pdfName; a.target = '_blank';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  } else if(n.pdfData){
+  if(n.pdfUrl){ const a = document.createElement('a'); a.href = n.pdfUrl; a.download = pdfName; a.target = '_blank'; a.click(); }
+  else if(n.pdfData){
     try{
-      const blob = base64ToBlob(n.pdfData, 'application/pdf');
+      const blob = base64ToBlob(n.pdfData);
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = pdfName;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      setTimeout(()=>URL.revokeObjectURL(url), 2000);
-    }catch(e){ toast('خطا در دانلود','error'); }
+      const a = document.createElement('a'); a.href = url; a.download = pdfName; a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }catch(e){ toast('خطا', 'error'); }
   }
-  toast('📥 دانلود شروع شد','success');
+  toast('دانلود شروع شد', 'success');
 };
-
-$('#pdfViewerClose').addEventListener('click', ()=>{
+$('#pdfViewerClose').addEventListener('click', () => {
   $('#pdfViewer').classList.add('hidden');
   $('#pdfViewerFrame').src = 'about:blank';
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
 });
 
+/* =========================================================
+   ۱۳. Navigation
+   ========================================================= */
 function showScreen(name){
   state.screen = name;
-  $$('.screen').forEach(s=>s.classList.remove('active'));
-  const sc = document.getElementById('screen-'+name);
-  if(sc) sc.classList.add('active');
-  $$('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.nav===name));
-  if(name==='home') renderHome();
-  if(name==='search') renderSearch();
-  if(name==='library') renderLibrary();
-  if(name==='profile') renderProfile();
-  window.scrollTo({top:0,behavior:'smooth'});
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  const sc = document.getElementById('screen-' + name); if(sc) sc.classList.add('active');
+  $$('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+  if(name === 'home') renderHome();
+  if(name === 'search') renderSearch();
+  if(name === 'library') renderLibrary();
+  if(name === 'profile') renderProfile();
+  window.scrollTo({top:0});
 }
 
-document.querySelectorAll('.nav-btn').forEach(btn=>{
-  btn.addEventListener('click', function(e){
-    e.preventDefault(); e.stopPropagation();
-    showScreen(this.dataset.nav);
-  });
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', e => { e.preventDefault(); showScreen(btn.dataset.nav); });
 });
 
-document.addEventListener('click', e=>{
+document.addEventListener('click', e => {
   const t = e.target.closest('[data-act]');
-  if(t){
-    const act = t.dataset.act;
-    if(act==='subj'){ state.subject = t.dataset.s; renderHome(); window.scrollTo({top:0}); }
-    else if(act==='allsubj'){ state.subject = null; renderHome(); }
-    else if(act==='open'){ openDetail(t.dataset.id); }
-    else if(act==='toggle-lib'){
-      const g = t.closest('.lib-grade');
-      if(g) g.classList.toggle('open');
-    }
-    else if(act==='lib-sub'){
-      state.grade = +t.dataset.g;
-      state.subject = t.dataset.s;
-      state.noteId = null;
-      localStorage.setItem(GRADE_KEY, state.grade);
-      showScreen('home');
-    }
-  }
+  if(!t) return;
+  const act = t.dataset.act;
+  if(act === 'subj'){ state.subject = t.dataset.s; renderHome(); }
+  else if(act === 'allsubj'){ state.subject = null; renderHome(); }
+  else if(act === 'open'){ openDetail(t.dataset.id); }
+  else if(act === 'toggle-lib'){ const g = t.closest('.lib-grade'); if(g) g.classList.toggle('open'); }
+  else if(act === 'lib-sub'){ state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null; localStorage.setItem(GRADE_KEY, state.grade); showScreen('home'); }
 });
 
-function openDetail(id){
-  state.noteId = id;
-  draft = {name:'', text:''};
-  $('#detail').classList.remove('hidden');
-  renderDetail();
-}
-function closeDetail(){
-  state.noteId = null;
-  $('#detail').classList.add('hidden');
-  refreshAll();
-}
+function openDetail(id){ state.noteId = id; draft = {name:'', text:''}; $('#detail').classList.remove('hidden'); renderDetail(); }
+function closeDetail(){ state.noteId = null; $('#detail').classList.add('hidden'); refreshAll(); }
 $('#detailBack').addEventListener('click', closeDetail);
 $('#themeToggle').addEventListener('click', toggleTheme);
 
 function openGradeSheet(){
-  const grid = $('#gradeGrid');
-  grid.innerHTML = Array.from({length:9},(_,i)=>i+1).map(g=>`
-    <button class="grade-opt ${g===state.grade?'active':''}" data-grade="${g}" type="button">
-      <span class="num">${fa(g)}</span><span class="lbl">پایه</span>
-    </button>`).join('');
-  $('#sheetTitle').textContent = 'انتخاب پایه تحصیلی';
+  $('#gradeGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<button class="grade-opt ${g === state.grade ? 'active' : ''}" data-grade="${g}" type="button"><span class="num">${fa(g)}</span><span class="lbl">پایه</span></button>`).join('');
   $('#sheetOverlay').classList.add('show');
   $('#sheet').classList.add('show');
 }
-function closeSheet(){
-  $('#sheetOverlay').classList.remove('show');
-  $('#sheet').classList.remove('show');
-}
+function closeSheet(){ $('#sheetOverlay').classList.remove('show'); $('#sheet').classList.remove('show'); }
 $('#sheetOverlay').addEventListener('click', closeSheet);
-$('#gradeGrid').addEventListener('click', e=>{
-  const b = e.target.closest('[data-grade]');
-  if(!b) return;
-  state.grade = +b.dataset.grade;
-  state.subject = null; state.noteId = null;
+$('#gradeGrid').addEventListener('click', e => {
+  const b = e.target.closest('[data-grade]'); if(!b) return;
+  state.grade = +b.dataset.grade; state.subject = null; state.noteId = null;
   localStorage.setItem(GRADE_KEY, state.grade);
-  closeSheet();
-  renderHome(); renderProfile();
-  toast(`پایه ${fa(state.grade)}م انتخاب شد`,'success');
+  closeSheet(); renderHome(); renderProfile();
+  toast(`پایه ${fa(state.grade)}م انتخاب شد`, 'success');
 });
 
 $('#menuGrade').addEventListener('click', openGradeSheet);
-$('#menuName').addEventListener('click', ()=>{
-  const cur = localStorage.getItem(NAME_KEY)||'';
+$('#menuName').addEventListener('click', () => {
+  const cur = localStorage.getItem(NAME_KEY) || '';
   const v = prompt('نام نمایشی خود را وارد کنید:', cur);
-  if(v===null) return;
+  if(v === null) return;
   const name = v.trim();
-  if(name) localStorage.setItem(NAME_KEY, name);
-  else localStorage.removeItem(NAME_KEY);
-  renderProfile(); toast('نام ذخیره شد','success');
+  if(name) localStorage.setItem(NAME_KEY, name); else localStorage.removeItem(NAME_KEY);
+  renderProfile(); toast('نام ذخیره شد', 'success');
 });
-$('#menuSync').addEventListener('click', async ()=>{
-  toast('در حال همگام‌سازی…');
-  await pullAll();
-  toast(isOnline?'همگام‌سازی انجام شد ✅':'اتصال برقرار نشد ⚠️', isOnline?'success':'error');
-});
-
-const handleSearch = debounce(q => {
-  state.searchQuery = q;
-  renderSearch();
-}, 180);
-$('#searchInput').addEventListener('input', e=>handleSearch(e.target.value));
-$('#searchClear').addEventListener('click', ()=>{
-  $('#searchInput').value = '';
-  state.searchQuery = '';
-  renderSearch();
-  $('#searchInput').focus();
+$('#menuSync').addEventListener('click', async () => {
+  toast('در حال دریافت از GitHub…');
+  await loadFromGitHub(false);
+  toast(isOnline ? 'به‌روزرسانی شد ✅' : 'اتصال برقرار نشد ⚠️', isOnline ? 'success' : 'error');
 });
 
-document.addEventListener('input', e=>{
-  if(e.target.id==='cName') draft.name = e.target.value;
-  if(e.target.id==='cText') draft.text = e.target.value;
+const handleSearch = debounce(q => { state.searchQuery = q; renderSearch(); }, 180);
+$('#searchInput').addEventListener('input', e => handleSearch(e.target.value));
+
+document.addEventListener('input', e => {
+  if(e.target.id === 'cName') draft.name = e.target.value;
+  if(e.target.id === 'cText') draft.text = e.target.value;
 });
 
-document.addEventListener('submit', async e=>{
-  if(e.target.id!=='cmtForm') return;
+document.addEventListener('submit', async e => {
+  if(e.target.id !== 'cmtForm') return;
   e.preventDefault();
-  const nameEl = $('#cName'), textEl = $('#cText');
-  const author = (nameEl.value||'').trim()||'ناشناس';
-  const text = (textEl.value||'').trim();
-  if(!text){ toast('متن نظر خالی است','error'); return; }
+  if(!isAdmin){ toast('فقط مدیر می‌تواند نظر بدهد', 'error'); return; }
+  const author = ($('#cName').value || '').trim() || 'ناشناس';
+  const text = ($('#cText').value || '').trim();
+  if(!text){ toast('متن نظر خالی است', 'error'); return; }
+
   localStorage.setItem(NAME_KEY, author);
   draft.name = author; draft.text = '';
   const item = {kind:'comment', id:uid(), noteId:state.noteId, author, text, ts:Date.now()};
-  applyItem(item); saveStore();
-  textEl.value = ''; renderDetail(); toast('نظر شما ثبت شد ✅','success');
+  store.comments[item.id] = item;
+  $('#cText').value = ''; renderDetail();
+  toast('در حال ذخیره روی GitHub…');
+
   const btn = e.target.querySelector('button'); btn.disabled = true;
-  try{ await publish(item); setStatus('online'); }
-  catch(err){ toast('ذخیره شد ولی ارسال آنلاین ناموفق بود ⚠️','error'); setStatus('offline'); }
-  finally{ btn.disabled = false; }
+  try{
+    await saveToGitHub();
+    toast('نظر روی GitHub ذخیره شد ✅', 'success');
+  }catch(err){
+    toast('خطا: ' + err.message, 'error');
+  }finally{ btn.disabled = false; }
 });
 
-/* ADMIN */
+/* =========================================================
+   ۱۴. ADMIN
+   ========================================================= */
 let adminFilterGrade = 0;
 
 function toggleAdmin(){
@@ -1384,116 +1069,71 @@ function toggleAdmin(){
   else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); }
 }
 $('#adminClose').addEventListener('click', toggleAdmin);
+document.addEventListener('keydown', e => { if(e.ctrlKey && e.shiftKey && e.code === 'KeyA'){ e.preventDefault(); toggleAdmin(); } });
 
-document.addEventListener('keydown', e=>{
-  if(e.ctrlKey && e.shiftKey && e.code==='KeyA'){ e.preventDefault(); toggleAdmin(); }
-});
-
-document.querySelectorAll('.admin-tab').forEach(tab=>{
+document.querySelectorAll('.admin-tab').forEach(tab => {
   tab.addEventListener('click', function(){
-    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
     this.classList.add('active');
-    document.getElementById('panel-'+this.dataset.tab).classList.add('active');
+    document.getElementById('panel-' + this.dataset.tab).classList.add('active');
   });
 });
 
 function renderAdminFilter(){
-  const el = $('#adminNotesFilter');
-  let html = `<select id="filterGrade" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)">`;
-  html += `<option value="0">همه پایه‌ها</option>`;
-  for(let g=1;g<=9;g++) html += `<option value="${g}" ${adminFilterGrade===g?'selected':''}>پایه ${fa(g)}م</option>`;
+  let html = `<select id="filterGrade" style="width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="0">همه پایه‌ها</option>`;
+  for(let g = 1; g <= 9; g++) html += `<option value="${g}" ${adminFilterGrade === g ? 'selected' : ''}>پایه ${fa(g)}م</option>`;
   html += `</select>`;
-  el.innerHTML = html;
-  document.getElementById('filterGrade').addEventListener('change', function(){
-    adminFilterGrade = +this.value; renderAdminNotes();
-  });
+  $('#adminNotesFilter').innerHTML = html;
+  document.getElementById('filterGrade').addEventListener('change', function(){ adminFilterGrade = +this.value; renderAdminNotes(); });
 }
 
 function renderAdminNotes(){
   const el = $('#adminNotesList');
-  let notes = Object.values(store.notes).filter(n=>!n.deleted);
-  if(adminFilterGrade) notes = notes.filter(n=>n.grade===adminFilterGrade);
-  notes.sort((a,b)=>b.ts-a.ts);
-  $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n=>!n.deleted).length);
-  if(!notes.length){
-    el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «جزوه جدید» شروع کنید.<br><br>اگه قبلاً جزوه داشتید، دکمه «♻️ بازیابی داده‌های قدیمی» را بزنید.</div>`;
-    return;
-  }
-  el.innerHTML = notes.map(n=>{
+  let notes = Object.values(store.notes).filter(n => !n.deleted);
+  if(adminFilterGrade) notes = notes.filter(n => n.grade === adminFilterGrade);
+  notes.sort((a,b) => b.ts - a.ts);
+  $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n => !n.deleted).length);
+  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «جزوه جدید» شروع کنید.</div>`; return; }
+  el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
     const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
-    return `<div class="admin-item">
-      <div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
-      <div class="admin-item-body">
-        <div class="admin-item-title">${esc(n.title||'بدون عنوان')} ${hasPdf?'📄':''}</div>
-        <div class="admin-item-meta">
-          <span>${esc(n.subject)}</span><span>•</span>
-          <span>پایه ${fa(n.grade)}</span><span>•</span>
-          <span>${dateFa(n.ts)}</span>
-        </div>
-      </div>
-      <div class="admin-item-actions">
-        <button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button>
-      </div>
-    </div>`;
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${hasPdf ? '📄' : ''}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span><span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
-  el.querySelectorAll('[data-admin-edit]').forEach(b=>{
-    b.addEventListener('click', ()=>openEditor(b.dataset.adminEdit));
-  });
+  el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
 
 function renderAdminSubjects(){
   const el = $('#adminSubjectsList');
-  const subjects = Object.values(store.subjects).filter(s=>!s.deleted).sort((a,b)=>(a.grade-b.grade)||(a.ts-b.ts));
+  const subjects = Object.values(store.subjects).filter(s => !s.deleted).sort((a,b) => (a.grade - b.grade) || (a.ts - b.ts));
   $('#tabSubjectsCount').textContent = fa(subjects.length);
-  if(!subjects.length){
-    el.innerHTML = `<div class="admin-empty">هنوز درس سفارشی اضافه نشده.</div>`;
-    return;
-  }
-  el.innerHTML = subjects.map(s=>{
+  if(!subjects.length){ el.innerHTML = `<div class="admin-empty">هنوز درس سفارشی اضافه نشده.</div>`; return; }
+  el.innerHTML = subjects.map(s => {
     const st = subjStyle(s.name);
-    return `<div class="admin-item">
-      <div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
-      <div class="admin-item-body">
-        <div class="admin-item-title">${esc(s.name)}</div>
-        <div class="admin-item-meta"><span>پایه ${fa(s.grade)}م</span><span>•</span><span>${dateFa(s.ts)}</span></div>
-      </div>
-      <div class="admin-item-actions">
-        <button class="btn btn-danger btn-sm" data-admin-del-subj="${s.id}" type="button">🗑</button>
-      </div>
-    </div>`;
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(s.name)}</div><div class="admin-item-meta"><span>پایه ${fa(s.grade)}م</span></div></div><div class="admin-item-actions"><button class="btn btn-danger btn-sm" data-admin-del-subj="${s.id}" type="button">🗑</button></div></div>`;
   }).join('');
-  el.querySelectorAll('[data-admin-del-subj]').forEach(b=>{
-    b.addEventListener('click', ()=>deleteSubject(b.dataset.adminDelSubj));
-  });
+  el.querySelectorAll('[data-admin-del-subj]').forEach(b => b.addEventListener('click', () => deleteSubject(b.dataset.adminDelSubj)));
 }
 
 function renderAdminSettings(){
-  $('#setTopic').value = TOPIC;
-  $('#setServer').value = NTFY;
-  try{
-    const lightStore = {notes:{}, comments:store.comments, subjects:store.subjects};
-    Object.entries(store.notes).forEach(([k,v])=>{
-      lightStore.notes[k] = {...v};
-      if(lightStore.notes[k].pdfData) lightStore.notes[k].pdfData = '['+formatSize(lightStore.notes[k].pdfSize||0)+']';
-    });
-    $('#setExport').value = JSON.stringify(lightStore, null, 2);
-  }catch(e){}
+  $('#setGhRepo').value = `${GH_OWNER}/${GH_REPO}`;
+  $('#setGhToken').value = getToken();
 
-  const nCount = Object.values(store.notes).filter(n=>!n.deleted).length;
-  const cCount = Object.values(store.comments).filter(c=>!c.deleted).length;
-  const sCount = Object.values(store.subjects).filter(s=>!s.deleted).length;
-  const pdfCount = Object.values(store.notes).filter(n=>!n.deleted && (n.pdfUrl || n.pdfData)).length;
-  const totalBytes = new Blob([JSON.stringify(store)]).size;
-  $('#adminStats').innerHTML = `
-    📝 جزوه‌ها: <b>${fa(nCount)}</b><br>
-    💬 نظرات: <b>${fa(cCount)}</b><br>
-    📚 درس‌های سفارشی: <b>${fa(sCount)}</b><br>
-    📄 جزوه‌های PDF: <b>${fa(pdfCount)}</b><br>
-    💾 حجم داده‌ها: <b>${formatSize(totalBytes)}</b><br>
-    🕒 آخرین به‌روزرسانی: <b>${dateFullFa(Date.now())}</b>
-  `;
+  const statusEl = $('#ghStatus');
+  if(isAdmin){
+    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>می‌توانی جزوه اضافه/ویرایش کنی.<br>مخزن: ${GH_OWNER}/${GH_REPO} • فایل: ${DATA_FILE}`;
+    statusEl.style.color = 'var(--success-txt)';
+  } else {
+    statusEl.innerHTML = `⚠️ <b>توکن تنظیم نشده</b><br>شما فقط می‌توانید بخوانید.<br>برای مدیریت، توکن را وارد کنید.`;
+    statusEl.style.color = 'var(--warning-txt)';
+  }
+
+  const nCount = Object.values(store.notes).filter(n => !n.deleted).length;
+  const cCount = Object.values(store.comments).filter(c => !c.deleted).length;
+  const sCount = Object.values(store.subjects).filter(s => !s.deleted).length;
+  const pdfCount = Object.values(store.notes).filter(n => !n.deleted && (n.pdfUrl || n.pdfData)).length;
+  const sizeBytes = new Blob([JSON.stringify(store)]).size;
+  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌های سفارشی: <b>${fa(sCount)}</b><br>📄 جزوه‌های PDF: <b>${fa(pdfCount)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b><br>🕒 آخرین به‌روزرسانی: <b>${store.updatedAt ? dateFullFa(store.updatedAt) : '—'}</b>`;
 }
 
 function renderAdmin(){
@@ -1503,44 +1143,51 @@ function renderAdmin(){
   renderAdminSettings();
 }
 
+/* ==== دکمه‌های تنظیمات ==== */
+$('#btnSaveGh').addEventListener('click', async () => {
+  const token = $('#setGhToken').value.trim();
+  if(!token){ toast('توکن را وارد کن', 'error'); return; }
+  setToken(token);
+  isAdmin = true;
+  toast('در حال اتصال…');
+  const ok = await loadFromGitHub();
+  renderAdminSettings();
+  if(ok) toast('✅ با موفقیت متصل شد', 'success');
+  else toast('⚠️ اتصال برقرار نشد - توکن را چک کن', 'error');
+});
+
+$('#btnDisconnect').addEventListener('click', () => {
+  if(!confirm('توکن از این دستگاه حذف شود؟')) return;
+  setToken('');
+  isAdmin = false;
+  renderAdminSettings();
+  toast('توکن حذف شد', 'success');
+});
+
+/* ==== Editor ==== */
 let editingNoteId = null;
 
 function openEditor(id){
+  if(!isAdmin){ toast('ابتدا توکن را وارد کنید', 'error'); return; }
   editingNoteId = id || null;
-  editingPdfFile = null;
-  editingPdfExisting = null;
-  editingPdfExistingName = '';
-  editingPdfExistingSize = 0;
-
+  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingName = ''; editingPdfExistingSize = 0;
   const gradeSel = $('#edGrade');
-  gradeSel.innerHTML = Array.from({length:9},(_,i)=>i+1)
-    .map(g=>`<option value="${g}">پایه ${fa(g)}م</option>`).join('');
+  gradeSel.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}">پایه ${fa(g)}م</option>`).join('');
 
   if(id){
-    const n = store.notes[id];
-    if(!n) return;
+    const n = store.notes[id]; if(!n) return;
     $('#editorTitle').textContent = 'ویرایش جزوه';
-    gradeSel.value = n.grade;
-    populateSubjects(n.grade, n.subject);
-    $('#edTitle').value = n.title||'';
-    $('#edContent').value = n.content||'';
-    $('#edPdfUrl').value = n.pdfUrl||'';
+    gradeSel.value = n.grade; populateSubjects(n.grade, n.subject);
+    $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl || '';
     if(n.pdfData && n.pdfData.length){
-      editingPdfExisting = n.pdfData;
-      editingPdfExistingName = n.pdfName || 'file.pdf';
-      editingPdfExistingSize = n.pdfSize || 0;
+      editingPdfExisting = n.pdfData; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
-    } else {
-      resetPdfUpload();
-    }
+    } else resetPdfUpload();
     $('#editorDelete').classList.remove('hidden');
   } else {
     $('#editorTitle').textContent = 'جزوه جدید';
-    gradeSel.value = state.grade;
-    populateSubjects(state.grade);
-    $('#edTitle').value = '';
-    $('#edContent').value = '';
-    $('#edPdfUrl').value = '';
+    gradeSel.value = state.grade; populateSubjects(state.grade);
+    $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = '';
     resetPdfUpload();
     $('#editorDelete').classList.add('hidden');
   }
@@ -1548,21 +1195,20 @@ function openEditor(id){
 }
 
 function populateSubjects(grade, selected){
-  const sel = $('#edSubject');
   const subs = getSubjects(grade);
-  sel.innerHTML = subs.map(s=>`<option value="${esc(s)}" ${s===selected?'selected':''}>${esc(s)}</option>`).join('');
+  $('#edSubject').innerHTML = subs.map(s => `<option value="${esc(s)}" ${s === selected ? 'selected' : ''}>${esc(s)}</option>`).join('');
 }
 
 function showPdfUpload(name, size, existing){
   $('#pdfUploadName').textContent = name;
-  $('#pdfUploadSize').textContent = formatSize(size) + (existing?' — ذخیره‌شده':' — آماده انتشار');
+  $('#pdfUploadSize').textContent = formatSize(size) + (existing ? ' — ذخیره‌شده' : ' — آماده انتشار');
   $('#pdfUploadArea').classList.add('has-file');
   $('#btnRemovePdf').classList.remove('hidden');
   $('#btnChoosePdf').textContent = 'تغییر';
 }
 function resetPdfUpload(){
   $('#pdfUploadName').textContent = 'هیچ فایلی انتخاب نشده';
-  $('#pdfUploadSize').textContent = 'حداکثر ۵۰۰ کیلوبایت';
+  $('#pdfUploadSize').textContent = 'حداکثر ۵۰۰KB برای ذخیره در data.json';
   $('#pdfUploadArea').classList.remove('has-file');
   $('#btnRemovePdf').classList.add('hidden');
   $('#btnChoosePdf').textContent = 'انتخاب';
@@ -1574,37 +1220,28 @@ $('#editorBack').addEventListener('click', closeEditor);
 $('#editorCancel').addEventListener('click', closeEditor);
 function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; }
 
-$('#btnChoosePdf').addEventListener('click', ()=>$('#edPdfFile').click());
-$('#btnRemovePdf').addEventListener('click', ()=>{
-  editingPdfFile = null;
-  editingPdfExisting = null;
-  editingPdfExistingName = '';
-  editingPdfExistingSize = 0;
-  resetPdfUpload();
-  toast('فایل PDF حذف شد');
+$('#btnChoosePdf').addEventListener('click', () => $('#edPdfFile').click());
+$('#btnRemovePdf').addEventListener('click', () => {
+  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingName = ''; editingPdfExistingSize = 0;
+  resetPdfUpload(); toast('PDF حذف شد');
 });
-
-$('#edPdfFile').addEventListener('change', e=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  if(file.type !== 'application/pdf'){ toast('فقط PDF مجاز است','error'); resetPdfUpload(); return; }
-  if(file.size > 500*1024){ toast('⚠️ حداکثر ۵۰۰ کیلوبایت','error'); resetPdfUpload(); return; }
-  editingPdfFile = file;
-  editingPdfExisting = null;
+$('#edPdfFile').addEventListener('change', e => {
+  const file = e.target.files[0]; if(!file) return;
+  if(file.type !== 'application/pdf'){ toast('فقط PDF', 'error'); resetPdfUpload(); return; }
+  if(file.size > 500 * 1024){ toast('حداکثر ۵۰۰KB — از لینک خارجی استفاده کن', 'error'); resetPdfUpload(); return; }
+  editingPdfFile = file; editingPdfExisting = null;
   showPdfUpload(file.name, file.size, false);
 });
 
-$('#editorSave').addEventListener('click', async ()=>{
+$('#editorSave').addEventListener('click', async () => {
+  if(!isAdmin){ toast('ابتدا توکن را وارد کنید', 'error'); return; }
   const grade = +$('#edGrade').value;
   const subject = $('#edSubject').value;
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
   const pdfUrl = $('#edPdfUrl').value.trim();
-
-  if(!title){ toast('عنوان را وارد کنید','error'); return; }
-  if(!content && !pdfUrl && !editingPdfFile && !editingPdfExisting){
-    toast('حداقل متن یا PDF لازم است','error'); return;
-  }
+  if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
+  if(!content && !pdfUrl && !editingPdfFile && !editingPdfExisting){ toast('حداقل متن یا PDF', 'error'); return; }
 
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
@@ -1612,53 +1249,41 @@ $('#editorSave').addEventListener('click', async ()=>{
   let pdfData = null, pdfName = '', pdfSize = 0;
   if(editingPdfFile){
     pdfData = await blobToBase64(editingPdfFile);
-    pdfName = editingPdfFile.name;
-    pdfSize = editingPdfFile.size;
+    pdfName = editingPdfFile.name; pdfSize = editingPdfFile.size;
   } else if(editingPdfExisting){
-    pdfData = editingPdfExisting;
-    pdfName = editingPdfExistingName;
-    pdfSize = editingPdfExistingSize;
+    pdfData = editingPdfExisting; pdfName = editingPdfExistingName; pdfSize = editingPdfExistingSize;
   } else if(pdfUrl){
-    item.pdfUrl = pdfUrl;
-    item.pdfName = pdfUrl.split('/').pop()?.split('?')[0] || 'file.pdf';
+    item.pdfUrl = pdfUrl; item.pdfName = pdfUrl.split('/').pop()?.split('?')[0] || 'file.pdf';
   }
+  if(pdfData){ item.pdfData = pdfData; item.pdfName = pdfName; item.pdfSize = pdfSize; }
 
-  if(pdfData){
-    item.pdfData = pdfData;
-    item.pdfName = pdfName;
-    item.pdfSize = pdfSize;
-    if(pdfSize > MAX_PDF_SYNC) item.pdfLocalOnly = true;
-  }
-
-  applyItem(item); saveStore();
+  store.notes[id] = item;
   closeEditor(); renderAdmin(); renderHome();
-  toast(editingNoteId ? 'جزوه ویرایش شد ✅' : 'جزوه منتشر شد ✅','success');
+  toast('در حال ذخیره روی GitHub…');
 
   const btn = $('#editorSave'); btn.disabled = true;
-  try{ await publish(item); setStatus('online'); }
-  catch(err){ toast('ذخیره شد ولی ارسال آنلاین ناموفق ⚠️','error'); setStatus('offline'); }
-  finally { btn.disabled = false; }
+  try{
+    await saveToGitHub();
+    toast(editingNoteId ? '✅ ویرایش روی GitHub ذخیره شد' : '✅ جزوه روی GitHub منتشر شد', 'success');
+  }catch(err){
+    toast('خطا: ' + err.message, 'error');
+  }finally{ btn.disabled = false; }
 });
 
-$('#editorDelete').addEventListener('click', async ()=>{
+$('#editorDelete').addEventListener('click', async () => {
   if(!editingNoteId) return;
-  if(!confirm('این جزوه برای همه حذف شود؟')) return;
-  const tomb = {
-    kind:'note', id: editingNoteId,
-    grade: store.notes[editingNoteId].grade,
-    subject: store.notes[editingNoteId].subject,
-    title:'', content:'', deleted:true, ts:Date.now()
-  };
-  applyItem(tomb); saveStore();
+  if(!confirm('این جزوه برای همیشه حذف شود؟')) return;
+  const tomb = {kind:'note', id: editingNoteId, grade: store.notes[editingNoteId].grade, subject: store.notes[editingNoteId].subject, title:'', content:'', deleted:true, ts:Date.now()};
+  store.notes[tomb.id] = tomb;
   closeEditor(); renderAdmin(); renderHome();
-  toast('جزوه حذف شد','success');
-  try{ await publish(tomb); }catch(e){}
+  toast('در حال حذف از GitHub…');
+  try{ await saveToGitHub(); toast('✅ حذف شد', 'success'); }
+  catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
 function openSubjectEditor(){
-  const sel = $('#subEdGrade');
-  sel.innerHTML = Array.from({length:9},(_,i)=>i+1)
-    .map(g=>`<option value="${g}" ${g===state.grade?'selected':''}>پایه ${fa(g)}م</option>`).join('');
+  if(!isAdmin){ toast('ابتدا توکن را وارد کنید', 'error'); return; }
+  $('#subEdGrade').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${fa(g)}م</option>`).join('');
   $('#subEdName').value = '';
   $('#subjectEditor').classList.remove('hidden');
 }
@@ -1668,121 +1293,73 @@ $('#btnNewSubject').addEventListener('click', openSubjectEditor);
 $('#subjectEditorBack').addEventListener('click', closeSubjectEditor);
 $('#subjectEditorCancel').addEventListener('click', closeSubjectEditor);
 
-$('#subjectEditorSave').addEventListener('click', async ()=>{
+$('#subjectEditorSave').addEventListener('click', async () => {
+  if(!isAdmin){ toast('ابتدا توکن را وارد کنید', 'error'); return; }
   const grade = +$('#subEdGrade').value;
   const name = $('#subEdName').value.trim();
-  if(!name){ toast('نام درس را وارد کنید','error'); return; }
-  if(getSubjects(grade).includes(name)){ toast('این درس قبلاً وجود دارد','error'); return; }
+  if(!name){ toast('نام درس را وارد کنید', 'error'); return; }
+  if(getSubjects(grade).includes(name)){ toast('تکراری است', 'error'); return; }
   const item = {kind:'subject', id:uid(), grade, name, ts:Date.now()};
-  applyItem(item); saveStore();
+  store.subjects[item.id] = item;
   closeSubjectEditor(); renderAdmin(); renderHome(); renderLibrary();
-  toast('درس اضافه شد ✅','success');
-  try{ await publish(item); setStatus('online'); }
-  catch(e){ toast('ارسال آنلاین ناموفق ⚠️','error'); }
+  toast('در حال ذخیره روی GitHub…');
+  try{ await saveToGitHub(); toast('✅ درس اضافه شد', 'success'); }
+  catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
 async function deleteSubject(id){
   if(!confirm('این درس حذف شود؟')) return;
-  const s = store.subjects[id];
-  if(!s) return;
+  const s = store.subjects[id]; if(!s) return;
   const tomb = {kind:'subject', id, grade:s.grade, name:s.name, deleted:true, ts:Date.now()};
-  applyItem(tomb); saveStore();
-  renderAdmin(); renderHome(); toast('درس حذف شد','success');
-  try{ await publish(tomb); }catch(e){}
+  store.subjects[id] = tomb;
+  renderAdmin(); renderHome(); toast('در حال حذف…');
+  try{ await saveToGitHub(); toast('✅ حذف شد', 'success'); }
+  catch(e){ toast('خطا: ' + e.message, 'error'); }
 }
 
-$('#btnNewNote').addEventListener('click', ()=>openEditor(null));
-$('#btnRefreshNotes').addEventListener('click', async ()=>{
-  toast('در حال دریافت…');
-  await pullAll();
+$('#btnNewNote').addEventListener('click', () => openEditor(null));
+$('#btnRefreshNotes').addEventListener('click', async () => {
+  toast('در حال دریافت از GitHub…');
+  await loadFromGitHub(false);
   renderAdmin();
-  toast(isOnline?'به‌روزرسانی شد ✅':'اتصال برقرار نشد ⚠️', isOnline?'success':'error');
+  toast(isOnline ? 'به‌روز شد ✅' : 'اتصال ناموفق ⚠️', isOnline ? 'success' : 'error');
 });
 
-/* دکمه بازیابی دستی */
-$('#btnRestore').addEventListener('click', ()=>{
-  // پاک کردن کلیدهای جدید تا migrate کار کنه
-  const savedNotes = Object.keys(store.notes).length;
-  if(savedNotes > 0){
-    if(!confirm('شما الان ' + savedNotes + ' جزوه دارید. بازیابی ممکن است داده‌های فعلی را نگه دارد. ادامه؟')) return;
-  }
-  let found = 0;
-  for(const k of OLD_DATA_KEYS){
-    try{
-      const old = JSON.parse(localStorage.getItem(k)||'null');
-      if(old && old.notes){
-        const cnt = Object.keys(old.notes).length;
-        if(cnt > 0){
-          Object.assign(store.notes, old.notes);
-          if(old.comments) Object.assign(store.comments, old.comments);
-          if(old.subjects) Object.assign(store.subjects, old.subjects);
-          found += cnt;
-        }
-      }
-    }catch(e){}
-  }
-  // همچنین تلاش از سرور
-  saveStore();
-  renderAdmin(); renderHome();
-  if(found > 0){
-    toast('♻️ ' + fa(found) + ' جزوه از حافظه بازیابی شد','success');
-  } else {
-    toast('چیزی در حافظه پیدا نشد، از سرور می‌گیریم…');
-    pullAll().then(()=>{
-      const cnt = Object.keys(store.notes).filter(k=>!store.notes[k].deleted).length;
-      if(cnt > 0) toast('✅ ' + fa(cnt) + ' جزوه از سرور بازیابی شد','success');
-      else toast('متأسفانه چیزی پیدا نشد','error');
-      renderAdmin(); renderHome();
-    });
-  }
-});
-
-$('#btnSaveSettings').addEventListener('click', ()=>{
-  const t = $('#setTopic').value.trim();
-  if(!t){ toast('موضوع خالی است','error'); return; }
-  localStorage.setItem(TOPIC_KEY, t); TOPIC = t;
-  toast('ذخیره شد. اپ را دوباره باز کنید.','success');
-});
-$('#btnForceSync').addEventListener('click', async ()=>{
-  toast('همگام‌سازی کامل…');
-  await pullAll();
-  renderAdmin();
-  toast(isOnline?'انجام شد ✅':'اتصال ناموفق ⚠️', isOnline?'success':'error');
-});
-$('#btnClearLocal').addEventListener('click', ()=>{
-  if(!confirm('تمام داده‌های محلی پاک شوند؟')) return;
-  localStorage.removeItem(DATA_KEY);
-  store = {notes:{},comments:{},subjects:{}};
-  saveStore(); renderAdmin(); renderHome();
-  toast('داده‌های محلی پاک شد','success');
-});
-
+/* ==== Toast ==== */
 let toastT;
 function toast(msg, type){
   const el = $('#toast');
+  if(!el) return;
   el.textContent = msg;
   el.className = 'toast show' + (type ? ' ' + type : '');
   clearTimeout(toastT);
-  toastT = setTimeout(()=>el.classList.remove('show'), 3000);
+  toastT = setTimeout(() => el.classList.remove('show'), 3500);
 }
 
-/* INIT */
+/* =========================================================
+   ۱۵. راه‌اندازی
+   ========================================================= */
 (async function init(){
   initTheme();
-  loadStore();
-  renderHome();
-  renderProfile();
-  renderLibrary();
+  isAdmin = !!getToken();
+  renderHome(); renderProfile(); renderLibrary();
 
-  setStatus('connecting');
-  armStatusTimeout();
-  await pullAll();
+  // اول از کش (برای نمایش سریع)
+  try{
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    if(cached && cached.notes){
+      store = cached;
+      refreshAll();
+    }
+  }catch(e){}
 
-  connectSSE();
-  setInterval(()=>pullAll(true), 30000);
-  setInterval(()=>{ if(!isOnline) pullAll(true); }, 10000);
+  // بعد از GitHub
+  await loadFromGitHub(true);
 
-  document.addEventListener('keydown', e=>{
+  // هر ۲ دقیقه یک بار تلاش برای دریافت تغییرات جدید
+  setInterval(() => { if(!state.noteId) loadFromGitHub(false); }, 120000);
+
+  document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
       if(!$('#pdfViewer').classList.contains('hidden')) $('#pdfViewerClose').click();
       else if(state.noteId) closeDetail();
@@ -1792,4 +1369,4 @@ function toast(msg, type){
 })();
 </script>
 </body>
-      </html>
+           </html>
