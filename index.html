@@ -9,9 +9,7 @@
 <meta name="description" content="درسیار، مرجع رایگان جزوه‌های کتاب درسی پایه اول تا نهم">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="درسیار | جزوه‌های کتاب درسی">
-<meta property="og:description" content="مرجع رایگان جزوه‌های کتاب درسی">
 <meta property="og:url" content="https://rl2011yasin-sketch.github.io/darsyar/">
-<meta property="og:image" content="https://rl2011yasin-sketch.github.io/darsyar/icon.png">
 <title>درسیار | جزوه‌های کتاب درسی پایه اول تا نهم</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
 <style>
@@ -239,11 +237,14 @@ button{cursor:pointer;user-select:none}
 .settings-section h4{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .settings-section h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--p)}
 .hidden{display:none !important}
-.loading-overlay{position:fixed;inset:0;background:var(--bg);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
 .loading-spinner{width:48px;height:48px;border-radius:50%;border:4px solid var(--br);border-top-color:var(--p);animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:14px;font-weight:700;color:var(--mut)}
+.loading-text{font-size:14px;font-weight:700;color:var(--mut);text-align:center;padding:0 20px}
+.loading-sub{font-size:12px;color:var(--dim);margin-top:4px;font-weight:600}
+.progress-track{width:220px;height:6px;background:var(--br);border-radius:10px;overflow:hidden}
+.progress-fill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .3s;border-radius:10px;width:0%}
 </style>
 </head>
 <body>
@@ -251,12 +252,14 @@ button{cursor:pointer;user-select:none}
 <div class="loading-overlay hidden" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loadingText">در حال دریافت داده‌ها…</div>
+  <div class="loading-sub" id="loadingSub"></div>
+  <div class="progress-track hidden" id="progressTrack"><div class="progress-fill-bar" id="progressFillBar"></div></div>
 </div>
 
 <div class="app">
   <header class="header">
     <div class="brand">
-      <div class="brand-logo" id="brandLogo"><img src="icon.png" alt="درسیار" onerror="this.style.display='none';this.parentNode.innerHTML='📚'"></div>
+      <div class="brand-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='📚'"></div>
       <div>
         <div class="brand-name">درسیار</div>
         <div class="brand-sub">جزوه‌های کتاب درسی</div>
@@ -321,7 +324,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه ۹.۰</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه ۱۰.۰<br>PDFها در پوشه pdfs/ ذخیره می‌شوند</p>
     </section>
   </main>
 
@@ -388,19 +391,24 @@ button{cursor:pointer;user-select:none}
         <div class="field">
           <label>مخزن GitHub</label>
           <input id="setGhRepo" dir="ltr" style="text-align:left" readonly>
-          <div class="hint">داده‌ها در فایل <code>data.json</code> ذخیره می‌شوند.</div>
         </div>
         <div class="field">
           <label>توکن GitHub</label>
           <input id="setGhToken" type="password" placeholder="ghp_..." dir="ltr" style="text-align:left">
-          <div class="hint">توکن فقط روی مرورگر خودت ذخیره می‌شود.</div>
         </div>
         <button class="btn btn-primary btn-block" id="btnSaveGh" type="button">💾 ذخیره و اتصال</button>
         <button class="btn btn-ghost btn-block" id="btnDisconnect" type="button" style="margin-top:8px">🔓 قطع اتصال</button>
         <div id="ghStatus" style="margin-top:12px;font-size:12px;color:var(--mut);line-height:1.9"></div>
       </div>
       <div class="settings-section">
-        <h4><span class="dot" style="background:var(--warn)"></span> آمار</h4>
+        <h4><span class="dot" style="background:var(--warn)"></span> انتقال PDFهای قدیمی</h4>
+        <p style="font-size:12px;color:var(--mut);line-height:1.9;margin-bottom:12px">
+          اگه قبلاً PDFها رو داخل data.json ذخیره کردی، با این دکمه به فایل‌های جداگانه توی پوشه <code>pdfs/</code> منتقل می‌شن.
+        </p>
+        <button class="btn btn-primary btn-block" id="btnMigratePdf" type="button">📦 انتقال PDFهای قدیمی</button>
+      </div>
+      <div class="settings-section">
+        <h4><span class="dot" style="background:var(--p)"></span> آمار</h4>
         <div id="adminStats" style="font-size:13px;color:var(--mut);line-height:2.2"></div>
       </div>
     </div>
@@ -430,11 +438,12 @@ button{cursor:pointer;user-select:none}
           <div class="pdf-upload-icon">📄</div>
           <div class="pdf-upload-info">
             <div class="pdf-upload-name" id="pdfUploadName">هیچ فایلی انتخاب نشده</div>
-            <div class="pdf-upload-size" id="pdfUploadSize">حداکثر ۱ مگابایت</div>
+            <div class="pdf-upload-size" id="pdfUploadSize">هر حجمی — جداگانه ذخیره می‌شود</div>
           </div>
           <button type="button" class="btn btn-ghost btn-sm" id="btnChoosePdf">انتخاب</button>
           <button type="button" class="pdf-remove hidden" id="btnRemovePdf">✕</button>
         </div>
+        <div class="hint">✅ PDF به صورت فایل جدا توی پوشه pdfs/ ذخیره می‌شود و data.json سبک می‌ماند.</div>
       </div>
       <div class="field" style="margin-bottom:0">
         <label>یا لینک PDF خارجی</label>
@@ -469,20 +478,21 @@ button{cursor:pointer;user-select:none}
 
 <script>
 /* =========================================================
-   درسیار v9.0 — با آیکون و توکن GitHub
+   درسیار v10.0 — PDFهای جداگانه در pdfs/
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
 const GH_BRANCH = 'main';
 const DATA_FILE = 'data.json';
+const PDF_DIR = 'pdfs';
 const GH_API = 'https://api.github.com';
+const PAGES_URL = `https://${GH_OWNER}.github.io/${GH_REPO}`;
 const TOKEN_KEY = 'darsyar_admin_token';
 const THEME_KEY = 'darsyar_theme';
 const GRADE_KEY = 'darsyar_grade';
 const NAME_KEY = 'darsyar_name';
 const CACHE_KEY = 'darsyar_cache';
 const ADMIN_CODE = 'darsyar2026';
-const MAX_PDF = 1024 * 1024;
 
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -513,7 +523,11 @@ let fileSha = null;
 let isAdmin = false;
 const state = { screen:'home', grade:+(localStorage.getItem(GRADE_KEY)||7), subject:null, noteId:null, searchQuery:'' };
 let draft = {name:'', text:''};
-let editingPdfFile = null, editingPdfExisting = null, editingPdfExistingName = '', editingPdfExistingSize = 0;
+let editingPdfFile = null;
+let editingPdfExisting = null; // {file, name, size}
+let editingPdfExistingFile = '';
+let editingPdfExistingName = '';
+let editingPdfExistingSize = 0;
 
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -545,6 +559,7 @@ const getSubjects = g => {
 const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
 const setToken = t => t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY);
 
+/* ==== GitHub: خواندن/نوشتن فایل ==== */
 async function githubGet(path){
   const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
   const headers = { 'Accept': 'application/vnd.github.v3+json' };
@@ -556,11 +571,11 @@ async function githubGet(path){
   return await r.json();
 }
 
-async function githubPut(path, content, message, sha){
+async function githubPut(path, contentBase64, message, sha){
   const token = getToken();
   if(!token) throw new Error('توکن تنظیم نشده');
   const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
-  const body = { message: message || 'به‌روزرسانی', content: utf8ToBase64(content), branch: GH_BRANCH };
+  const body = { message: message || 'به‌روزرسانی', content: contentBase64, branch: GH_BRANCH };
   if(sha) body.sha = sha;
   const r = await fetch(url, {
     method: 'PUT',
@@ -570,10 +585,45 @@ async function githubPut(path, content, message, sha){
   if(r.status === 401) throw new Error('توکن نامعتبر');
   if(r.status === 403) throw new Error('دسترسی ندارید');
   if(r.status === 409) throw new Error('تضاد - دوباره امتحان کن');
+  if(r.status === 422) throw new Error('حجم فایل زیاده');
   if(!r.ok) throw new Error('PUT ' + r.status);
   return await r.json();
 }
 
+/* ==== آپلود PDF به صورت فایل جداگانه ==== */
+async function uploadPdfFile(filename, base64Data, onProgress){
+  const path = `${PDF_DIR}/${filename}`;
+  // ابتدا چک کن فایل هست یا نه
+  let sha = null;
+  try{
+    const existing = await githubGet(path);
+    if(existing) sha = existing.sha;
+  }catch(e){}
+  
+  if(onProgress) onProgress('در حال آپلود PDF…');
+  await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
+  return `${PAGES_URL}/${PDF_DIR}/${filename}`;
+}
+
+/* ==== حذف PDF از GitHub ==== */
+async function deletePdfFile(filename){
+  const token = getToken();
+  if(!token) return false;
+  try{
+    const path = `${PDF_DIR}/${filename}`;
+    const existing = await githubGet(path);
+    if(!existing) return false;
+    const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+    const r = await fetch(url, {
+      method: 'DELETE',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `حذف PDF: ${filename}`, sha: existing.sha, branch: GH_BRANCH })
+    });
+    return r.ok;
+  }catch(e){ return false; }
+}
+
+/* ==== خوندن/ذخیره data.json ==== */
 async function loadFromGitHub(showLoad = true){
   if(showLoad) setLoading(true, 'در حال دریافت از GitHub…');
   setStatus('connecting');
@@ -604,25 +654,80 @@ async function loadFromGitHub(showLoad = true){
   }
 }
 
-async function saveToGitHub(){
+async function saveDataToGitHub(){
   if(!isAdmin) throw new Error('توکن تنظیم نشده');
   setStatus('saving');
-  setLoading(true, 'در حال ذخیره روی GitHub…');
-  try{
-    store.updatedAt = Date.now();
-    const content = JSON.stringify(store);
-    if(!fileSha){ const ex = await githubGet(DATA_FILE); if(ex) fileSha = ex.sha; }
-    const result = await githubPut(DATA_FILE, content, '📚 به‌روزرسانی درسیار — ' + new Date().toLocaleString('fa-IR'), fileSha);
-    fileSha = result.content?.sha || null;
-    localStorage.setItem(CACHE_KEY, JSON.stringify(store));
-    setStatus('online');
-    return true;
-  }catch(e){
-    setStatus('offline');
-    throw e;
-  }finally{ setLoading(false); }
+  store.updatedAt = Date.now();
+  // پاکسازی pdfData از همه notes (که نباید دیگه وجود داشته باشه)
+  const cleanNotes = {};
+  Object.entries(store.notes).forEach(([k,v]) => {
+    const {pdfData, ...rest} = v;
+    cleanNotes[k] = rest;
+  });
+  const cleanStore = { notes: cleanNotes, comments: store.comments, subjects: store.subjects, updatedAt: store.updatedAt };
+  const content = utf8ToBase64(JSON.stringify(cleanStore));
+  if(!fileSha){ const ex = await githubGet(DATA_FILE); if(ex) fileSha = ex.sha; }
+  const result = await githubPut(DATA_FILE, content, '📚 به‌روزرسانی درسیار — ' + new Date().toLocaleString('fa-IR'), fileSha);
+  fileSha = result.content?.sha || null;
+  store.notes = cleanNotes;
+  localStorage.setItem(CACHE_KEY, JSON.stringify(store));
+  setStatus('online');
+  return true;
 }
 
+/* ==== Migration: انتقال PDFهای base64 قدیمی به فایل‌های جداگانه ==== */
+async function migrateOldPdfs(){
+  const notesWithData = Object.values(store.notes).filter(n => n.pdfData && n.pdfData.length && !n.pdfFile);
+  if(!notesWithData.length){
+    toast('هیچ PDF قدیمی برای انتقال نیست', 'error');
+    return;
+  }
+  const total = notesWithData.length;
+  setLoading(true, `انتقال PDF ۱ از ${fa(total)}…`);
+  showProgress(0);
+  
+  let migrated = 0;
+  let failed = 0;
+  for(let i = 0; i < notesWithData.length; i++){
+    const n = notesWithData[i];
+    try{
+      // نام فایل: note_id_random.pdf
+      const filename = `note_${n.id}_${Date.now().toString(36)}.pdf`;
+      setLoading(true, `آپلود PDF ${fa(i+1)} از ${fa(total)}…`);
+      showProgress((i / total) * 100);
+      
+      const url = await uploadPdfFile(filename, n.pdfData);
+      
+      // به‌روزرسانی note: حذف pdfData، اضافه pdfFile
+      n.pdfFile = filename;
+      n.pdfUrl = url;
+      delete n.pdfData;
+      migrated++;
+    }catch(e){
+      console.warn('migrate failed for', n.id, e);
+      failed++;
+    }
+  }
+  
+  setLoading(true, 'ذخیره data.json…');
+  showProgress(95);
+  try{
+    await saveDataToGitHub();
+    showProgress(100);
+  }catch(e){
+    toast('خطا در ذخیره data.json', 'error');
+  }
+  
+  setLoading(false);
+  hideProgress();
+  
+  if(migrated > 0) toast(`✅ ${fa(migrated)} PDF منتقل شد${failed ? ' ('+fa(failed)+' خطا)' : ''}`, 'success');
+  else toast('انتقال ناموفق — توکن را چک کن', 'error');
+  
+  renderAdmin(); renderHome();
+}
+
+/* ==== وضعیت و loading ==== */
 let isOnline = false, statusTimer = null;
 function setStatus(s){
   const dot = $('#statusDot'); if(!dot) return;
@@ -632,12 +737,24 @@ function setStatus(s){
   else if(s === 'saving'){ dot.className = 'status-dot saving'; dot.title = 'در حال ذخیره…'; }
   else { dot.className = 'status-dot connecting'; dot.title = 'در حال اتصال…'; statusTimer = setTimeout(() => { if(!isOnline) setStatus('offline'); }, 6000); }
 }
-function setLoading(show, text){
+function setLoading(show, text, sub){
   const ov = $('#loadingOverlay'); if(!ov) return;
-  if(show){ if(text) $('#loadingText').textContent = text; ov.classList.remove('hidden'); }
-  else ov.classList.add('hidden');
+  if(show){
+    if(text) $('#loadingText').textContent = text;
+    if(sub !== undefined) $('#loadingSub').textContent = sub;
+    ov.classList.remove('hidden');
+  } else ov.classList.add('hidden');
+}
+function showProgress(pct){
+  $('#progressTrack').classList.remove('hidden');
+  $('#progressFillBar').style.width = pct + '%';
+}
+function hideProgress(){
+  $('#progressTrack').classList.add('hidden');
+  $('#progressFillBar').style.width = '0%';
 }
 
+/* ==== قالب‌بندی ==== */
 function fmt(text){
   const lines = String(text || '').split('\n');
   const out = []; let inList = false;
@@ -655,9 +772,28 @@ function fmt(text){
   return out.join('');
 }
 
-function base64ToBlob(b64){ const c = atob(b64); const u = new Uint8Array(c.length); for(let i = 0; i < c.length; i++) u[i] = c.charCodeAt(i); return new Blob([u], {type:'application/pdf'}); }
-function blobToBase64(blob){ return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(e.target.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); }); }
+function blobToBase64(blob){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
 
+/* ==== گرفتن URL PDF از note ==== */
+function getPdfUrl(n){
+  if(!n) return null;
+  if(n.pdfUrl) return n.pdfUrl; // لینک خارجی یا URL کامل
+  if(n.pdfFile) return `${PAGES_URL}/${PDF_DIR}/${n.pdfFile}`;
+  return null;
+}
+
+function hasPdf(n){
+  return !!(n && (n.pdfUrl || n.pdfFile || (n.pdfData && n.pdfData.length)));
+}
+
+/* ==== تم ==== */
 function initTheme(){
   const saved = localStorage.getItem(THEME_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -679,6 +815,7 @@ function updateThemeIcon(theme){
     : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 }
 
+/* ==== رندر ==== */
 function renderHome(){
   const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade).sort((a,b) => b.ts - a.ts);
   const subs = getSubjects(state.grade);
@@ -708,9 +845,8 @@ function noteCard(n){
   const st = subjStyle(n.subject);
   const cc = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).length;
   const preview = (n.content || '').replace(/[#*\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 110);
-  const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
   return `<article class="note-card" data-act="open" data-id="${n.id}" style="--sc:${st.c};--sb:${st.bg}">
-    <div class="nc-top"><span class="nc-chip">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span>${hasPdf ? '<span class="nc-pdf">📄 PDF</span>' : ''}</div>
+    <div class="nc-top"><span class="nc-chip">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span>${hasPdf(n) ? '<span class="nc-pdf">📄 PDF</span>' : ''}</div>
     <div class="nc-title">${esc(n.title || 'بدون عنوان')}</div>
     <div class="nc-preview">${esc(preview)}${preview.length >= 110 ? '…' : ''}</div>
     <div class="nc-foot"><span>💬 ${fa(cc)} نظر</span><span>🕒 ${dateFa(n.ts)}</span></div>
@@ -776,11 +912,14 @@ function renderDetail(){
     const initial = (c.author || 'ن').trim().charAt(0) || 'ن';
     return `<div class="cmt"><div class="cmt-av" style="background:${avColor(c.author || 'ن')}">${esc(initial)}</div><div class="cmt-body"><div class="cmt-head"><b>${esc(c.author || 'ناشناس')}</b><span>${dateFa(c.ts)}</span></div><div class="cmt-text">${esc(c.text).replace(/\n/g, '<br>')}</div></div></div>`;
   }).join('') : `<div class="empty" style="padding:24px 12px;border:0;background:transparent"><div class="empty-icon" style="width:52px;height:52px;font-size:24px;border-radius:16px">✍️</div><b>هنوز نظری نیست</b><p>اولین نفری باشید که نظر می‌دهد.</p></div>`;
+
   let pdfHtml = '';
-  if(n.pdfUrl || (n.pdfData && n.pdfData.length)){
+  if(hasPdf(n)){
     const pdfName = n.pdfName || 'جزوه.pdf';
-    pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${n.pdfSize ? formatSize(n.pdfSize) : (n.pdfUrl ? 'لینک خارجی' : 'فایل داخلی')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
+    const pdfSize = n.pdfSize || 0;
+    pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${pdfSize ? formatSize(pdfSize) : (n.pdfUrl && !n.pdfFile ? 'لینک خارجی' : 'ذخیره‌شده در pdfs/')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
   }
+
   $('#detailBody').innerHTML = `
     <div class="note-head"><div class="chips-row"><span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span></div><div class="note-title">${esc(n.title || 'بدون عنوان')}</div><div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div></div>
     ${pdfHtml}
@@ -799,36 +938,50 @@ function refreshAll(){
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
 }
 
-let currentPdfBlobUrl = null;
+/* ==== PDF Viewer ==== */
 window.openPdfViewer = function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
   const frame = $('#pdfViewerFrame'), dl = $('#pdfViewerDownload');
-  if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
+  const url = getPdfUrl(n);
+  if(!url){ toast('PDF موجود نیست', 'error'); return; }
   $('#pdfViewerTitle').textContent = pdfName;
-  if(n.pdfUrl){ frame.src = n.pdfUrl; dl.href = n.pdfUrl; dl.setAttribute('download', pdfName); }
-  else if(n.pdfData){
-    try{ const blob = base64ToBlob(n.pdfData); const url = URL.createObjectURL(blob); currentPdfBlobUrl = url; frame.src = url; dl.href = url; dl.setAttribute('download', pdfName); }
-    catch(e){ toast('خطا در PDF', 'error'); }
+  // اگه pdfData هست (قدیمی)، از blob استفاده کن
+  if(n.pdfData && n.pdfData.length){
+    try{
+      const byteChars = atob(n.pdfData);
+      const bytes = new Uint8Array(byteChars.length);
+      for(let i = 0; i < byteChars.length; i++) bytes[i] = byteChars.charCodeAt(i);
+      const blob = new Blob([bytes], {type:'application/pdf'});
+      const blobUrl = URL.createObjectURL(blob);
+      frame.src = blobUrl;
+      dl.href = blobUrl;
+      dl.setAttribute('download', pdfName);
+    }catch(e){ frame.src = url; dl.href = url; dl.setAttribute('download', pdfName); }
+  } else {
+    frame.src = url;
+    dl.href = url;
+    dl.setAttribute('download', pdfName);
   }
   $('#pdfViewer').classList.remove('hidden');
 };
 window.downloadPdf = function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
-  if(n.pdfUrl){ const a = document.createElement('a'); a.href = n.pdfUrl; a.download = pdfName; a.target = '_blank'; a.click(); }
-  else if(n.pdfData){
-    try{ const blob = base64ToBlob(n.pdfData); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = pdfName; a.click(); setTimeout(() => URL.revokeObjectURL(url), 2000); }
-    catch(e){ toast('خطا', 'error'); }
-  }
+  const url = getPdfUrl(n);
+  if(!url){ toast('PDF موجود نیست', 'error'); return; }
+  const a = document.createElement('a');
+  a.href = url; a.download = pdfName;
+  if(!n.pdfUrl || n.pdfFile) a.target = '_blank'; // برای URLs داخلی
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   toast('📥 دانلود شروع شد', 'success');
 };
 $('#pdfViewerClose').addEventListener('click', () => {
   $('#pdfViewer').classList.add('hidden');
   $('#pdfViewerFrame').src = 'about:blank';
-  if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
 });
 
+/* ==== Navigation ==== */
 function showScreen(name){
   state.screen = name;
   $$('.screen').forEach(s => s.classList.remove('active'));
@@ -914,11 +1067,12 @@ document.addEventListener('submit', async e => {
   $('#cText').value = ''; renderDetail();
   toast('در حال ذخیره…');
   const btn = e.target.querySelector('button'); btn.disabled = true;
-  try{ await saveToGitHub(); toast('✅ نظر ذخیره شد', 'success'); }
+  try{ await saveDataToGitHub(); toast('✅ نظر ذخیره شد', 'success'); }
   catch(err){ toast('خطا: ' + err.message, 'error'); }
   finally{ btn.disabled = false; }
 });
 
+/* ==== Admin ==== */
 let adminFilterGrade = 0;
 function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); toast('🔓 پنل مدیر باز شد', 'success'); }
 function toggleAdmin(){ const a = $('#admin'); if(a.classList.contains('hidden')) openAdminPanel(); else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); } }
@@ -951,8 +1105,8 @@ function renderAdminNotes(){
   if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «جزوه جدید» شروع کن.</div>`; return; }
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
-    const hasPdf = !!(n.pdfUrl || (n.pdfData && n.pdfData.length));
-    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${hasPdf ? '📄' : ''}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span><span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
+    const pdfTag = hasPdf(n) ? (n.pdfFile ? '📄✓' : '📄⚠') : '';
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${pdfTag}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span><span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
@@ -974,7 +1128,7 @@ function renderAdminSettings(){
   $('#setGhToken').value = getToken();
   const statusEl = $('#ghStatus');
   if(isAdmin){
-    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}<br>فایل: ${DATA_FILE}`;
+    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}<br>data.json + پوشه pdfs/`;
     statusEl.style.color = 'var(--oktxt)';
   } else {
     statusEl.innerHTML = `⚠️ <b>توکن تنظیم نشده</b><br>فقط می‌توانی بخوانی.`;
@@ -983,9 +1137,18 @@ function renderAdminSettings(){
   const nCount = Object.values(store.notes).filter(n => !n.deleted).length;
   const cCount = Object.values(store.comments).filter(c => !c.deleted).length;
   const sCount = Object.values(store.subjects).filter(s => !s.deleted).length;
-  const pdfCount = Object.values(store.notes).filter(n => !n.deleted && (n.pdfUrl || n.pdfData)).length;
+  const pdfFiles = Object.values(store.notes).filter(n => !n.deleted && n.pdfFile).length;
+  const pdfOld = Object.values(store.notes).filter(n => !n.deleted && n.pdfData && n.pdfData.length).length;
   const sizeBytes = new Blob([JSON.stringify(store)]).size;
-  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF: <b>${fa(pdfCount)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b><br>🕒 آخرین به‌روزرسانی: <b>${store.updatedAt ? dateFullFa(store.updatedAt) : '—'}</b>`;
+  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF فایل جدا: <b>${fa(pdfFiles)}</b><br>⚠️ PDF قدیمی (داخل data.json): <b>${fa(pdfOld)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
+  
+  // هشدار اگه PDF قدیمی هست
+  if(pdfOld > 0){
+    $('#btnMigratePdf').style.display = 'flex';
+    $('#btnMigratePdf').textContent = `📦 انتقال ${fa(pdfOld)} PDF قدیمی به پوشه pdfs/`;
+  } else {
+    $('#btnMigratePdf').style.display = 'none';
+  }
 }
 
 function renderAdmin(){ renderAdminFilter(); renderAdminNotes(); renderAdminSubjects(); renderAdminSettings(); }
@@ -1007,21 +1170,35 @@ $('#btnDisconnect').addEventListener('click', () => {
   toast('توکن حذف شد', 'success');
 });
 
+$('#btnMigratePdf').addEventListener('click', async () => {
+  if(!isAdmin){ toast('اول توکن را وارد کن', 'error'); return; }
+  if(!confirm('PDFهای قدیمی به فایل‌های جداگانه منتقل شوند؟ این کار ممکنه چند دقیقه طول بکشه.')) return;
+  await migrateOldPdfs();
+});
+
+/* ==== Editor ==== */
 let editingNoteId = null;
 function openEditor(id){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   editingNoteId = id || null;
-  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingName = ''; editingPdfExistingSize = 0;
+  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingFile = ''; editingPdfExistingName = ''; editingPdfExistingSize = 0;
   const gradeSel = $('#edGrade');
   gradeSel.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}">پایه ${fa(g)}م</option>`).join('');
   if(id){
     const n = store.notes[id]; if(!n) return;
     $('#editorTitle').textContent = 'ویرایش جزوه';
     gradeSel.value = n.grade; populateSubjects(n.grade, n.subject);
-    $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl || '';
-    if(n.pdfData && n.pdfData.length){
-      editingPdfExisting = n.pdfData; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
+    $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl && !n.pdfFile ? n.pdfUrl : '';
+    if(n.pdfFile){
+      editingPdfExistingFile = n.pdfFile;
+      editingPdfExistingName = n.pdfName || 'file.pdf';
+      editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
+    } else if(n.pdfData && n.pdfData.length){
+      editingPdfExisting = n.pdfData;
+      editingPdfExistingName = n.pdfName || 'file.pdf';
+      editingPdfExistingSize = n.pdfSize || 0;
+      showPdfUpload(editingPdfExistingName + ' (قدیمی)', editingPdfExistingSize, true);
     } else resetPdfUpload();
     $('#editorDelete').classList.remove('hidden');
   } else {
@@ -1039,14 +1216,14 @@ function populateSubjects(grade, selected){
 }
 function showPdfUpload(name, size, existing){
   $('#pdfUploadName').textContent = name;
-  $('#pdfUploadSize').textContent = formatSize(size) + (existing ? ' — ذخیره‌شده' : ' — آماده انتشار');
+  $('#pdfUploadSize').textContent = formatSize(size) + (existing ? ' — ذخیره‌شده' : ' — آماده آپلود');
   $('#pdfUploadArea').classList.add('has-file');
   $('#btnRemovePdf').classList.remove('hidden');
   $('#btnChoosePdf').textContent = 'تغییر';
 }
 function resetPdfUpload(){
   $('#pdfUploadName').textContent = 'هیچ فایلی انتخاب نشده';
-  $('#pdfUploadSize').textContent = 'حداکثر ۱ مگابایت';
+  $('#pdfUploadSize').textContent = 'هر حجمی — جداگانه ذخیره می‌شود';
   $('#pdfUploadArea').classList.remove('has-file');
   $('#btnRemovePdf').classList.add('hidden');
   $('#btnChoosePdf').textContent = 'انتخاب';
@@ -1058,14 +1235,13 @@ $('#editorCancel').addEventListener('click', closeEditor);
 function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; }
 $('#btnChoosePdf').addEventListener('click', () => $('#edPdfFile').click());
 $('#btnRemovePdf').addEventListener('click', () => {
-  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingName = ''; editingPdfExistingSize = 0;
+  editingPdfFile = null; editingPdfExisting = null; editingPdfExistingFile = ''; editingPdfExistingName = ''; editingPdfExistingSize = 0;
   resetPdfUpload(); toast('PDF حذف شد');
 });
 $('#edPdfFile').addEventListener('change', e => {
   const file = e.target.files[0]; if(!file) return;
   if(file.type !== 'application/pdf'){ toast('فقط PDF', 'error'); resetPdfUpload(); return; }
-  if(file.size > MAX_PDF){ toast('حداکثر ۱ مگابایت', 'error'); resetPdfUpload(); return; }
-  editingPdfFile = file; editingPdfExisting = null;
+  editingPdfFile = file; editingPdfExisting = null; editingPdfExistingFile = '';
   showPdfUpload(file.name, file.size, false);
 });
 
@@ -1075,34 +1251,81 @@ $('#editorSave').addEventListener('click', async () => {
   const subject = $('#edSubject').value;
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
-  const pdfUrl = $('#edPdfUrl').value.trim();
+  const pdfUrlInput = $('#edPdfUrl').value.trim();
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
-  if(!content && !pdfUrl && !editingPdfFile && !editingPdfExisting){ toast('حداقل متن یا PDF', 'error'); return; }
+  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
+  
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
-  let pdfData = null, pdfName = '', pdfSize = 0;
-  if(editingPdfFile){ pdfData = await blobToBase64(editingPdfFile); pdfName = editingPdfFile.name; pdfSize = editingPdfFile.size; }
-  else if(editingPdfExisting){ pdfData = editingPdfExisting; pdfName = editingPdfExistingName; pdfSize = editingPdfExistingSize; }
-  else if(pdfUrl){ item.pdfUrl = pdfUrl; item.pdfName = pdfUrl.split('/').pop()?.split('?')[0] || 'file.pdf'; }
-  if(pdfData){ item.pdfData = pdfData; item.pdfName = pdfName; item.pdfSize = pdfSize; }
+  
+  // اگر PDF جدید انتخاب شده
+  if(editingPdfFile){
+    try{
+      setLoading(true, 'در حال آپلود PDF به GitHub…');
+      showProgress(30);
+      const base64Data = await blobToBase64(editingPdfFile);
+      showProgress(50);
+      const filename = `note_${id}_${Date.now().toString(36)}.pdf`;
+      const url = await uploadPdfFile(filename, base64Data, (msg) => setLoading(true, msg));
+      showProgress(80);
+      item.pdfFile = filename;
+      item.pdfUrl = url;
+      item.pdfName = editingPdfFile.name;
+      item.pdfSize = editingPdfFile.size;
+      // اگه فایل قدیمی بود، پاکش کن
+      if(editingPdfExistingFile && editingPdfExistingFile !== filename){
+        deletePdfFile(editingPdfExistingFile).catch(()=>{});
+      }
+    }catch(err){
+      setLoading(false); hideProgress();
+      toast('خطا در آپلود PDF: ' + err.message, 'error');
+      return;
+    }
+  } else if(editingPdfExistingFile){
+    // PDF قبلی حفظ می‌شه
+    item.pdfFile = editingPdfExistingFile;
+    item.pdfUrl = `${PAGES_URL}/${PDF_DIR}/${editingPdfExistingFile}`;
+    item.pdfName = editingPdfExistingName;
+    item.pdfSize = editingPdfExistingSize;
+  } else if(editingPdfExisting){
+    // PDF قدیمی base64 هنوز منتقل نشده - نگهش دار
+    item.pdfData = editingPdfExisting;
+    item.pdfName = editingPdfExistingName;
+    item.pdfSize = editingPdfExistingSize;
+  } else if(pdfUrlInput){
+    item.pdfUrl = pdfUrlInput;
+    item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
+  }
+  
   store.notes[id] = item;
   closeEditor(); renderAdmin(); renderHome();
-  toast('در حال ذخیره روی GitHub…');
-  const btn = $('#editorSave'); btn.disabled = true;
-  try{ await saveToGitHub(); toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success'); }
-  catch(err){ toast('خطا: ' + err.message, 'error'); }
-  finally{ btn.disabled = false; }
+  setLoading(true, 'در حال ذخیره data.json…');
+  showProgress(90);
+  try{
+    await saveDataToGitHub();
+    showProgress(100);
+    toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success');
+  }catch(err){
+    toast('خطا: ' + err.message, 'error');
+  }finally{
+    setLoading(false); hideProgress();
+  }
 });
 
 $('#editorDelete').addEventListener('click', async () => {
   if(!editingNoteId) return;
-  if(!confirm('این جزوه حذف شود؟')) return;
-  const tomb = {kind:'note', id: editingNoteId, grade: store.notes[editingNoteId].grade, subject: store.notes[editingNoteId].subject, title:'', content:'', deleted:true, ts:Date.now()};
+  if(!confirm('این جزوه حذف شود؟ (فایل PDF هم پاک می‌شود)')) return;
+  const oldNote = store.notes[editingNoteId];
+  const pdfToDelete = oldNote.pdfFile;
+  const tomb = {kind:'note', id: editingNoteId, grade: oldNote.grade, subject: oldNote.subject, title:'', content:'', deleted:true, ts:Date.now()};
   store.notes[tomb.id] = tomb;
   closeEditor(); renderAdmin(); renderHome();
   toast('در حال حذف…');
-  try{ await saveToGitHub(); toast('✅ حذف شد', 'success'); }
-  catch(e){ toast('خطا: ' + e.message, 'error'); }
+  try{
+    await saveDataToGitHub();
+    if(pdfToDelete) deletePdfFile(pdfToDelete).catch(()=>{});
+    toast('✅ حذف شد', 'success');
+  }catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
 function openSubjectEditor(){
@@ -1126,7 +1349,7 @@ $('#subjectEditorSave').addEventListener('click', async () => {
   store.subjects[item.id] = item;
   closeSubjectEditor(); renderAdmin(); renderHome(); renderLibrary();
   toast('در حال ذخیره…');
-  try{ await saveToGitHub(); toast('✅ درس اضافه شد', 'success'); }
+  try{ await saveDataToGitHub(); toast('✅ درس اضافه شد', 'success'); }
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
@@ -1136,7 +1359,7 @@ async function deleteSubject(id){
   const tomb = {kind:'subject', id, grade:s.grade, name:s.name, deleted:true, ts:Date.now()};
   store.subjects[id] = tomb;
   renderAdmin(); renderHome(); toast('در حال حذف…');
-  try{ await saveToGitHub(); toast('✅ حذف شد', 'success'); }
+  try{ await saveDataToGitHub(); toast('✅ حذف شد', 'success'); }
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 }
 
@@ -1157,6 +1380,7 @@ function toast(msg, type){
   toastT = setTimeout(() => el.classList.remove('show'), 3500);
 }
 
+/* ==== INIT ==== */
 (async function init(){
   initTheme();
   isAdmin = !!getToken();
@@ -1180,4 +1404,4 @@ function toast(msg, type){
 })();
 </script>
 </body>
-        </html>
+    </html>
