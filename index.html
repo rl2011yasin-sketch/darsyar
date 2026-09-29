@@ -6,8 +6,6 @@
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <meta name="theme-color" content="#6366f1">
-<meta name="description" content="درسیار، مرجع رایگان جزوه‌های کتاب درسی پایه اول تا نهم">
-<meta name="robots" content="index, follow">
 <title>درسیار | جزوه‌های کتاب درسی پایه اول تا نهم</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
 <style>
@@ -20,7 +18,6 @@ button,input,textarea,select{font-family:inherit;color:inherit;outline:none;bord
 button{cursor:pointer;user-select:none}
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:6px}
-::selection{background:var(--p);color:#fff}
 .app{min-height:100vh;display:flex;flex-direction:column;max-width:640px;margin:0 auto;background:var(--bg)}
 .header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;display:flex;align-items:center;gap:11px}
 .brand{display:flex;align-items:center;gap:10px}
@@ -322,7 +319,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه ۱۱.۰<br>PDFها در پوشه pdfs/ ذخیره می‌شوند</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه ۱۲.۰<br>PDFها در پوشه pdfs/ ذخیره می‌شوند</p>
     </section>
   </main>
 
@@ -393,7 +390,7 @@ button{cursor:pointer;user-select:none}
         <div class="field">
           <label>توکن GitHub</label>
           <input id="setGhToken" type="password" placeholder="ghp_..." dir="ltr" style="text-align:left">
-          <div class="hint">توکن فقط برای نوشتن لازمه. خواندن آزاده.</div>
+          <div class="hint">توکن فقط برای نوشتن لازمه.</div>
         </div>
         <button class="btn btn-primary btn-block" id="btnSaveGh" type="button">💾 ذخیره و اتصال</button>
         <button class="btn btn-ghost btn-block" id="btnDisconnect" type="button" style="margin-top:8px">🔓 قطع اتصال</button>
@@ -402,7 +399,7 @@ button{cursor:pointer;user-select:none}
       <div class="settings-section">
         <h4><span class="dot" style="background:var(--warn)"></span> انتقال PDFهای قدیمی</h4>
         <p style="font-size:12px;color:var(--mut);line-height:1.9;margin-bottom:12px">
-          PDFهایی که داخل <code>data.json</code> ذخیره شدن رو به فایل‌های جداگانه توی <code>pdfs/</code> منتقل می‌کنه و <code>data.json</code> رو سبک می‌کنه.
+          PDFهایی که داخل <code>data.json</code> ذخیره شدن رو به فایل‌های جداگانه توی <code>pdfs/</code> منتقل می‌کنه.
         </p>
         <button class="btn btn-primary btn-block" id="btnMigratePdf" type="button">📦 انتقال PDFهای قدیمی</button>
       </div>
@@ -442,7 +439,6 @@ button{cursor:pointer;user-select:none}
           <button type="button" class="btn btn-ghost btn-sm" id="btnChoosePdf">انتخاب</button>
           <button type="button" class="pdf-remove hidden" id="btnRemovePdf">✕</button>
         </div>
-        <div class="hint">✅ PDF در پوشه pdfs/ ذخیره می‌شود و data.json سبک می‌ماند.</div>
       </div>
       <div class="field" style="margin-bottom:0">
         <label>یا لینک PDF خارجی</label>
@@ -477,7 +473,8 @@ button{cursor:pointer;user-select:none}
 
 <script>
 /* =========================================================
-   درسیار v11.0 — PDFهای جداگانه + خوندن از raw (بدون سقف ۱ مگ)
+   درسیار v12.0 — آپلود مطمئن PDF
+   ترتیب: ۱) PDF آپلود ۲) تأیید ۳) ذخیره data.json
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
@@ -499,6 +496,7 @@ const $$ = s => document.querySelectorAll(s);
 const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 function dateFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
 function dateFullFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ return ''; } }
@@ -541,7 +539,7 @@ const SUBJ_STYLE = {
   'پیام‌های آسمان':{c:'#0d9488',bg:'#f0fdfa',i:'🕌'},'مطالعات اجتماعی':{c:'#ea580c',bg:'#fff7ed',i:'🗺️'},
   'عربی':{c:'#ca8a04',bg:'#fcefe8',i:'📜'},'زبان انگلیسی':{c:'#db2777',bg:'#fdf2f8',i:'🌍'},
   'کار و فناوری':{c:'#475569',bg:'#f8fafc',i:'🔧'},'تفکر و پژوهش':{c:'#7c3aed',bg:'#f5f3ff',i:'💡'},
-  'تفکر و سبک زندگی':{c:'#0891b2',bg:'#ecfeff',i:'🧠'},'آمادگی دفاعی':{c:'#b91c1c',bg:'#fef2f2',i:'🛡'}
+  'تفکرو سبک زندگی':{c:'#0891b2',bg:'#ecfeff',i:'🧠'},'آمادگی دفاعی':{c:'#b91c1c',bg:'#fef2f2',i:'🛡'}
 };
 const subjStyle = s => SUBJ_STYLE[s] || {c:'#6366f1',bg:'#eef2ff',i:'📘'};
 const getSubjects = g => {
@@ -553,47 +551,109 @@ const getSubjects = g => {
 const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
 const setToken = t => t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY);
 
-/* ==== GitHub: خوندن با API (برای گرفتن SHA) ==== */
+/* ==== GitHub API helper با timeout و retry ==== */
+async function ghFetch(url, options = {}, retries = 2){
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 60000); // ۶۰ ثانیه
+  try{
+    const r = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(timeout);
+    return r;
+  }catch(e){
+    clearTimeout(timeout);
+    if(retries > 0 && e.name === 'AbortError'){
+      console.log('Timeout, retrying...');
+      await sleep(1000);
+      return ghFetch(url, options, retries - 1);
+    }
+    throw e;
+  }
+}
+
+/* ==== گرفتن metadata فایل (SHA + size) ==== */
 async function githubGetMeta(path){
-  const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`;
+  const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
   const headers = { 'Accept': 'application/vnd.github.v3+json' };
   const token = getToken();
   if(token) headers['Authorization'] = `token ${token}`;
   try{
-    const r = await fetch(url, { headers, cache: 'no-store' });
+    const r = await ghFetch(url, { headers, cache: 'no-store' });
     if(r.status === 404) return null;
-    if(!r.ok) return null;
+    if(!r.ok){
+      const err = await r.text();
+      throw new Error(`GitHub GET ${path}: ${r.status} - ${err.substring(0,150)}`);
+    }
     const data = await r.json();
     return { sha: data.sha, size: data.size };
-  }catch(e){ return null; }
+  }catch(e){
+    if(e.message && e.message.includes('404')) return null;
+    throw e;
+  }
 }
 
-/* ==== GitHub: نوشتن فایل ==== */
+/* ==== نوشتن فایل روی GitHub ==== */
 async function githubPut(path, contentBase64, message, sha){
   const token = getToken();
   if(!token) throw new Error('توکن تنظیم نشده');
   const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
   const body = { message: message || 'به‌روزرسانی', content: contentBase64, branch: GH_BRANCH };
   if(sha) body.sha = sha;
-  const r = await fetch(url, {
+  const r = await ghFetch(url, {
     method: 'PUT',
-    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    headers: { 
+      'Authorization': `token ${token}`, 
+      'Accept': 'application/vnd.github.v3+json', 
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify(body)
   });
-  if(r.status === 401) throw new Error('توکن نامعتبر');
-  if(r.status === 403) throw new Error('دسترسی ندارید');
-  if(r.status === 409) throw new Error('تضاد - دوباره امتحان کن');
-  if(r.status === 422) throw new Error('حجم فایل زیاده');
-  if(!r.ok) throw new Error('PUT ' + r.status);
+  if(r.status === 401) throw new Error('توکن نامعتبر - دوباره توکن بساز');
+  if(r.status === 403) throw new Error('دسترسی ندارید - توکن باید repo scope داشته باشه');
+  if(r.status === 409) throw new Error('تضاد SHA - صفحه را رفرش کن');
+  if(r.status === 422) throw new Error('حجم فایل زیاده (بیش از 100 مگ)');
+  if(!r.ok){
+    const err = await r.text();
+    throw new Error(`خطای GitHub ${r.status}: ${err.substring(0,150)}`);
+  }
   return await r.json();
 }
 
-/* ==== آپلود PDF به پوشه pdfs/ ==== */
+/* ==== آپلود PDF (با تأیید واقعی) ==== */
 async function uploadPdfFile(filename, base64Data){
   const path = `${PDF_DIR}/${filename}`;
-  const meta = await githubGetMeta(path);
-  await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, meta ? meta.sha : null);
-  return `${PAGES_URL}/${PDF_DIR}/${filename}`;
+  
+  // مرحله ۱: چک کن فایل قبلی هست
+  let sha = null;
+  try{
+    const meta = await githubGetMeta(path);
+    if(meta) sha = meta.sha;
+  }catch(e){
+    console.warn('meta check failed:', e.message);
+  }
+  
+  // مرحله ۲: آپلود
+  console.log(`📤 آپلود ${path} (${(base64Data.length/1024/1024).toFixed(2)} MB)...`);
+  const result = await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
+  console.log(`✅ آپلود موفق. SHA: ${result.content?.sha}`);
+  
+  // مرحله ۳: تأیید آپلود
+  await sleep(1500); // صبر برای index شدن
+  const verify = await githubGetMeta(path);
+  if(!verify){
+    throw new Error('آپلود PDF تأیید نشد - فایل روی GitHub نیست');
+  }
+  console.log(`✅ تأیید شد. حجم: ${(verify.size/1024/1024).toFixed(2)} MB`);
+  
+  // مرحله ۴: چک حجم
+  if(verify.size < 100){
+    throw new Error('فایل PDF خالی یا ناقص آپلود شد');
+  }
+  
+  return {
+    url: `${PAGES_URL}/${PDF_DIR}/${filename}`,
+    size: verify.size,
+    sha: verify.sha
+  };
 }
 
 /* ==== حذف PDF ==== */
@@ -604,7 +664,7 @@ async function deletePdfFile(filename){
     const meta = await githubGetMeta(`${PDF_DIR}/${filename}`);
     if(!meta) return false;
     const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${PDF_DIR}/${filename}`;
-    const r = await fetch(url, {
+    const r = await ghFetch(url, {
       method: 'DELETE',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: `حذف PDF: ${filename}`, sha: meta.sha, branch: GH_BRANCH })
@@ -613,7 +673,7 @@ async function deletePdfFile(filename){
   }catch(e){ return false; }
 }
 
-/* ==== ✅ خوندن data.json از raw — بدون سقف ۱ مگ ==== */
+/* ==== خوندن data.json از raw ==== */
 async function loadFromGitHub(showLoad = true){
   if(showLoad) setLoading(true, 'در حال دریافت داده‌ها…');
   setStatus('connecting');
@@ -632,6 +692,9 @@ async function loadFromGitHub(showLoad = true){
     if(!r.ok) throw new Error('HTTP ' + r.status);
     
     const text = await r.text();
+    if(!text || text.trim() === ''){
+      throw new Error('فایل data.json خالی است');
+    }
     const data = JSON.parse(text);
     store = { 
       notes: data.notes || {}, 
@@ -640,7 +703,6 @@ async function loadFromGitHub(showLoad = true){
       updatedAt: data.updatedAt || 0 
     };
     localStorage.setItem(CACHE_KEY, JSON.stringify(store));
-    // SHA رو موقع ذخیره می‌گیریم (برای صرفه‌جویی در درخواست)
     fileSha = null;
     setStatus('online');
     refreshAll();
@@ -658,13 +720,13 @@ async function loadFromGitHub(showLoad = true){
   }
 }
 
-/* ==== ذخیره data.json (بدون pdfData - سبک) ==== */
+/* ==== ذخیره data.json ==== */
 async function saveDataToGitHub(){
   if(!isAdmin) throw new Error('توکن تنظیم نشده');
   setStatus('saving');
   store.updatedAt = Date.now();
   
-  // پاکسازی pdfData از همه notes
+  // پاکسازی pdfData
   const cleanNotes = {};
   Object.entries(store.notes).forEach(([k, v]) => {
     const {pdfData, ...rest} = v;
@@ -680,14 +742,16 @@ async function saveDataToGitHub(){
   
   const content = utf8ToBase64(JSON.stringify(cleanStore));
   
-  // SHA رو موقع ذخیره می‌گیریم
-  let sha = fileSha;
-  if(!sha){
+  // گرفتن SHA جدید
+  let sha = null;
+  try{
     const meta = await githubGetMeta(DATA_FILE);
     if(meta) sha = meta.sha;
+  }catch(e){
+    console.warn('sha check failed:', e);
   }
   
-  const result = await githubPut(DATA_FILE, content, '📚 به‌روزرسانی درسیار — ' + new Date().toLocaleString('fa-IR'), sha);
+  const result = await githubPut(DATA_FILE, content, '📚 به‌روزرسانی درسیار', sha);
   fileSha = result.content?.sha || null;
   store.notes = cleanNotes;
   localStorage.setItem(CACHE_KEY, JSON.stringify(store));
@@ -695,7 +759,7 @@ async function saveDataToGitHub(){
   return true;
 }
 
-/* ==== Migration: انتقال PDFهای base64 قدیمی ==== */
+/* ==== Migration ==== */
 async function migrateOldPdfs(){
   const notesWithData = Object.values(store.notes).filter(n => n.pdfData && n.pdfData.length && !n.pdfFile);
   if(!notesWithData.length){
@@ -706,17 +770,17 @@ async function migrateOldPdfs(){
   setLoading(true, `انتقال PDF ۱ از ${fa(total)}…`);
   showProgress(0);
   
-  let migrated = 0;
-  let failed = 0;
+  let migrated = 0, failed = 0;
   for(let i = 0; i < notesWithData.length; i++){
     const n = notesWithData[i];
     try{
       const filename = `note_${n.id}_${Date.now().toString(36)}.pdf`;
       setLoading(true, `آپلود PDF ${fa(i+1)} از ${fa(total)}…`);
       showProgress((i / total) * 100);
-      const url = await uploadPdfFile(filename, n.pdfData);
+      const result = await uploadPdfFile(filename, n.pdfData);
       n.pdfFile = filename;
-      n.pdfUrl = url;
+      n.pdfUrl = result.url;
+      n.pdfSize = result.size;
       delete n.pdfData;
       migrated++;
     }catch(e){
@@ -731,18 +795,18 @@ async function migrateOldPdfs(){
     await saveDataToGitHub();
     showProgress(100);
   }catch(e){
-    toast('خطا در ذخیره data.json: ' + e.message, 'error');
+    toast('خطا در ذخیره: ' + e.message, 'error');
   }
   
   setTimeout(() => { setLoading(false); hideProgress(); }, 500);
   
   if(migrated > 0) toast(`✅ ${fa(migrated)} PDF منتقل شد${failed ? ' ('+fa(failed)+' خطا)' : ''}`, 'success');
-  else toast('انتقال ناموفق — توکن را چک کن', 'error');
+  else toast('انتقال ناموفق', 'error');
   
   renderAdmin(); renderHome();
 }
 
-/* ==== وضعیت و loading ==== */
+/* ==== Status & Loading ==== */
 let isOnline = false, statusTimer = null;
 function setStatus(s){
   const dot = $('#statusDot'); if(!dot) return;
@@ -948,7 +1012,6 @@ function refreshAll(){
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
 }
 
-/* ==== PDF Viewer ==== */
 window.openPdfViewer = function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
@@ -986,7 +1049,6 @@ $('#pdfViewerClose').addEventListener('click', () => {
   $('#pdfViewerFrame').src = 'about:blank';
 });
 
-/* ==== Navigation ==== */
 function showScreen(name){
   state.screen = name;
   $$('.screen').forEach(s => s.classList.remove('active'));
@@ -1042,7 +1104,7 @@ $('#menuName').addEventListener('click', () => {
   renderProfile(); toast('نام ذخیره شد', 'success');
 });
 $('#menuSync').addEventListener('click', async () => {
-  toast('در حال دریافت از GitHub…');
+  toast('در حال دریافت…');
   await loadFromGitHub(false);
   toast(isOnline ? 'به‌روزرسانی شد ✅' : 'اتصال برقرار نشد ⚠️', isOnline ? 'success' : 'error');
 });
@@ -1079,7 +1141,7 @@ document.addEventListener('submit', async e => {
 
 /* ==== Admin ==== */
 let adminFilterGrade = 0;
-function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); toast('🔓 پنل مدیر باز شد', 'success'); }
+function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); }
 function toggleAdmin(){ const a = $('#admin'); if(a.classList.contains('hidden')) openAdminPanel(); else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); } }
 $('#adminClose').addEventListener('click', toggleAdmin);
 document.addEventListener('keydown', e => { if(e.ctrlKey && e.shiftKey && e.code === 'KeyA'){ e.preventDefault(); toggleAdmin(); } });
@@ -1133,7 +1195,7 @@ function renderAdminSettings(){
   $('#setGhToken').value = getToken();
   const statusEl = $('#ghStatus');
   if(isAdmin){
-    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}<br>data.json + پوشه pdfs/`;
+    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}`;
     statusEl.style.color = 'var(--oktxt)';
   } else {
     statusEl.innerHTML = `⚠️ <b>توکن تنظیم نشده</b><br>فقط می‌توانی بخوانی.`;
@@ -1145,7 +1207,7 @@ function renderAdminSettings(){
   const pdfFiles = Object.values(store.notes).filter(n => !n.deleted && n.pdfFile).length;
   const pdfOld = Object.values(store.notes).filter(n => !n.deleted && n.pdfData && n.pdfData.length).length;
   const sizeBytes = new Blob([JSON.stringify(store)]).size;
-  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF فایل جدا: <b>${fa(pdfFiles)}</b><br>⚠️ PDF قدیمی (داخل data.json): <b>${fa(pdfOld)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
+  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF فایل جدا: <b>${fa(pdfFiles)}</b><br>⚠️ PDF قدیمی: <b>${fa(pdfOld)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
   
   if(pdfOld > 0){
     $('#btnMigratePdf').style.display = 'flex';
@@ -1249,6 +1311,7 @@ $('#edPdfFile').addEventListener('change', e => {
   showPdfUpload(file.name, file.size, false);
 });
 
+/* ==== ذخیره جزوه با PDF ==== */
 $('#editorSave').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   const grade = +$('#edGrade').value;
@@ -1256,59 +1319,99 @@ $('#editorSave').addEventListener('click', async () => {
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
   const pdfUrlInput = $('#edPdfUrl').value.trim();
+  
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
-  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
+  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ 
+    toast('حداقل متن یا PDF لازم است', 'error'); return; 
+  }
   
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
+  const btn = $('#editorSave');
+  btn.disabled = true;
   
-  if(editingPdfFile){
-    try{
-      setLoading(true, 'در حال آپلود PDF به GitHub…');
+  try{
+    // ==== مرحله ۱: آپلود PDF اگر فایل جدید هست ====
+    if(editingPdfFile){
+      const sizeMB = (editingPdfFile.size / 1024 / 1024).toFixed(2);
+      setLoading(true, `آماده‌سازی PDF (${sizeMB} MB)…`, '');
+      showProgress(10);
+      
+      await sleep(200);
+      
+      setLoading(true, `در حال تبدیل PDF…`, `فایل: ${editingPdfFile.name}`);
       showProgress(30);
+      
       const base64Data = await blobToBase64(editingPdfFile);
+      
+      setLoading(true, `در حال آپلود PDF به GitHub…`, 'این مرحله ممکن است چند دقیقه طول بکشد');
       showProgress(50);
+      
       const filename = `note_${id}_${Date.now().toString(36)}.pdf`;
-      const url = await uploadPdfFile(filename, base64Data);
+      
+      // آپلود با تأیید
+      const result = await uploadPdfFile(filename, base64Data);
+      
+      setLoading(true, `✅ PDF آپلود شد`, `${(result.size/1024/1024).toFixed(2)} MB`);
       showProgress(80);
+      
       item.pdfFile = filename;
-      item.pdfUrl = url;
+      item.pdfUrl = result.url;
       item.pdfName = editingPdfFile.name;
-      item.pdfSize = editingPdfFile.size;
+      item.pdfSize = result.size;
+      
+      // اگه PDF قدیمی داشت، پاکش کن
       if(editingPdfExistingFile && editingPdfExistingFile !== filename){
         deletePdfFile(editingPdfExistingFile).catch(()=>{});
       }
-    }catch(err){
-      setLoading(false); hideProgress();
-      toast('خطا در آپلود PDF: ' + err.message, 'error');
-      return;
+    } 
+    else if(editingPdfExistingFile){
+      // PDF قبلی حفظ می‌شه
+      item.pdfFile = editingPdfExistingFile;
+      item.pdfUrl = `${PAGES_URL}/${PDF_DIR}/${editingPdfExistingFile}`;
+      item.pdfName = editingPdfExistingName;
+      item.pdfSize = editingPdfExistingSize;
+    } 
+    else if(editingPdfExisting){
+      // PDF قدیمی base64
+      item.pdfData = editingPdfExisting;
+      item.pdfName = editingPdfExistingName;
+      item.pdfSize = editingPdfExistingSize;
+    } 
+    else if(pdfUrlInput){
+      item.pdfUrl = pdfUrlInput;
+      item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
     }
-  } else if(editingPdfExistingFile){
-    item.pdfFile = editingPdfExistingFile;
-    item.pdfUrl = `${PAGES_URL}/${PDF_DIR}/${editingPdfExistingFile}`;
-    item.pdfName = editingPdfExistingName;
-    item.pdfSize = editingPdfExistingSize;
-  } else if(editingPdfExisting){
-    item.pdfData = editingPdfExisting;
-    item.pdfName = editingPdfExistingName;
-    item.pdfSize = editingPdfExistingSize;
-  } else if(pdfUrlInput){
-    item.pdfUrl = pdfUrlInput;
-    item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
-  }
-  
-  store.notes[id] = item;
-  closeEditor(); renderAdmin(); renderHome();
-  setLoading(true, 'در حال ذخیره data.json…');
-  showProgress(90);
-  try{
+    
+    // ==== مرحله ۲: ذخیره data.json ====
+    store.notes[id] = item;
+    
+    setLoading(true, 'در حال ذخیره data.json…', '');
+    showProgress(90);
+    
     await saveDataToGitHub();
+    
     showProgress(100);
+    setLoading(true, '✅ همه‌چیز ذخیره شد!', '');
+    
+    await sleep(800);
+    
+    closeEditor(); 
+    renderAdmin(); 
+    renderHome();
+    
     toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success');
   }catch(err){
-    toast('خطا: ' + err.message, 'error');
+    console.error('Save error:', err);
+    toast('❌ خطا: ' + err.message, 'error');
+    // اگه PDF آپلود شده ولی data.json ذخیره نشده، یادداشت کن
+    if(item.pdfFile){
+      console.warn('PDF uploaded but data.json not saved. File:', item.pdfFile);
+    }
   }finally{
-    setTimeout(() => { setLoading(false); hideProgress(); }, 500);
+    setLoading(false);
+    hideProgress();
+    btn.disabled = false;
   }
 });
 
@@ -1377,7 +1480,7 @@ function toast(msg, type){
   el.textContent = msg;
   el.className = 'toast show' + (type ? ' ' + type : '');
   clearTimeout(toastT);
-  toastT = setTimeout(() => el.classList.remove('show'), 3500);
+  toastT = setTimeout(() => el.classList.remove('show'), 4500);
 }
 
 /* ==== INIT ==== */
