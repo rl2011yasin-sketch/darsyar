@@ -19,39 +19,10 @@ button{cursor:pointer;user-select:none}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:8px}
 ::-webkit-scrollbar-track{background:transparent}
-
-/* ============================================
-   APP LAYOUT
-   ============================================ */
-.app{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  max-width:var(--max-w);
-  margin:0 auto;
-  background:var(--bg);
-  transition:max-width .3s;
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-.header{
-  position:sticky;top:0;z-index:30;
-  background:color-mix(in srgb,var(--card) 88%,transparent);
-  backdrop-filter:saturate(180%) blur(22px);
-  -webkit-backdrop-filter:saturate(180%) blur(22px);
-  border-bottom:1px solid var(--br);
-  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;
-  display:flex;align-items:center;gap:11px;
-}
+.app{min-height:100vh;display:flex;flex-direction:column;max-width:var(--max-w);margin:0 auto;background:var(--bg);transition:max-width .3s}
+.header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;display:flex;align-items:center;gap:11px}
 .brand{display:flex;align-items:center;gap:10px;cursor:pointer}
-.brand-logo{
-  width:38px;height:38px;border-radius:12px;
-  background:linear-gradient(135deg,var(--p),var(--p3));
-  display:grid;place-items:center;font-size:19px;
-  box-shadow:0 8px 20px -8px rgba(99,102,241,.8);
-  overflow:hidden;flex-shrink:0;
-}
+.brand-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p3));display:grid;place-items:center;font-size:19px;box-shadow:0 8px 20px -8px rgba(99,102,241,.8);overflow:hidden;flex-shrink:0}
 .brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 .brand-name{font-weight:800;font-size:16.5px;letter-spacing:-.4px;line-height:1.15}
 .brand-sub{font-size:10.5px;color:var(--dim);font-weight:500;line-height:1.15}
@@ -64,32 +35,11 @@ button{cursor:pointer;user-select:none}
 .status-dot.saving{background:var(--p);animation:pulse 1s infinite}
 .status-dot.connecting{background:var(--warn);animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ============================================
-   MAIN
-   ============================================ */
-.main{
-  flex:1;
-  padding:16px 16px calc(110px + var(--sb));
-}
-
-/* ============================================
-   SCREENS
-   ============================================ */
+.main{flex:1;padding:16px 16px calc(110px + var(--sb))}
 .screen{display:none}
 .screen.active{display:block;animation:fadeUp .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ============================================
-   HERO
-   ============================================ */
-.hero{
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);
-  border-radius:22px;padding:20px;color:#fff;
-  margin-bottom:22px;
-  box-shadow:0 20px 42px -20px rgba(99,102,241,.75);
-}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);border-radius:22px;padding:20px;color:#fff;margin-bottom:22px;box-shadow:0 20px 42px -20px rgba(99,102,241,.75)}
 .hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1);top:-80px;left:-60px}
 .hero::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.07);bottom:-70px;right:-40px}
 .hero-in{position:relative;z-index:1}
@@ -98,63 +48,32 @@ button{cursor:pointer;user-select:none}
 .hero-stats{display:flex;gap:22px}
 .hero-stat b{display:block;font-size:22px;font-weight:800;line-height:1.15;letter-spacing:-.6px}
 .hero-stat span{font-size:11px;opacity:.85;font-weight:500}
-
-/* ============================================
-   SECTION
-   ============================================ */
 .section{display:flex;align-items:center;justify-content:space-between;margin:0 4px 11px}
 .section h2{font-size:15px;font-weight:800;letter-spacing:-.3px}
 .section .count{font-size:12px;color:var(--dim);font-weight:700}
-
-/* ============================================
-   CHIPS
-   ============================================ */
 .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 16px;margin:0 -16px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{
-  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;border-radius:30px;background:var(--card);
-  border:1.5px solid var(--br);font-size:13px;font-weight:600;
-  color:var(--text);transition:.18s;white-space:nowrap;
-}
+.chip{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;background:var(--card);border:1.5px solid var(--br);font-size:13px;font-weight:600;color:var(--text);transition:.18s;white-space:nowrap}
 .chip:active{transform:scale(.95)}
 .chip .cnt{font-size:10.5px;background:var(--bg2);color:var(--mut);padding:1px 7px;border-radius:20px;font-weight:700}
 .chip.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 8px 20px -8px rgba(99,102,241,.9)}
 .chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
-
-/* ============================================
-   NOTE CARDS
-   ============================================ */
 .notes{display:flex;flex-direction:column;gap:11px}
-.note-card{
-  background:var(--card);border-radius:var(--r);
-  padding:15px 16px 13px;box-shadow:var(--sh);
-  border:1.5px solid var(--br);transition:transform .18s,box-shadow .18s;
-  cursor:pointer;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;gap:9px;
-}
+.note-card{background:var(--card);border-radius:var(--r);padding:15px 16px 13px;box-shadow:var(--sh);border:1.5px solid var(--br);transition:transform .18s,box-shadow .18s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:9px}
 .note-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--sc,var(--p))}
 .note-card:active{transform:scale(.985)}
-.note-card:hover{box-shadow:var(--sh2)}
 .nc-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-right:8px}
 .nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5)}
 .nc-grade{font-size:11px;font-weight:700;color:var(--mut);background:var(--bg2);padding:3px 9px;border-radius:20px}
 .nc-pdf{font-size:10.5px;font-weight:700;background:var(--dangbg);color:var(--dangtxt);padding:3px 8px;border-radius:20px}
+.nc-lesson{font-size:11px;font-weight:800;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
 .nc-title{font-size:15.5px;font-weight:700;line-height:1.65;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-preview{font-size:12.5px;color:var(--mut);line-height:1.9;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-foot{display:flex;align-items:center;gap:14px;padding-top:9px;margin-top:3px;border-top:1px solid var(--br);font-size:11px;color:var(--dim);font-weight:600;padding-right:8px}
-
-/* ============================================
-   EMPTY
-   ============================================ */
 .empty{background:var(--card);border-radius:var(--r);padding:42px 22px;text-align:center;border:1.5px dashed var(--br2)}
 .empty-icon{width:68px;height:68px;border-radius:22px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:30px;margin:0 auto 16px}
 .empty b{display:block;font-size:15.5px;font-weight:800;margin-bottom:7px}
 .empty p{font-size:13px;color:var(--mut);line-height:1.9}
-
-/* ============================================
-   SEARCH
-   ============================================ */
 .search-wrap{margin-bottom:16px}
 .search-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--br);border-radius:15px;padding:12px 15px;transition:.18s}
 .search-box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px color-mix(in srgb,var(--p) 12%,transparent)}
@@ -162,13 +81,8 @@ button{cursor:pointer;user-select:none}
 .search-box input{flex:1;font-size:14.5px;background:transparent}
 .search-clear{width:26px;height:26px;border-radius:8px;display:none;place-items:center;color:var(--mut);background:var(--bg2);font-size:14px;font-weight:700}
 .search-clear.show{display:grid}
-
-/* ============================================
-   LIBRARY
-   ============================================ */
 .lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);margin-bottom:10px;overflow:hidden;transition:.2s}
 .lib-head{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer}
-.lib-head:active{background:var(--card2)}
 .lib-num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:15.5px;flex-shrink:0}
 .lib-title{flex:1;font-weight:700;font-size:14.5px}
 .lib-meta{font-size:11px;color:var(--dim);font-weight:600;margin-top:2px}
@@ -179,10 +93,6 @@ button{cursor:pointer;user-select:none}
 .lib-sub{display:flex;align-items:center;gap:11px;padding:10px 15px;font-size:13.5px;cursor:pointer;transition:.15s}
 .lib-sub:hover,.lib-sub:active{background:var(--card2)}
 .lib-sub-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:var(--sb);color:var(--sc)}
-
-/* ============================================
-   PROFILE
-   ============================================ */
 .profile-card{background:linear-gradient(135deg,var(--p),var(--p2));border-radius:var(--r);padding:26px 22px;color:#fff;text-align:center;margin-bottom:14px;box-shadow:var(--sh2)}
 .profile-av{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;color:#fff;font-size:32px;font-weight:800;margin:0 auto 12px;border:2px solid rgba(255,255,255,.3)}
 .profile-card h3{font-size:17px;font-weight:800;margin-bottom:4px}
@@ -197,29 +107,11 @@ button{cursor:pointer;user-select:none}
 .menu-item:active{background:var(--card2)}
 .menu-icon{width:36px;height:36px;border-radius:11px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:17px}
 .menu-item .arrow{color:var(--dim);margin-right:auto;font-size:18px;font-weight:700}
-
-/* ============================================
-   BOTTOM NAV
-   ============================================ */
-.bottom-nav{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:var(--max-w);z-index:60;
-  background:color-mix(in srgb,var(--card) 92%,transparent);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
-  border-top:1px solid var(--br);
-  padding:8px 10px calc(8px + var(--sb));
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
-}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);z-index:60;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-top:1px solid var(--br);padding:8px 10px calc(8px + var(--sb));display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
 .nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:12px;color:var(--dim);font-size:10.5px;font-weight:700;transition:.18s}
-.nav-btn svg{width:22px;height:22px;transition:.2s}
+.nav-btn svg{width:22px;height:22px}
 .nav-btn.active{color:var(--p);background:var(--pl)}
-.nav-btn.active svg{transform:translateY(-1px)}
 .nav-btn:active{transform:scale(.94)}
-
-/* ============================================
-   DETAIL
-   ============================================ */
 .detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);z-index:80;background:var(--bg);display:flex;flex-direction:column}
 .detail.hidden{display:none}
 .detail-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;display:flex;align-items:center;gap:11px}
@@ -248,10 +140,6 @@ button{cursor:pointer;user-select:none}
 .pdf-size{font-size:11.5px;color:var(--mut);font-weight:600}
 .pdf-actions{display:flex;gap:8px;flex-wrap:wrap}
 .pdf-actions .btn{flex:1;justify-content:center;min-width:110px}
-
-/* ============================================
-   BUTTONS
-   ============================================ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;white-space:nowrap}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
@@ -261,10 +149,6 @@ button{cursor:pointer;user-select:none}
 .btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
 .btn-block{width:100%}
 .btn:disabled{opacity:.55;cursor:wait}
-
-/* ============================================
-   COMMENTS
-   ============================================ */
 .comments{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--br)}
 .comments h3{font-size:15.5px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .cnt-pill{font-size:11px;background:var(--pl);color:var(--p);padding:2px 9px;border-radius:20px;font-weight:800}
@@ -280,10 +164,6 @@ button{cursor:pointer;user-select:none}
 .cmt-form input,.cmt-form textarea{border:1.5px solid var(--br);border-radius:12px;padding:11px 14px;font-size:13.5px;background:var(--card2);width:100%}
 .cmt-form input:focus,.cmt-form textarea:focus{border-color:var(--p);background:var(--card)}
 .cmt-form button{align-self:flex-start;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:11px 28px;border-radius:12px;font-size:13.5px;font-weight:700}
-
-/* ============================================
-   SHEET
-   ============================================ */
 .sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;opacity:0;pointer-events:none;transition:.28s;backdrop-filter:blur(4px)}
 .sheet-overlay.show{opacity:1;pointer-events:auto}
 .sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:var(--max-w);background:var(--card);border-radius:24px 24px 0 0;padding:10px 18px calc(24px + var(--sb));z-index:101;transition:transform .32s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
@@ -297,82 +177,28 @@ button{cursor:pointer;user-select:none}
 .grade-opt .lbl{font-size:11px;color:var(--mut);font-weight:600}
 .grade-opt.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
 .grade-opt.active .num,.grade-opt.active .lbl{color:#fff}
-
-/* ============================================
-   WELCOME MODAL
-   ============================================ */
-.welcome-overlay{
-  position:fixed;inset:0;z-index:5000;
-  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;overflow-y:auto;
-  animation:fadeIn .4s;
-}
+.welcome-overlay{position:fixed;inset:0;z-index:5000;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;animation:fadeIn .4s}
 .welcome-overlay.hidden{display:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.welcome-card{
-  background:var(--card);border-radius:28px;
-  padding:32px 24px;width:100%;max-width:480px;
-  box-shadow:0 40px 80px -20px rgba(0,0,0,.4);
-  animation:popIn .4s cubic-bezier(.2,.8,.2,1);
-}
+.welcome-card{background:var(--card);border-radius:28px;padding:32px 24px;width:100%;max-width:480px;box-shadow:0 40px 80px -20px rgba(0,0,0,.4);animation:popIn .4s cubic-bezier(.2,.8,.2,1)}
 @keyframes popIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.welcome-logo{
-  width:80px;height:80px;border-radius:24px;
-  background:linear-gradient(135deg,var(--p),var(--p3));
-  display:grid;place-items:center;font-size:38px;
-  margin:0 auto 18px;
-  box-shadow:0 20px 40px -12px rgba(99,102,241,.7);
-  overflow:hidden;
-}
+.welcome-logo{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--p),var(--p3));display:grid;place-items:center;font-size:38px;margin:0 auto 18px;box-shadow:0 20px 40px -12px rgba(99,102,241,.7);overflow:hidden}
 .welcome-logo img{width:100%;height:100%;object-fit:cover;border-radius:24px}
-.welcome-title{
-  font-size:24px;font-weight:800;text-align:center;
-  letter-spacing:-.5px;margin-bottom:8px;
-}
-.welcome-sub{
-  font-size:13.5px;color:var(--mut);text-align:center;
-  line-height:1.9;margin-bottom:24px;
-}
-.welcome-label{
-  font-size:13px;font-weight:800;color:var(--text);
-  margin-bottom:12px;text-align:center;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.welcome-grade-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-  margin-bottom:24px;
-}
-.welcome-grade-btn{
-  padding:18px 8px;border-radius:16px;
-  border:2px solid var(--br);background:var(--card2);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  transition:.18s;cursor:pointer;
-}
+.welcome-title{font-size:24px;font-weight:800;text-align:center;letter-spacing:-.5px;margin-bottom:8px}
+.welcome-sub{font-size:13.5px;color:var(--mut);text-align:center;line-height:1.9;margin-bottom:24px}
+.welcome-label{font-size:13px;font-weight:800;color:var(--text);margin-bottom:12px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.welcome-grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.welcome-grade-btn{padding:18px 8px;border-radius:16px;border:2px solid var(--br);background:var(--card2);display:flex;flex-direction:column;align-items:center;gap:6px;transition:.18s;cursor:pointer}
 .welcome-grade-btn:active{transform:scale(.94)}
 .welcome-grade-btn:hover{border-color:var(--p)}
-.welcome-grade-btn.active{
-  background:linear-gradient(135deg,var(--p),var(--p2));
-  border-color:transparent;color:#fff;
-  box-shadow:0 12px 24px -10px rgba(99,102,241,.9);
-  transform:scale(1.02);
-}
+.welcome-grade-btn.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 12px 24px -10px rgba(99,102,241,.9);transform:scale(1.02)}
 .welcome-grade-btn .gnum{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1}
 .welcome-grade-btn .glbl{font-size:11px;color:var(--mut);font-weight:600}
-.welcome-grade-btn.active .gnum,
-.welcome-grade-btn.active .glbl{color:#fff}
-
-/* ============================================
-   TOAST
-   ============================================ */
+.welcome-grade-btn.active .gnum,.welcome-grade-btn.active .glbl{color:#fff}
 .toast{position:fixed;bottom:calc(100px + var(--sb));left:50%;transform:translate(-50%,80px);background:var(--text);color:var(--card);padding:12px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.32s;z-index:2000;max-width:88vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.success{background:var(--oktxt);color:#fff}
 .toast.error{background:var(--dangtxt);color:#fff}
-
-/* ============================================
-   PDF VIEWER
-   ============================================ */
 .pdf-viewer{position:fixed;inset:0;z-index:500;background:#0b1020;display:flex;flex-direction:column}
 .pdf-viewer.hidden{display:none}
 .pdf-viewer-header{background:#1e293b;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
@@ -384,10 +210,6 @@ button{cursor:pointer;user-select:none}
 .pdf-loading.hidden{display:none}
 .spinner{width:40px;height:40px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ============================================
-   ADMIN
-   ============================================ */
 .admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
 .admin.hidden{display:none}
 .admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -409,16 +231,13 @@ button{cursor:pointer;user-select:none}
 .admin-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .admin-list{display:flex;flex-direction:column;gap:9px}
 .admin-item{background:var(--card);border-radius:14px;padding:14px 15px;border:1.5px solid var(--br);display:flex;gap:12px}
-.admin-item-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;font-size:19px}
+.admin-item-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;font-size:19px;font-weight:800;color:#fff;position:relative}
+.admin-item-lesson{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;border-radius:11px;background:#fff;color:var(--p);border:2px solid var(--p);display:grid;place-items:center;font-size:10.5px;font-weight:800}
 .admin-item-body{flex:1;min-width:0}
 .admin-item-title{font-size:14px;font-weight:700;margin-bottom:3px;line-height:1.6}
 .admin-item-meta{font-size:11px;color:var(--dim);font-weight:600;display:flex;gap:9px;flex-wrap:wrap}
 .admin-item-actions{display:flex;gap:5px}
 .admin-empty{background:var(--card);border-radius:14px;padding:42px 20px;text-align:center;border:1.5px dashed var(--br2);color:var(--mut);font-size:13.5px;line-height:2}
-
-/* ============================================
-   EDITOR
-   ============================================ */
 .editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column}
 .editor.hidden{display:none}
 .editor-header{background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -444,26 +263,20 @@ button{cursor:pointer;user-select:none}
 .settings-section{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);padding:18px;margin-bottom:14px}
 .settings-section h4{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .settings-section h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--p)}
-
-/* ============================================
-   BULK LIST
-   ============================================ */
 .bulk-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
 .bulk-item{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--card2);border-radius:10px;font-size:12.5px;border:1px solid var(--br)}
 .bulk-item-num{color:var(--p);font-weight:800;flex-shrink:0;min-width:22px}
 .bulk-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.bulk-item-lesson{background:var(--pl);color:var(--p);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800;flex-shrink:0}
 .bulk-item-size{color:var(--mut);font-weight:600;flex-shrink:0}
 .bulk-item-status{flex-shrink:0;font-size:14px}
 .bulk-item.done{background:var(--okbg);border-color:var(--ok)}
 .bulk-item.error{background:var(--dangbg);border-color:var(--dangtxt)}
 .bulk-item.active{background:var(--pl);border-color:var(--p);animation:pulseLight 1.2s infinite}
 @keyframes pulseLight{0%,100%{opacity:1}50%{opacity:.7}}
-
+.lesson-preview{background:linear-gradient(135deg,var(--pl),var(--pl));border:1.5px dashed var(--p);border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.8;color:var(--pd)}
+.lesson-preview b{color:var(--p)}
 .hidden{display:none !important}
-
-/* ============================================
-   LOADING
-   ============================================ */
 .loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
 .loading-spinner{width:48px;height:48px;border-radius:50%;border:4px solid var(--br);border-top-color:var(--p);animation:spin .8s linear infinite}
@@ -472,169 +285,41 @@ button{cursor:pointer;user-select:none}
 .progress-track{width:220px;height:6px;background:var(--br);border-radius:10px;overflow:hidden}
 .progress-fill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .3s;border-radius:10px;width:0%}
 .ver{position:fixed;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--dim);opacity:.4;z-index:1;pointer-events:none}
-
-/* ============================================
-   DESKTOP - تمام صفحه
-   ============================================ */
 .desktop-sidebar{display:none}
-
 @media(min-width:900px){
   :root{--max-w:100%}
-  
   body{background:var(--bg2)}
-  
-  .app{
-    max-width:100%;
-    display:grid;
-    grid-template-columns:280px 1fr;
-    grid-template-rows:auto 1fr;
-    min-height:100vh;
-    margin:0;
-    box-shadow:none;
-  }
-  
-  /* Header تمام عرض */
-  .header{
-    grid-column:1 / -1;
-    padding:14px 32px;
-    border-bottom:1px solid var(--br);
-  }
-  
-  /* Sidebar */
-  .desktop-sidebar{
-    display:flex;flex-direction:column;
-    background:var(--card);
-    border-left:1px solid var(--br);
-    padding:20px 16px;
-    overflow-y:auto;
-    height:calc(100vh - 70px);
-    position:sticky;top:70px;
-    grid-column:1;
-    grid-row:2;
-  }
-  
-  /* Main - تمام عرض */
-  .main{
-    grid-column:2;
-    grid-row:2;
-    padding:24px 32px 120px;
-    max-width:1400px;
-    margin:0 auto;
-    width:100%;
-    overflow-y:auto;
-    height:calc(100vh - 70px);
-  }
-  
-  /* Bottom nav مخفی روی دسکتاپ */
+  .app{max-width:100%;display:grid;grid-template-columns:280px 1fr;grid-template-rows:auto 1fr;min-height:100vh;margin:0}
+  .header{grid-column:1 / -1;padding:14px 32px}
+  .desktop-sidebar{display:flex;flex-direction:column;background:var(--card);border-left:1px solid var(--br);padding:20px 16px;overflow-y:auto;height:calc(100vh - 70px);position:sticky;top:70px;grid-column:1;grid-row:2}
+  .main{grid-column:2;grid-row:2;padding:24px 32px 120px;max-width:1400px;margin:0 auto;width:100%;overflow-y:auto;height:calc(100vh - 70px)}
   .bottom-nav{display:none}
-  
-  /* کارت‌ها در گرید */
-  .notes{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:14px;
-  }
-  
-  .note-card{
-    padding:18px 18px 15px;
-    border-radius:16px;
-  }
-  
-  .note-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 20px 40px -20px rgba(99,102,241,.5);
-  }
-  
-  .nc-title{font-size:16px}
-  .nc-preview{font-size:13px}
-  
-  /* Hero عریض‌تر */
-  .hero{padding:24px;border-radius:24px}
-  .hero-title{font-size:22px}
-  .hero-sub{font-size:13.5px}
-  .hero-stat b{font-size:26px}
-  
-  /* Detail تمام صفحه */
-  .detail{
-    max-width:900px;
-    box-shadow:0 0 60px -20px rgba(0,0,0,.3);
-    border-left:1px solid var(--br);
-    border-right:1px solid var(--br);
-  }
-  
-  /* Sheet عریض‌تر */
+  .notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .detail{max-width:900px;box-shadow:0 0 60px -20px rgba(0,0,0,.3);border-left:1px solid var(--br);border-right:1px solid var(--br)}
   .sheet{max-width:520px;border-radius:24px;bottom:20px;left:auto;right:20px;transform:translate(0,100%)}
   .sheet.show{transform:translate(0,0)}
-  
-  /* پیام toast */
   .toast{bottom:30px}
-  
-  /* Admin تمام صفحه */
   .admin-body{max-width:1100px;padding:24px 32px}
-  
-  /* Editor عریض‌تر */
   .editor-body{max-width:800px;padding:24px}
   .editor-actions{max-width:800px}
-  
-  /* Welcome عریض‌تر */
   .welcome-card{max-width:560px;padding:40px 36px}
   .welcome-grade-grid{grid-template-columns:repeat(5,1fr)}
-  
-  /* Sidebar library styling */
   .sidebar-section{margin-bottom:22px}
-  .sidebar-title{
-    font-size:11px;font-weight:800;color:var(--dim);
-    letter-spacing:.5px;text-transform:uppercase;
-    padding:0 10px;margin-bottom:10px;
-  }
-  .sidebar-item{
-    display:flex;align-items:center;gap:10px;
-    padding:10px 12px;border-radius:12px;
-    font-size:13.5px;font-weight:600;cursor:pointer;
-    transition:.15s;color:var(--text);
-    border:0;background:none;width:100%;text-align:right;
-  }
+  .sidebar-title{font-size:11px;font-weight:800;color:var(--dim);letter-spacing:.5px;padding:0 10px;margin-bottom:10px}
+  .sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s;color:var(--text);border:0;background:none;width:100%;text-align:right}
   .sidebar-item:hover{background:var(--card2)}
   .sidebar-item.active{background:var(--pl);color:var(--p);font-weight:800}
-  .sidebar-item .sicon{
-    width:30px;height:30px;border-radius:9px;
-    display:grid;place-items:center;font-size:14px;flex-shrink:0;
-    background:var(--sb,var(--pl));color:var(--sc,var(--p));
-  }
-  .sidebar-item .scount{
-    margin-right:auto;font-size:10.5px;
-    background:var(--bg2);color:var(--mut);
-    padding:2px 8px;border-radius:20px;font-weight:700;
-  }
+  .sidebar-item .sicon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;flex-shrink:0;background:var(--sb,var(--pl));color:var(--sc,var(--p))}
+  .sidebar-item .scount{margin-right:auto;font-size:10.5px;background:var(--bg2);color:var(--mut);padding:2px 8px;border-radius:20px;font-weight:700}
   .sidebar-item.active .scount{background:var(--p);color:#fff}
-  .sidebar-grade-btn{
-    display:flex;align-items:center;gap:10px;
-    padding:10px 12px;border-radius:12px;
-    font-size:13.5px;font-weight:700;cursor:pointer;
-    transition:.15s;color:var(--text);
-    border:0;background:none;width:100%;text-align:right;
-  }
+  .sidebar-grade-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;font-size:13.5px;font-weight:700;cursor:pointer;transition:.15s;color:var(--text);border:0;background:none;width:100%;text-align:right}
   .sidebar-grade-btn:hover{background:var(--card2)}
   .sidebar-grade-btn.active{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
-  .sidebar-grade-btn .gnum{
-    width:30px;height:30px;border-radius:9px;
-    display:grid;place-items:center;font-size:14px;font-weight:800;
-    background:var(--pl);color:var(--p);flex-shrink:0;
-  }
+  .sidebar-grade-btn .gnum{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;font-weight:800;background:var(--pl);color:var(--p);flex-shrink:0}
   .sidebar-grade-btn.active .gnum{background:rgba(255,255,255,.25);color:#fff}
-  .sidebar-grade-btn .gcount{
-    margin-right:auto;font-size:10.5px;
-    background:var(--bg2);color:var(--mut);
-    padding:2px 8px;border-radius:20px;font-weight:700;
-  }
+  .sidebar-grade-btn .gcount{margin-right:auto;font-size:10.5px;background:var(--bg2);color:var(--mut);padding:2px 8px;border-radius:20px;font-weight:700}
   .sidebar-grade-btn.active .gcount{background:rgba(255,255,255,.25);color:#fff}
 }
-
-@media(min-width:1400px){
-  .main{max-width:1600px}
-}
-
-/* برای تبلت */
 @media(min-width:641px) and (max-width:899px){
   :root{--max-w:100%}
   .app{max-width:100%}
@@ -660,6 +345,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- ==================== LOADING ==================== -->
 <div class="loading-overlay hidden" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loadingText">در حال دریافت داده‌ها…</div>
@@ -667,6 +353,7 @@ button{cursor:pointer;user-select:none}
   <div class="progress-track hidden" id="progressTrack"><div class="progress-fill-bar" id="progressFillBar"></div></div>
 </div>
 
+<!-- ==================== APP ==================== -->
 <div class="app">
   <header class="header">
     <div class="brand" id="brandClick">
@@ -683,10 +370,10 @@ button{cursor:pointer;user-select:none}
     <div class="status-dot" id="statusDot"></div>
   </header>
 
-  <!-- Desktop Sidebar -->
   <aside class="desktop-sidebar" id="desktopSidebar"></aside>
 
   <main class="main">
+    <!-- HOME -->
     <section class="screen active" id="screen-home">
       <div class="hero">
         <div class="hero-in">
@@ -705,6 +392,7 @@ button{cursor:pointer;user-select:none}
       <div class="notes" id="notesList"></div>
     </section>
 
+    <!-- SEARCH -->
     <section class="screen" id="screen-search">
       <div class="search-wrap">
         <div class="search-box">
@@ -716,12 +404,14 @@ button{cursor:pointer;user-select:none}
       <div class="notes" id="searchResults"></div>
     </section>
 
+    <!-- LIBRARY -->
     <section class="screen" id="screen-library">
       <div class="section"><h2>کتابخانه درسی</h2></div>
       <p style="font-size:12.5px;color:var(--mut);margin:0 4px 14px">روی هر پایه بزنید تا درس‌های آن را ببینید.</p>
       <div id="libraryList"></div>
     </section>
 
+    <!-- PROFILE -->
     <section class="screen" id="screen-profile">
       <div class="profile-card">
         <div class="profile-av" id="profileAv">👤</div>
@@ -738,7 +428,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.3</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.4</p>
     </section>
   </main>
 
@@ -750,6 +440,7 @@ button{cursor:pointer;user-select:none}
   </nav>
 </div>
 
+<!-- DETAIL -->
 <div class="detail hidden" id="detail">
   <div class="detail-header">
     <button class="back-btn" id="detailBack" type="button">‹</button>
@@ -758,6 +449,7 @@ button{cursor:pointer;user-select:none}
   <div class="detail-body" id="detailBody"></div>
 </div>
 
+<!-- PDF VIEWER -->
 <div class="pdf-viewer hidden" id="pdfViewer">
   <div class="pdf-viewer-header">
     <button class="back-btn" id="pdfViewerClose" type="button">✕</button>
@@ -770,6 +462,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- SHEET (Grade Picker) -->
 <div class="sheet-overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
@@ -777,6 +470,7 @@ button{cursor:pointer;user-select:none}
   <div class="grade-grid" id="gradeGrid"></div>
 </div>
 
+<!-- ADMIN PANEL -->
 <div class="admin hidden" id="admin">
   <div class="admin-header">
     <div class="admin-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='🛠'"></div>
@@ -795,6 +489,7 @@ button{cursor:pointer;user-select:none}
         <button class="btn btn-primary" id="btnBulkUpload" type="button">📦 آپلود گروهی</button>
         <button class="btn btn-ghost" id="btnNewNote" type="button">＋ جزوه تکی</button>
         <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 دریافت</button>
+        <button class="btn btn-ghost" id="btnResortNotes" type="button">🔢 مرتب‌سازی هوشمند</button>
       </div>
       <div id="adminNotesFilter" style="margin-bottom:14px"></div>
       <div class="admin-list" id="adminNotesList"></div>
@@ -826,6 +521,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- NOTE EDITOR -->
 <div class="editor hidden" id="editor">
   <div class="editor-header">
     <button class="back-btn" id="editorBack" type="button">‹</button>
@@ -836,7 +532,12 @@ button{cursor:pointer;user-select:none}
       <div class="field"><label>پایه</label><select id="edGrade"></select></div>
       <div class="field"><label>درس</label><select id="edSubject"></select></div>
     </div>
-    <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: فصل اول" maxlength="120"></div>
+    <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: درس اول — عددهای صحیح" maxlength="120"></div>
+    <div class="field">
+      <label>شماره درس (اختیاری)</label>
+      <input id="edLessonNum" type="number" placeholder="خودکار از عنوان" min="1" max="99">
+      <div class="hint" id="lessonHint">💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه (اول، ۱، درس ۲ و...)</div>
+    </div>
     <div class="field">
       <label>متن جزوه</label>
       <textarea id="edContent" class="content-area" placeholder="متن جزوه...&#10;&#10;# عنوان&#10;## زیرعنوان&#10;- آیتم&#10;**متن مهم**"></textarea>
@@ -869,6 +570,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- BULK UPLOAD EDITOR -->
 <div class="editor hidden" id="bulkEditor">
   <div class="editor-header">
     <button class="back-btn" id="bulkBack" type="button">‹</button>
@@ -881,7 +583,7 @@ button{cursor:pointer;user-select:none}
         <div class="field"><label>پایه</label><select id="bulkGrade"></select></div>
         <div class="field"><label>درس</label><select id="bulkSubject"></select></div>
       </div>
-      <div class="hint">👆 همه PDFهای انتخابی به این درس اضافه می‌شن.</div>
+      <div class="hint">👆 همه PDFها به این درس اضافه می‌شن. شماره درس خودکار از اسم فایل تشخیص داده می‌شه.</div>
     </div>
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--dang)"></span> انتخاب فایل‌ها</h4>
@@ -916,6 +618,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- SUBJECT EDITOR -->
 <div class="editor hidden" id="subjectEditor">
   <div class="editor-header">
     <button class="back-btn" id="subjectEditorBack" type="button">‹</button>
@@ -932,11 +635,11 @@ button{cursor:pointer;user-select:none}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v1.0.3</div>
+<div class="ver">درسیار v1.0.4</div>
 
 <script>
 /* =========================================================
-   درسیار v1.0.3 — Welcome Modal + Desktop Full Width
+   درسیار v1.0.4 — نسخه کامل
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
@@ -950,7 +653,7 @@ const THEME_KEY = 'darsyar_theme';
 const GRADE_KEY = 'darsyar_grade';
 const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
-const CACHE_KEY = 'darsyar_cache_v103';
+const CACHE_KEY = 'darsyar_cache_v104';
 const ADMIN_CODE = 'darsyar2026';
 
 const $ = s => document.querySelector(s);
@@ -959,12 +662,100 @@ const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+function isDesktop(){ return window.innerWidth >= 900; }
+
+/* ===== تشخیص شماره درس ===== */
+const PERSIAN_DIGITS = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
+function normalizeDigits(str){ return String(str).replace(/[۰-۹٠-٩]/g, d => PERSIAN_DIGITS[d] || d); }
+
+const PERSIAN_ORDINALS = {
+  'اول':1,'اولین':1,'یکم':1,'یک':1,'یه':1,
+  'دوم':2,'دومین':2,'دو':2,
+  'سوم':3,'سومین':3,'سه':3,
+  'چهارم':4,'چهارمین':4,'چهار':4,
+  'پنجم':5,'پنجمین':5,'پنج':5,
+  'ششم':6,'ششمین':6,'شش':6,
+  'هفتم':7,'هفتمین':7,'هفت':7,
+  'هشتم':8,'هشتمین':8,'هشت':8,
+  'نهم':9,'نهمین':9,'نه':9,
+  'دهم':10,'دهمین':10,'ده':10,
+  'یازدهم':11,'یازدهمین':11,'یازده':11,
+  'دوازدهم':12,'دوازدهمین':12,'دوازده':12,
+  'سیزدهم':13,'سیزدهمین':13,'سیزده':13,
+  'چهاردهم':14,'چهاردهمین':14,'چهارده':14,
+  'پانزدهم':15,'پانزدهمین':15,'پانزده':15,
+  'شانزدهم':16,'شانزدهمین':16,'شانزده':16,
+  'هفدهم':17,'هفدهمین':17,'هفده':17,
+  'هجدهم':18,'هجدهمین':18,'هجده':18,
+  'نوزدهم':19,'نوزدهمین':19,'نوزده':19,
+  'بیستم':20,'بیستمین':20,'بیست':20
+};
+
+const LESSON_PREFIXES = ['درس','فصل','بخش','واحد','مبحث','گفتار','درسنامه'];
+
+function detectLessonNumber(text){
+  if(!text) return null;
+  let str = normalizeDigits(String(text).trim());
+  
+  // دنبال پیشوند "درس N" یا "فصل N"
+  const prefixPattern = new RegExp(`(?:${LESSON_PREFIXES.join('|')})\\s*[\\-_\\s]*?([0-9]{1,3})`, 'i');
+  const m1 = str.match(prefixPattern);
+  if(m1){
+    const n = parseInt(m1[1], 10);
+    if(n >= 1 && n <= 99) return n;
+  }
+  
+  // کلمات ترتیبی فارسی
+  const words = str.split(/[\s\-_.,،()]+/);
+  for(let i = 0; i < words.length; i++){
+    const w = words[i].trim();
+    if(PERSIAN_ORDINALS[w]) return PERSIAN_ORDINALS[w];
+    if(i + 2 < words.length){
+      const combo = `${w} و ${words[i+2]}`;
+      if(PERSIAN_ORDINALS[combo]) return PERSIAN_ORDINALS[combo];
+    }
+  }
+  
+  // هر عدد در متن
+  const anyNum = str.match(/(\d{1,2})/);
+  if(anyNum){
+    const n = parseInt(anyNum[1], 10);
+    if(n >= 1 && n <= 99) return n;
+  }
+  
+  return null;
+}
+
+function detectLessonFromNote(note){
+  if(note.lessonNum) return note.lessonNum;
+  if(note.title){
+    const n = detectLessonNumber(note.title);
+    if(n) return n;
+  }
+  if(note.pdfName){
+    const n = detectLessonNumber(note.pdfName);
+    if(n) return n;
+  }
+  if(note.content){
+    const n = detectLessonNumber(note.content);
+    if(n) return n;
+  }
+  return null;
+}
+
+function sortNotes(a, b){
+  const aL = detectLessonFromNote(a);
+  const bL = detectLessonFromNote(b);
+  if(aL && bL) return aL - bL;
+  if(aL && !bL) return -1;
+  if(!aL && bL) return 1;
+  return (b.ts || 0) - (a.ts || 0);
+}
 
 function dateFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
 function dateFullFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ return ''; } }
 function formatSize(b){ if(!b) return ''; if(b < 1024) return fa(b)+' بایت'; if(b < 1024*1024) return fa((b/1024).toFixed(0))+' KB'; return fa((b/1024/1024).toFixed(1))+' MB'; }
 function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
-function isDesktop(){ return window.innerWidth >= 900; }
 
 function utf8ToBase64(str){
   const bytes = new TextEncoder().encode(str);
@@ -1094,9 +885,6 @@ async function deletePdfFile(filename){
   }catch(e){ return false; }
 }
 
-/* =========================================================
-   Merge
-   ========================================================= */
 function mergeNotes(localN, remoteN){
   const merged = {};
   const keys = new Set([...Object.keys(localN || {}), ...Object.keys(remoteN || {})]);
@@ -1123,18 +911,13 @@ function mergeMap(a, b){
   return merged;
 }
 
-/* =========================================================
-   Load / Save
-   ========================================================= */
 async function loadFromGitHub(showLoad = true){
   if(showLoad) setLoading(true, 'در حال دریافت داده‌ها…');
   setStatus('connecting');
   try{
     const url = `${RAW_URL}/${DATA_FILE}?t=${Date.now()}`;
     const r = await fetch(url, { cache: 'no-store' });
-    if(r.status === 404){
-      fileSha = null; setStatus('online'); refreshAll(); return true;
-    }
+    if(r.status === 404){ fileSha = null; setStatus('online'); refreshAll(); return true; }
     if(!r.ok) throw new Error('HTTP ' + r.status);
     const text = await r.text();
     if(!text || text.trim() === '') throw new Error('data.json خالی');
@@ -1156,9 +939,7 @@ async function loadFromGitHub(showLoad = true){
       if(cached && cached.notes){ store = cached; refreshAll(); }
     }catch(_){}
     return false;
-  }finally{
-    if(showLoad) setLoading(false);
-  }
+  }finally{ if(showLoad) setLoading(false); }
 }
 
 async function saveDataToGitHub(){
@@ -1182,9 +963,6 @@ async function saveDataToGitHub(){
   return true;
 }
 
-/* =========================================================
-   Status & Loading
-   ========================================================= */
 let isOnline = false, statusTimer = null;
 function setStatus(s){
   const dot = $('#statusDot'); if(!dot) return;
@@ -1208,9 +986,6 @@ function hideProgress(){
   $('#progressFillBar').style.width = '0%';
 }
 
-/* =========================================================
-   Utils
-   ========================================================= */
 function fmt(text){
   const lines = String(text || '').split('\n');
   const out = []; let inList = false;
@@ -1245,9 +1020,6 @@ function getPdfRawUrl(n){
 }
 function hasPdf(n){ return !!(n && (n.pdfUrl || n.pdfFile || (n.pdfData && n.pdfData.length))); }
 
-/* =========================================================
-   Theme
-   ========================================================= */
 function initTheme(){
   const saved = localStorage.getItem(THEME_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1269,25 +1041,15 @@ function updateThemeIcon(theme){
     : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 }
 
-/* =========================================================
-   Welcome (اولین بار)
-   ========================================================= */
 function initWelcome(){
   const visited = localStorage.getItem(VISITED_KEY);
   const savedGrade = localStorage.getItem(GRADE_KEY);
-  
-  if(visited && savedGrade){
-    state.grade = +savedGrade;
-    return false;
-  }
-  
-  // نمایش مودال
+  if(visited && savedGrade){ state.grade = +savedGrade; return false; }
   welcomeSelectedGrade = savedGrade ? +savedGrade : null;
   renderWelcomeGrid();
   $('#welcomeOverlay').classList.remove('hidden');
   return true;
 }
-
 function renderWelcomeGrid(){
   const grid = $('#welcomeGradeGrid');
   grid.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `
@@ -1296,16 +1058,13 @@ function renderWelcomeGrid(){
       <span class="glbl">پایه</span>
     </button>
   `).join('');
-  
   $('#welcomeContinue').disabled = !welcomeSelectedGrade;
 }
-
 $('#welcomeGradeGrid').addEventListener('click', e => {
   const b = e.target.closest('[data-wg]'); if(!b) return;
   welcomeSelectedGrade = +b.dataset.wg;
   renderWelcomeGrid();
 });
-
 $('#welcomeContinue').addEventListener('click', () => {
   if(!welcomeSelectedGrade) return;
   state.grade = welcomeSelectedGrade;
@@ -1316,26 +1075,18 @@ $('#welcomeContinue').addEventListener('click', () => {
   toast(`خوش اومدی! پایه ${fa(state.grade)}م انتخاب شد ✅`, 'success');
 });
 
-/* =========================================================
-   Desktop Sidebar
-   ========================================================= */
 function renderSidebar(){
   if(!isDesktop()) return;
   const sb = $('#desktopSidebar');
-  
-  // درس‌های پایه فعلی
   const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade);
   const subs = getSubjects(state.grade);
-  
   let html = `
     <div class="sidebar-section">
       <div class="sidebar-title">🎓 پایه تحصیلی</div>
       ${Array.from({length:9}, (_, i) => i + 1).map(g => {
         const count = Object.values(store.notes).filter(n => !n.deleted && n.grade === g).length;
         return `<button class="sidebar-grade-btn ${g === state.grade ? 'active' : ''}" data-sidebar-grade="${g}" type="button">
-          <span class="gnum">${fa(g)}</span>
-          <span>پایه ${fa(g)}م</span>
-          <span class="gcount">${fa(count)}</span>
+          <span class="gnum">${fa(g)}</span><span>پایه ${fa(g)}م</span><span class="gcount">${fa(count)}</span>
         </button>`;
       }).join('')}
     </div>
@@ -1357,19 +1108,14 @@ function renderSidebar(){
       }).join('')}
     </div>
   `;
-  
   sb.innerHTML = html;
 }
-
 document.addEventListener('click', e => {
   const gb = e.target.closest('[data-sidebar-grade]');
   if(gb){
-    state.grade = +gb.dataset.sidebarGrade;
-    state.subject = null;
-    state.noteId = null;
+    state.grade = +gb.dataset.sidebarGrade; state.subject = null; state.noteId = null;
     localStorage.setItem(GRADE_KEY, state.grade);
-    renderHome(); renderProfile(); renderSidebar();
-    showScreen('home');
+    renderHome(); renderProfile(); renderSidebar(); showScreen('home');
     toast(`پایه ${fa(state.grade)}م انتخاب شد`, 'success');
     return;
   }
@@ -1377,26 +1123,18 @@ document.addEventListener('click', e => {
   if(sb){
     state.subject = sb.dataset.sidebarSubj || null;
     state.noteId = null;
-    renderHome(); renderSidebar();
-    showScreen('home');
+    renderHome(); renderSidebar(); showScreen('home');
     return;
   }
 });
-
-// Resize listener for sidebar
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    if(isDesktop()) renderSidebar();
-  }, 200);
+  resizeTimer = setTimeout(() => { if(isDesktop()) renderSidebar(); }, 200);
 });
 
-/* =========================================================
-   Render
-   ========================================================= */
 function renderHome(){
-  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade).sort((a,b) => b.ts - a.ts);
+  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade).sort(sortNotes);
   const subs = getSubjects(state.grade);
   const activeSubs = subs.filter(s => notes.some(n => n.subject === s)).length;
   const cc = Object.values(store.comments).filter(c => !c.deleted && notes.some(n => n.id === c.noteId)).length;
@@ -1413,7 +1151,7 @@ function renderHome(){
     return `<button class="chip ${state.subject === s ? 'active' : ''}" data-act="subj" data-s="${esc(s)}" type="button"><span>${st.i}</span><span>${esc(s)}</span>${c ? `<span class="cnt">${fa(c)}</span>` : ''}</button>`;
   }).join('');
   $('#subjectChips').innerHTML = chipsHtml;
-  const list = state.subject ? notes.filter(n => n.subject === state.subject) : notes;
+  const list = state.subject ? notes.filter(n => n.subject === state.subject).sort(sortNotes) : notes;
   const listEl = $('#notesList');
   if(!notes.length){ listEl.innerHTML = `<div class="empty"><div class="empty-icon">📭</div><b>هنوز جزوه‌ای ثبت نشده</b><p>برای پایه ${fa(state.grade)} هنوز جزوه‌ای اضافه نشده است.</p></div>`; return; }
   if(!list.length){ listEl.innerHTML = `<div class="empty"><div class="empty-icon">📂</div><b>این درس خالی است</b><p>برای «${esc(state.subject)}» هنوز جزوه‌ای ثبت نشده است.</p></div>`; return; }
@@ -1424,8 +1162,15 @@ function noteCard(n){
   const st = subjStyle(n.subject);
   const cc = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).length;
   const preview = (n.content || '').replace(/[#*\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 110);
+  const lessonNum = detectLessonFromNote(n);
+  const lessonBadge = lessonNum ? `<span class="nc-lesson">📖 درس ${fa(lessonNum)}</span>` : '';
   return `<article class="note-card" data-act="open" data-id="${n.id}" style="--sc:${st.c};--sb:${st.bg}">
-    <div class="nc-top"><span class="nc-chip">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span>${hasPdf(n) ? '<span class="nc-pdf">📄 PDF</span>' : ''}</div>
+    <div class="nc-top">
+      <span class="nc-chip">${st.i} ${esc(n.subject)}</span>
+      <span class="nc-grade">پایه ${fa(n.grade)}</span>
+      ${lessonBadge}
+      ${hasPdf(n) ? '<span class="nc-pdf">📄 PDF</span>' : ''}
+    </div>
     <div class="nc-title">${esc(n.title || 'بدون عنوان')}</div>
     <div class="nc-preview">${esc(preview)}${preview.length >= 110 ? '…' : ''}</div>
     <div class="nc-foot"><span>💬 ${fa(cc)} نظر</span><span>🕒 ${dateFa(n.ts)}</span></div>
@@ -1444,7 +1189,7 @@ function renderSearch(){
   }
   if(!q){ el.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><b>جستجو در جزوه‌ها</b><p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`; return; }
   const all = Object.values(store.notes).filter(n => !n.deleted);
-  const results = all.filter(n => (n.title || '').toLowerCase().includes(q) || (n.subject || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)).sort((a,b) => b.ts - a.ts);
+  const results = all.filter(n => (n.title || '').toLowerCase().includes(q) || (n.subject || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)).sort(sortNotes);
   if(!results.length){ el.innerHTML = `<div class="empty"><div class="empty-icon">😶‍🌫️</div><b>نتیجه‌ای یافت نشد</b><p>برای «${esc(state.searchQuery)}» چیزی پیدا نشد.</p></div>`; return; }
   el.innerHTML = `<div class="section"><h2>نتایج</h2><span class="count">${fa(results.length)} مورد</span></div>` + results.map(noteCard).join('');
 }
@@ -1477,6 +1222,7 @@ function renderDetail(){
   if(!n){ closeDetail(); return; }
   const st = subjStyle(n.subject);
   $('#detailTitle').textContent = n.title || 'جزوه';
+  const lessonNum = detectLessonFromNote(n);
   const comments = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).sort((a,b) => a.ts - b.ts);
   const avColors = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981','#0ea5e9','#ef4444'];
   const avColor = name => avColors[(name.charCodeAt(0) || 0) % avColors.length];
@@ -1491,7 +1237,15 @@ function renderDetail(){
     pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${pdfSize ? formatSize(pdfSize) : (n.pdfUrl && !n.pdfFile ? 'لینک خارجی' : 'ذخیره‌شده')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
   }
   $('#detailBody').innerHTML = `
-    <div class="note-head"><div class="chips-row"><span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span></div><div class="note-title">${esc(n.title || 'بدون عنوان')}</div><div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div></div>
+    <div class="note-head">
+      <div class="chips-row">
+        <span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span>
+        <span class="nc-grade">پایه ${fa(n.grade)}</span>
+        ${lessonNum ? `<span class="nc-lesson">📖 درس ${fa(lessonNum)}</span>` : ''}
+      </div>
+      <div class="note-title">${esc(n.title || 'بدون عنوان')}</div>
+      <div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div>
+    </div>
     ${pdfHtml}
     <article class="note-content">${fmt(n.content || '')}</article>
     <section class="comments"><h3>💬 نظرات ${comments.length ? `<span class="cnt-pill">${fa(comments.length)}</span>` : ''}</h3><div>${commentsHtml}</div>
@@ -1509,9 +1263,6 @@ function refreshAll(){
   renderSidebar();
 }
 
-/* =========================================================
-   PDF Viewer
-   ========================================================= */
 let currentPdfBlobUrl = null;
 window.openPdfViewer = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
@@ -1532,9 +1283,7 @@ window.openPdfViewer = async function(){
       const blob = new Blob([bytes], {type: 'application/pdf'});
       const url = URL.createObjectURL(blob);
       currentPdfBlobUrl = url;
-      frame.src = url;
-      dl.href = url;
-      dl.setAttribute('download', pdfName);
+      frame.src = url; dl.href = url; dl.setAttribute('download', pdfName);
       loading.classList.add('hidden');
       return;
     }catch(e){ loadingText.textContent = 'خطا'; return; }
@@ -1552,9 +1301,7 @@ window.openPdfViewer = async function(){
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     currentPdfBlobUrl = blobUrl;
-    frame.src = blobUrl;
-    dl.href = blobUrl;
-    dl.setAttribute('download', pdfName);
+    frame.src = blobUrl; dl.href = blobUrl; dl.setAttribute('download', pdfName);
     loading.classList.add('hidden');
   }catch(e){ loading.classList.add('hidden'); toast('خطا در بارگذاری', 'error'); }
 };
@@ -1589,9 +1336,6 @@ $('#pdfViewerClose').addEventListener('click', () => {
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
 });
 
-/* =========================================================
-   Navigation
-   ========================================================= */
 function showScreen(name){
   state.screen = name;
   $$('.screen').forEach(s => s.classList.remove('active'));
@@ -1603,11 +1347,9 @@ function showScreen(name){
   if(name === 'profile') renderProfile();
   window.scrollTo({top:0});
 }
-
 document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', e => { e.preventDefault(); showScreen(btn.dataset.nav); });
 });
-
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-act]'); if(!t) return;
   const act = t.dataset.act;
@@ -1617,7 +1359,6 @@ document.addEventListener('click', e => {
   else if(act === 'toggle-lib'){ const g = t.closest('.lib-grade'); if(g) g.classList.toggle('open'); }
   else if(act === 'lib-sub'){ state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null; localStorage.setItem(GRADE_KEY, state.grade); showScreen('home'); renderSidebar(); }
 });
-
 function openDetail(id){ state.noteId = id; draft = {name:'', text:''}; $('#detail').classList.remove('hidden'); renderDetail(); }
 function closeDetail(){ state.noteId = null; $('#detail').classList.add('hidden'); refreshAll(); }
 $('#detailBack').addEventListener('click', closeDetail);
@@ -1651,18 +1392,15 @@ $('#menuSync').addEventListener('click', async () => {
   await loadFromGitHub(false);
   toast(isOnline ? 'به‌روزرسانی شد ✅' : 'اتصال برقرار نشد ⚠️', isOnline ? 'success' : 'error');
 });
-
 const handleSearch = debounce(q => { state.searchQuery = q; renderSearch(); }, 180);
 $('#searchInput').addEventListener('input', e => handleSearch(e.target.value));
 $('#searchClear').addEventListener('click', () => {
   $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); $('#searchInput').focus();
 });
-
 document.addEventListener('input', e => {
   if(e.target.id === 'cName') draft.name = e.target.value;
   if(e.target.id === 'cText') draft.text = e.target.value;
 });
-
 document.addEventListener('submit', async e => {
   if(e.target.id !== 'cmtForm') return;
   e.preventDefault();
@@ -1682,15 +1420,12 @@ document.addEventListener('submit', async e => {
   finally{ btn.disabled = false; }
 });
 
-/* =========================================================
-   Admin
-   ========================================================= */
+/* ===== Admin ===== */
 let adminFilterGrade = 0;
 function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); }
 function toggleAdmin(){ const a = $('#admin'); if(a.classList.contains('hidden')) openAdminPanel(); else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); closeBulkEditor(); } }
 $('#adminClose').addEventListener('click', toggleAdmin);
 document.addEventListener('keydown', e => { if(e.ctrlKey && e.shiftKey && e.code === 'KeyA'){ e.preventDefault(); toggleAdmin(); } });
-
 document.querySelectorAll('.admin-tab').forEach(tab => {
   tab.addEventListener('click', function(){
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -1699,7 +1434,6 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
     document.getElementById('panel-' + this.dataset.tab).classList.add('active');
   });
 });
-
 function renderAdminFilter(){
   let html = `<select id="filterGrade" style="width:100%;padding:11px 14px;border:1.5px solid var(--br);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="0">همه پایه‌ها</option>`;
   for(let g = 1; g <= 9; g++) html += `<option value="${g}" ${adminFilterGrade === g ? 'selected' : ''}>پایه ${fa(g)}م</option>`;
@@ -1707,22 +1441,22 @@ function renderAdminFilter(){
   $('#adminNotesFilter').innerHTML = html;
   document.getElementById('filterGrade').addEventListener('change', function(){ adminFilterGrade = +this.value; renderAdminNotes(); });
 }
-
 function renderAdminNotes(){
   const el = $('#adminNotesList');
   let notes = Object.values(store.notes).filter(n => !n.deleted);
   if(adminFilterGrade) notes = notes.filter(n => n.grade === adminFilterGrade);
-  notes.sort((a,b) => b.ts - a.ts);
+  notes.sort(sortNotes);
   $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n => !n.deleted).length);
   if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «آپلود گروهی» یا «جزوه تکی» شروع کن.</div>`; return; }
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
+    const lessonNum = detectLessonFromNote(n);
     const pdfTag = hasPdf(n) ? '📄' : '';
-    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${pdfTag}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span><span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
+    const lessonBadge = lessonNum ? `<span class="admin-item-lesson">${fa(lessonNum)}</span>` : '';
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${pdfTag}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span>${lessonNum ? `<span>•</span><span>📖 درس ${fa(lessonNum)}</span>` : ''}<span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
-
 function renderAdminSubjects(){
   const el = $('#adminSubjectsList');
   const subjects = Object.values(store.subjects).filter(s => !s.deleted).sort((a,b) => (a.grade - b.grade) || (a.ts - b.ts));
@@ -1734,7 +1468,6 @@ function renderAdminSubjects(){
   }).join('');
   el.querySelectorAll('[data-admin-del-subj]').forEach(b => b.addEventListener('click', () => deleteSubject(b.dataset.adminDelSubj)));
 }
-
 function renderAdminSettings(){
   $('#setGhRepo').value = `${GH_OWNER}/${GH_REPO}`;
   $('#setGhToken').value = getToken();
@@ -1750,12 +1483,11 @@ function renderAdminSettings(){
   const cCount = Object.values(store.comments).filter(c => !c.deleted).length;
   const sCount = Object.values(store.subjects).filter(s => !s.deleted).length;
   const pdfFiles = Object.values(store.notes).filter(n => !n.deleted && n.pdfFile).length;
+  const withLesson = Object.values(store.notes).filter(n => !n.deleted && detectLessonFromNote(n)).length;
   const sizeBytes = new Blob([JSON.stringify(store)]).size;
-  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF فایل جدا: <b>${fa(pdfFiles)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
+  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>📖 با شماره درس: <b>${fa(withLesson)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF: <b>${fa(pdfFiles)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
 }
-
 function renderAdmin(){ renderAdminFilter(); renderAdminNotes(); renderAdminSubjects(); renderAdminSettings(); }
-
 $('#btnSaveGh').addEventListener('click', async () => {
   const token = $('#setGhToken').value.trim();
   if(!token){ toast('توکن را وارد کن', 'error'); return; }
@@ -1773,10 +1505,43 @@ $('#btnDisconnect').addEventListener('click', () => {
   toast('توکن حذف شد', 'success');
 });
 
-/* =========================================================
-   Single Editor
-   ========================================================= */
+/* ===== مرتب‌سازی هوشمند ===== */
+$('#btnResortNotes').addEventListener('click', async () => {
+  if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
+  if(!confirm('همه جزوه‌ها بر اساس شماره درس (از عنوان/اسم فایل) مرتب و برچسب‌گذاری بشن؟')) return;
+  setLoading(true, 'در حال مرتب‌سازی…');
+  showProgress(30);
+  let count = 0;
+  Object.values(store.notes).forEach(n => {
+    if(n.deleted) return;
+    const lessonNum = detectLessonFromNote(n);
+    if(lessonNum && n.lessonNum !== lessonNum){
+      n.lessonNum = lessonNum;
+      count++;
+    }
+  });
+  showProgress(70);
+  try{
+    await saveDataToGitHub();
+    showProgress(100);
+    toast(`✅ ${fa(count)} جزوه برچسب‌گذاری شد`, 'success');
+    renderAdmin(); renderHome();
+  }catch(e){ toast('خطا: ' + e.message, 'error'); }
+  finally{ setLoading(false); hideProgress(); }
+});
+
+/* ===== Editor ===== */
 let editingNoteId = null;
+function updateLessonHint(){
+  const title = $('#edTitle').value.trim();
+  const manual = $('#edLessonNum').value.trim();
+  if(manual){ $('#lessonHint').innerHTML = `✅ شماره درس دستی: <b>${fa(manual)}</b>`; return; }
+  if(title){
+    const n = detectLessonNumber(title);
+    if(n){ $('#lessonHint').innerHTML = `🔮 تشخیص خودکار: <b>درس ${fa(n)}</b>`; return; }
+  }
+  $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه (اول، ۱، درس ۲ و...)`;
+}
 function openEditor(id){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   editingNoteId = id || null;
@@ -1788,6 +1553,8 @@ function openEditor(id){
     $('#editorTitle').textContent = 'ویرایش جزوه';
     gradeSel.value = n.grade; populateSubjects(n.grade, n.subject);
     $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl && !n.pdfFile ? n.pdfUrl : '';
+    $('#edLessonNum').value = n.lessonNum || '';
+    updateLessonHint();
     if(n.pdfFile){
       editingPdfExistingFile = n.pdfFile; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
@@ -1799,7 +1566,8 @@ function openEditor(id){
   } else {
     $('#editorTitle').textContent = 'جزوه جدید';
     gradeSel.value = state.grade; populateSubjects(state.grade);
-    $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = '';
+    $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = ''; $('#edLessonNum').value = '';
+    updateLessonHint();
     resetPdfUpload();
     $('#editorDelete').classList.add('hidden');
   }
@@ -1824,6 +1592,8 @@ function resetPdfUpload(){
   $('#btnChoosePdf').textContent = 'انتخاب';
   $('#edPdfFile').value = '';
 }
+$('#edTitle').addEventListener('input', updateLessonHint);
+$('#edLessonNum').addEventListener('input', updateLessonHint);
 $('#edGrade').addEventListener('change', function(){ populateSubjects(+this.value); });
 $('#editorBack').addEventListener('click', closeEditor);
 $('#editorCancel').addEventListener('click', closeEditor);
@@ -1849,10 +1619,15 @@ $('#editorSave').addEventListener('click', async () => {
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
   const pdfUrlInput = $('#edPdfUrl').value.trim();
+  const manualLesson = $('#edLessonNum').value.trim();
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
   if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
+  // شماره درس
+  const lessonNum = manualLesson ? parseInt(manualLesson, 10) : detectLessonNumber(title);
+  if(lessonNum) item.lessonNum = lessonNum;
+  
   const btn = $('#editorSave'); btn.disabled = true;
   try{
     if(editingPdfFile){
@@ -1898,9 +1673,7 @@ $('#editorDelete').addEventListener('click', async () => {
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
-/* =========================================================
-   Bulk Upload
-   ========================================================= */
+/* ===== Bulk Upload ===== */
 function openBulkEditor(){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   bulkFiles = []; bulkStopFlag = false;
@@ -1936,7 +1709,8 @@ function renderBulkList(){
     const status = f._status || 'wait';
     const icon = status === 'done' ? '✅' : status === 'error' ? '❌' : status === 'active' ? '⏳' : '⏸';
     const cls = status === 'done' ? 'done' : status === 'error' ? 'error' : status === 'active' ? 'active' : '';
-    return `<div class="bulk-item ${cls}"><span class="bulk-item-num">${fa(i+1)}.</span><span class="bulk-item-name">${esc(f.name)}</span><span class="bulk-item-size">${(f.size/1024/1024).toFixed(1)} MB</span><span class="bulk-item-status">${icon}</span></div>`;
+    const lessonNum = f._lesson || detectLessonNumber(f.name);
+    return `<div class="bulk-item ${cls}"><span class="bulk-item-num">${fa(i+1)}.</span><span class="bulk-item-name">${esc(f.name)}</span>${lessonNum ? `<span class="bulk-item-lesson">درس ${fa(lessonNum)}</span>` : ''}<span class="bulk-item-size">${(f.size/1024/1024).toFixed(1)} MB</span><span class="bulk-item-status">${icon}</span></div>`;
   }).join('');
 }
 function closeBulkEditor(){ $('#bulkEditor').classList.add('hidden'); }
@@ -1952,7 +1726,11 @@ $('#bulkFiles').addEventListener('change', e => {
   const valid = files.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
   const invalid = files.length - valid.length;
   if(invalid > 0) toast(`${fa(invalid)} فایل غیر PDF نادیده گرفته شد`, 'error');
-  bulkFiles = valid.map(f => { f._status = 'wait'; return f; });
+  bulkFiles = valid.map(f => {
+    f._status = 'wait';
+    f._lesson = detectLessonNumber(f.name);
+    return f;
+  });
   renderBulkList();
 });
 $('#bulkStop').addEventListener('click', () => { bulkStopFlag = true; toast('آپلود متوقف می‌شود…'); });
@@ -1986,7 +1764,9 @@ $('#bulkSave').addEventListener('click', async () => {
       const result = await uploadPdfFile(filename, base64Data);
       const noteId = uid();
       const title = file.name.replace(/\.pdf$/i, '').trim() || 'بدون عنوان';
+      const lessonNum = file._lesson || detectLessonNumber(file.name);
       const item = {kind:'note', id:noteId, grade, subject, title, content:'', pdfFile:filename, pdfName:file.name, pdfSize:result.size, ts:Date.now()};
+      if(lessonNum) item.lessonNum = lessonNum;
       store.notes[noteId] = item;
       await saveDataToGitHub();
       file._status = 'done';
@@ -2007,9 +1787,7 @@ $('#bulkSave').addEventListener('click', async () => {
   else toast(`✅ ${fa(ok)} موفق • ❌ ${fa(err)} خطا`, 'error');
 });
 
-/* =========================================================
-   Subject Editor
-   ========================================================= */
+/* ===== Subject Editor ===== */
 function openSubjectEditor(){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   $('#subEdGrade').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${fa(g)}م</option>`).join('');
@@ -2050,9 +1828,6 @@ $('#btnRefreshNotes').addEventListener('click', async () => {
   toast(isOnline ? 'به‌روز شد ✅' : 'اتصال ناموفق ⚠️', isOnline ? 'success' : 'error');
 });
 
-/* =========================================================
-   Toast
-   ========================================================= */
 let toastT;
 function toast(msg, type){
   const el = $('#toast'); if(!el) return;
@@ -2068,25 +1843,17 @@ function toast(msg, type){
 (async function init(){
   initTheme();
   isAdmin = !!getToken();
-  
-  // چک کردن اولین بازدید
   const isFirst = initWelcome();
-  
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
     if(cached && cached.notes){ store = cached; }
   }catch(e){}
-  
-  // اگه کاربر قبلی هست، پایه رو از storage بخون
   if(!isFirst){
     state.grade = +(localStorage.getItem(GRADE_KEY) || 7);
   }
-  
   renderHome(); renderProfile(); renderLibrary();
   if(isDesktop()) renderSidebar();
-  
   await loadFromGitHub(true);
-  
   setInterval(() => { if(!state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false); }, 120000);
   document.addEventListener('visibilitychange', () => {
     if(!document.hidden && !state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false);
