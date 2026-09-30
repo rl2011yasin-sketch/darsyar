@@ -10,18 +10,48 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--p:#6366f1;--p2:#8b5cf6;--p3:#a855f7;--pl:#eef2ff;--pd:#4f46e5;--bg:#f6f7fb;--bg2:#eef1f8;--card:#fff;--card2:#fafbff;--text:#0f172a;--text2:#334155;--mut:#64748b;--dim:#94a3b8;--br:#eaedf3;--br2:#dde3ee;--ok:#10b981;--okbg:#ecfdf5;--oktxt:#059669;--dang:#ef4444;--dangbg:#fef2f2;--dangtxt:#dc2626;--warn:#f59e0b;--warnbg:#fffbeb;--warntxt:#d97706;--r:18px;--sb:env(safe-area-inset-bottom,0px);--sh:0 1px 2px rgba(15,23,42,.05);--sh2:0 20px 40px -18px rgba(99,102,241,.55)}
+:root{--p:#6366f1;--p2:#8b5cf6;--p3:#a855f7;--pl:#eef2ff;--pd:#4f46e5;--bg:#f6f7fb;--bg2:#eef1f8;--card:#fff;--card2:#fafbff;--text:#0f172a;--text2:#334155;--mut:#64748b;--dim:#94a3b8;--br:#eaedf3;--br2:#dde3ee;--ok:#10b981;--okbg:#ecfdf5;--oktxt:#059669;--dang:#ef4444;--dangbg:#fef2f2;--dangtxt:#dc2626;--warn:#f59e0b;--warnbg:#fffbeb;--warntxt:#d97706;--r:18px;--sb:env(safe-area-inset-bottom,0px);--sh:0 1px 2px rgba(15,23,42,.05);--sh2:0 20px 40px -18px rgba(99,102,241,.55);--max-w:640px}
 html[data-theme="dark"]{--bg:#0b1020;--bg2:#0f172a;--card:#141b2d;--card2:#1a2237;--text:#f1f5f9;--text2:#cbd5e1;--mut:#94a3b8;--dim:#64748b;--br:#25304a;--br2:#334155;--pl:#1e1b4b}
 html,body{height:100%;overflow-x:hidden}
 body{font-family:Vazirmatn,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;overscroll-behavior-y:none}
 button,input,textarea,select{font-family:inherit;color:inherit;outline:none;border:0;background:none}
 button{cursor:pointer;user-select:none}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-thumb{background:var(--br2);border-radius:6px}
-.app{min-height:100vh;display:flex;flex-direction:column;max-width:640px;margin:0 auto;background:var(--bg)}
-.header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;display:flex;align-items:center;gap:11px}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p3));display:grid;place-items:center;font-size:19px;box-shadow:0 8px 20px -8px rgba(99,102,241,.8);overflow:hidden}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:var(--br2);border-radius:8px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ============================================
+   APP LAYOUT
+   ============================================ */
+.app{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  max-width:var(--max-w);
+  margin:0 auto;
+  background:var(--bg);
+  transition:max-width .3s;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header{
+  position:sticky;top:0;z-index:30;
+  background:color-mix(in srgb,var(--card) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(22px);
+  -webkit-backdrop-filter:saturate(180%) blur(22px);
+  border-bottom:1px solid var(--br);
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;
+  display:flex;align-items:center;gap:11px;
+}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.brand-logo{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--p),var(--p3));
+  display:grid;place-items:center;font-size:19px;
+  box-shadow:0 8px 20px -8px rgba(99,102,241,.8);
+  overflow:hidden;flex-shrink:0;
+}
 .brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 .brand-name{font-weight:800;font-size:16.5px;letter-spacing:-.4px;line-height:1.15}
 .brand-sub{font-size:10.5px;color:var(--dim);font-weight:500;line-height:1.15}
@@ -34,11 +64,32 @@ button{cursor:pointer;user-select:none}
 .status-dot.saving{background:var(--p);animation:pulse 1s infinite}
 .status-dot.connecting{background:var(--warn);animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.main{flex:1;padding:16px 16px calc(110px + var(--sb))}
+
+/* ============================================
+   MAIN
+   ============================================ */
+.main{
+  flex:1;
+  padding:16px 16px calc(110px + var(--sb));
+}
+
+/* ============================================
+   SCREENS
+   ============================================ */
 .screen{display:none}
 .screen.active{display:block;animation:fadeUp .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);border-radius:22px;padding:20px;color:#fff;margin-bottom:22px;box-shadow:0 20px 42px -20px rgba(99,102,241,.75)}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 55%,#a855f7 100%);
+  border-radius:22px;padding:20px;color:#fff;
+  margin-bottom:22px;
+  box-shadow:0 20px 42px -20px rgba(99,102,241,.75);
+}
 .hero::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.1);top:-80px;left:-60px}
 .hero::after{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.07);bottom:-70px;right:-40px}
 .hero-in{position:relative;z-index:1}
@@ -47,20 +98,44 @@ button{cursor:pointer;user-select:none}
 .hero-stats{display:flex;gap:22px}
 .hero-stat b{display:block;font-size:22px;font-weight:800;line-height:1.15;letter-spacing:-.6px}
 .hero-stat span{font-size:11px;opacity:.85;font-weight:500}
+
+/* ============================================
+   SECTION
+   ============================================ */
 .section{display:flex;align-items:center;justify-content:space-between;margin:0 4px 11px}
 .section h2{font-size:15px;font-weight:800;letter-spacing:-.3px}
 .section .count{font-size:12px;color:var(--dim);font-weight:700}
+
+/* ============================================
+   CHIPS
+   ============================================ */
 .chips{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 16px;margin:0 -16px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:30px;background:var(--card);border:1.5px solid var(--br);font-size:13px;font-weight:600;color:var(--text);transition:.18s;white-space:nowrap}
+.chip{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:30px;background:var(--card);
+  border:1.5px solid var(--br);font-size:13px;font-weight:600;
+  color:var(--text);transition:.18s;white-space:nowrap;
+}
 .chip:active{transform:scale(.95)}
 .chip .cnt{font-size:10.5px;background:var(--bg2);color:var(--mut);padding:1px 7px;border-radius:20px;font-weight:700}
 .chip.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 8px 20px -8px rgba(99,102,241,.9)}
 .chip.active .cnt{background:rgba(255,255,255,.25);color:#fff}
+
+/* ============================================
+   NOTE CARDS
+   ============================================ */
 .notes{display:flex;flex-direction:column;gap:11px}
-.note-card{background:var(--card);border-radius:var(--r);padding:15px 16px 13px;box-shadow:var(--sh);border:1.5px solid var(--br);transition:transform .18s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:9px}
+.note-card{
+  background:var(--card);border-radius:var(--r);
+  padding:15px 16px 13px;box-shadow:var(--sh);
+  border:1.5px solid var(--br);transition:transform .18s,box-shadow .18s;
+  cursor:pointer;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:9px;
+}
 .note-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--sc,var(--p))}
 .note-card:active{transform:scale(.985)}
+.note-card:hover{box-shadow:var(--sh2)}
 .nc-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-right:8px}
 .nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5)}
 .nc-grade{font-size:11px;font-weight:700;color:var(--mut);background:var(--bg2);padding:3px 9px;border-radius:20px}
@@ -68,10 +143,18 @@ button{cursor:pointer;user-select:none}
 .nc-title{font-size:15.5px;font-weight:700;line-height:1.65;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-preview{font-size:12.5px;color:var(--mut);line-height:1.9;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-foot{display:flex;align-items:center;gap:14px;padding-top:9px;margin-top:3px;border-top:1px solid var(--br);font-size:11px;color:var(--dim);font-weight:600;padding-right:8px}
+
+/* ============================================
+   EMPTY
+   ============================================ */
 .empty{background:var(--card);border-radius:var(--r);padding:42px 22px;text-align:center;border:1.5px dashed var(--br2)}
 .empty-icon{width:68px;height:68px;border-radius:22px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:30px;margin:0 auto 16px}
 .empty b{display:block;font-size:15.5px;font-weight:800;margin-bottom:7px}
 .empty p{font-size:13px;color:var(--mut);line-height:1.9}
+
+/* ============================================
+   SEARCH
+   ============================================ */
 .search-wrap{margin-bottom:16px}
 .search-box{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--br);border-radius:15px;padding:12px 15px;transition:.18s}
 .search-box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px color-mix(in srgb,var(--p) 12%,transparent)}
@@ -79,8 +162,13 @@ button{cursor:pointer;user-select:none}
 .search-box input{flex:1;font-size:14.5px;background:transparent}
 .search-clear{width:26px;height:26px;border-radius:8px;display:none;place-items:center;color:var(--mut);background:var(--bg2);font-size:14px;font-weight:700}
 .search-clear.show{display:grid}
-.lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);margin-bottom:10px;overflow:hidden}
+
+/* ============================================
+   LIBRARY
+   ============================================ */
+.lib-grade{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);margin-bottom:10px;overflow:hidden;transition:.2s}
 .lib-head{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer}
+.lib-head:active{background:var(--card2)}
 .lib-num{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:15.5px;flex-shrink:0}
 .lib-title{flex:1;font-weight:700;font-size:14.5px}
 .lib-meta{font-size:11px;color:var(--dim);font-weight:600;margin-top:2px}
@@ -88,8 +176,13 @@ button{cursor:pointer;user-select:none}
 .lib-grade.open .lib-arrow{transform:rotate(-90deg)}
 .lib-subs{display:none;border-top:1px solid var(--br);padding:6px 0}
 .lib-grade.open .lib-subs{display:block}
-.lib-sub{display:flex;align-items:center;gap:11px;padding:10px 15px;font-size:13.5px;cursor:pointer}
+.lib-sub{display:flex;align-items:center;gap:11px;padding:10px 15px;font-size:13.5px;cursor:pointer;transition:.15s}
+.lib-sub:hover,.lib-sub:active{background:var(--card2)}
 .lib-sub-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:var(--sb);color:var(--sc)}
+
+/* ============================================
+   PROFILE
+   ============================================ */
 .profile-card{background:linear-gradient(135deg,var(--p),var(--p2));border-radius:var(--r);padding:26px 22px;color:#fff;text-align:center;margin-bottom:14px;box-shadow:var(--sh2)}
 .profile-av{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;color:#fff;font-size:32px;font-weight:800;margin:0 auto 12px;border:2px solid rgba(255,255,255,.3)}
 .profile-card h3{font-size:17px;font-weight:800;margin-bottom:4px}
@@ -99,18 +192,39 @@ button{cursor:pointer;user-select:none}
 .stat-card b{display:block;font-size:21px;font-weight:800;color:var(--p);letter-spacing:-.6px}
 .stat-card span{font-size:11px;color:var(--mut);font-weight:600}
 .menu{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);overflow:hidden}
-.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%;text-align:right;border-bottom:1px solid var(--br);font-size:14px;font-weight:600}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%;text-align:right;border-bottom:1px solid var(--br);font-size:14px;font-weight:600;transition:.15s}
 .menu-item:last-child{border-bottom:0}
+.menu-item:active{background:var(--card2)}
 .menu-icon{width:36px;height:36px;border-radius:11px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:17px}
 .menu-item .arrow{color:var(--dim);margin-right:auto;font-size:18px;font-weight:700}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:60;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-top:1px solid var(--br);padding:8px 10px calc(8px + var(--sb));display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+/* ============================================
+   BOTTOM NAV
+   ============================================ */
+.bottom-nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:var(--max-w);z-index:60;
+  background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:saturate(180%) blur(24px);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  border-top:1px solid var(--br);
+  padding:8px 10px calc(8px + var(--sb));
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+}
 .nav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:12px;color:var(--dim);font-size:10.5px;font-weight:700;transition:.18s}
-.nav-btn svg{width:22px;height:22px}
+.nav-btn svg{width:22px;height:22px;transition:.2s}
 .nav-btn.active{color:var(--p);background:var(--pl)}
-.detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:640px;z-index:80;background:var(--bg);display:flex;flex-direction:column}
+.nav-btn.active svg{transform:translateY(-1px)}
+.nav-btn:active{transform:scale(.94)}
+
+/* ============================================
+   DETAIL
+   ============================================ */
+.detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);z-index:80;background:var(--bg);display:flex;flex-direction:column}
 .detail.hidden{display:none}
 .detail-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;display:flex;align-items:center;gap:11px}
-.back-btn{width:38px;height:38px;border-radius:12px;background:var(--bg2);display:grid;place-items:center;color:var(--text);flex-shrink:0;font-size:20px;font-weight:700}
+.back-btn{width:38px;height:38px;border-radius:12px;background:var(--bg2);display:grid;place-items:center;color:var(--text);flex-shrink:0;font-size:20px;font-weight:700;transition:.15s}
+.back-btn:active{background:var(--br);transform:scale(.94)}
 .detail-title{font-size:14.5px;font-weight:800;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .detail-body{flex:1;overflow-y:auto;padding:16px 16px calc(28px + var(--sb))}
 .note-head{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--br);margin-bottom:13px}
@@ -134,14 +248,23 @@ button{cursor:pointer;user-select:none}
 .pdf-size{font-size:11.5px;color:var(--mut);font-weight:600}
 .pdf-actions{display:flex;gap:8px;flex-wrap:wrap}
 .pdf-actions .btn{flex:1;justify-content:center;min-width:110px}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:700;transition:.15s;white-space:nowrap}
 .btn:active{transform:scale(.96)}
 .btn-primary{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
 .btn-ghost{background:var(--card);color:var(--text);border:1.5px solid var(--br)}
+.btn-ghost:hover{background:var(--card2)}
 .btn-danger{background:var(--dangbg);color:var(--dangtxt);border:1.5px solid #fecaca}
 .btn-sm{padding:8px 14px;font-size:12.5px;border-radius:10px}
 .btn-block{width:100%}
 .btn:disabled{opacity:.55;cursor:wait}
+
+/* ============================================
+   COMMENTS
+   ============================================ */
 .comments{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--br)}
 .comments h3{font-size:15.5px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .cnt-pill{font-size:11px;background:var(--pl);color:var(--p);padding:2px 9px;border-radius:20px;font-weight:800}
@@ -155,23 +278,101 @@ button{cursor:pointer;user-select:none}
 .cmt-text{font-size:13.5px;color:var(--text2);line-height:2;word-break:break-word}
 .cmt-form{margin-top:16px;padding-top:16px;border-top:2px dashed var(--br);display:flex;flex-direction:column;gap:9px}
 .cmt-form input,.cmt-form textarea{border:1.5px solid var(--br);border-radius:12px;padding:11px 14px;font-size:13.5px;background:var(--card2);width:100%}
+.cmt-form input:focus,.cmt-form textarea:focus{border-color:var(--p);background:var(--card)}
 .cmt-form button{align-self:flex-start;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:11px 28px;border-radius:12px;font-size:13.5px;font-weight:700}
+
+/* ============================================
+   SHEET
+   ============================================ */
 .sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;opacity:0;pointer-events:none;transition:.28s;backdrop-filter:blur(4px)}
 .sheet-overlay.show{opacity:1;pointer-events:auto}
-.sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:640px;background:var(--card);border-radius:24px 24px 0 0;padding:10px 18px calc(24px + var(--sb));z-index:101;transition:transform .32s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
+.sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:var(--max-w);background:var(--card);border-radius:24px 24px 0 0;padding:10px 18px calc(24px + var(--sb));z-index:101;transition:transform .32s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
 .sheet.show{transform:translate(-50%,0)}
 .sheet-handle{width:38px;height:4px;border-radius:20px;background:var(--br2);margin:6px auto 16px}
 .sheet h3{font-size:16.5px;font-weight:800;margin-bottom:16px}
 .grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.grade-opt{padding:16px 8px;border-radius:14px;border:1.5px solid var(--br);background:var(--card2);display:flex;flex-direction:column;align-items:center;gap:4px}
-.grade-opt .num{font-size:22px;font-weight:800}
+.grade-opt{padding:16px 8px;border-radius:14px;border:1.5px solid var(--br);background:var(--card2);display:flex;flex-direction:column;align-items:center;gap:4px;transition:.15s}
+.grade-opt:active{transform:scale(.95)}
+.grade-opt .num{font-size:22px;font-weight:800;letter-spacing:-.6px}
 .grade-opt .lbl{font-size:11px;color:var(--mut);font-weight:600}
-.grade-opt.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff}
-.grade-opt.active .lbl{color:#fff}
-.toast{position:fixed;bottom:calc(100px + var(--sb));left:50%;transform:translate(-50%,80px);background:var(--text);color:var(--card);padding:12px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.32s;z-index:200;max-width:88vw;text-align:center}
+.grade-opt.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 10px 22px -10px rgba(99,102,241,.9)}
+.grade-opt.active .num,.grade-opt.active .lbl{color:#fff}
+
+/* ============================================
+   WELCOME MODAL
+   ============================================ */
+.welcome-overlay{
+  position:fixed;inset:0;z-index:5000;
+  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;overflow-y:auto;
+  animation:fadeIn .4s;
+}
+.welcome-overlay.hidden{display:none}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.welcome-card{
+  background:var(--card);border-radius:28px;
+  padding:32px 24px;width:100%;max-width:480px;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,.4);
+  animation:popIn .4s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.welcome-logo{
+  width:80px;height:80px;border-radius:24px;
+  background:linear-gradient(135deg,var(--p),var(--p3));
+  display:grid;place-items:center;font-size:38px;
+  margin:0 auto 18px;
+  box-shadow:0 20px 40px -12px rgba(99,102,241,.7);
+  overflow:hidden;
+}
+.welcome-logo img{width:100%;height:100%;object-fit:cover;border-radius:24px}
+.welcome-title{
+  font-size:24px;font-weight:800;text-align:center;
+  letter-spacing:-.5px;margin-bottom:8px;
+}
+.welcome-sub{
+  font-size:13.5px;color:var(--mut);text-align:center;
+  line-height:1.9;margin-bottom:24px;
+}
+.welcome-label{
+  font-size:13px;font-weight:800;color:var(--text);
+  margin-bottom:12px;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.welcome-grade-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:24px;
+}
+.welcome-grade-btn{
+  padding:18px 8px;border-radius:16px;
+  border:2px solid var(--br);background:var(--card2);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:.18s;cursor:pointer;
+}
+.welcome-grade-btn:active{transform:scale(.94)}
+.welcome-grade-btn:hover{border-color:var(--p)}
+.welcome-grade-btn.active{
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  border-color:transparent;color:#fff;
+  box-shadow:0 12px 24px -10px rgba(99,102,241,.9);
+  transform:scale(1.02);
+}
+.welcome-grade-btn .gnum{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1}
+.welcome-grade-btn .glbl{font-size:11px;color:var(--mut);font-weight:600}
+.welcome-grade-btn.active .gnum,
+.welcome-grade-btn.active .glbl{color:#fff}
+
+/* ============================================
+   TOAST
+   ============================================ */
+.toast{position:fixed;bottom:calc(100px + var(--sb));left:50%;transform:translate(-50%,80px);background:var(--text);color:var(--card);padding:12px 22px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.32s;z-index:2000;max-width:88vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.success{background:var(--oktxt);color:#fff}
 .toast.error{background:var(--dangtxt);color:#fff}
+
+/* ============================================
+   PDF VIEWER
+   ============================================ */
 .pdf-viewer{position:fixed;inset:0;z-index:500;background:#0b1020;display:flex;flex-direction:column}
 .pdf-viewer.hidden{display:none}
 .pdf-viewer-header{background:#1e293b;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
@@ -183,6 +384,10 @@ button{cursor:pointer;user-select:none}
 .pdf-loading.hidden{display:none}
 .spinner{width:40px;height:40px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================
+   ADMIN
+   ============================================ */
 .admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
 .admin.hidden{display:none}
 .admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -210,6 +415,10 @@ button{cursor:pointer;user-select:none}
 .admin-item-meta{font-size:11px;color:var(--dim);font-weight:600;display:flex;gap:9px;flex-wrap:wrap}
 .admin-item-actions{display:flex;gap:5px}
 .admin-empty{background:var(--card);border-radius:14px;padding:42px 20px;text-align:center;border:1.5px dashed var(--br2);color:var(--mut);font-size:13.5px;line-height:2}
+
+/* ============================================
+   EDITOR
+   ============================================ */
 .editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column}
 .editor.hidden{display:none}
 .editor-header{background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -235,6 +444,10 @@ button{cursor:pointer;user-select:none}
 .settings-section{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);padding:18px;margin-bottom:14px}
 .settings-section h4{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .settings-section h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--p)}
+
+/* ============================================
+   BULK LIST
+   ============================================ */
 .bulk-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
 .bulk-item{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--card2);border-radius:10px;font-size:12.5px;border:1px solid var(--br)}
 .bulk-item-num{color:var(--p);font-weight:800;flex-shrink:0;min-width:22px}
@@ -245,7 +458,12 @@ button{cursor:pointer;user-select:none}
 .bulk-item.error{background:var(--dangbg);border-color:var(--dangtxt)}
 .bulk-item.active{background:var(--pl);border-color:var(--p);animation:pulseLight 1.2s infinite}
 @keyframes pulseLight{0%,100%{opacity:1}50%{opacity:.7}}
+
 .hidden{display:none !important}
+
+/* ============================================
+   LOADING
+   ============================================ */
 .loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
 .loading-spinner{width:48px;height:48px;border-radius:50%;border:4px solid var(--br);border-top-color:var(--p);animation:spin .8s linear infinite}
@@ -254,9 +472,193 @@ button{cursor:pointer;user-select:none}
 .progress-track{width:220px;height:6px;background:var(--br);border-radius:10px;overflow:hidden}
 .progress-fill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .3s;border-radius:10px;width:0%}
 .ver{position:fixed;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--dim);opacity:.4;z-index:1;pointer-events:none}
+
+/* ============================================
+   DESKTOP - تمام صفحه
+   ============================================ */
+.desktop-sidebar{display:none}
+
+@media(min-width:900px){
+  :root{--max-w:100%}
+  
+  body{background:var(--bg2)}
+  
+  .app{
+    max-width:100%;
+    display:grid;
+    grid-template-columns:280px 1fr;
+    grid-template-rows:auto 1fr;
+    min-height:100vh;
+    margin:0;
+    box-shadow:none;
+  }
+  
+  /* Header تمام عرض */
+  .header{
+    grid-column:1 / -1;
+    padding:14px 32px;
+    border-bottom:1px solid var(--br);
+  }
+  
+  /* Sidebar */
+  .desktop-sidebar{
+    display:flex;flex-direction:column;
+    background:var(--card);
+    border-left:1px solid var(--br);
+    padding:20px 16px;
+    overflow-y:auto;
+    height:calc(100vh - 70px);
+    position:sticky;top:70px;
+    grid-column:1;
+    grid-row:2;
+  }
+  
+  /* Main - تمام عرض */
+  .main{
+    grid-column:2;
+    grid-row:2;
+    padding:24px 32px 120px;
+    max-width:1400px;
+    margin:0 auto;
+    width:100%;
+    overflow-y:auto;
+    height:calc(100vh - 70px);
+  }
+  
+  /* Bottom nav مخفی روی دسکتاپ */
+  .bottom-nav{display:none}
+  
+  /* کارت‌ها در گرید */
+  .notes{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:14px;
+  }
+  
+  .note-card{
+    padding:18px 18px 15px;
+    border-radius:16px;
+  }
+  
+  .note-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 20px 40px -20px rgba(99,102,241,.5);
+  }
+  
+  .nc-title{font-size:16px}
+  .nc-preview{font-size:13px}
+  
+  /* Hero عریض‌تر */
+  .hero{padding:24px;border-radius:24px}
+  .hero-title{font-size:22px}
+  .hero-sub{font-size:13.5px}
+  .hero-stat b{font-size:26px}
+  
+  /* Detail تمام صفحه */
+  .detail{
+    max-width:900px;
+    box-shadow:0 0 60px -20px rgba(0,0,0,.3);
+    border-left:1px solid var(--br);
+    border-right:1px solid var(--br);
+  }
+  
+  /* Sheet عریض‌تر */
+  .sheet{max-width:520px;border-radius:24px;bottom:20px;left:auto;right:20px;transform:translate(0,100%)}
+  .sheet.show{transform:translate(0,0)}
+  
+  /* پیام toast */
+  .toast{bottom:30px}
+  
+  /* Admin تمام صفحه */
+  .admin-body{max-width:1100px;padding:24px 32px}
+  
+  /* Editor عریض‌تر */
+  .editor-body{max-width:800px;padding:24px}
+  .editor-actions{max-width:800px}
+  
+  /* Welcome عریض‌تر */
+  .welcome-card{max-width:560px;padding:40px 36px}
+  .welcome-grade-grid{grid-template-columns:repeat(5,1fr)}
+  
+  /* Sidebar library styling */
+  .sidebar-section{margin-bottom:22px}
+  .sidebar-title{
+    font-size:11px;font-weight:800;color:var(--dim);
+    letter-spacing:.5px;text-transform:uppercase;
+    padding:0 10px;margin-bottom:10px;
+  }
+  .sidebar-item{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;border-radius:12px;
+    font-size:13.5px;font-weight:600;cursor:pointer;
+    transition:.15s;color:var(--text);
+    border:0;background:none;width:100%;text-align:right;
+  }
+  .sidebar-item:hover{background:var(--card2)}
+  .sidebar-item.active{background:var(--pl);color:var(--p);font-weight:800}
+  .sidebar-item .sicon{
+    width:30px;height:30px;border-radius:9px;
+    display:grid;place-items:center;font-size:14px;flex-shrink:0;
+    background:var(--sb,var(--pl));color:var(--sc,var(--p));
+  }
+  .sidebar-item .scount{
+    margin-right:auto;font-size:10.5px;
+    background:var(--bg2);color:var(--mut);
+    padding:2px 8px;border-radius:20px;font-weight:700;
+  }
+  .sidebar-item.active .scount{background:var(--p);color:#fff}
+  .sidebar-grade-btn{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;border-radius:12px;
+    font-size:13.5px;font-weight:700;cursor:pointer;
+    transition:.15s;color:var(--text);
+    border:0;background:none;width:100%;text-align:right;
+  }
+  .sidebar-grade-btn:hover{background:var(--card2)}
+  .sidebar-grade-btn.active{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
+  .sidebar-grade-btn .gnum{
+    width:30px;height:30px;border-radius:9px;
+    display:grid;place-items:center;font-size:14px;font-weight:800;
+    background:var(--pl);color:var(--p);flex-shrink:0;
+  }
+  .sidebar-grade-btn.active .gnum{background:rgba(255,255,255,.25);color:#fff}
+  .sidebar-grade-btn .gcount{
+    margin-right:auto;font-size:10.5px;
+    background:var(--bg2);color:var(--mut);
+    padding:2px 8px;border-radius:20px;font-weight:700;
+  }
+  .sidebar-grade-btn.active .gcount{background:rgba(255,255,255,.25);color:#fff}
+}
+
+@media(min-width:1400px){
+  .main{max-width:1600px}
+}
+
+/* برای تبلت */
+@media(min-width:641px) and (max-width:899px){
+  :root{--max-w:100%}
+  .app{max-width:100%}
+  .main{padding:20px 24px 120px}
+  .bottom-nav{max-width:100%}
+  .notes{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .detail{max-width:100%}
+  .welcome-card{max-width:520px}
+}
 </style>
 </head>
 <body>
+
+<!-- ==================== WELCOME MODAL ==================== -->
+<div class="welcome-overlay hidden" id="welcomeOverlay">
+  <div class="welcome-card">
+    <div class="welcome-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='📚'"></div>
+    <div class="welcome-title">به درسیار خوش اومدی 👋</div>
+    <div class="welcome-sub">قبل از شروع، لطفاً پایه تحصیلی‌ات رو انتخاب کن تا جزوه‌های مناسب خودت رو ببینی.</div>
+    <div class="welcome-label">🎓 پایه تحصیلی</div>
+    <div class="welcome-grade-grid" id="welcomeGradeGrid"></div>
+    <button class="btn btn-primary btn-block" id="welcomeContinue" type="button" disabled>شروع کن ✨</button>
+  </div>
+</div>
 
 <div class="loading-overlay hidden" id="loadingOverlay">
   <div class="loading-spinner"></div>
@@ -267,7 +669,7 @@ button{cursor:pointer;user-select:none}
 
 <div class="app">
   <header class="header">
-    <div class="brand">
+    <div class="brand" id="brandClick">
       <div class="brand-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='📚'"></div>
       <div>
         <div class="brand-name">درسیار</div>
@@ -280,6 +682,9 @@ button{cursor:pointer;user-select:none}
     </button>
     <div class="status-dot" id="statusDot"></div>
   </header>
+
+  <!-- Desktop Sidebar -->
+  <aside class="desktop-sidebar" id="desktopSidebar"></aside>
 
   <main class="main">
     <section class="screen active" id="screen-home">
@@ -333,7 +738,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.2</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.3</p>
     </section>
   </main>
 
@@ -464,7 +869,6 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
-<!-- Bulk Upload Editor -->
 <div class="editor hidden" id="bulkEditor">
   <div class="editor-header">
     <button class="back-btn" id="bulkBack" type="button">‹</button>
@@ -477,9 +881,8 @@ button{cursor:pointer;user-select:none}
         <div class="field"><label>پایه</label><select id="bulkGrade"></select></div>
         <div class="field"><label>درس</label><select id="bulkSubject"></select></div>
       </div>
-      <div class="hint">👆 همه PDFهای انتخابی به این درس اضافه می‌شن. عنوان خودکار از اسم فایل</div>
+      <div class="hint">👆 همه PDFهای انتخابی به این درس اضافه می‌شن.</div>
     </div>
-
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--dang)"></span> انتخاب فایل‌ها</h4>
       <div class="field">
@@ -495,7 +898,6 @@ button{cursor:pointer;user-select:none}
       </div>
       <div class="bulk-list" id="bulkList"></div>
     </div>
-
     <div class="settings-section" id="bulkProgressSection" style="display:none">
       <h4><span class="dot" style="background:var(--ok)"></span> پیشرفت آپلود</h4>
       <div style="font-size:13px;line-height:2;margin-bottom:10px">
@@ -503,9 +905,7 @@ button{cursor:pointer;user-select:none}
         <div>❌ ناموفق: <b id="bulkErrCount" style="color:var(--dangtxt)">۰</b></div>
         <div>⏳ در حال: <b id="bulkCurrent">—</b></div>
       </div>
-      <div class="progress-track" style="width:100%">
-        <div class="progress-fill-bar" id="bulkProgressBar"></div>
-      </div>
+      <div class="progress-track" style="width:100%"><div class="progress-fill-bar" id="bulkProgressBar"></div></div>
     </div>
   </div>
   <div class="editor-actions">
@@ -532,11 +932,11 @@ button{cursor:pointer;user-select:none}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v1.0.2</div>
+<div class="ver">درسیار v1.0.3</div>
 
 <script>
 /* =========================================================
-   درسیار v1.0.2 — Bulk Upload + PDF جداگانه
+   درسیار v1.0.3 — Welcome Modal + Desktop Full Width
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
@@ -548,8 +948,9 @@ const RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_B
 const TOKEN_KEY = 'darsyar_admin_token';
 const THEME_KEY = 'darsyar_theme';
 const GRADE_KEY = 'darsyar_grade';
+const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
-const CACHE_KEY = 'darsyar_cache_v102';
+const CACHE_KEY = 'darsyar_cache_v103';
 const ADMIN_CODE = 'darsyar2026';
 
 const $ = s => document.querySelector(s);
@@ -563,6 +964,7 @@ function dateFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{month:'sho
 function dateFullFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ return ''; } }
 function formatSize(b){ if(!b) return ''; if(b < 1024) return fa(b)+' بایت'; if(b < 1024*1024) return fa((b/1024).toFixed(0))+' KB'; return fa((b/1024/1024).toFixed(1))+' MB'; }
 function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
+function isDesktop(){ return window.innerWidth >= 900; }
 
 function utf8ToBase64(str){
   const bytes = new TextEncoder().encode(str);
@@ -574,17 +976,11 @@ function utf8ToBase64(str){
 let store = { notes:{}, comments:{}, subjects:{}, updatedAt:0 };
 let fileSha = null;
 let isAdmin = false;
-const state = { screen:'home', grade:+(localStorage.getItem(GRADE_KEY)||7), subject:null, noteId:null, searchQuery:'' };
+const state = { screen:'home', grade:7, subject:null, noteId:null, searchQuery:'' };
 let draft = {name:'', text:''};
-let editingPdfFile = null;
-let editingPdfExisting = null;
-let editingPdfExistingFile = '';
-let editingPdfExistingName = '';
-let editingPdfExistingSize = 0;
-
-// Bulk upload state
-let bulkFiles = [];
-let bulkStopFlag = false;
+let editingPdfFile = null, editingPdfExisting = null, editingPdfExistingFile = '', editingPdfExistingName = '', editingPdfExistingSize = 0;
+let bulkFiles = [], bulkStopFlag = false;
+let welcomeSelectedGrade = null;
 
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -661,11 +1057,7 @@ async function githubPut(path, contentBase64, message, sha){
   if(sha) body.sha = sha;
   const r = await ghFetch(url, {
     method: 'PUT',
-    headers: {
-      'Authorization': `token ${token}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
   if(r.status === 401) throw new Error('توکن نامعتبر');
@@ -679,10 +1071,7 @@ async function githubPut(path, contentBase64, message, sha){
 async function uploadPdfFile(filename, base64Data){
   const path = `${PDF_DIR}/${filename}`;
   let sha = null;
-  try{
-    const meta = await githubGetMeta(path);
-    if(meta) sha = meta.sha;
-  }catch(e){}
+  try{ const meta = await githubGetMeta(path); if(meta) sha = meta.sha; }catch(e){}
   await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
   await sleep(600);
   const verify = await githubGetMeta(path);
@@ -692,11 +1081,9 @@ async function uploadPdfFile(filename, base64Data){
 }
 
 async function deletePdfFile(filename){
-  const token = getToken();
-  if(!token) return false;
+  const token = getToken(); if(!token) return false;
   try{
-    const meta = await githubGetMeta(`${PDF_DIR}/${filename}`);
-    if(!meta) return false;
+    const meta = await githubGetMeta(`${PDF_DIR}/${filename}`); if(!meta) return false;
     const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${PDF_DIR}/${filename}`;
     const r = await ghFetch(url, {
       method: 'DELETE',
@@ -708,34 +1095,30 @@ async function deletePdfFile(filename){
 }
 
 /* =========================================================
-   Merge هوشمند
+   Merge
    ========================================================= */
-function mergeNotes(localNotes, remoteNotes){
+function mergeNotes(localN, remoteN){
   const merged = {};
-  const allKeys = new Set([...Object.keys(localNotes || {}), ...Object.keys(remoteNotes || {})]);
-  for(const key of allKeys){
-    const local = localNotes?.[key];
-    const remote = remoteNotes?.[key];
-    if(!local){ merged[key] = remote; continue; }
-    if(!remote){ merged[key] = local; continue; }
-    const localTs = local.ts || 0;
-    const remoteTs = remote.ts || 0;
-    if(localTs > remoteTs){ merged[key] = local; }
-    else if(remoteTs > localTs){ merged[key] = remote; }
-    else { merged[key] = { ...remote, ...local }; }
+  const keys = new Set([...Object.keys(localN || {}), ...Object.keys(remoteN || {})]);
+  for(const k of keys){
+    const l = localN?.[k], r = remoteN?.[k];
+    if(!l){ merged[k] = r; continue; }
+    if(!r){ merged[k] = l; continue; }
+    const lt = l.ts || 0, rt = r.ts || 0;
+    if(lt > rt) merged[k] = l;
+    else if(rt > lt) merged[k] = r;
+    else merged[k] = { ...r, ...l };
   }
   return merged;
 }
-
-function mergeMap(localC, remoteC){
+function mergeMap(a, b){
   const merged = {};
-  const allKeys = new Set([...Object.keys(localC || {}), ...Object.keys(remoteC || {})]);
-  for(const key of allKeys){
-    const local = localC?.[key];
-    const remote = remoteC?.[key];
-    if(!local){ merged[key] = remote; continue; }
-    if(!remote){ merged[key] = local; continue; }
-    merged[key] = (local.ts || 0) > (remote.ts || 0) ? local : remote;
+  const keys = new Set([...Object.keys(a || {}), ...Object.keys(b || {})]);
+  for(const k of keys){
+    const l = a?.[k], r = b?.[k];
+    if(!l){ merged[k] = r; continue; }
+    if(!r){ merged[k] = l; continue; }
+    merged[k] = (l.ts || 0) > (r.ts || 0) ? l : r;
   }
   return merged;
 }
@@ -750,21 +1133,16 @@ async function loadFromGitHub(showLoad = true){
     const url = `${RAW_URL}/${DATA_FILE}?t=${Date.now()}`;
     const r = await fetch(url, { cache: 'no-store' });
     if(r.status === 404){
-      fileSha = null;
-      setStatus('online');
-      refreshAll();
-      return true;
+      fileSha = null; setStatus('online'); refreshAll(); return true;
     }
     if(!r.ok) throw new Error('HTTP ' + r.status);
     const text = await r.text();
     if(!text || text.trim() === '') throw new Error('data.json خالی');
     const data = JSON.parse(text);
-    
     store.notes = mergeNotes(store.notes || {}, data.notes || {});
     store.comments = mergeMap(store.comments || {}, data.comments || {});
     store.subjects = mergeMap(store.subjects || {}, data.subjects || {});
     store.updatedAt = Math.max(store.updatedAt || 0, data.updatedAt || 0);
-    
     localStorage.setItem(CACHE_KEY, JSON.stringify(store));
     fileSha = null;
     setStatus('online');
@@ -787,27 +1165,15 @@ async function saveDataToGitHub(){
   if(!isAdmin) throw new Error('توکن تنظیم نشده');
   setStatus('saving');
   store.updatedAt = Date.now();
-  
   const cleanNotes = {};
   Object.entries(store.notes).forEach(([k, v]) => {
     const {pdfData, ...rest} = v;
     cleanNotes[k] = rest;
   });
-  
-  const cleanStore = {
-    notes: cleanNotes,
-    comments: store.comments,
-    subjects: store.subjects,
-    updatedAt: store.updatedAt
-  };
-  
+  const cleanStore = { notes: cleanNotes, comments: store.comments, subjects: store.subjects, updatedAt: store.updatedAt };
   const content = utf8ToBase64(JSON.stringify(cleanStore));
   let sha = null;
-  try{
-    const meta = await githubGetMeta(DATA_FILE);
-    if(meta) sha = meta.sha;
-  }catch(e){}
-  
+  try{ const meta = await githubGetMeta(DATA_FILE); if(meta) sha = meta.sha; }catch(e){}
   const result = await githubPut(DATA_FILE, content, '📚 به‌روزرسانی درسیار', sha);
   fileSha = result.content?.sha || null;
   store.notes = cleanNotes;
@@ -904,6 +1270,129 @@ function updateThemeIcon(theme){
 }
 
 /* =========================================================
+   Welcome (اولین بار)
+   ========================================================= */
+function initWelcome(){
+  const visited = localStorage.getItem(VISITED_KEY);
+  const savedGrade = localStorage.getItem(GRADE_KEY);
+  
+  if(visited && savedGrade){
+    state.grade = +savedGrade;
+    return false;
+  }
+  
+  // نمایش مودال
+  welcomeSelectedGrade = savedGrade ? +savedGrade : null;
+  renderWelcomeGrid();
+  $('#welcomeOverlay').classList.remove('hidden');
+  return true;
+}
+
+function renderWelcomeGrid(){
+  const grid = $('#welcomeGradeGrid');
+  grid.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `
+    <button class="welcome-grade-btn ${welcomeSelectedGrade === g ? 'active' : ''}" data-wg="${g}" type="button">
+      <span class="gnum">${fa(g)}</span>
+      <span class="glbl">پایه</span>
+    </button>
+  `).join('');
+  
+  $('#welcomeContinue').disabled = !welcomeSelectedGrade;
+}
+
+$('#welcomeGradeGrid').addEventListener('click', e => {
+  const b = e.target.closest('[data-wg]'); if(!b) return;
+  welcomeSelectedGrade = +b.dataset.wg;
+  renderWelcomeGrid();
+});
+
+$('#welcomeContinue').addEventListener('click', () => {
+  if(!welcomeSelectedGrade) return;
+  state.grade = welcomeSelectedGrade;
+  localStorage.setItem(GRADE_KEY, state.grade);
+  localStorage.setItem(VISITED_KEY, '1');
+  $('#welcomeOverlay').classList.add('hidden');
+  renderHome(); renderProfile(); renderLibrary(); renderSidebar();
+  toast(`خوش اومدی! پایه ${fa(state.grade)}م انتخاب شد ✅`, 'success');
+});
+
+/* =========================================================
+   Desktop Sidebar
+   ========================================================= */
+function renderSidebar(){
+  if(!isDesktop()) return;
+  const sb = $('#desktopSidebar');
+  
+  // درس‌های پایه فعلی
+  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade);
+  const subs = getSubjects(state.grade);
+  
+  let html = `
+    <div class="sidebar-section">
+      <div class="sidebar-title">🎓 پایه تحصیلی</div>
+      ${Array.from({length:9}, (_, i) => i + 1).map(g => {
+        const count = Object.values(store.notes).filter(n => !n.deleted && n.grade === g).length;
+        return `<button class="sidebar-grade-btn ${g === state.grade ? 'active' : ''}" data-sidebar-grade="${g}" type="button">
+          <span class="gnum">${fa(g)}</span>
+          <span>پایه ${fa(g)}م</span>
+          <span class="gcount">${fa(count)}</span>
+        </button>`;
+      }).join('')}
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">📖 درس‌های پایه ${fa(state.grade)}</div>
+      <button class="sidebar-item ${!state.subject ? 'active' : ''}" data-sidebar-subj="" type="button">
+        <span class="sicon" style="--sb:var(--pl);--sc:var(--p)">📚</span>
+        <span>همه درس‌ها</span>
+        <span class="scount">${fa(notes.length)}</span>
+      </button>
+      ${subs.map(s => {
+        const st = subjStyle(s);
+        const c = notes.filter(n => n.subject === s).length;
+        return `<button class="sidebar-item ${state.subject === s ? 'active' : ''}" data-sidebar-subj="${esc(s)}" type="button">
+          <span class="sicon" style="--sb:${st.bg};--sc:${st.c}">${st.i}</span>
+          <span>${esc(s)}</span>
+          <span class="scount">${fa(c)}</span>
+        </button>`;
+      }).join('')}
+    </div>
+  `;
+  
+  sb.innerHTML = html;
+}
+
+document.addEventListener('click', e => {
+  const gb = e.target.closest('[data-sidebar-grade]');
+  if(gb){
+    state.grade = +gb.dataset.sidebarGrade;
+    state.subject = null;
+    state.noteId = null;
+    localStorage.setItem(GRADE_KEY, state.grade);
+    renderHome(); renderProfile(); renderSidebar();
+    showScreen('home');
+    toast(`پایه ${fa(state.grade)}م انتخاب شد`, 'success');
+    return;
+  }
+  const sb = e.target.closest('[data-sidebar-subj]');
+  if(sb){
+    state.subject = sb.dataset.sidebarSubj || null;
+    state.noteId = null;
+    renderHome(); renderSidebar();
+    showScreen('home');
+    return;
+  }
+});
+
+// Resize listener for sidebar
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if(isDesktop()) renderSidebar();
+  }, 200);
+});
+
+/* =========================================================
    Render
    ========================================================= */
 function renderHome(){
@@ -948,13 +1437,11 @@ function renderSearch(){
   const el = $('#searchResults');
   const clearBtn = $('#searchClear');
   if(state.searchQuery) clearBtn.classList.add('show'); else clearBtn.classList.remove('show');
-
   if(state.searchQuery.trim() === ADMIN_CODE){
     el.innerHTML = `<div class="empty"><div class="empty-icon">🔓</div><b>خوش آمدی مدیر</b><p>در حال باز کردن پنل…</p></div>`;
     setTimeout(() => { $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); openAdminPanel(); }, 400);
     return;
   }
-
   if(!q){ el.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><b>جستجو در جزوه‌ها</b><p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`; return; }
   const all = Object.values(store.notes).filter(n => !n.deleted);
   const results = all.filter(n => (n.title || '').toLowerCase().includes(q) || (n.subject || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)).sort((a,b) => b.ts - a.ts);
@@ -997,14 +1484,12 @@ function renderDetail(){
     const initial = (c.author || 'ن').trim().charAt(0) || 'ن';
     return `<div class="cmt"><div class="cmt-av" style="background:${avColor(c.author || 'ن')}">${esc(initial)}</div><div class="cmt-body"><div class="cmt-head"><b>${esc(c.author || 'ناشناس')}</b><span>${dateFa(c.ts)}</span></div><div class="cmt-text">${esc(c.text).replace(/\n/g, '<br>')}</div></div></div>`;
   }).join('') : `<div class="empty" style="padding:24px 12px;border:0;background:transparent"><div class="empty-icon" style="width:52px;height:52px;font-size:24px;border-radius:16px">✍️</div><b>هنوز نظری نیست</b><p>اولین نفری باشید که نظر می‌دهد.</p></div>`;
-
   let pdfHtml = '';
   if(hasPdf(n)){
     const pdfName = n.pdfName || 'جزوه.pdf';
     const pdfSize = n.pdfSize || 0;
     pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${pdfSize ? formatSize(pdfSize) : (n.pdfUrl && !n.pdfFile ? 'لینک خارجی' : 'ذخیره‌شده')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
   }
-
   $('#detailBody').innerHTML = `
     <div class="note-head"><div class="chips-row"><span class="nc-chip" style="--sc:${st.c};--sb:${st.bg}">${st.i} ${esc(n.subject)}</span><span class="nc-grade">پایه ${fa(n.grade)}</span></div><div class="note-title">${esc(n.title || 'بدون عنوان')}</div><div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div></div>
     ${pdfHtml}
@@ -1021,33 +1506,29 @@ function refreshAll(){
   else if(state.screen === 'profile') renderProfile();
   if(state.noteId) renderDetail();
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
+  renderSidebar();
 }
 
 /* =========================================================
    PDF Viewer
    ========================================================= */
 let currentPdfBlobUrl = null;
-
 window.openPdfViewer = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
   const frame = $('#pdfViewerFrame'), dl = $('#pdfViewerDownload');
   const loading = $('#pdfLoading'), loadingText = $('#pdfLoadingText');
-  
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
-  
   $('#pdfViewerTitle').textContent = pdfName;
   $('#pdfViewer').classList.remove('hidden');
   loading.classList.remove('hidden');
   loadingText.textContent = 'در حال بارگذاری PDF…';
   frame.src = 'about:blank';
-  
-  // PDF base64 قدیمی
   if(n.pdfData && n.pdfData.length){
     try{
-      const byteChars = atob(n.pdfData);
-      const bytes = new Uint8Array(byteChars.length);
-      for(let i = 0; i < byteChars.length; i++) bytes[i] = byteChars.charCodeAt(i);
+      const bc = atob(n.pdfData);
+      const bytes = new Uint8Array(bc.length);
+      for(let i = 0; i < bc.length; i++) bytes[i] = bc.charCodeAt(i);
       const blob = new Blob([bytes], {type: 'application/pdf'});
       const url = URL.createObjectURL(blob);
       currentPdfBlobUrl = url;
@@ -1056,12 +1537,10 @@ window.openPdfViewer = async function(){
       dl.setAttribute('download', pdfName);
       loading.classList.add('hidden');
       return;
-    }catch(e){ loadingText.textContent = 'خطا در بارگذاری'; return; }
+    }catch(e){ loadingText.textContent = 'خطا'; return; }
   }
-  
   const url = getPdfRawUrl(n);
   if(!url){ loadingText.textContent = 'PDF یافت نشد'; return; }
-  
   try{
     const r = await fetch(url, { cache: 'no-store' });
     if(!r.ok){
@@ -1077,41 +1556,33 @@ window.openPdfViewer = async function(){
     dl.href = blobUrl;
     dl.setAttribute('download', pdfName);
     loading.classList.add('hidden');
-  }catch(e){
-    loading.classList.add('hidden');
-    toast('خطا در بارگذاری PDF', 'error');
-  }
+  }catch(e){ loading.classList.add('hidden'); toast('خطا در بارگذاری', 'error'); }
 };
-
 window.downloadPdf = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
   if(currentPdfBlobUrl){
     const a = document.createElement('a');
-    a.href = currentPdfBlobUrl;
-    a.download = pdfName;
+    a.href = currentPdfBlobUrl; a.download = pdfName;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    toast('📥 دانلود شروع شد', 'success');
-    return;
+    toast('📥 دانلود شروع شد', 'success'); return;
   }
   const url = getPdfRawUrl(n);
   if(!url){ toast('PDF موجود نیست', 'error'); return; }
   toast('در حال دانلود…');
   try{
     const r = await fetch(url, { cache: 'no-store' });
-    if(!r.ok) throw new Error('خطا');
+    if(!r.ok) throw new Error();
     const blob = await r.blob();
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     const a = document.createElement('a');
-    a.href = blobUrl;
-    a.download = pdfName;
+    a.href = blobUrl; a.download = pdfName;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
     toast('📥 دانلود شروع شد', 'success');
   }catch(e){ toast('خطا در دانلود', 'error'); }
 };
-
 $('#pdfViewerClose').addEventListener('click', () => {
   $('#pdfViewer').classList.add('hidden');
   $('#pdfViewerFrame').src = 'about:blank';
@@ -1140,17 +1611,18 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-act]'); if(!t) return;
   const act = t.dataset.act;
-  if(act === 'subj'){ state.subject = t.dataset.s; renderHome(); }
-  else if(act === 'allsubj'){ state.subject = null; renderHome(); }
+  if(act === 'subj'){ state.subject = t.dataset.s; renderHome(); renderSidebar(); }
+  else if(act === 'allsubj'){ state.subject = null; renderHome(); renderSidebar(); }
   else if(act === 'open'){ openDetail(t.dataset.id); }
   else if(act === 'toggle-lib'){ const g = t.closest('.lib-grade'); if(g) g.classList.toggle('open'); }
-  else if(act === 'lib-sub'){ state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null; localStorage.setItem(GRADE_KEY, state.grade); showScreen('home'); }
+  else if(act === 'lib-sub'){ state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null; localStorage.setItem(GRADE_KEY, state.grade); showScreen('home'); renderSidebar(); }
 });
 
 function openDetail(id){ state.noteId = id; draft = {name:'', text:''}; $('#detail').classList.remove('hidden'); renderDetail(); }
 function closeDetail(){ state.noteId = null; $('#detail').classList.add('hidden'); refreshAll(); }
 $('#detailBack').addEventListener('click', closeDetail);
 $('#themeToggle').addEventListener('click', toggleTheme);
+$('#brandClick').addEventListener('click', () => showScreen('home'));
 
 function openGradeSheet(){
   $('#gradeGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<button class="grade-opt ${g === state.grade ? 'active' : ''}" data-grade="${g}" type="button"><span class="num">${fa(g)}</span><span class="lbl">پایه</span></button>`).join('');
@@ -1162,10 +1634,9 @@ $('#gradeGrid').addEventListener('click', e => {
   const b = e.target.closest('[data-grade]'); if(!b) return;
   state.grade = +b.dataset.grade; state.subject = null; state.noteId = null;
   localStorage.setItem(GRADE_KEY, state.grade);
-  closeSheet(); renderHome(); renderProfile();
+  closeSheet(); renderHome(); renderProfile(); renderSidebar();
   toast(`پایه ${fa(state.grade)}م انتخاب شد`, 'success');
 });
-
 $('#menuGrade').addEventListener('click', openGradeSheet);
 $('#menuName').addEventListener('click', () => {
   const cur = localStorage.getItem(NAME_KEY) || '';
@@ -1303,7 +1774,7 @@ $('#btnDisconnect').addEventListener('click', () => {
 });
 
 /* =========================================================
-   Single Note Editor
+   Single Editor
    ========================================================= */
 let editingNoteId = null;
 function openEditor(id){
@@ -1318,14 +1789,10 @@ function openEditor(id){
     gradeSel.value = n.grade; populateSubjects(n.grade, n.subject);
     $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl && !n.pdfFile ? n.pdfUrl : '';
     if(n.pdfFile){
-      editingPdfExistingFile = n.pdfFile;
-      editingPdfExistingName = n.pdfName || 'file.pdf';
-      editingPdfExistingSize = n.pdfSize || 0;
+      editingPdfExistingFile = n.pdfFile; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
     } else if(n.pdfData && n.pdfData.length){
-      editingPdfExisting = n.pdfData;
-      editingPdfExistingName = n.pdfName || 'file.pdf';
-      editingPdfExistingSize = n.pdfSize || 0;
+      editingPdfExisting = n.pdfData; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName + ' (قدیمی)', editingPdfExistingSize, true);
     } else resetPdfUpload();
     $('#editorDelete').classList.remove('hidden');
@@ -1382,15 +1849,11 @@ $('#editorSave').addEventListener('click', async () => {
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
   const pdfUrlInput = $('#edPdfUrl').value.trim();
-  
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
-  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF لازم است', 'error'); return; }
-  
+  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
-  const btn = $('#editorSave');
-  btn.disabled = true;
-  
+  const btn = $('#editorSave'); btn.disabled = true;
   try{
     if(editingPdfFile){
       setLoading(true, `آماده‌سازی PDF (${(editingPdfFile.size/1024/1024).toFixed(2)} MB)…`, '');
@@ -1401,40 +1864,25 @@ $('#editorSave').addEventListener('click', async () => {
       const filename = `note_${id}_${Date.now().toString(36)}.pdf`;
       const result = await uploadPdfFile(filename, base64Data);
       showProgress(80);
-      item.pdfFile = filename;
-      item.pdfName = editingPdfFile.name;
-      item.pdfSize = result.size;
-      if(editingPdfExistingFile && editingPdfExistingFile !== filename){
-        deletePdfFile(editingPdfExistingFile).catch(()=>{});
-      }
+      item.pdfFile = filename; item.pdfName = editingPdfFile.name; item.pdfSize = result.size;
+      if(editingPdfExistingFile && editingPdfExistingFile !== filename) deletePdfFile(editingPdfExistingFile).catch(()=>{});
     } else if(editingPdfExistingFile){
-      item.pdfFile = editingPdfExistingFile;
-      item.pdfName = editingPdfExistingName;
-      item.pdfSize = editingPdfExistingSize;
+      item.pdfFile = editingPdfExistingFile; item.pdfName = editingPdfExistingName; item.pdfSize = editingPdfExistingSize;
     } else if(editingPdfExisting){
-      item.pdfData = editingPdfExisting;
-      item.pdfName = editingPdfExistingName;
-      item.pdfSize = editingPdfExistingSize;
+      item.pdfData = editingPdfExisting; item.pdfName = editingPdfExistingName; item.pdfSize = editingPdfExistingSize;
     } else if(pdfUrlInput){
-      item.pdfUrl = pdfUrlInput;
-      item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
+      item.pdfUrl = pdfUrlInput; item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
     }
-    
     store.notes[id] = item;
     setLoading(true, 'در حال ذخیره data.json…', '');
     showProgress(90);
     await saveDataToGitHub();
     showProgress(100);
     await sleep(500);
-    closeEditor();
-    renderAdmin(); renderHome();
+    closeEditor(); renderAdmin(); renderHome();
     toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success');
-  }catch(err){
-    console.error('Save error:', err);
-    toast('❌ خطا: ' + err.message, 'error');
-  }finally{
-    setLoading(false); hideProgress(); btn.disabled = false;
-  }
+  }catch(err){ console.error(err); toast('❌ خطا: ' + err.message, 'error'); }
+  finally{ setLoading(false); hideProgress(); btn.disabled = false; }
 });
 
 $('#editorDelete').addEventListener('click', async () => {
@@ -1446,11 +1894,8 @@ $('#editorDelete').addEventListener('click', async () => {
   store.notes[tomb.id] = tomb;
   closeEditor(); renderAdmin(); renderHome();
   toast('در حال حذف…');
-  try{
-    await saveDataToGitHub();
-    if(pdfToDelete) deletePdfFile(pdfToDelete).catch(()=>{});
-    toast('✅ حذف شد', 'success');
-  }catch(e){ toast('خطا: ' + e.message, 'error'); }
+  try{ await saveDataToGitHub(); if(pdfToDelete) deletePdfFile(pdfToDelete).catch(()=>{}); toast('✅ حذف شد', 'success'); }
+  catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
 /* =========================================================
@@ -1458,8 +1903,7 @@ $('#editorDelete').addEventListener('click', async () => {
    ========================================================= */
 function openBulkEditor(){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
-  bulkFiles = [];
-  bulkStopFlag = false;
+  bulkFiles = []; bulkStopFlag = false;
   const gradeSel = $('#bulkGrade');
   gradeSel.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${fa(g)}م</option>`).join('');
   populateBulkSubjects(state.grade);
@@ -1471,12 +1915,10 @@ function openBulkEditor(){
   $('#bulkStop').classList.add('hidden');
   $('#bulkEditor').classList.remove('hidden');
 }
-
 function populateBulkSubjects(grade){
   const subs = getSubjects(grade);
   $('#bulkSubject').innerHTML = subs.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
 }
-
 function renderBulkList(){
   const el = $('#bulkList');
   if(!bulkFiles.length){
@@ -1490,31 +1932,21 @@ function renderBulkList(){
   $('#bulkUploadName').textContent = `${fa(bulkFiles.length)} فایل انتخاب شد`;
   $('#bulkUploadSize').textContent = `حجم کل: ${totalMB.toFixed(1)} مگابایت`;
   $('#bulkUploadArea').classList.add('has-file');
-  
   el.innerHTML = bulkFiles.map((f, i) => {
     const status = f._status || 'wait';
-    const statusIcon = status === 'done' ? '✅' : status === 'error' ? '❌' : status === 'active' ? '⏳' : '⏸';
+    const icon = status === 'done' ? '✅' : status === 'error' ? '❌' : status === 'active' ? '⏳' : '⏸';
     const cls = status === 'done' ? 'done' : status === 'error' ? 'error' : status === 'active' ? 'active' : '';
-    return `<div class="bulk-item ${cls}">
-      <span class="bulk-item-num">${fa(i+1)}.</span>
-      <span class="bulk-item-name">${esc(f.name)}</span>
-      <span class="bulk-item-size">${(f.size/1024/1024).toFixed(1)} MB</span>
-      <span class="bulk-item-status">${statusIcon}</span>
-    </div>`;
+    return `<div class="bulk-item ${cls}"><span class="bulk-item-num">${fa(i+1)}.</span><span class="bulk-item-name">${esc(f.name)}</span><span class="bulk-item-size">${(f.size/1024/1024).toFixed(1)} MB</span><span class="bulk-item-status">${icon}</span></div>`;
   }).join('');
 }
-
 function closeBulkEditor(){ $('#bulkEditor').classList.add('hidden'); }
 
 $('#btnBulkUpload').addEventListener('click', openBulkEditor);
-$('#bulkBack').addEventListener('click', () => { if(!bulkStopFlag){ closeBulkEditor(); } else toast('اول آپلود رو متوقف کن'); });
-$('#bulkCancel').addEventListener('click', () => { if(bulkStopFlag){ toast('اول آپلود رو متوقف کن'); return; } closeBulkEditor(); });
-
+$('#bulkBack').addEventListener('click', () => { if(!bulkStopFlag) closeBulkEditor(); else toast('اول آپلود رو متوقف کن'); });
+$('#bulkCancel').addEventListener('click', () => { if(bulkStopFlag){ toast('اول متوقف کن'); return; } closeBulkEditor(); });
 $('#bulkGrade').addEventListener('change', function(){ populateBulkSubjects(+this.value); });
-
 $('#btnBulkChoose').addEventListener('click', (e) => { e.stopPropagation(); $('#bulkFiles').click(); });
 $('#bulkUploadArea').addEventListener('click', () => $('#bulkFiles').click());
-
 $('#bulkFiles').addEventListener('change', e => {
   const files = Array.from(e.target.files || []);
   const valid = files.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
@@ -1523,109 +1955,56 @@ $('#bulkFiles').addEventListener('change', e => {
   bulkFiles = valid.map(f => { f._status = 'wait'; return f; });
   renderBulkList();
 });
-
-$('#bulkStop').addEventListener('click', () => {
-  bulkStopFlag = true;
-  toast('آپلود متوقف می‌شود…');
-});
+$('#bulkStop').addEventListener('click', () => { bulkStopFlag = true; toast('آپلود متوقف می‌شود…'); });
 
 $('#bulkSave').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   if(!bulkFiles.length){ toast('حداقل یه فایل انتخاب کن', 'error'); return; }
-  
   const grade = +$('#bulkGrade').value;
   const subject = $('#bulkSubject').value;
   const total = bulkFiles.length;
-  
   if(!confirm(`${fa(total)} PDF به درس «${subject}» پایه ${fa(grade)}م اضافه بشه؟`)) return;
-  
   bulkStopFlag = false;
   $('#bulkSave').disabled = true;
   $('#bulkSave').textContent = '⏳ در حال آپلود…';
   $('#bulkStop').classList.remove('hidden');
   $('#bulkProgressSection').style.display = 'block';
-  
   let ok = 0, err = 0;
   const errors = [];
-  
   for(let i = 0; i < bulkFiles.length; i++){
-    if(bulkStopFlag){
-      toast('آپلود متوقف شد', 'error');
-      break;
-    }
-    
+    if(bulkStopFlag){ toast('آپلود متوقف شد', 'error'); break; }
     const file = bulkFiles[i];
     file._status = 'active';
     renderBulkList();
-    
     $('#bulkOkCount').textContent = fa(ok);
     $('#bulkErrCount').textContent = fa(err);
     $('#bulkCurrent').textContent = file.name;
     $('#bulkProgressBar').style.width = ((i / total) * 100) + '%';
-    
     try{
-      // تبدیل به base64
       const base64Data = await blobToBase64(file);
-      
-      // آپلود PDF
       const filename = `note_${uid()}_${Date.now().toString(36)}.pdf`;
       const result = await uploadPdfFile(filename, base64Data);
-      
-      // ساخت جزوه
       const noteId = uid();
       const title = file.name.replace(/\.pdf$/i, '').trim() || 'بدون عنوان';
-      const item = {
-        kind: 'note',
-        id: noteId,
-        grade,
-        subject,
-        title,
-        content: '',
-        pdfFile: filename,
-        pdfName: file.name,
-        pdfSize: result.size,
-        ts: Date.now()
-      };
-      
+      const item = {kind:'note', id:noteId, grade, subject, title, content:'', pdfFile:filename, pdfName:file.name, pdfSize:result.size, ts:Date.now()};
       store.notes[noteId] = item;
-      
-      // ذخیره فوری (اگه بعدش قطع شد، این یکی حفظ بشه)
       await saveDataToGitHub();
-      
       file._status = 'done';
       ok++;
-    }catch(e){
-      console.error('Bulk error for', file.name, e);
-      file._status = 'error';
-      err++;
-      errors.push(`${file.name}: ${e.message}`);
-    }
-    
+    }catch(e){ console.error(e); file._status = 'error'; err++; errors.push(`${file.name}: ${e.message}`); }
     renderBulkList();
     $('#bulkOkCount').textContent = fa(ok);
     $('#bulkErrCount').textContent = fa(err);
-    
-    // صبر بین فایل‌ها (برای GitHub Rate Limit)
-    if(i < bulkFiles.length - 1 && !bulkStopFlag){
-      await sleep(800);
-    }
+    if(i < bulkFiles.length - 1 && !bulkStopFlag) await sleep(800);
   }
-  
   $('#bulkProgressBar').style.width = '100%';
   $('#bulkCurrent').textContent = '—';
   $('#bulkStop').classList.add('hidden');
   $('#bulkSave').disabled = false;
   $('#bulkSave').textContent = '🚀 آپلود دوباره';
-  
   renderAdmin(); renderHome();
-  
-  if(err === 0){
-    toast(`🎉 ${fa(ok)} جزوه با موفقیت اضافه شد`, 'success');
-    setTimeout(() => closeBulkEditor(), 2000);
-  } else {
-    toast(`✅ ${fa(ok)} موفق • ❌ ${fa(err)} خطا`, 'error');
-    console.warn('Bulk errors:', errors);
-  }
+  if(err === 0){ toast(`🎉 ${fa(ok)} جزوه اضافه شد`, 'success'); setTimeout(() => closeBulkEditor(), 2000); }
+  else toast(`✅ ${fa(ok)} موفق • ❌ ${fa(err)} خطا`, 'error');
 });
 
 /* =========================================================
@@ -1641,7 +2020,6 @@ function closeSubjectEditor(){ $('#subjectEditor').classList.add('hidden'); }
 $('#btnNewSubject').addEventListener('click', openSubjectEditor);
 $('#subjectEditorBack').addEventListener('click', closeSubjectEditor);
 $('#subjectEditorCancel').addEventListener('click', closeSubjectEditor);
-
 $('#subjectEditorSave').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   const grade = +$('#subEdGrade').value;
@@ -1650,22 +2028,20 @@ $('#subjectEditorSave').addEventListener('click', async () => {
   if(getSubjects(grade).includes(name)){ toast('تکراری است', 'error'); return; }
   const item = {kind:'subject', id:uid(), grade, name, ts:Date.now()};
   store.subjects[item.id] = item;
-  closeSubjectEditor(); renderAdmin(); renderHome(); renderLibrary();
+  closeSubjectEditor(); renderAdmin(); renderHome(); renderLibrary(); renderSidebar();
   toast('در حال ذخیره…');
   try{ await saveDataToGitHub(); toast('✅ درس اضافه شد', 'success'); }
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
-
 async function deleteSubject(id){
   if(!confirm('این درس حذف شود؟')) return;
   const s = store.subjects[id]; if(!s) return;
   const tomb = {kind:'subject', id, grade:s.grade, name:s.name, deleted:true, ts:Date.now()};
   store.subjects[id] = tomb;
-  renderAdmin(); renderHome(); toast('در حال حذف…');
+  renderAdmin(); renderHome(); renderSidebar(); toast('در حال حذف…');
   try{ await saveDataToGitHub(); toast('✅ حذف شد', 'success'); }
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 }
-
 $('#btnNewNote').addEventListener('click', () => openEditor(null));
 $('#btnRefreshNotes').addEventListener('click', async () => {
   toast('در حال دریافت…');
@@ -1693,12 +2069,22 @@ function toast(msg, type){
   initTheme();
   isAdmin = !!getToken();
   
+  // چک کردن اولین بازدید
+  const isFirst = initWelcome();
+  
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
     if(cached && cached.notes){ store = cached; }
   }catch(e){}
   
+  // اگه کاربر قبلی هست، پایه رو از storage بخون
+  if(!isFirst){
+    state.grade = +(localStorage.getItem(GRADE_KEY) || 7);
+  }
+  
   renderHome(); renderProfile(); renderLibrary();
+  if(isDesktop()) renderSidebar();
+  
   await loadFromGitHub(true);
   
   setInterval(() => { if(!state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false); }, 120000);
