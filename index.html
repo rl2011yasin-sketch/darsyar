@@ -206,8 +206,11 @@ button{cursor:pointer;user-select:none}
 .pdf-viewer-title{flex:1;font-size:13.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-viewer-body{flex:1;position:relative;background:#1e293b}
 .pdf-viewer-body iframe{width:100%;height:100%;border:0;background:#fff}
-.pdf-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1e293b;color:#94a3b8;gap:14px}
+.pdf-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1e293b;color:#94a3b8;gap:14px;padding:20px;text-align:center}
 .pdf-loading.hidden{display:none}
+.pdf-loading b{color:#fff;font-size:15px;margin-bottom:6px}
+.pdf-loading p{font-size:13px;line-height:1.9;max-width:340px}
+.pdf-loading .btn{margin-top:14px}
 .spinner{width:40px;height:40px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
@@ -274,8 +277,21 @@ button{cursor:pointer;user-select:none}
 .bulk-item.error{background:var(--dangbg);border-color:var(--dangtxt)}
 .bulk-item.active{background:var(--pl);border-color:var(--p);animation:pulseLight 1.2s infinite}
 @keyframes pulseLight{0%,100%{opacity:1}50%{opacity:.7}}
-.lesson-preview{background:linear-gradient(135deg,var(--pl),var(--pl));border:1.5px dashed var(--p);border-radius:12px;padding:12px;margin-top:10px;font-size:12px;line-height:1.8;color:var(--pd)}
-.lesson-preview b{color:var(--p)}
+
+/* User Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;margin-bottom:16px}
+.stat-big{background:var(--card);border-radius:14px;padding:16px;border:1.5px solid var(--br);text-align:center}
+.stat-big .num{font-size:28px;font-weight:800;color:var(--p);letter-spacing:-1px;line-height:1.1;margin-bottom:4px}
+.stat-big .lbl{font-size:11.5px;color:var(--mut);font-weight:700}
+.stat-big .ico{font-size:22px;margin-bottom:6px}
+.user-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card);border-radius:11px;border:1px solid var(--br);margin-bottom:6px}
+.user-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0}
+.user-info{flex:1;min-width:0}
+.user-name{font-size:13px;font-weight:700;margin-bottom:2px}
+.user-meta{font-size:10.5px;color:var(--mut);font-weight:600}
+.user-badge{padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:800;background:var(--pl);color:var(--p);flex-shrink:0}
+.user-badge.online{background:var(--okbg);color:var(--oktxt)}
+
 .hidden{display:none !important}
 .loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
@@ -333,7 +349,7 @@ button{cursor:pointer;user-select:none}
 </head>
 <body>
 
-<!-- ==================== WELCOME MODAL ==================== -->
+<!-- WELCOME -->
 <div class="welcome-overlay hidden" id="welcomeOverlay">
   <div class="welcome-card">
     <div class="welcome-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='📚'"></div>
@@ -345,7 +361,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
-<!-- ==================== LOADING ==================== -->
+<!-- LOADING -->
 <div class="loading-overlay hidden" id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loadingText">در حال دریافت داده‌ها…</div>
@@ -353,7 +369,7 @@ button{cursor:pointer;user-select:none}
   <div class="progress-track hidden" id="progressTrack"><div class="progress-fill-bar" id="progressFillBar"></div></div>
 </div>
 
-<!-- ==================== APP ==================== -->
+<!-- APP -->
 <div class="app">
   <header class="header">
     <div class="brand" id="brandClick">
@@ -373,7 +389,6 @@ button{cursor:pointer;user-select:none}
   <aside class="desktop-sidebar" id="desktopSidebar"></aside>
 
   <main class="main">
-    <!-- HOME -->
     <section class="screen active" id="screen-home">
       <div class="hero">
         <div class="hero-in">
@@ -392,7 +407,6 @@ button{cursor:pointer;user-select:none}
       <div class="notes" id="notesList"></div>
     </section>
 
-    <!-- SEARCH -->
     <section class="screen" id="screen-search">
       <div class="search-wrap">
         <div class="search-box">
@@ -404,14 +418,12 @@ button{cursor:pointer;user-select:none}
       <div class="notes" id="searchResults"></div>
     </section>
 
-    <!-- LIBRARY -->
     <section class="screen" id="screen-library">
       <div class="section"><h2>کتابخانه درسی</h2></div>
       <p style="font-size:12.5px;color:var(--mut);margin:0 4px 14px">روی هر پایه بزنید تا درس‌های آن را ببینید.</p>
       <div id="libraryList"></div>
     </section>
 
-    <!-- PROFILE -->
     <section class="screen" id="screen-profile">
       <div class="profile-card">
         <div class="profile-av" id="profileAv">👤</div>
@@ -428,7 +440,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.4</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.5</p>
     </section>
   </main>
 
@@ -457,12 +469,17 @@ button{cursor:pointer;user-select:none}
     <a class="btn btn-ghost btn-sm" id="pdfViewerDownload" download style="background:rgba(255,255,255,.15);color:#fff">⬇</a>
   </div>
   <div class="pdf-viewer-body">
-    <div class="pdf-loading" id="pdfLoading"><div class="spinner"></div><span id="pdfLoadingText">در حال بارگذاری PDF…</span></div>
+    <div class="pdf-loading" id="pdfLoading">
+      <div class="spinner" id="pdfSpinner"></div>
+      <b id="pdfLoadingTitle">در حال بارگذاری PDF…</b>
+      <p id="pdfLoadingText">لطفاً صبر کن</p>
+      <button class="btn btn-primary btn-sm hidden" id="pdfRetryBtn" type="button">🔄 تلاش مجدد</button>
+    </div>
     <iframe id="pdfViewerFrame" src="about:blank"></iframe>
   </div>
 </div>
 
-<!-- SHEET (Grade Picker) -->
+<!-- SHEET -->
 <div class="sheet-overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
@@ -481,6 +498,7 @@ button{cursor:pointer;user-select:none}
   <div class="admin-tabs">
     <button class="admin-tab active" data-tab="notes" type="button">📝 جزوه‌ها <span class="cnt-mini" id="tabNotesCount">۰</span></button>
     <button class="admin-tab" data-tab="subjects" type="button">📚 درس‌ها <span class="cnt-mini" id="tabSubjectsCount">۰</span></button>
+    <button class="admin-tab" data-tab="users" type="button">👥 کاربران <span class="cnt-mini" id="tabUsersCount">۰</span></button>
     <button class="admin-tab" data-tab="settings" type="button">⚙️ تنظیمات</button>
   </div>
   <div class="admin-body">
@@ -498,6 +516,12 @@ button{cursor:pointer;user-select:none}
       <div class="admin-actions"><button class="btn btn-primary" id="btnNewSubject" type="button">＋ درس سفارشی</button></div>
       <div class="admin-list" id="adminSubjectsList"></div>
     </div>
+    <div class="admin-panel" id="panel-users">
+      <div class="admin-actions">
+        <button class="btn btn-ghost" id="btnRefreshUsers" type="button">🔄 به‌روزرسانی آمار</button>
+      </div>
+      <div id="usersStats"></div>
+    </div>
     <div class="admin-panel" id="panel-settings">
       <div class="settings-section">
         <h4><span class="dot" style="background:var(--ok)"></span> اتصال به GitHub</h4>
@@ -514,7 +538,7 @@ button{cursor:pointer;user-select:none}
         <div id="ghStatus" style="margin-top:12px;font-size:12px;color:var(--mut);line-height:1.9"></div>
       </div>
       <div class="settings-section">
-        <h4><span class="dot" style="background:var(--p)"></span> آمار</h4>
+        <h4><span class="dot" style="background:var(--p)"></span> آمار کلی</h4>
         <div id="adminStats" style="font-size:13px;color:var(--mut);line-height:2.2"></div>
       </div>
     </div>
@@ -536,11 +560,11 @@ button{cursor:pointer;user-select:none}
     <div class="field">
       <label>شماره درس (اختیاری)</label>
       <input id="edLessonNum" type="number" placeholder="خودکار از عنوان" min="1" max="99">
-      <div class="hint" id="lessonHint">💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه (اول، ۱، درس ۲ و...)</div>
+      <div class="hint" id="lessonHint">💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه</div>
     </div>
     <div class="field">
       <label>متن جزوه</label>
-      <textarea id="edContent" class="content-area" placeholder="متن جزوه...&#10;&#10;# عنوان&#10;## زیرعنوان&#10;- آیتم&#10;**متن مهم**"></textarea>
+      <textarea id="edContent" class="content-area" placeholder="متن جزوه..."></textarea>
     </div>
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--dang)"></span> PDF (اختیاری)</h4>
@@ -570,7 +594,7 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
-<!-- BULK UPLOAD EDITOR -->
+<!-- BULK EDITOR -->
 <div class="editor hidden" id="bulkEditor">
   <div class="editor-header">
     <button class="back-btn" id="bulkBack" type="button">‹</button>
@@ -583,7 +607,6 @@ button{cursor:pointer;user-select:none}
         <div class="field"><label>پایه</label><select id="bulkGrade"></select></div>
         <div class="field"><label>درس</label><select id="bulkSubject"></select></div>
       </div>
-      <div class="hint">👆 همه PDFها به این درس اضافه می‌شن. شماره درس خودکار از اسم فایل تشخیص داده می‌شه.</div>
     </div>
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--dang)"></span> انتخاب فایل‌ها</h4>
@@ -593,7 +616,7 @@ button{cursor:pointer;user-select:none}
           <div class="pdf-upload-icon">📚</div>
           <div class="pdf-upload-info">
             <div class="pdf-upload-name" id="bulkUploadName">برای انتخاب کلیک کن</div>
-            <div class="pdf-upload-size" id="bulkUploadSize">می‌تونی چند تا PDF رو با هم انتخاب کنی</div>
+            <div class="pdf-upload-size" id="bulkUploadSize">چند تا PDF رو با هم انتخاب کن</div>
           </div>
           <button type="button" class="btn btn-ghost btn-sm" id="btnBulkChoose">انتخاب</button>
         </div>
@@ -601,7 +624,7 @@ button{cursor:pointer;user-select:none}
       <div class="bulk-list" id="bulkList"></div>
     </div>
     <div class="settings-section" id="bulkProgressSection" style="display:none">
-      <h4><span class="dot" style="background:var(--ok)"></span> پیشرفت آپلود</h4>
+      <h4><span class="dot" style="background:var(--ok)"></span> پیشرفت</h4>
       <div style="font-size:13px;line-height:2;margin-bottom:10px">
         <div>✅ موفق: <b id="bulkOkCount" style="color:var(--oktxt)">۰</b></div>
         <div>❌ ناموفق: <b id="bulkErrCount" style="color:var(--dangtxt)">۰</b></div>
@@ -635,11 +658,11 @@ button{cursor:pointer;user-select:none}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v1.0.4</div>
+<div class="ver">درسیار v1.0.5</div>
 
 <script>
 /* =========================================================
-   درسیار v1.0.4 — نسخه کامل
+   درسیار v1.0.5 — با آمار کاربران + فیکس PDF
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
@@ -653,7 +676,8 @@ const THEME_KEY = 'darsyar_theme';
 const GRADE_KEY = 'darsyar_grade';
 const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
-const CACHE_KEY = 'darsyar_cache_v104';
+const USER_ID_KEY = 'darsyar_user_id';
+const CACHE_KEY = 'darsyar_cache_v105';
 const ADMIN_CODE = 'darsyar2026';
 
 const $ = s => document.querySelector(s);
@@ -690,22 +714,14 @@ const PERSIAN_ORDINALS = {
   'نوزدهم':19,'نوزدهمین':19,'نوزده':19,
   'بیستم':20,'بیستمین':20,'بیست':20
 };
-
 const LESSON_PREFIXES = ['درس','فصل','بخش','واحد','مبحث','گفتار','درسنامه'];
 
 function detectLessonNumber(text){
   if(!text) return null;
   let str = normalizeDigits(String(text).trim());
-  
-  // دنبال پیشوند "درس N" یا "فصل N"
   const prefixPattern = new RegExp(`(?:${LESSON_PREFIXES.join('|')})\\s*[\\-_\\s]*?([0-9]{1,3})`, 'i');
   const m1 = str.match(prefixPattern);
-  if(m1){
-    const n = parseInt(m1[1], 10);
-    if(n >= 1 && n <= 99) return n;
-  }
-  
-  // کلمات ترتیبی فارسی
+  if(m1){ const n = parseInt(m1[1], 10); if(n >= 1 && n <= 99) return n; }
   const words = str.split(/[\s\-_.,،()]+/);
   for(let i = 0; i < words.length; i++){
     const w = words[i].trim();
@@ -715,34 +731,17 @@ function detectLessonNumber(text){
       if(PERSIAN_ORDINALS[combo]) return PERSIAN_ORDINALS[combo];
     }
   }
-  
-  // هر عدد در متن
   const anyNum = str.match(/(\d{1,2})/);
-  if(anyNum){
-    const n = parseInt(anyNum[1], 10);
-    if(n >= 1 && n <= 99) return n;
-  }
-  
+  if(anyNum){ const n = parseInt(anyNum[1], 10); if(n >= 1 && n <= 99) return n; }
   return null;
 }
-
 function detectLessonFromNote(note){
   if(note.lessonNum) return note.lessonNum;
-  if(note.title){
-    const n = detectLessonNumber(note.title);
-    if(n) return n;
-  }
-  if(note.pdfName){
-    const n = detectLessonNumber(note.pdfName);
-    if(n) return n;
-  }
-  if(note.content){
-    const n = detectLessonNumber(note.content);
-    if(n) return n;
-  }
+  if(note.title){ const n = detectLessonNumber(note.title); if(n) return n; }
+  if(note.pdfName){ const n = detectLessonNumber(note.pdfName); if(n) return n; }
+  if(note.content){ const n = detectLessonNumber(note.content); if(n) return n; }
   return null;
 }
-
 function sortNotes(a, b){
   const aL = detectLessonFromNote(a);
   const bL = detectLessonFromNote(b);
@@ -754,6 +753,14 @@ function sortNotes(a, b){
 
 function dateFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } }
 function dateFullFa(ts){ try{ return new Date(ts).toLocaleString('fa-IR',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ return ''; } }
+function timeAgo(ts){
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if(s < 60) return 'الان';
+  if(s < 3600) return `${fa(Math.floor(s/60))} دقیقه پیش`;
+  if(s < 86400) return `${fa(Math.floor(s/3600))} ساعت پیش`;
+  if(s < 604800) return `${fa(Math.floor(s/86400))} روز پیش`;
+  return dateFa(ts);
+}
 function formatSize(b){ if(!b) return ''; if(b < 1024) return fa(b)+' بایت'; if(b < 1024*1024) return fa((b/1024).toFixed(0))+' KB'; return fa((b/1024/1024).toFixed(1))+' MB'; }
 function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
 
@@ -764,7 +771,32 @@ function utf8ToBase64(str){
   return btoa(bin);
 }
 
-let store = { notes:{}, comments:{}, subjects:{}, updatedAt:0 };
+/* ===== تشخیص دستگاه و مرورگر ===== */
+function detectBrowser(){
+  const ua = navigator.userAgent;
+  if(/Chrome/i.test(ua) && !/Edg/i.test(ua)) return 'Chrome';
+  if(/Safari/i.test(ua) && !/Chrome/i.test(ua)) return 'Safari';
+  if(/Firefox/i.test(ua)) return 'Firefox';
+  if(/Edg/i.test(ua)) return 'Edge';
+  if(/Opera|OPR/i.test(ua)) return 'Opera';
+  return 'مرورگر ناشناس';
+}
+function detectOS(){
+  const ua = navigator.userAgent;
+  if(/Android/i.test(ua)) return 'اندروید';
+  if(/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
+  if(/Windows/i.test(ua)) return 'ویندوز';
+  if(/Mac/i.test(ua)) return 'مک';
+  if(/Linux/i.test(ua)) return 'لینوکس';
+  return 'نامشخص';
+}
+function detectDevice(){
+  const ua = navigator.userAgent;
+  if(/Mobile|Android|iPhone|iPad|iPod/i.test(ua)) return 'موبایل';
+  return 'دسکتاپ';
+}
+
+let store = { notes:{}, comments:{}, subjects:{}, stats:{ visits:0, users:{} }, updatedAt:0 };
 let fileSha = null;
 let isAdmin = false;
 const state = { screen:'home', grade:7, subject:null, noteId:null, searchQuery:'' };
@@ -772,6 +804,7 @@ let draft = {name:'', text:''};
 let editingPdfFile = null, editingPdfExisting = null, editingPdfExistingFile = '', editingPdfExistingName = '', editingPdfExistingSize = 0;
 let bulkFiles = [], bulkStopFlag = false;
 let welcomeSelectedGrade = null;
+let currentPdfBlobUrl = null;
 
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -802,6 +835,11 @@ const getSubjects = g => {
 
 const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
 const setToken = t => t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY);
+const getUserId = () => {
+  let id = localStorage.getItem(USER_ID_KEY);
+  if(!id){ id = 'u_' + uid(); localStorage.setItem(USER_ID_KEY, id); }
+  return id;
+};
 
 /* =========================================================
    GitHub API
@@ -833,7 +871,7 @@ async function githubGetMeta(path){
     if(r.status === 404) return null;
     if(!r.ok) throw new Error(`GitHub GET ${r.status}`);
     const data = await r.json();
-    return { sha: data.sha, size: data.size };
+    return { sha: data.sha, size: data.size, download_url: data.download_url };
   }catch(e){
     if(e.message && e.message.includes('404')) return null;
     throw e;
@@ -864,7 +902,7 @@ async function uploadPdfFile(filename, base64Data){
   let sha = null;
   try{ const meta = await githubGetMeta(path); if(meta) sha = meta.sha; }catch(e){}
   await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
-  await sleep(600);
+  await sleep(800);
   const verify = await githubGetMeta(path);
   if(!verify) throw new Error('آپلود تأیید نشد');
   if(verify.size < 100) throw new Error('فایل خالی');
@@ -925,6 +963,20 @@ async function loadFromGitHub(showLoad = true){
     store.notes = mergeNotes(store.notes || {}, data.notes || {});
     store.comments = mergeMap(store.comments || {}, data.comments || {});
     store.subjects = mergeMap(store.subjects || {}, data.subjects || {});
+    // آمار: ادغام
+    const remoteStats = data.stats || {};
+    if(!store.stats) store.stats = { visits: 0, users: {} };
+    if(remoteStats.visits > (store.stats.visits || 0)) store.stats.visits = remoteStats.visits;
+    if(remoteStats.users){
+      const allUsers = { ...(store.stats.users || {}), ...remoteStats.users };
+      // ادغام کاربران (هر کاربری که دیرتر دیده شده)
+      Object.entries(store.stats.users || {}).forEach(([k, v]) => {
+        if(remoteStats.users?.[k]){
+          allUsers[k] = (v.lastSeen || 0) > (remoteStats.users[k].lastSeen || 0) ? v : remoteStats.users[k];
+        }
+      });
+      store.stats.users = allUsers;
+    }
     store.updatedAt = Math.max(store.updatedAt || 0, data.updatedAt || 0);
     localStorage.setItem(CACHE_KEY, JSON.stringify(store));
     fileSha = null;
@@ -951,7 +1003,13 @@ async function saveDataToGitHub(){
     const {pdfData, ...rest} = v;
     cleanNotes[k] = rest;
   });
-  const cleanStore = { notes: cleanNotes, comments: store.comments, subjects: store.subjects, updatedAt: store.updatedAt };
+  const cleanStore = {
+    notes: cleanNotes,
+    comments: store.comments,
+    subjects: store.subjects,
+    stats: store.stats,
+    updatedAt: store.updatedAt
+  };
   const content = utf8ToBase64(JSON.stringify(cleanStore));
   let sha = null;
   try{ const meta = await githubGetMeta(DATA_FILE); if(meta) sha = meta.sha; }catch(e){}
@@ -961,6 +1019,38 @@ async function saveDataToGitHub(){
   localStorage.setItem(CACHE_KEY, JSON.stringify(store));
   setStatus('online');
   return true;
+}
+
+/* ===== ثبت بازدید کاربر ===== */
+async function registerVisit(){
+  const userId = getUserId();
+  const now = Date.now();
+  if(!store.stats) store.stats = { visits: 0, users: {} };
+  if(!store.stats.users) store.stats.users = {};
+  
+  const existing = store.stats.users[userId] || { firstSeen: now, count: 0 };
+  store.stats.users[userId] = {
+    firstSeen: existing.firstSeen || now,
+    lastSeen: now,
+    count: (existing.count || 0) + 1,
+    browser: detectBrowser(),
+    os: detectOS(),
+    device: detectDevice(),
+    grade: state.grade
+  };
+  store.stats.visits = (store.stats.visits || 0) + 1;
+  
+  localStorage.setItem(CACHE_KEY, JSON.stringify(store));
+  
+  // ارسال به GitHub (فقط اگه ادمین باشه)
+  if(isAdmin){
+    try{
+      await saveDataToGitHub();
+      console.log('✅ بازدید ثبت شد');
+    }catch(e){
+      console.warn('ثبت بازدید ناموفق:', e);
+    }
+  }
 }
 
 let isOnline = false, statusTimer = null;
@@ -1065,7 +1155,7 @@ $('#welcomeGradeGrid').addEventListener('click', e => {
   welcomeSelectedGrade = +b.dataset.wg;
   renderWelcomeGrid();
 });
-$('#welcomeContinue').addEventListener('click', () => {
+$('#welcomeContinue').addEventListener('click', async () => {
   if(!welcomeSelectedGrade) return;
   state.grade = welcomeSelectedGrade;
   localStorage.setItem(GRADE_KEY, state.grade);
@@ -1073,6 +1163,8 @@ $('#welcomeContinue').addEventListener('click', () => {
   $('#welcomeOverlay').classList.add('hidden');
   renderHome(); renderProfile(); renderLibrary(); renderSidebar();
   toast(`خوش اومدی! پایه ${fa(state.grade)}م انتخاب شد ✅`, 'success');
+  // ثبت بازدید بعد از انتخاب پایه
+  if(isAdmin) await registerVisit();
 });
 
 function renderSidebar(){
@@ -1263,20 +1355,54 @@ function refreshAll(){
   renderSidebar();
 }
 
-let currentPdfBlobUrl = null;
+/* =========================================================
+   PDF Viewer — با retry
+   ========================================================= */
+function setPdfStatus(title, text, showRetry, showSpinner){
+  $('#pdfLoadingTitle').textContent = title;
+  $('#pdfLoadingText').textContent = text;
+  $('#pdfRetryBtn').classList.toggle('hidden', !showRetry);
+  $('#pdfSpinner').style.display = showSpinner ? 'block' : 'none';
+}
+
+async function fetchPdfWithRetry(url, maxRetries = 3){
+  for(let i = 0; i < maxRetries; i++){
+    try{
+      const bustUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+      const r = await fetch(bustUrl, { cache: 'no-store' });
+      if(r.ok){
+        const blob = await r.blob();
+        if(blob.size > 100) return blob;
+      }
+      if(r.status === 404){
+        // فایل شاید هنوز آماده نیست، صبر کن و دوباره
+        if(i < maxRetries - 1){
+          await sleep(2000);
+          continue;
+        }
+        return null;
+      }
+    }catch(e){
+      console.warn('PDF fetch attempt', i+1, 'failed:', e);
+      if(i < maxRetries - 1) await sleep(1500);
+    }
+  }
+  return null;
+}
+
 window.openPdfViewer = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
   const frame = $('#pdfViewerFrame'), dl = $('#pdfViewerDownload');
-  const loading = $('#pdfLoading'), loadingText = $('#pdfLoadingText');
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
   $('#pdfViewerTitle').textContent = pdfName;
   $('#pdfViewer').classList.remove('hidden');
-  loading.classList.remove('hidden');
-  loadingText.textContent = 'در حال بارگذاری PDF…';
   frame.src = 'about:blank';
+  
+  // PDF base64 قدیمی
   if(n.pdfData && n.pdfData.length){
     try{
+      setPdfStatus('در حال باز کردن…', 'فایل داخلی', false, true);
       const bc = atob(n.pdfData);
       const bytes = new Uint8Array(bc.length);
       for(let i = 0; i < bc.length; i++) bytes[i] = bc.charCodeAt(i);
@@ -1284,27 +1410,48 @@ window.openPdfViewer = async function(){
       const url = URL.createObjectURL(blob);
       currentPdfBlobUrl = url;
       frame.src = url; dl.href = url; dl.setAttribute('download', pdfName);
-      loading.classList.add('hidden');
+      $('#pdfLoading').classList.add('hidden');
       return;
-    }catch(e){ loadingText.textContent = 'خطا'; return; }
-  }
-  const url = getPdfRawUrl(n);
-  if(!url){ loadingText.textContent = 'PDF یافت نشد'; return; }
-  try{
-    const r = await fetch(url, { cache: 'no-store' });
-    if(!r.ok){
-      loading.classList.add('hidden');
-      toast(r.status === 404 ? 'PDF هنوز آماده نیست - ۱ دقیقه صبر کن' : 'خطا در بارگذاری', 'error');
+    }catch(e){
+      setPdfStatus('خطا', 'فایل PDF خراب است', false, false);
       return;
     }
-    const blob = await r.blob();
+  }
+  
+  const url = getPdfRawUrl(n);
+  if(!url){
+    setPdfStatus('PDF یافت نشد', 'این جزوه فایل PDF ندارد', false, false);
+    return;
+  }
+  
+  setPdfStatus('در حال بارگذاری PDF…', 'لطفاً صبر کن', false, true);
+  
+  const blob = await fetchPdfWithRetry(url, 3);
+  if(!blob){
+    setPdfStatus(
+      '⏳ PDF آماده نیست',
+      'ممکنه آپلود هنوز کامل نشده باشه. ۱-۲ دقیقه صبر کن و دوباره تلاش کن.',
+      true, false
+    );
+    return;
+  }
+  
+  try{
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     currentPdfBlobUrl = blobUrl;
     frame.src = blobUrl; dl.href = blobUrl; dl.setAttribute('download', pdfName);
-    loading.classList.add('hidden');
-  }catch(e){ loading.classList.add('hidden'); toast('خطا در بارگذاری', 'error'); }
+    $('#pdfLoading').classList.add('hidden');
+  }catch(e){
+    setPdfStatus('خطا', 'مشکل در نمایش PDF', true, false);
+  }
 };
+
+$('#pdfRetryBtn').addEventListener('click', () => {
+  $('#pdfLoading').classList.remove('hidden');
+  window.openPdfViewer();
+});
+
 window.downloadPdf = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
@@ -1318,9 +1465,8 @@ window.downloadPdf = async function(){
   if(!url){ toast('PDF موجود نیست', 'error'); return; }
   toast('در حال دانلود…');
   try{
-    const r = await fetch(url, { cache: 'no-store' });
-    if(!r.ok) throw new Error();
-    const blob = await r.blob();
+    const blob = await fetchPdfWithRetry(url, 3);
+    if(!blob) throw new Error('not ready');
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     const a = document.createElement('a');
@@ -1447,7 +1593,7 @@ function renderAdminNotes(){
   if(adminFilterGrade) notes = notes.filter(n => n.grade === adminFilterGrade);
   notes.sort(sortNotes);
   $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n => !n.deleted).length);
-  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «آپلود گروهی» یا «جزوه تکی» شروع کن.</div>`; return; }
+  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.</div>`; return; }
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
     const lessonNum = detectLessonFromNote(n);
@@ -1468,6 +1614,69 @@ function renderAdminSubjects(){
   }).join('');
   el.querySelectorAll('[data-admin-del-subj]').forEach(b => b.addEventListener('click', () => deleteSubject(b.dataset.adminDelSubj)));
 }
+
+/* ===== Users Tab ===== */
+function renderUsers(){
+  const el = $('#usersStats');
+  if(!store.stats) store.stats = { visits: 0, users: {} };
+  const users = store.stats.users || {};
+  const usersArr = Object.entries(users).map(([id, data]) => ({ id, ...data }));
+  usersArr.sort((a, b) => (b.lastSeen || 0) - (a.lastSeen || 0));
+  
+  const total = usersArr.length;
+  const now = Date.now();
+  const online = usersArr.filter(u => (now - (u.lastSeen || 0)) < 5 * 60 * 1000).length;
+  const visits = store.stats.visits || 0;
+  
+  $('#tabUsersCount').textContent = fa(total);
+  
+  let html = `<div class="stats-grid">
+    <div class="stat-big">
+      <div class="ico">👥</div>
+      <div class="num">${fa(total)}</div>
+      <div class="lbl">کاربر یکتا</div>
+    </div>
+    <div class="stat-big">
+      <div class="ico">👁</div>
+      <div class="num">${fa(visits)}</div>
+      <div class="lbl">کل بازدیدها</div>
+    </div>
+    <div class="stat-big">
+      <div class="ico">🟢</div>
+      <div class="num">${fa(online)}</div>
+      <div class="lbl">آنلاین (۵ دقیقه)</div>
+    </div>
+  </div>`;
+  
+  if(!usersArr.length){
+    html += `<div class="admin-empty">هنوز آماری ثبت نشده.<br><br>ℹ️ آمار از این به بعد ثبت می‌شه. هر بار که کسی وارد اپ می‌شه، یه بازدید ثبت می‌شه.</div>`;
+  } else {
+    html += `<div style="font-size:13px;font-weight:800;color:var(--mut);margin:16px 0 10px;padding:0 4px">📋 لیست کاربران (${fa(total)} نفر):</div>`;
+    html += usersArr.map(u => {
+      const isOnlineNow = (now - (u.lastSeen || 0)) < 5 * 60 * 1000;
+      const initial = (u.grade ? `کلاس ${fa(u.grade)}` : 'کاربر');
+      return `<div class="user-row">
+        <div class="user-av">${fa(u.grade || 0)}</div>
+        <div class="user-info">
+          <div class="user-name">${initial}${u.device === 'موبایل' ? ' 📱' : ' 💻'}</div>
+          <div class="user-meta">${esc(u.browser || '?')} • ${esc(u.os || '?')} • ${timeAgo(u.lastSeen || 0)}</div>
+        </div>
+        <div class="user-badge ${isOnlineNow ? 'online' : ''}">
+          ${isOnlineNow ? 'آنلاین' : fa(u.count || 1) + ' بازدید'}
+        </div>
+      </div>`;
+    }).join('');
+  }
+  
+  el.innerHTML = html;
+}
+$('#btnRefreshUsers').addEventListener('click', async () => {
+  toast('در حال دریافت آمار…');
+  await loadFromGitHub(false);
+  renderUsers();
+  toast('به‌روز شد ✅', 'success');
+});
+
 function renderAdminSettings(){
   $('#setGhRepo').value = `${GH_OWNER}/${GH_REPO}`;
   $('#setGhToken').value = getToken();
@@ -1487,7 +1696,7 @@ function renderAdminSettings(){
   const sizeBytes = new Blob([JSON.stringify(store)]).size;
   $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>📖 با شماره درس: <b>${fa(withLesson)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF: <b>${fa(pdfFiles)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
 }
-function renderAdmin(){ renderAdminFilter(); renderAdminNotes(); renderAdminSubjects(); renderAdminSettings(); }
+function renderAdmin(){ renderAdminFilter(); renderAdminNotes(); renderAdminSubjects(); renderUsers(); renderAdminSettings(); }
 $('#btnSaveGh').addEventListener('click', async () => {
   const token = $('#setGhToken').value.trim();
   if(!token){ toast('توکن را وارد کن', 'error'); return; }
@@ -1495,7 +1704,7 @@ $('#btnSaveGh').addEventListener('click', async () => {
   toast('در حال اتصال…');
   const ok = await loadFromGitHub();
   renderAdminSettings();
-  if(ok) toast('✅ با موفقیت متصل شد', 'success');
+  if(ok){ toast('✅ با موفقیت متصل شد', 'success'); await registerVisit(); }
   else toast('⚠️ اتصال برقرار نشد', 'error');
 });
 $('#btnDisconnect').addEventListener('click', () => {
@@ -1505,28 +1714,20 @@ $('#btnDisconnect').addEventListener('click', () => {
   toast('توکن حذف شد', 'success');
 });
 
-/* ===== مرتب‌سازی هوشمند ===== */
 $('#btnResortNotes').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
-  if(!confirm('همه جزوه‌ها بر اساس شماره درس (از عنوان/اسم فایل) مرتب و برچسب‌گذاری بشن؟')) return;
+  if(!confirm('همه جزوه‌ها بر اساس شماره درس مرتب بشن؟')) return;
   setLoading(true, 'در حال مرتب‌سازی…');
   showProgress(30);
   let count = 0;
   Object.values(store.notes).forEach(n => {
     if(n.deleted) return;
     const lessonNum = detectLessonFromNote(n);
-    if(lessonNum && n.lessonNum !== lessonNum){
-      n.lessonNum = lessonNum;
-      count++;
-    }
+    if(lessonNum && n.lessonNum !== lessonNum){ n.lessonNum = lessonNum; count++; }
   });
   showProgress(70);
-  try{
-    await saveDataToGitHub();
-    showProgress(100);
-    toast(`✅ ${fa(count)} جزوه برچسب‌گذاری شد`, 'success');
-    renderAdmin(); renderHome();
-  }catch(e){ toast('خطا: ' + e.message, 'error'); }
+  try{ await saveDataToGitHub(); showProgress(100); toast(`✅ ${fa(count)} جزوه برچسب‌گذاری شد`, 'success'); renderAdmin(); renderHome(); }
+  catch(e){ toast('خطا: ' + e.message, 'error'); }
   finally{ setLoading(false); hideProgress(); }
 });
 
@@ -1536,11 +1737,8 @@ function updateLessonHint(){
   const title = $('#edTitle').value.trim();
   const manual = $('#edLessonNum').value.trim();
   if(manual){ $('#lessonHint').innerHTML = `✅ شماره درس دستی: <b>${fa(manual)}</b>`; return; }
-  if(title){
-    const n = detectLessonNumber(title);
-    if(n){ $('#lessonHint').innerHTML = `🔮 تشخیص خودکار: <b>درس ${fa(n)}</b>`; return; }
-  }
-  $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه (اول، ۱، درس ۲ و...)`;
+  if(title){ const n = detectLessonNumber(title); if(n){ $('#lessonHint').innerHTML = `🔮 تشخیص خودکار: <b>درس ${fa(n)}</b>`; return; } }
+  $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه`;
 }
 function openEditor(id){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
@@ -1624,10 +1822,8 @@ $('#editorSave').addEventListener('click', async () => {
   if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
-  // شماره درس
   const lessonNum = manualLesson ? parseInt(manualLesson, 10) : detectLessonNumber(title);
   if(lessonNum) item.lessonNum = lessonNum;
-  
   const btn = $('#editorSave'); btn.disabled = true;
   try{
     if(editingPdfFile){
@@ -1673,7 +1869,7 @@ $('#editorDelete').addEventListener('click', async () => {
   catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
-/* ===== Bulk Upload ===== */
+/* ===== Bulk ===== */
 function openBulkEditor(){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   bulkFiles = []; bulkStopFlag = false;
@@ -1697,7 +1893,7 @@ function renderBulkList(){
   if(!bulkFiles.length){
     el.innerHTML = '';
     $('#bulkUploadName').textContent = 'برای انتخاب کلیک کن';
-    $('#bulkUploadSize').textContent = 'می‌تونی چند تا PDF رو با هم انتخاب کنی';
+    $('#bulkUploadSize').textContent = 'چند تا PDF رو با هم انتخاب کن';
     $('#bulkUploadArea').classList.remove('has-file');
     return;
   }
@@ -1714,7 +1910,6 @@ function renderBulkList(){
   }).join('');
 }
 function closeBulkEditor(){ $('#bulkEditor').classList.add('hidden'); }
-
 $('#btnBulkUpload').addEventListener('click', openBulkEditor);
 $('#bulkBack').addEventListener('click', () => { if(!bulkStopFlag) closeBulkEditor(); else toast('اول آپلود رو متوقف کن'); });
 $('#bulkCancel').addEventListener('click', () => { if(bulkStopFlag){ toast('اول متوقف کن'); return; } closeBulkEditor(); });
@@ -1726,15 +1921,10 @@ $('#bulkFiles').addEventListener('change', e => {
   const valid = files.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
   const invalid = files.length - valid.length;
   if(invalid > 0) toast(`${fa(invalid)} فایل غیر PDF نادیده گرفته شد`, 'error');
-  bulkFiles = valid.map(f => {
-    f._status = 'wait';
-    f._lesson = detectLessonNumber(f.name);
-    return f;
-  });
+  bulkFiles = valid.map(f => { f._status = 'wait'; f._lesson = detectLessonNumber(f.name); return f; });
   renderBulkList();
 });
 $('#bulkStop').addEventListener('click', () => { bulkStopFlag = true; toast('آپلود متوقف می‌شود…'); });
-
 $('#bulkSave').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   if(!bulkFiles.length){ toast('حداقل یه فایل انتخاب کن', 'error'); return; }
@@ -1748,7 +1938,6 @@ $('#bulkSave').addEventListener('click', async () => {
   $('#bulkStop').classList.remove('hidden');
   $('#bulkProgressSection').style.display = 'block';
   let ok = 0, err = 0;
-  const errors = [];
   for(let i = 0; i < bulkFiles.length; i++){
     if(bulkStopFlag){ toast('آپلود متوقف شد', 'error'); break; }
     const file = bulkFiles[i];
@@ -1771,7 +1960,7 @@ $('#bulkSave').addEventListener('click', async () => {
       await saveDataToGitHub();
       file._status = 'done';
       ok++;
-    }catch(e){ console.error(e); file._status = 'error'; err++; errors.push(`${file.name}: ${e.message}`); }
+    }catch(e){ console.error(e); file._status = 'error'; err++; }
     renderBulkList();
     $('#bulkOkCount').textContent = fa(ok);
     $('#bulkErrCount').textContent = fa(err);
@@ -1846,7 +2035,10 @@ function toast(msg, type){
   const isFirst = initWelcome();
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-    if(cached && cached.notes){ store = cached; }
+    if(cached && cached.notes){
+      store = cached;
+      if(!store.stats) store.stats = { visits: 0, users: {} };
+    }
   }catch(e){}
   if(!isFirst){
     state.grade = +(localStorage.getItem(GRADE_KEY) || 7);
@@ -1854,6 +2046,10 @@ function toast(msg, type){
   renderHome(); renderProfile(); renderLibrary();
   if(isDesktop()) renderSidebar();
   await loadFromGitHub(true);
+  // ثبت بازدید (اگه کاربر قبلی و مدیر هست)
+  if(!isFirst && isAdmin){
+    await registerVisit();
+  }
   setInterval(() => { if(!state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false); }, 120000);
   document.addEventListener('visibilitychange', () => {
     if(!document.hidden && !state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false);
