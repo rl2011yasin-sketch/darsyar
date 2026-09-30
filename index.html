@@ -223,7 +223,7 @@ button{cursor:pointer;user-select:none}
 .field .hint{font-size:11px;color:var(--dim);margin-top:5px;padding:0 4px;line-height:1.8}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:480px){.field-row{grid-template-columns:1fr}}
-.pdf-upload-area{display:flex;align-items:center;gap:10px;background:var(--card2);border:1.5px dashed var(--br2);border-radius:12px;padding:14px}
+.pdf-upload-area{display:flex;align-items:center;gap:10px;background:var(--card2);border:1.5px dashed var(--br2);border-radius:12px;padding:14px;cursor:pointer}
 .pdf-upload-area.has-file{background:var(--okbg);border-color:var(--ok);border-style:solid}
 .pdf-upload-icon{width:42px;height:42px;border-radius:12px;background:var(--dangbg);color:var(--dangtxt);display:grid;place-items:center;font-size:19px;flex-shrink:0}
 .pdf-upload-info{flex:1;min-width:0}
@@ -235,6 +235,16 @@ button{cursor:pointer;user-select:none}
 .settings-section{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);padding:18px;margin-bottom:14px}
 .settings-section h4{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .settings-section h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--p)}
+.bulk-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
+.bulk-item{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--card2);border-radius:10px;font-size:12.5px;border:1px solid var(--br)}
+.bulk-item-num{color:var(--p);font-weight:800;flex-shrink:0;min-width:22px}
+.bulk-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.bulk-item-size{color:var(--mut);font-weight:600;flex-shrink:0}
+.bulk-item-status{flex-shrink:0;font-size:14px}
+.bulk-item.done{background:var(--okbg);border-color:var(--ok)}
+.bulk-item.error{background:var(--dangbg);border-color:var(--dangtxt)}
+.bulk-item.active{background:var(--pl);border-color:var(--p);animation:pulseLight 1.2s infinite}
+@keyframes pulseLight{0%,100%{opacity:1}50%{opacity:.7}}
 .hidden{display:none !important}
 .loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
@@ -323,7 +333,7 @@ button{cursor:pointer;user-select:none}
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.1</p>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.2</p>
     </section>
   </main>
 
@@ -377,8 +387,9 @@ button{cursor:pointer;user-select:none}
   <div class="admin-body">
     <div class="admin-panel active" id="panel-notes">
       <div class="admin-actions">
-        <button class="btn btn-primary" id="btnNewNote" type="button">＋ جزوه جدید</button>
-        <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 دریافت از GitHub</button>
+        <button class="btn btn-primary" id="btnBulkUpload" type="button">📦 آپلود گروهی</button>
+        <button class="btn btn-ghost" id="btnNewNote" type="button">＋ جزوه تکی</button>
+        <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 دریافت</button>
       </div>
       <div id="adminNotesFilter" style="margin-bottom:14px"></div>
       <div class="admin-list" id="adminNotesList"></div>
@@ -453,6 +464,58 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- Bulk Upload Editor -->
+<div class="editor hidden" id="bulkEditor">
+  <div class="editor-header">
+    <button class="back-btn" id="bulkBack" type="button">‹</button>
+    <h3>📦 آپلود گروهی PDF</h3>
+  </div>
+  <div class="editor-body">
+    <div class="settings-section">
+      <h4><span class="dot" style="background:var(--p)"></span> مقصد</h4>
+      <div class="field-row">
+        <div class="field"><label>پایه</label><select id="bulkGrade"></select></div>
+        <div class="field"><label>درس</label><select id="bulkSubject"></select></div>
+      </div>
+      <div class="hint">👆 همه PDFهای انتخابی به این درس اضافه می‌شن. عنوان خودکار از اسم فایل</div>
+    </div>
+
+    <div class="settings-section">
+      <h4><span class="dot" style="background:var(--dang)"></span> انتخاب فایل‌ها</h4>
+      <div class="field">
+        <input type="file" id="bulkFiles" accept="application/pdf" multiple style="display:none">
+        <div class="pdf-upload-area" id="bulkUploadArea">
+          <div class="pdf-upload-icon">📚</div>
+          <div class="pdf-upload-info">
+            <div class="pdf-upload-name" id="bulkUploadName">برای انتخاب کلیک کن</div>
+            <div class="pdf-upload-size" id="bulkUploadSize">می‌تونی چند تا PDF رو با هم انتخاب کنی</div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="btnBulkChoose">انتخاب</button>
+        </div>
+      </div>
+      <div class="bulk-list" id="bulkList"></div>
+    </div>
+
+    <div class="settings-section" id="bulkProgressSection" style="display:none">
+      <h4><span class="dot" style="background:var(--ok)"></span> پیشرفت آپلود</h4>
+      <div style="font-size:13px;line-height:2;margin-bottom:10px">
+        <div>✅ موفق: <b id="bulkOkCount" style="color:var(--oktxt)">۰</b></div>
+        <div>❌ ناموفق: <b id="bulkErrCount" style="color:var(--dangtxt)">۰</b></div>
+        <div>⏳ در حال: <b id="bulkCurrent">—</b></div>
+      </div>
+      <div class="progress-track" style="width:100%">
+        <div class="progress-fill-bar" id="bulkProgressBar"></div>
+      </div>
+    </div>
+  </div>
+  <div class="editor-actions">
+    <button class="btn btn-primary" id="bulkSave" type="button">🚀 شروع آپلود</button>
+    <button class="btn btn-ghost" id="bulkCancel" type="button">انصراف</button>
+    <div class="spacer"></div>
+    <button class="btn btn-danger hidden" id="bulkStop" type="button">⏹ توقف</button>
+  </div>
+</div>
+
 <div class="editor hidden" id="subjectEditor">
   <div class="editor-header">
     <button class="back-btn" id="subjectEditorBack" type="button">‹</button>
@@ -469,14 +532,11 @@ button{cursor:pointer;user-select:none}
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v1.0.1</div>
+<div class="ver">درسیار v1.0.2</div>
 
 <script>
 /* =========================================================
-   درسیار v1.0.1 — FIXED
-   ۱) Merge هوشمند: PDFها پاک نمی‌شن
-   ۲) نمایش PDF به صورت Blob (inline)
-   ۳) سرعت بالاتر
+   درسیار v1.0.2 — Bulk Upload + PDF جداگانه
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
@@ -489,7 +549,7 @@ const TOKEN_KEY = 'darsyar_admin_token';
 const THEME_KEY = 'darsyar_theme';
 const GRADE_KEY = 'darsyar_grade';
 const NAME_KEY = 'darsyar_name';
-const CACHE_KEY = 'darsyar_cache_v1';
+const CACHE_KEY = 'darsyar_cache_v102';
 const ADMIN_CODE = 'darsyar2026';
 
 const $ = s => document.querySelector(s);
@@ -521,6 +581,10 @@ let editingPdfExisting = null;
 let editingPdfExistingFile = '';
 let editingPdfExistingName = '';
 let editingPdfExistingSize = 0;
+
+// Bulk upload state
+let bulkFiles = [];
+let bulkStopFlag = false;
 
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -564,7 +628,7 @@ async function ghFetch(url, options = {}, retries = 2){
     return r;
   }catch(e){
     clearTimeout(timeout);
-    if(retries > 0 && (e.name === 'AbortError' || e.message.includes('Failed to fetch'))){
+    if(retries > 0 && (e.name === 'AbortError' || (e.message && e.message.includes('Failed to fetch')))){
       await sleep(1500);
       return ghFetch(url, options, retries - 1);
     }
@@ -619,11 +683,11 @@ async function uploadPdfFile(filename, base64Data){
     const meta = await githubGetMeta(path);
     if(meta) sha = meta.sha;
   }catch(e){}
-  const result = await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
-  await sleep(1000);
+  await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
+  await sleep(600);
   const verify = await githubGetMeta(path);
-  if(!verify) throw new Error('آپلود PDF تأیید نشد');
-  if(verify.size < 100) throw new Error('فایل PDF خالی');
+  if(!verify) throw new Error('آپلود تأیید نشد');
+  if(verify.size < 100) throw new Error('فایل خالی');
   return { size: verify.size, sha: verify.sha };
 }
 
@@ -644,44 +708,26 @@ async function deletePdfFile(filename){
 }
 
 /* =========================================================
-   Merge هوشمند — PDFها پاک نمی‌شن
+   Merge هوشمند
    ========================================================= */
 function mergeNotes(localNotes, remoteNotes){
   const merged = {};
   const allKeys = new Set([...Object.keys(localNotes || {}), ...Object.keys(remoteNotes || {})]);
-  
   for(const key of allKeys){
     const local = localNotes?.[key];
     const remote = remoteNotes?.[key];
-    
     if(!local){ merged[key] = remote; continue; }
     if(!remote){ merged[key] = local; continue; }
-    
-    // هر دو هستن → جدیدتر رو انتخاب کن
     const localTs = local.ts || 0;
     const remoteTs = remote.ts || 0;
-    
-    if(localTs > remoteTs){
-      // محلی جدیدتره
-      merged[key] = local;
-    } else if(remoteTs > localTs){
-      // ریموت جدیدتره
-      merged[key] = remote;
-    } else {
-      // هم‌زمان → ادغام هوشمند
-      const mergedItem = { ...remote, ...local };
-      // اگه محلی PDF داره ولی ریموت نداره → محلی رو نگه دار
-      if(local.pdfFile && !remote.pdfFile) mergedItem.pdfFile = local.pdfFile;
-      if(local.pdfFile && !remote.pdfFile) mergedItem.pdfName = local.pdfName;
-      if(local.pdfFile && !remote.pdfFile) mergedItem.pdfSize = local.pdfSize;
-      if(local.pdfData && !remote.pdfData) mergedItem.pdfData = local.pdfData;
-      merged[key] = mergedItem;
-    }
+    if(localTs > remoteTs){ merged[key] = local; }
+    else if(remoteTs > localTs){ merged[key] = remote; }
+    else { merged[key] = { ...remote, ...local }; }
   }
   return merged;
 }
 
-function mergeComments(localC, remoteC){
+function mergeMap(localC, remoteC){
   const merged = {};
   const allKeys = new Set([...Object.keys(localC || {}), ...Object.keys(remoteC || {})]);
   for(const key of allKeys){
@@ -694,21 +740,8 @@ function mergeComments(localC, remoteC){
   return merged;
 }
 
-function mergeSubjects(localS, remoteS){
-  const merged = {};
-  const allKeys = new Set([...Object.keys(localS || {}), ...Object.keys(remoteS || {})]);
-  for(const key of allKeys){
-    const local = localS?.[key];
-    const remote = remoteS?.[key];
-    if(!local){ merged[key] = remote; continue; }
-    if(!remote){ merged[key] = local; continue; }
-    merged[key] = (local.ts || 0) > (remote.ts || 0) ? local : remote;
-  }
-  return merged;
-}
-
 /* =========================================================
-   بارگذاری از GitHub (با Merge)
+   Load / Save
    ========================================================= */
 async function loadFromGitHub(showLoad = true){
   if(showLoad) setLoading(true, 'در حال دریافت داده‌ها…');
@@ -716,28 +749,20 @@ async function loadFromGitHub(showLoad = true){
   try{
     const url = `${RAW_URL}/${DATA_FILE}?t=${Date.now()}`;
     const r = await fetch(url, { cache: 'no-store' });
-    
     if(r.status === 404){
       fileSha = null;
       setStatus('online');
       refreshAll();
       return true;
     }
-    
     if(!r.ok) throw new Error('HTTP ' + r.status);
-    
     const text = await r.text();
     if(!text || text.trim() === '') throw new Error('data.json خالی');
     const data = JSON.parse(text);
     
-    // ✅ Merge هوشمند: محلی رو با ریموت ترکیب کن
-    const localNotes = store.notes || {};
-    const localComments = store.comments || {};
-    const localSubjects = store.subjects || {};
-    
-    store.notes = mergeNotes(localNotes, data.notes || {});
-    store.comments = mergeComments(localComments, data.comments || {});
-    store.subjects = mergeSubjects(localSubjects, data.subjects || {});
+    store.notes = mergeNotes(store.notes || {}, data.notes || {});
+    store.comments = mergeMap(store.comments || {}, data.comments || {});
+    store.subjects = mergeMap(store.subjects || {}, data.subjects || {});
     store.updatedAt = Math.max(store.updatedAt || 0, data.updatedAt || 0);
     
     localStorage.setItem(CACHE_KEY, JSON.stringify(store));
@@ -805,10 +830,8 @@ function setStatus(s){
 }
 function setLoading(show, text){
   const ov = $('#loadingOverlay'); if(!ov) return;
-  if(show){
-    if(text) $('#loadingText').textContent = text;
-    ov.classList.remove('hidden');
-  } else ov.classList.add('hidden');
+  if(show){ if(text) $('#loadingText').textContent = text; ov.classList.remove('hidden'); }
+  else ov.classList.add('hidden');
 }
 function showProgress(pct){
   $('#progressTrack').classList.remove('hidden');
@@ -820,7 +843,7 @@ function hideProgress(){
 }
 
 /* =========================================================
-   Format
+   Utils
    ========================================================= */
 function fmt(text){
   const lines = String(text || '').split('\n');
@@ -854,7 +877,6 @@ function getPdfRawUrl(n){
   if(n.pdfUrl) return n.pdfUrl;
   return null;
 }
-
 function hasPdf(n){ return !!(n && (n.pdfUrl || n.pdfFile || (n.pdfData && n.pdfData.length))); }
 
 /* =========================================================
@@ -929,12 +951,7 @@ function renderSearch(){
 
   if(state.searchQuery.trim() === ADMIN_CODE){
     el.innerHTML = `<div class="empty"><div class="empty-icon">🔓</div><b>خوش آمدی مدیر</b><p>در حال باز کردن پنل…</p></div>`;
-    setTimeout(() => {
-      $('#searchInput').value = '';
-      state.searchQuery = '';
-      renderSearch();
-      openAdminPanel();
-    }, 400);
+    setTimeout(() => { $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); openAdminPanel(); }, 400);
     return;
   }
 
@@ -1007,19 +1024,16 @@ function refreshAll(){
 }
 
 /* =========================================================
-   PDF Viewer — نمایش inline با Blob
+   PDF Viewer
    ========================================================= */
 let currentPdfBlobUrl = null;
 
 window.openPdfViewer = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
-  const frame = $('#pdfViewerFrame');
-  const dl = $('#pdfViewerDownload');
-  const loading = $('#pdfLoading');
-  const loadingText = $('#pdfLoadingText');
+  const frame = $('#pdfViewerFrame'), dl = $('#pdfViewerDownload');
+  const loading = $('#pdfLoading'), loadingText = $('#pdfLoadingText');
   
-  // پاکسازی URL قدیمی
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
   
   $('#pdfViewerTitle').textContent = pdfName;
@@ -1028,7 +1042,7 @@ window.openPdfViewer = async function(){
   loadingText.textContent = 'در حال بارگذاری PDF…';
   frame.src = 'about:blank';
   
-  // اگه PDF base64 قدیمی
+  // PDF base64 قدیمی
   if(n.pdfData && n.pdfData.length){
     try{
       const byteChars = atob(n.pdfData);
@@ -1042,13 +1056,9 @@ window.openPdfViewer = async function(){
       dl.setAttribute('download', pdfName);
       loading.classList.add('hidden');
       return;
-    }catch(e){
-      loadingText.textContent = 'خطا در بارگذاری';
-      return;
-    }
+    }catch(e){ loadingText.textContent = 'خطا در بارگذاری'; return; }
   }
   
-  // PDF از GitHub → fetch و نمایش inline
   const url = getPdfRawUrl(n);
   if(!url){ loadingText.textContent = 'PDF یافت نشد'; return; }
   
@@ -1056,12 +1066,10 @@ window.openPdfViewer = async function(){
     const r = await fetch(url, { cache: 'no-store' });
     if(!r.ok){
       loading.classList.add('hidden');
-      loadingText.textContent = r.status === 404 ? 'PDF هنوز آماده نیست' : 'خطا در دریافت';
       toast(r.status === 404 ? 'PDF هنوز آماده نیست - ۱ دقیقه صبر کن' : 'خطا در بارگذاری', 'error');
       return;
     }
     const blob = await r.blob();
-    // ✅ Blob با type=application/pdf → مرورگر inline نشون می‌ده
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     currentPdfBlobUrl = blobUrl;
@@ -1071,7 +1079,6 @@ window.openPdfViewer = async function(){
     loading.classList.add('hidden');
   }catch(e){
     loading.classList.add('hidden');
-    loadingText.textContent = 'خطا در بارگذاری - دوباره تلاش کن';
     toast('خطا در بارگذاری PDF', 'error');
   }
 };
@@ -1079,8 +1086,6 @@ window.openPdfViewer = async function(){
 window.downloadPdf = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
-  
-  // اگه blob آماده داریم، مستقیم دانلود
   if(currentPdfBlobUrl){
     const a = document.createElement('a');
     a.href = currentPdfBlobUrl;
@@ -1089,10 +1094,8 @@ window.downloadPdf = async function(){
     toast('📥 دانلود شروع شد', 'success');
     return;
   }
-  
   const url = getPdfRawUrl(n);
   if(!url){ toast('PDF موجود نیست', 'error'); return; }
-  
   toast('در حال دانلود…');
   try{
     const r = await fetch(url, { cache: 'no-store' });
@@ -1106,9 +1109,7 @@ window.downloadPdf = async function(){
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
     toast('📥 دانلود شروع شد', 'success');
-  }catch(e){
-    toast('خطا در دانلود', 'error');
-  }
+  }catch(e){ toast('خطا در دانلود', 'error'); }
 };
 
 $('#pdfViewerClose').addEventListener('click', () => {
@@ -1215,7 +1216,7 @@ document.addEventListener('submit', async e => {
    ========================================================= */
 let adminFilterGrade = 0;
 function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); }
-function toggleAdmin(){ const a = $('#admin'); if(a.classList.contains('hidden')) openAdminPanel(); else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); } }
+function toggleAdmin(){ const a = $('#admin'); if(a.classList.contains('hidden')) openAdminPanel(); else { a.classList.add('hidden'); closeEditor(); closeSubjectEditor(); closeBulkEditor(); } }
 $('#adminClose').addEventListener('click', toggleAdmin);
 document.addEventListener('keydown', e => { if(e.ctrlKey && e.shiftKey && e.code === 'KeyA'){ e.preventDefault(); toggleAdmin(); } });
 
@@ -1242,10 +1243,10 @@ function renderAdminNotes(){
   if(adminFilterGrade) notes = notes.filter(n => n.grade === adminFilterGrade);
   notes.sort((a,b) => b.ts - a.ts);
   $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n => !n.deleted).length);
-  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «جزوه جدید» شروع کن.</div>`; return; }
+  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.<br>با دکمه «آپلود گروهی» یا «جزوه تکی» شروع کن.</div>`; return; }
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
-    const pdfTag = hasPdf(n) ? '📄✓' : '';
+    const pdfTag = hasPdf(n) ? '📄' : '';
     return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${pdfTag}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span><span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
@@ -1302,7 +1303,7 @@ $('#btnDisconnect').addEventListener('click', () => {
 });
 
 /* =========================================================
-   Editor
+   Single Note Editor
    ========================================================= */
 let editingNoteId = null;
 function openEditor(id){
@@ -1360,8 +1361,10 @@ $('#edGrade').addEventListener('change', function(){ populateSubjects(+this.valu
 $('#editorBack').addEventListener('click', closeEditor);
 $('#editorCancel').addEventListener('click', closeEditor);
 function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; }
-$('#btnChoosePdf').addEventListener('click', () => $('#edPdfFile').click());
-$('#btnRemovePdf').addEventListener('click', () => {
+$('#btnChoosePdf').addEventListener('click', (e) => { e.stopPropagation(); $('#edPdfFile').click(); });
+$('#pdfUploadArea').addEventListener('click', () => $('#edPdfFile').click());
+$('#btnRemovePdf').addEventListener('click', (e) => {
+  e.stopPropagation();
   editingPdfFile = null; editingPdfExisting = null; editingPdfExistingFile = ''; editingPdfExistingName = ''; editingPdfExistingSize = 0;
   resetPdfUpload(); toast('PDF حذف شد');
 });
@@ -1381,9 +1384,7 @@ $('#editorSave').addEventListener('click', async () => {
   const pdfUrlInput = $('#edPdfUrl').value.trim();
   
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
-  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ 
-    toast('حداقل متن یا PDF لازم است', 'error'); return; 
-  }
+  if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF لازم است', 'error'); return; }
   
   const id = editingNoteId || uid();
   const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
@@ -1392,74 +1393,53 @@ $('#editorSave').addEventListener('click', async () => {
   
   try{
     if(editingPdfFile){
-      const sizeMB = (editingPdfFile.size / 1024 / 1024).toFixed(2);
-      setLoading(true, `آماده‌سازی PDF (${sizeMB} MB)…`, '');
-      showProgress(10);
-      await sleep(200);
-      
-      setLoading(true, `در حال تبدیل PDF…`, editingPdfFile.name);
-      showProgress(30);
+      setLoading(true, `آماده‌سازی PDF (${(editingPdfFile.size/1024/1024).toFixed(2)} MB)…`, '');
+      showProgress(20);
       const base64Data = await blobToBase64(editingPdfFile);
-      
-      setLoading(true, `در حال آپلود به GitHub…`, 'لطفاً صبر کن');
+      setLoading(true, 'در حال آپلود به GitHub…', 'لطفاً صبر کن');
       showProgress(50);
       const filename = `note_${id}_${Date.now().toString(36)}.pdf`;
       const result = await uploadPdfFile(filename, base64Data);
-      
-      setLoading(true, `✅ PDF آپلود شد`, `${(result.size/1024/1024).toFixed(2)} MB`);
       showProgress(80);
-      
       item.pdfFile = filename;
       item.pdfName = editingPdfFile.name;
       item.pdfSize = result.size;
-      
       if(editingPdfExistingFile && editingPdfExistingFile !== filename){
         deletePdfFile(editingPdfExistingFile).catch(()=>{});
       }
-    } 
-    else if(editingPdfExistingFile){
+    } else if(editingPdfExistingFile){
       item.pdfFile = editingPdfExistingFile;
       item.pdfName = editingPdfExistingName;
       item.pdfSize = editingPdfExistingSize;
-    } 
-    else if(editingPdfExisting){
+    } else if(editingPdfExisting){
       item.pdfData = editingPdfExisting;
       item.pdfName = editingPdfExistingName;
       item.pdfSize = editingPdfExistingSize;
-    } 
-    else if(pdfUrlInput){
+    } else if(pdfUrlInput){
       item.pdfUrl = pdfUrlInput;
       item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
     }
     
     store.notes[id] = item;
-    
     setLoading(true, 'در حال ذخیره data.json…', '');
     showProgress(90);
     await saveDataToGitHub();
     showProgress(100);
-    
-    setLoading(true, '✅ همه‌چیز ذخیره شد!', '');
-    await sleep(800);
-    
-    closeEditor(); 
-    renderAdmin(); 
-    renderHome();
-    
+    await sleep(500);
+    closeEditor();
+    renderAdmin(); renderHome();
     toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success');
   }catch(err){
     console.error('Save error:', err);
     toast('❌ خطا: ' + err.message, 'error');
   }finally{
-    setLoading(false);
-    hideProgress();
-    btn.disabled = false;
+    setLoading(false); hideProgress(); btn.disabled = false;
   }
 });
 
 $('#editorDelete').addEventListener('click', async () => {
   if(!editingNoteId) return;
-  if(!confirm('این جزوه حذف شود؟ (فایل PDF هم پاک می‌شود)')) return;
+  if(!confirm('این جزوه حذف شود؟')) return;
   const oldNote = store.notes[editingNoteId];
   const pdfToDelete = oldNote.pdfFile;
   const tomb = {kind:'note', id: editingNoteId, grade: oldNote.grade, subject: oldNote.subject, title:'', content:'', deleted:true, ts:Date.now()};
@@ -1473,6 +1453,184 @@ $('#editorDelete').addEventListener('click', async () => {
   }catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
+/* =========================================================
+   Bulk Upload
+   ========================================================= */
+function openBulkEditor(){
+  if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
+  bulkFiles = [];
+  bulkStopFlag = false;
+  const gradeSel = $('#bulkGrade');
+  gradeSel.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${fa(g)}م</option>`).join('');
+  populateBulkSubjects(state.grade);
+  renderBulkList();
+  $('#bulkProgressSection').style.display = 'none';
+  $('#bulkFiles').value = '';
+  $('#bulkSave').disabled = false;
+  $('#bulkSave').textContent = '🚀 شروع آپلود';
+  $('#bulkStop').classList.add('hidden');
+  $('#bulkEditor').classList.remove('hidden');
+}
+
+function populateBulkSubjects(grade){
+  const subs = getSubjects(grade);
+  $('#bulkSubject').innerHTML = subs.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+}
+
+function renderBulkList(){
+  const el = $('#bulkList');
+  if(!bulkFiles.length){
+    el.innerHTML = '';
+    $('#bulkUploadName').textContent = 'برای انتخاب کلیک کن';
+    $('#bulkUploadSize').textContent = 'می‌تونی چند تا PDF رو با هم انتخاب کنی';
+    $('#bulkUploadArea').classList.remove('has-file');
+    return;
+  }
+  const totalMB = bulkFiles.reduce((s, f) => s + f.size, 0) / 1024 / 1024;
+  $('#bulkUploadName').textContent = `${fa(bulkFiles.length)} فایل انتخاب شد`;
+  $('#bulkUploadSize').textContent = `حجم کل: ${totalMB.toFixed(1)} مگابایت`;
+  $('#bulkUploadArea').classList.add('has-file');
+  
+  el.innerHTML = bulkFiles.map((f, i) => {
+    const status = f._status || 'wait';
+    const statusIcon = status === 'done' ? '✅' : status === 'error' ? '❌' : status === 'active' ? '⏳' : '⏸';
+    const cls = status === 'done' ? 'done' : status === 'error' ? 'error' : status === 'active' ? 'active' : '';
+    return `<div class="bulk-item ${cls}">
+      <span class="bulk-item-num">${fa(i+1)}.</span>
+      <span class="bulk-item-name">${esc(f.name)}</span>
+      <span class="bulk-item-size">${(f.size/1024/1024).toFixed(1)} MB</span>
+      <span class="bulk-item-status">${statusIcon}</span>
+    </div>`;
+  }).join('');
+}
+
+function closeBulkEditor(){ $('#bulkEditor').classList.add('hidden'); }
+
+$('#btnBulkUpload').addEventListener('click', openBulkEditor);
+$('#bulkBack').addEventListener('click', () => { if(!bulkStopFlag){ closeBulkEditor(); } else toast('اول آپلود رو متوقف کن'); });
+$('#bulkCancel').addEventListener('click', () => { if(bulkStopFlag){ toast('اول آپلود رو متوقف کن'); return; } closeBulkEditor(); });
+
+$('#bulkGrade').addEventListener('change', function(){ populateBulkSubjects(+this.value); });
+
+$('#btnBulkChoose').addEventListener('click', (e) => { e.stopPropagation(); $('#bulkFiles').click(); });
+$('#bulkUploadArea').addEventListener('click', () => $('#bulkFiles').click());
+
+$('#bulkFiles').addEventListener('change', e => {
+  const files = Array.from(e.target.files || []);
+  const valid = files.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+  const invalid = files.length - valid.length;
+  if(invalid > 0) toast(`${fa(invalid)} فایل غیر PDF نادیده گرفته شد`, 'error');
+  bulkFiles = valid.map(f => { f._status = 'wait'; return f; });
+  renderBulkList();
+});
+
+$('#bulkStop').addEventListener('click', () => {
+  bulkStopFlag = true;
+  toast('آپلود متوقف می‌شود…');
+});
+
+$('#bulkSave').addEventListener('click', async () => {
+  if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
+  if(!bulkFiles.length){ toast('حداقل یه فایل انتخاب کن', 'error'); return; }
+  
+  const grade = +$('#bulkGrade').value;
+  const subject = $('#bulkSubject').value;
+  const total = bulkFiles.length;
+  
+  if(!confirm(`${fa(total)} PDF به درس «${subject}» پایه ${fa(grade)}م اضافه بشه؟`)) return;
+  
+  bulkStopFlag = false;
+  $('#bulkSave').disabled = true;
+  $('#bulkSave').textContent = '⏳ در حال آپلود…';
+  $('#bulkStop').classList.remove('hidden');
+  $('#bulkProgressSection').style.display = 'block';
+  
+  let ok = 0, err = 0;
+  const errors = [];
+  
+  for(let i = 0; i < bulkFiles.length; i++){
+    if(bulkStopFlag){
+      toast('آپلود متوقف شد', 'error');
+      break;
+    }
+    
+    const file = bulkFiles[i];
+    file._status = 'active';
+    renderBulkList();
+    
+    $('#bulkOkCount').textContent = fa(ok);
+    $('#bulkErrCount').textContent = fa(err);
+    $('#bulkCurrent').textContent = file.name;
+    $('#bulkProgressBar').style.width = ((i / total) * 100) + '%';
+    
+    try{
+      // تبدیل به base64
+      const base64Data = await blobToBase64(file);
+      
+      // آپلود PDF
+      const filename = `note_${uid()}_${Date.now().toString(36)}.pdf`;
+      const result = await uploadPdfFile(filename, base64Data);
+      
+      // ساخت جزوه
+      const noteId = uid();
+      const title = file.name.replace(/\.pdf$/i, '').trim() || 'بدون عنوان';
+      const item = {
+        kind: 'note',
+        id: noteId,
+        grade,
+        subject,
+        title,
+        content: '',
+        pdfFile: filename,
+        pdfName: file.name,
+        pdfSize: result.size,
+        ts: Date.now()
+      };
+      
+      store.notes[noteId] = item;
+      
+      // ذخیره فوری (اگه بعدش قطع شد، این یکی حفظ بشه)
+      await saveDataToGitHub();
+      
+      file._status = 'done';
+      ok++;
+    }catch(e){
+      console.error('Bulk error for', file.name, e);
+      file._status = 'error';
+      err++;
+      errors.push(`${file.name}: ${e.message}`);
+    }
+    
+    renderBulkList();
+    $('#bulkOkCount').textContent = fa(ok);
+    $('#bulkErrCount').textContent = fa(err);
+    
+    // صبر بین فایل‌ها (برای GitHub Rate Limit)
+    if(i < bulkFiles.length - 1 && !bulkStopFlag){
+      await sleep(800);
+    }
+  }
+  
+  $('#bulkProgressBar').style.width = '100%';
+  $('#bulkCurrent').textContent = '—';
+  $('#bulkStop').classList.add('hidden');
+  $('#bulkSave').disabled = false;
+  $('#bulkSave').textContent = '🚀 آپلود دوباره';
+  
+  renderAdmin(); renderHome();
+  
+  if(err === 0){
+    toast(`🎉 ${fa(ok)} جزوه با موفقیت اضافه شد`, 'success');
+    setTimeout(() => closeBulkEditor(), 2000);
+  } else {
+    toast(`✅ ${fa(ok)} موفق • ❌ ${fa(err)} خطا`, 'error');
+    console.warn('Bulk errors:', errors);
+  }
+});
+
+/* =========================================================
+   Subject Editor
+   ========================================================= */
 function openSubjectEditor(){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   $('#subEdGrade').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${fa(g)}م</option>`).join('');
@@ -1516,6 +1674,9 @@ $('#btnRefreshNotes').addEventListener('click', async () => {
   toast(isOnline ? 'به‌روز شد ✅' : 'اتصال ناموفق ⚠️', isOnline ? 'success' : 'error');
 });
 
+/* =========================================================
+   Toast
+   ========================================================= */
 let toastT;
 function toast(msg, type){
   const el = $('#toast'); if(!el) return;
@@ -1532,15 +1693,12 @@ function toast(msg, type){
   initTheme();
   isAdmin = !!getToken();
   
-  // اول از کش
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
     if(cached && cached.notes){ store = cached; }
   }catch(e){}
   
   renderHome(); renderProfile(); renderLibrary();
-  
-  // بعد از GitHub
   await loadFromGitHub(true);
   
   setInterval(() => { if(!state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false); }, 120000);
@@ -1552,6 +1710,7 @@ function toast(msg, type){
       if(!$('#pdfViewer').classList.contains('hidden')) $('#pdfViewerClose').click();
       else if(state.noteId) closeDetail();
       else if($('#sheet').classList.contains('show')) closeSheet();
+      else if(!$('#bulkEditor').classList.contains('hidden') && !bulkStopFlag) closeBulkEditor();
     }
   });
 })();
