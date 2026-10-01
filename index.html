@@ -21,7 +21,6 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:8px}
 ::-webkit-scrollbar-track{background:transparent}
 
-/* ============ APP ============ */
 .app{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
 
 /* ============ HEADER ============ */
@@ -53,11 +52,9 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .hero-btn:hover{transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(99,102,241,.8)}
 .hero-btn:active{transform:translateY(0)}
 
-/* ============ CONTAINER ============ */
 .container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
 @media(max-width:600px){.container{padding:0 14px}}
 
-/* ============ SECTION ============ */
 .section-head{text-align:center;margin:46px 0 26px}
 .section-head h2{font-size:clamp(19px,3vw,24px);font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:var(--text)}
 .section-head p{font-size:13px;color:var(--mut);font-weight:500}
@@ -81,32 +78,38 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .breadcrumb .sep{color:var(--dim)}
 .breadcrumb .cur{color:var(--text);font-weight:700}
 
-/* ============ PAGE HEADER ============ */
 .page-header{padding:14px 0 22px;text-align:center;border-bottom:1px solid var(--br);margin-bottom:22px}
 .page-header h1{font-size:clamp(20px,3.2vw,26px);font-weight:800;letter-spacing:-.5px;line-height:1.5;margin-bottom:8px}
 .page-header p{font-size:13.5px;color:var(--mut);font-weight:500;line-height:1.9}
 
-/* ============ ACCORDION (grade page) ============ */
-.acc-list{display:flex;flex-direction:column;gap:10px;padding-bottom:50px}
+/* ============ ACCORDION (grade page - subjects) ============ */
+.acc-list{display:flex;flex-direction:column;gap:12px;padding-bottom:50px}
 .acc-item{background:var(--card);border:1.5px solid var(--br2);border-radius:16px;overflow:hidden;transition:.2s}
-.acc-item:hover{border-color:color-mix(in srgb,var(--p) 40%,var(--br2));transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(99,102,241,.4)}
-.acc-head{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:.15s}
+.acc-item.open{box-shadow:0 10px 30px -14px rgba(99,102,241,.35);border-color:color-mix(in srgb,var(--p) 30%,var(--br2))}
+.acc-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;transition:.15s}
 .acc-head:hover{background:var(--bg2)}
-.acc-icon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
-.acc-title{flex:1;font-size:15px;font-weight:800;letter-spacing:-.2px;color:var(--text)}
-.acc-count{font-size:11.5px;font-weight:700;background:var(--bg2);color:var(--mut);padding:3px 10px;border-radius:20px;flex-shrink:0}
-.acc-arrow{width:24px;height:24px;display:grid;place-items:center;color:var(--dim);font-size:20px;font-weight:700;flex-shrink:0}
+.acc-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.acc-title{flex:1;font-size:16px;font-weight:800;letter-spacing:-.2px;color:var(--text)}
+.acc-count{font-size:11.5px;font-weight:700;background:var(--bg2);color:var(--mut);padding:4px 12px;border-radius:20px;flex-shrink:0}
+.acc-arrow{width:26px;height:26px;display:grid;place-items:center;color:var(--dim);font-size:22px;font-weight:700;transition:.3s;flex-shrink:0}
+.acc-item.open .acc-arrow{transform:rotate(-90deg)}
+.acc-body{display:none;border-top:1px solid var(--br);background:var(--card)}
+.acc-item.open .acc-body{display:block;animation:slideDown .25s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ============ SUBJECT PAGE - SECTION BLOCKS ============ */
-.subject-page{padding-bottom:50px}
-.sec-block{margin-bottom:30px}
-.sec-header{display:flex;align-items:center;gap:10px;padding:0 4px 10px;margin-bottom:14px;border-bottom:2px solid var(--br)}
-.sec-header h3{font-size:16px;font-weight:800;letter-spacing:-.3px;color:var(--text)}
-.sec-icon{font-size:18px}
-.sec-count{font-size:11.5px;background:var(--pl);color:var(--p);padding:3px 10px;border-radius:20px;font-weight:700;margin-right:auto}
+/* ============ SECTION LINK (inside accordion) ============ */
+.sec-link{display:flex;align-items:center;gap:14px;padding:15px 22px;cursor:pointer;transition:.15s;border-bottom:1px solid var(--br);font-size:14px;font-weight:600;color:var(--text2)}
+.sec-link:last-child{border-bottom:0}
+.sec-link:hover{background:var(--bg2);color:var(--p)}
+.sec-link:active{background:var(--pl)}
+.sec-check{width:26px;height:26px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex-shrink:0;box-shadow:0 4px 10px -4px rgba(16,185,129,.5)}
+.sec-check.empty{background:var(--br2);color:var(--dim);box-shadow:none}
+.sec-name{flex:1;line-height:1.7}
+.sec-count{font-size:11px;background:var(--pl);color:var(--p);padding:3px 10px;border-radius:20px;font-weight:700;flex-shrink:0}
+.sec-empty-note{font-size:11px;color:var(--dim);font-weight:600;background:var(--bg2);padding:3px 10px;border-radius:20px;flex-shrink:0}
 
 /* ============ NOTES LIST ============ */
-.notes-list{display:flex;flex-direction:column;gap:10px}
+.notes-list{display:flex;flex-direction:column;gap:10px;padding-bottom:50px}
 .note-row{background:var(--card);border:1.5px solid var(--br2);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:.2s}
 .note-row:hover{transform:translateX(-3px);border-color:var(--p);box-shadow:0 10px 24px -14px rgba(99,102,241,.5)}
 .note-row:active{transform:translateX(-1px)}
@@ -121,7 +124,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .nr-tag.img{background:#f0fdf4;color:#16a34a}
 .nr-arrow{color:var(--dim);font-size:20px;font-weight:700;flex-shrink:0}
 
-/* ============ EMPTY ============ */
 .empty-state{background:var(--card);border-radius:18px;padding:56px 22px;text-align:center;border:2px dashed var(--br2)}
 .empty-state-icon{width:70px;height:70px;border-radius:22px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:32px;margin:0 auto 16px}
 .empty-state b{display:block;font-size:16px;font-weight:800;margin-bottom:8px}
@@ -167,7 +169,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .note-content-lg strong{color:var(--text);font-weight:800}
 .note-content-lg .sp{height:8px}
 .note-content-lg img{max-width:100%;height:auto;border-radius:12px;margin:12px 0;box-shadow:var(--sh);display:block;cursor:pointer;transition:.2s}
-.note-content-lg img:hover{transform:scale(1.01)}
 .note-img{max-width:100%;margin:14px 0}
 .note-img-caption{font-size:12px;color:var(--dim);text-align:center;padding:6px 10px;font-weight:600}
 .pdf-box{background:var(--card);border-radius:18px;padding:18px;box-shadow:var(--sh);border:1.5px solid var(--br2);margin-bottom:14px}
@@ -190,7 +191,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .btn-block{width:100%}
 .btn:disabled{opacity:.55;cursor:wait}
 
-/* ============ COMMENTS ============ */
 .comments-box{background:var(--card);border-radius:18px;padding:22px;box-shadow:var(--sh);border:1.5px solid var(--br2)}
 .comments-box h3{font-size:15.5px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .cnt-pill{font-size:11.5px;background:var(--pl);color:var(--p);padding:3px 10px;border-radius:20px;font-weight:800}
@@ -208,7 +208,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .cmt-form button{align-self:flex-start;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:12px 28px;border-radius:13px;font-size:13.5px;font-weight:800;transition:.15s;box-shadow:0 12px 24px -10px rgba(99,102,241,.7)}
 .cmt-form button:hover{transform:translateY(-1px)}
 
-/* ============ SHEET ============ */
 .sheet-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;opacity:0;pointer-events:none;transition:.28s;backdrop-filter:blur(4px)}
 .sheet-overlay.show{opacity:1;pointer-events:auto}
 .sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:520px;background:var(--card);border-radius:24px 24px 0 0;padding:12px 22px calc(28px + var(--sb));z-index:101;transition:transform .32s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
@@ -224,7 +223,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .grade-opt.active{background:linear-gradient(135deg,var(--p),var(--p2));border-color:transparent;color:#fff;box-shadow:0 12px 24px -10px rgba(99,102,241,.7)}
 .grade-opt.active .num,.grade-opt.active .lbl{color:#fff}
 
-/* ============ WELCOME ============ */
 .welcome-overlay{position:fixed;inset:0;z-index:5000;background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;animation:fadeIn .4s}
 .welcome-overlay.hidden{display:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -245,7 +243,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .welcome-grade .glbl{font-size:10.5px;color:var(--mut);font-weight:700}
 .welcome-grade.active .gnum,.welcome-grade.active .glbl{color:#fff}
 
-/* ============ PDF/IMG VIEWER ============ */
 .pdf-viewer{position:fixed;inset:0;z-index:500;background:#0b1020;display:flex;flex-direction:column}
 .pdf-viewer.hidden{display:none}
 .pdf-viewer-header{background:#1e293b;color:#fff;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
@@ -260,7 +257,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .spinner{width:42px;height:42px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ============ ADMIN ============ */
 .admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
 .admin.hidden{display:none}
 .admin-header{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -291,7 +287,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .admin-item-actions{display:flex;gap:6px;flex-shrink:0}
 .admin-empty{background:var(--card);border-radius:14px;padding:44px 20px;text-align:center;border:2px dashed var(--br2);color:var(--mut);font-size:13.5px;line-height:2}
 
-/* ============ EDITOR ============ */
 .editor{position:fixed;inset:0;z-index:1100;background:var(--bg);display:flex;flex-direction:column}
 .editor.hidden{display:none}
 .editor-header{background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 14px;display:flex;align-items:center;gap:12px}
@@ -353,12 +348,10 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .user-badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;background:var(--pl);color:var(--p);flex-shrink:0}
 .user-badge.online{background:var(--okbg);color:var(--oktxt)}
 
-/* ============ FOOTER ============ */
 .footer{background:var(--card);border-top:1px solid var(--br);padding:44px 0 26px;margin-top:20px}
 .footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 20px;text-align:center}
 .footer-copy{font-size:12.5px;color:var(--dim);font-weight:600;line-height:2}
 
-/* ============ UTILS ============ */
 .hidden{display:none !important}
 .toast{position:fixed;bottom:40px;left:50%;transform:translate(-50%,80px);background:#0f172a;color:#fff;padding:13px 24px;border-radius:14px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:.32s;z-index:2000;max-width:90vw;text-align:center;box-shadow:0 20px 40px -12px rgba(0,0,0,.5)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -371,7 +364,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .loading-sub{font-size:12px;color:var(--dim);margin-top:5px;font-weight:600;text-align:center;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .progress-track{width:240px;height:6px;background:var(--br2);border-radius:10px;overflow:hidden}
 .progress-fill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .3s;border-radius:10px;width:0%}
-.ver{position:fixed;bottom:4px;left:50%;transform:translateX(-50%);font-size:9.5px;color:var(--dim);opacity:.4;z-index:1;pointer-events:none}
 
 @media(min-width:900px){
   .detail{max-width:900px;left:50%;transform:translateX(-50%);box-shadow:0 0 80px -20px rgba(0,0,0,.3)}
@@ -444,27 +436,27 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
       </div>
     </section>
 
-    <!-- ==================== GRADE (subjects list) ==================== -->
+    <!-- ==================== GRADE (subjects accordion) ==================== -->
     <section class="screen" id="screen-grade">
       <div class="container">
         <div class="breadcrumb" id="gradeBreadcrumb"></div>
         <div class="page-header">
-          <h1 id="gradePageTitle">پایه نهم متوسطه: گام به گام، نمونه سوال و آموزش</h1>
+          <h1 id="gradePageTitle">پایه نهم متوسطه</h1>
           <p id="gradePageSub">کتاب مورد نظر خود را انتخاب کرده و به محتوای آموزشی دسترسی پیدا کنید</p>
         </div>
         <div class="acc-list" id="gradeAccList"></div>
       </div>
     </section>
 
-    <!-- ==================== SUBJECT (sections + notes) ==================== -->
-    <section class="screen" id="screen-subject">
+    <!-- ==================== SECTION (notes list) ==================== -->
+    <section class="screen" id="screen-section">
       <div class="container">
-        <div class="breadcrumb" id="subjectBreadcrumb"></div>
+        <div class="breadcrumb" id="sectionBreadcrumb"></div>
         <div class="page-header">
-          <h1 id="subjectPageTitle">ریاضی نهم</h1>
-          <p id="subjectPageSub">گام به گام ریاضی نهم</p>
+          <h1 id="sectionPageTitle">گام به گام ریاضی نهم</h1>
+          <p id="sectionPageSub">لیست محتوای این بخش</p>
         </div>
-        <div class="subject-page" id="subjectSections"></div>
+        <div class="notes-list" id="sectionNotesList"></div>
       </div>
     </section>
   </main>
@@ -472,7 +464,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-copy">
-        © ۱۴۰۴ درسیار — تمام حقوق محفوظ است<br>
+        © ۱۴۰۵ درسیار — تمام حقوق محفوظ است<br>
         ساخته‌شده با ❤️ برای دانش‌آموزان ایرانی
       </div>
     </div>
@@ -596,7 +588,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
       <div class="field"><label>درس</label><select id="edSubject"></select></div>
       <div class="field"><label>بخش</label><select id="edSection"></select></div>
     </div>
-    <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: جواب فصل ۱ ریاضی نهم (PDF و صفحه به صفحه)" maxlength="140"></div>
+    <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: جواب فصل ۱ ریاضی نهم" maxlength="140"></div>
     <div class="field">
       <label>شماره فصل/درس (اختیاری)</label>
       <input id="edLessonNum" type="number" placeholder="خودکار از عنوان" min="1" max="99">
@@ -612,7 +604,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
         <button type="button" class="ct-btn" id="ctInsertImage">📷 عکس</button>
       </div>
       <textarea id="edContent" class="content-area" placeholder="متن جزوه...&#10;&#10;# عنوان&#10;## زیرعنوان&#10;- آیتم&#10;**متن مهم**&#10;![توضیح عکس](اسم-عکس)"></textarea>
-      <div class="hint">💡 برای عکس: یا از دکمه «📷 عکس» استفاده کن، یا بنویس <code>![توضیح](اسم-عکس)</code></div>
+      <div class="hint">💡 می‌تونی فقط PDF بذاری، فقط متن بذاری، یا هر دو رو با هم.</div>
     </div>
     <div class="settings-section">
       <h4><span class="dot" style="background:#16a34a"></span> عکس‌های جزوه</h4>
@@ -723,7 +715,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v2.1.0</div>
 
 <script>
 /* ============ CONSTANTS ============ */
@@ -741,23 +732,29 @@ const GRADE_KEY = 'darsyar_grade';
 const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
 const USER_ID_KEY = 'darsyar_user_id';
-const BOOKMARK_KEY = 'darsyar_bookmarks_v2';
+const BOOKMARK_KEY = 'darsyar_bookmarks_v3';
 const FONT_SIZE_KEY = 'darsyar_fontsize';
-const CACHE_KEY = 'darsyar_cache_v2';
+const CACHE_KEY = 'darsyar_cache_v3';
 const ADMIN_CODE = 'darsyar2026';
 
-/* بخش‌های استاندارد هر درس */
+/* بخش‌های استاندارد هر درس — مثل همیار */
 const SECTIONS = [
-  {id:'gam', name:'گام به گام', icon:'📘'},
-  {id:'jozve', name:'جزوه', icon:'📝'},
-  {id:'nemune', name:'نمونه سوال', icon:'📋'},
-  {id:'pasokh', name:'پاسخ سوالات متن', icon:'✍️'},
-  {id:'amoozesh', name:'آموزش تصویری', icon:'🎬'},
+  {id:'gam',         name:'گام به گام',                    suffix:''},
+  {id:'jozve',       name:'جزوه',                           suffix:''},
+  {id:'nemune-fasl', name:'نمونه سوالات',                   suffix:'فصل به فصل'},
+  {id:'nemune-n1',   name:'نمونه سوالات',                   suffix:'نوبت اول'},
+  {id:'nemune-n2',   name:'نمونه سوالات',                   suffix:'نوبت دوم'},
+  {id:'amoozesh',    name:'آموزش تصویری',                   suffix:''},
 ];
 const DEFAULT_SECTION = 'jozve';
 const getSection = id => SECTIONS.find(s => s.id === id) || SECTIONS[1];
 const sectionName = id => getSection(id).name;
-const sectionIcon = id => getSection(id).icon;
+const sectionSuffix = id => getSection(id).suffix || '';
+function sectionFullName(id, subject, gradeWord){
+  const sec = getSection(id);
+  if(!subject) return sec.name + (sec.suffix ? ' ' + sec.suffix : '');
+  return `${sec.name} ${subject} ${gradeWord}${sec.suffix ? ' ' + sec.suffix : ''}`;
+}
 
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -778,10 +775,7 @@ function detectLessonNumber(text){
   const m1 = str.match(p);
   if(m1){ const n = parseInt(m1[1], 10); if(n >= 1 && n <= 99) return n; }
   const words = str.split(/[\s\-_.,،()]+/);
-  for(let i = 0; i < words.length; i++){
-    const w = words[i].trim();
-    if(ORD[w]) return ORD[w];
-  }
+  for(let i = 0; i < words.length; i++){ const w = words[i].trim(); if(ORD[w]) return ORD[w]; }
   const an = str.match(/(\d{1,2})/);
   if(an){ const n = parseInt(an[1], 10); if(n >= 1 && n <= 99) return n; }
   return null;
@@ -826,7 +820,7 @@ function detectDevice(){ const ua=navigator.userAgent; if(/Mobile|Android|iPhone
 let store = { notes:{}, comments:{}, subjects:{}, stats:{ visits:0, users:{} }, updatedAt:0 };
 let fileSha = null;
 let isAdmin = false;
-const state = { screen:'home', grade:9, subject:null, noteId:null, searchQuery:'' };
+const state = { screen:'home', grade:9, subject:null, section:null, noteId:null, openSubject:null };
 let draft = {name:'', text:''};
 let editingPdfFile = null, editingPdfExisting = null, editingPdfExistingFile = '', editingPdfExistingName = '', editingPdfExistingSize = 0;
 let editingImages = [];
@@ -1075,7 +1069,7 @@ function fmt(text){
     if(imgMatch){
       closeList();
       const alt = imgMatch[1], fname = imgMatch[2], url = getImageUrl(fname);
-      out.push(`<div class="note-img"><img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=&quot;padding:16px;text-align:center;color:var(--dim);font-size:13px&quot;>🖼 عکس یافت نشد</div>'">${alt ? `<div class="note-img-caption">${esc(alt)}</div>` : ''}</div>`);
+      out.push(`<div class="note-img"><img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')" onerror="this.style.display='none'">${alt ? `<div class="note-img-caption">${esc(alt)}</div>` : ''}</div>`);
       continue;
     }
     l = l.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, fname) => {
@@ -1183,7 +1177,7 @@ function renderHome(){
   }).join('');
 }
 
-/* ===== RENDER GRADE (subjects list) ===== */
+/* ===== RENDER GRADE (subjects accordion + sections inside) ===== */
 function renderGrade(){
   const grade = state.grade;
   const subs = getSubjects(grade);
@@ -1196,8 +1190,8 @@ function renderGrade(){
   `;
   
   const gradeWord = GRADE_NAMES[grade];
-  if(grade <= 6) $('#gradePageTitle').textContent = `پایه ${gradeWord} دبستان: گام به گام، نمونه سوال و آموزش`;
-  else $('#gradePageTitle').textContent = `پایه ${gradeWord} متوسطه: گام به گام، نمونه سوال و آموزش`;
+  if(grade <= 6) $('#gradePageTitle').textContent = `پایه ${gradeWord} دبستان`;
+  else $('#gradePageTitle').textContent = `پایه ${gradeWord} متوسطه`;
   $('#gradePageSub').textContent = 'کتاب مورد نظر خود را انتخاب کرده و به محتوای آموزشی دسترسی پیدا کنید';
   
   const el = $('#gradeAccList');
@@ -1209,24 +1203,38 @@ function renderGrade(){
   el.innerHTML = subs.map(s => {
     const st = subjStyle(s);
     const subjNotes = notes.filter(n => n.subject === s);
-    return `<div class="acc-item">
-      <div class="acc-head" data-open-subject="${esc(s)}">
+    const isOpen = state.openSubject === s;
+    return `<div class="acc-item ${isOpen ? 'open' : ''}" data-acc-subject="${esc(s)}">
+      <div class="acc-head" data-toggle-subject="${esc(s)}">
         <div class="acc-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
         <div class="acc-title">${esc(s)} ${gradeWord}</div>
         <div class="acc-count">${fa(subjNotes.length)} جزوه</div>
         <div class="acc-arrow">‹</div>
       </div>
+      <div class="acc-body">
+        ${SECTIONS.map(sec => {
+          const count = subjNotes.filter(n => (n.section || DEFAULT_SECTION) === sec.id).length;
+          const cls = count > 0 ? '' : 'empty';
+          const countHtml = count > 0 ? `<span class="sec-count">${fa(count)} مورد</span>` : `<span class="sec-empty-note">خالی</span>`;
+          return `<div class="sec-link" data-open-section="${sec.id}" data-subject="${esc(s)}">
+            <span class="sec-check ${cls}">✓</span>
+            <span class="sec-name">${sectionFullName(sec.id, s, gradeWord)}</span>
+            ${countHtml}
+          </div>`;
+        }).join('')}
+      </div>
     </div>`;
   }).join('');
 }
 
-/* ===== RENDER SUBJECT (sections + notes) ===== */
-function renderSubject(){
+/* ===== RENDER SECTION (notes list) ===== */
+function renderSection(){
   const grade = state.grade;
   const subject = state.subject;
+  const section = state.section || DEFAULT_SECTION;
   const gradeWord = GRADE_NAMES[grade];
   
-  $('#subjectBreadcrumb').innerHTML = `
+  $('#sectionBreadcrumb').innerHTML = `
     <a data-act="go-home">خانه</a>
     <span class="sep">›</span>
     <a data-act="go-grade">پایه ${gradeWord}</a>
@@ -1234,42 +1242,23 @@ function renderSubject(){
     <span class="cur">${esc(subject)}</span>
   `;
   
-  $('#subjectPageTitle').textContent = `${esc(subject)} ${gradeWord}`;
-  $('#subjectPageSub').textContent = `گام به گام، جزوه و نمونه سوالات ${esc(subject)} ${gradeWord}`;
+  $('#sectionPageTitle').textContent = sectionFullName(section, subject, gradeWord);
+  $('#sectionPageSub').textContent = `لیست محتوای این بخش`;
   
-  const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === grade && n.subject === subject).sort(sortNotes);
-  const el = $('#subjectSections');
+  const notes = Object.values(store.notes).filter(n => 
+    !n.deleted && 
+    n.grade === grade && 
+    n.subject === subject && 
+    (n.section || DEFAULT_SECTION) === section
+  ).sort(sortNotes);
   
+  const el = $('#sectionNotesList');
   if(!notes.length){
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📂</div><b>هنوز محتوایی نیست</b><p>برای «${esc(subject)}» هنوز جزوه‌ای اضافه نشده است.</p></div>`;
+    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📂</div><b>هنوز محتوایی نیست</b><p>برای این بخش هنوز جزوه‌ای اضافه نشده است.</p></div>`;
     return;
   }
   
-  /* گروه‌بندی بر اساس بخش */
-  const grouped = {};
-  notes.forEach(n => {
-    const sec = n.section || DEFAULT_SECTION;
-    if(!grouped[sec]) grouped[sec] = [];
-    grouped[sec].push(n);
-  });
-  
-  let html = '';
-  SECTIONS.forEach(sec => {
-    const list = grouped[sec.id];
-    if(!list || !list.length) return;
-    html += `<div class="sec-block">
-      <div class="sec-header">
-        <span class="sec-icon">${sec.icon}</span>
-        <h3>${sec.name} ${esc(subject)} ${gradeWord}</h3>
-        <span class="sec-count">${fa(list.length)} مورد</span>
-      </div>
-      <div class="notes-list">
-        ${list.map((n, i) => noteRowHTML(n, i)).join('')}
-      </div>
-    </div>`;
-  });
-  
-  el.innerHTML = html;
+  el.innerHTML = notes.map((n, i) => noteRowHTML(n, i)).join('');
 }
 
 function noteRowHTML(n, i){
@@ -1318,13 +1307,14 @@ function renderDetail(){
   }
   const rt = readingTime(n.content);
   document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
+  const secId = n.section || DEFAULT_SECTION;
   $('#detailBody').innerHTML = `
     <div class="note-head">
       <div class="chips-row">
         <span class="nc-chip" style="background:${st.bg};color:${st.c}">${st.i} ${esc(n.subject)}</span>
         <span class="nc-grade">پایه ${GRADE_NAMES[n.grade]}</span>
         ${lessonNum ? `<span class="nc-lesson">📖 فصل ${fa(lessonNum)}</span>` : ''}
-        <span class="nc-section">${sectionIcon(n.section || DEFAULT_SECTION)} ${sectionName(n.section || DEFAULT_SECTION)}</span>
+        <span class="nc-section">${sectionName(secId)}${sectionSuffix(secId) ? ' ' + sectionSuffix(secId) : ''}</span>
       </div>
       <div class="note-title-lg">${esc(n.title || 'بدون عنوان')}</div>
       <div class="note-meta">
@@ -1342,7 +1332,7 @@ function renderDetail(){
 function refreshAll(){
   if(state.screen === 'home') renderHome();
   else if(state.screen === 'grade') renderGrade();
-  else if(state.screen === 'subject') renderSubject();
+  else if(state.screen === 'section') renderSection();
   if(state.noteId) renderDetail();
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
 }
@@ -1450,7 +1440,7 @@ function showScreen(name){
   const sc = document.getElementById('screen-' + name); if(sc) sc.classList.add('active');
   if(name === 'home') renderHome();
   else if(name === 'grade') renderGrade();
-  else if(name === 'subject') renderSubject();
+  else if(name === 'section') renderSection();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -1459,17 +1449,29 @@ document.addEventListener('click', e => {
   if(hg){
     state.grade = +hg.dataset.homeGrade;
     state.subject = null;
+    state.section = null;
+    state.openSubject = null;
     state.noteId = null;
     localStorage.setItem(GRADE_KEY, state.grade);
     showScreen('grade');
     return;
   }
   
-  const os = e.target.closest('[data-open-subject]');
-  if(os){
-    state.subject = os.dataset.openSubject;
+  const tglSubj = e.target.closest('[data-toggle-subject]');
+  if(tglSubj){
+    e.stopPropagation();
+    const subj = tglSubj.dataset.toggleSubject;
+    state.openSubject = (state.openSubject === subj) ? null : subj;
+    renderGrade();
+    return;
+  }
+  
+  const openSec = e.target.closest('[data-open-section]');
+  if(openSec){
+    state.subject = openSec.dataset.subject;
+    state.section = openSec.dataset.openSection;
     state.noteId = null;
-    showScreen('subject');
+    showScreen('section');
     return;
   }
   
@@ -1477,7 +1479,7 @@ document.addEventListener('click', e => {
   if(t){
     const act = t.dataset.act;
     if(act === 'go-home'){ showScreen('home'); return; }
-    if(act === 'go-grade'){ showScreen('grade'); return; }
+    if(act === 'go-grade'){ state.openSubject = null; showScreen('grade'); return; }
     if(act === 'open-note'){ openDetail(t.dataset.id); return; }
   }
 });
@@ -1565,7 +1567,7 @@ function stopTts(){
   const b = $('#toolTts'); if(b){ b.textContent = '🔊'; b.classList.remove('active'); }
 }
 
-/* ===== SHEET (تغییر پایه) ===== */
+/* ===== SHEET ===== */
 function openGradeSheet(){
   $('#gradeGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<button class="grade-opt ${g === state.grade ? 'active' : ''}" data-grade="${g}" type="button"><span class="num">${fa(g)}</span><span class="lbl">پایه</span></button>`).join('');
   $('#sheetOverlay').classList.add('show'); $('#sheet').classList.add('show');
@@ -1574,10 +1576,10 @@ function closeSheet(){ $('#sheetOverlay').classList.remove('show'); $('#sheet').
 $('#sheetOverlay').addEventListener('click', closeSheet);
 $('#gradeGrid').addEventListener('click', e => {
   const b = e.target.closest('[data-grade]'); if(!b) return;
-  state.grade = +b.dataset.grade; state.subject = null; state.noteId = null;
+  state.grade = +b.dataset.grade; state.subject = null; state.section = null; state.openSubject = null; state.noteId = null;
   localStorage.setItem(GRADE_KEY, state.grade);
   closeSheet();
-  if(state.screen === 'grade' || state.screen === 'subject') showScreen('grade');
+  if(state.screen === 'grade' || state.screen === 'section') showScreen('grade');
   toast(`پایه ${GRADE_NAMES[state.grade]} انتخاب شد`, 'success');
 });
 
@@ -1627,7 +1629,7 @@ function renderAdminFilter(){
   let html = `<div class="field-row" style="margin-bottom:0"><select id="filterGrade" style="padding:12px 14px;border:1.5px solid var(--br2);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="0">همه پایه‌ها</option>`;
   for(let g = 1; g <= 9; g++) html += `<option value="${g}" ${adminFilterGrade === g ? 'selected' : ''}>پایه ${GRADE_NAMES[g]}</option>`;
   html += `</select><select id="filterSection" style="padding:12px 14px;border:1.5px solid var(--br2);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="">همه بخش‌ها</option>`;
-  SECTIONS.forEach(s => html += `<option value="${s.id}" ${adminFilterSection === s.id ? 'selected' : ''}>${s.icon} ${s.name}</option>`);
+  SECTIONS.forEach(s => html += `<option value="${s.id}" ${adminFilterSection === s.id ? 'selected' : ''}>${s.name}${s.suffix ? ' ' + s.suffix : ''}</option>`);
   html += `</select></div>`;
   $('#adminNotesFilter').innerHTML = html;
   document.getElementById('filterGrade').addEventListener('change', function(){ adminFilterGrade = +this.value; renderAdminNotes(); });
@@ -1644,10 +1646,11 @@ function renderAdminNotes(){
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
     const lessonNum = detectLessonFromNote(n);
-    const tags = (hasPdf(n) ? '📄' : '') + (hasImages(n) ? '🖼' : '');
+    const tags = (hasPdf(n) ? '📄' : '') + (hasImages(n) ? '🖼' : '') + (n.content && n.content.trim() ? '📝' : '');
     const lessonBadge = lessonNum ? `<span class="admin-item-lesson">${fa(lessonNum)}</span>` : '';
     const secId = n.section || DEFAULT_SECTION;
-    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${tags}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${GRADE_NAMES[n.grade]}</span><span>•</span><span class="admin-item-sec">${sectionIcon(secId)} ${sectionName(secId)}</span>${lessonNum ? `<span>•</span><span>📖 فصل ${fa(lessonNum)}</span>` : ''}</div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
+    const sec = getSection(secId);
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${tags}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${GRADE_NAMES[n.grade]}</span><span>•</span><span class="admin-item-sec">${sec.name}${sec.suffix ? ' ' + sec.suffix : ''}</span>${lessonNum ? `<span>•</span><span>📖 فصل ${fa(lessonNum)}</span>` : ''}</div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
@@ -1743,7 +1746,7 @@ function updateLessonHint(){
   $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه`;
 }
 function populateSectionSelect(selectEl, selected){
-  selectEl.innerHTML = SECTIONS.map(s => `<option value="${s.id}" ${s.id === selected ? 'selected' : ''}>${s.icon} ${s.name}</option>`).join('');
+  selectEl.innerHTML = SECTIONS.map(s => `<option value="${s.id}" ${s.id === selected ? 'selected' : ''}>${s.name}${s.suffix ? ' ' + s.suffix : ''}</option>`).join('');
 }
 function renderImgList(){
   const el = $('#imgList');
@@ -1816,7 +1819,7 @@ function openEditor(id){
   } else {
     $('#editorTitle').textContent = 'جزوه جدید';
     gs.value = state.grade; populateSubjects(state.grade, state.subject);
-    populateSectionSelect($('#edSection'), DEFAULT_SECTION);
+    populateSectionSelect($('#edSection'), state.section || DEFAULT_SECTION);
     $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = ''; $('#edLessonNum').value = '';
     updateLessonHint(); renderImgList(); resetPdfUpload();
     $('#editorDelete').classList.add('hidden');
@@ -1960,7 +1963,7 @@ function openBulkEditor(){
   const gs = $('#bulkGrade');
   gs.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${GRADE_NAMES[g]}</option>`).join('');
   populateBulkSubjects(state.grade);
-  populateSectionSelect($('#bulkSection'), DEFAULT_SECTION);
+  populateSectionSelect($('#bulkSection'), state.section || DEFAULT_SECTION);
   renderBulkList();
   $('#bulkProgressSection').style.display = 'none';
   $('#bulkFiles').value = '';
@@ -2011,7 +2014,7 @@ $('#bulkSave').addEventListener('click', async () => {
   const subject = $('#bulkSubject').value;
   const section = $('#bulkSection').value;
   const total = bulkFiles.length;
-  if(!confirm(`${fa(total)} PDF به بخش «${sectionName(section)}» درس «${subject}» پایه ${GRADE_NAMES[grade]} اضافه بشه؟`)) return;
+  if(!confirm(`${fa(total)} PDF به بخش «${sectionName(section)}${sectionSuffix(section) ? ' ' + sectionSuffix(section) : ''}» درس «${subject}» پایه ${GRADE_NAMES[grade]} اضافه بشه؟`)) return;
   bulkStopFlag = false;
   $('#bulkSave').disabled = true;
   $('#bulkSave').textContent = '⏳ در حال آپلود…';
@@ -2139,4 +2142,4 @@ function toast(msg, type){
 })();
 </script>
 </body>
-  </html>
+</html>
