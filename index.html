@@ -23,24 +23,51 @@ a{color:inherit;text-decoration:none}
 
 .app{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
 
-/* ============ HEADER ============ */
+/* ============ HEADER (hamyar style) ============ */
 .header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--br);padding:10px 0}
-.header-inner{max-width:var(--max-w);margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
-.brand-logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--p),var(--p3));display:grid;place-items:center;font-size:19px;box-shadow:0 8px 20px -8px rgba(99,102,241,.7);overflow:hidden;flex-shrink:0;color:#fff}
-.brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:11px}
-.brand-name{font-weight:800;font-size:17px;letter-spacing:-.3px;line-height:1.2}
-.brand-sub{font-size:10.5px;color:var(--mut);font-weight:500;line-height:1.2}
+.header-inner{max-width:var(--max-w);margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:10px;position:relative}
+.brand{display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0}
+.brand-logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--p),var(--p3));display:grid;place-items:center;font-size:17px;overflow:hidden;flex-shrink:0;color:#fff;box-shadow:0 6px 16px -8px rgba(99,102,241,.6)}
+.brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.brand-name{font-weight:800;font-size:18px;letter-spacing:-.4px;color:var(--text);white-space:nowrap}
+
+.search-toggle{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:var(--mut);background:transparent;transition:.15s;flex-shrink:0}
+.search-toggle:hover{background:var(--bg2);color:var(--p)}
+.search-toggle:active{transform:scale(.94)}
+
+.search-box{flex:1;display:flex;align-items:center;gap:8px;background:var(--bg2);border:1.5px solid var(--br2);border-radius:12px;padding:8px 14px;max-width:520px;margin:0 auto;transition:.15s}
+.search-box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px color-mix(in srgb,var(--p) 12%,transparent);background:var(--card)}
+.search-box svg{color:var(--dim);flex-shrink:0}
+.search-box input{flex:1;font-size:13.5px;background:transparent;min-width:0;padding:2px 0;font-weight:500}
+.search-box input::placeholder{color:var(--dim)}
+.search-close{width:26px;height:26px;border-radius:8px;background:var(--br2);color:var(--mut);display:grid;place-items:center;font-size:12px;flex-shrink:0;transition:.15s;font-weight:800}
+.search-close:hover{background:var(--dangbg);color:var(--dangtxt)}
+
 .header-spacer{flex:1}
-.icon-btn{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:var(--mut);transition:.15s;flex-shrink:0;background:var(--bg2)}
-.icon-btn:hover{background:var(--br2);color:var(--text)}
+.icon-btn{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:var(--mut);transition:.15s;flex-shrink:0;background:transparent}
+.icon-btn:hover{background:var(--bg2);color:var(--text)}
 .icon-btn:active{transform:scale(.92)}
+
 .status-dot{width:9px;height:9px;border-radius:50%;background:var(--dim);transition:.3s;flex-shrink:0}
 .status-dot.online{background:var(--ok);box-shadow:0 0 0 3px rgba(16,185,129,.2)}
 .status-dot.offline{background:var(--dang)}
 .status-dot.saving{background:var(--p);animation:pulse 1s infinite}
 .status-dot.connecting{background:var(--warn);animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+@media(max-width:640px){
+  .header-inner{padding:0 12px;gap:8px}
+  .brand-name{font-size:16px}
+  .brand-logo{width:32px;height:32px}
+  .search-toggle{display:grid}
+  .search-box{display:none}
+  .search-box.active{display:flex;position:absolute;top:calc(100% + 8px);left:12px;right:12px;max-width:none;margin:0;z-index:60;box-shadow:0 14px 30px -10px rgba(0,0,0,.25);background:var(--card)}
+}
+@media(min-width:641px){
+  .search-toggle{display:none}
+  .search-box{display:flex !important}
+  .search-close{display:none}
+}
 
 /* ============ HERO ============ */
 .hero{background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 50%,#faf5ff 100%);padding:60px 20px 64px;text-align:center;position:relative;overflow:hidden}
@@ -401,14 +428,22 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
     <div class="header-inner">
       <div class="brand" id="brandClick">
         <div class="brand-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='📚'"></div>
-        <div>
-          <div class="brand-name">درسیار</div>
-          <div class="brand-sub">یادگیری آسان، در هر زمان و هر مکان</div>
-        </div>
+        <div class="brand-name">درسیار</div>
+      </div>
+      <button class="search-toggle" id="searchToggle" type="button" aria-label="جستجو">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <div class="search-box" id="searchBox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" placeholder="جستجو در درسیار..." autocomplete="off">
+        <button class="search-close" id="searchClose" type="button" aria-label="بستن">✕</button>
       </div>
       <div class="header-spacer"></div>
       <button class="icon-btn" id="themeToggle" type="button" title="حالت شب/روز">
         <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn" id="menuBtn" type="button" title="منو">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
       </button>
       <div class="status-dot" id="statusDot" title="وضعیت اتصال"></div>
     </div>
@@ -464,7 +499,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-copy">
-        © ۱۴۰۵ درسیار — تمام حقوق محفوظ است<br>
+        © ۱۴۰۴ درسیار — تمام حقوق محفوظ است<br>
         ساخته‌شده با ❤️ برای دانش‌آموزان ایرانی
       </div>
     </div>
@@ -732,12 +767,12 @@ const GRADE_KEY = 'darsyar_grade';
 const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
 const USER_ID_KEY = 'darsyar_user_id';
-const BOOKMARK_KEY = 'darsyar_bookmarks_v3';
+const BOOKMARK_KEY = 'darsyar_bookmarks_v4';
 const FONT_SIZE_KEY = 'darsyar_fontsize';
-const CACHE_KEY = 'darsyar_cache_v3';
+const CACHE_KEY = 'darsyar_cache_v4';
 const ADMIN_CODE = 'darsyar2026';
 
-/* بخش‌های استاندارد هر درس — مثل همیار */
+/* بخش‌های استاندارد هر درس */
 const SECTIONS = [
   {id:'gam',         name:'گام به گام',                    suffix:''},
   {id:'jozve',       name:'جزوه',                           suffix:''},
@@ -1204,7 +1239,7 @@ function renderGrade(){
     const st = subjStyle(s);
     const subjNotes = notes.filter(n => n.subject === s);
     const isOpen = state.openSubject === s;
-    return `<div class="acc-item ${isOpen ? 'open' : ''}" data-acc-subject="${esc(s)}">
+    return `<div class="acc-item ${isOpen ? 'open' : ''}">
       <div class="acc-head" data-toggle-subject="${esc(s)}">
         <div class="acc-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
         <div class="acc-title">${esc(s)} ${gradeWord}</div>
@@ -1581,6 +1616,40 @@ $('#gradeGrid').addEventListener('click', e => {
   closeSheet();
   if(state.screen === 'grade' || state.screen === 'section') showScreen('grade');
   toast(`پایه ${GRADE_NAMES[state.grade]} انتخاب شد`, 'success');
+});
+
+/* ===== SEARCH (با ورود خودکار به پنل) ===== */
+function handleSearchTrigger(q){
+  if(q.trim() === ADMIN_CODE){
+    const inp = $('#searchInput'); if(inp) inp.value = '';
+    $('#searchBox')?.classList.remove('active');
+    setTimeout(() => openAdminPanel(), 100);
+    toast('خوش آمدی مدیر 🔓', 'success');
+    return;
+  }
+  // جستجوی عادی (اختیاری - می‌تونی جایگزین کنی)
+}
+$('#searchInput').addEventListener('input', debounce(e => handleSearchTrigger(e.target.value), 300));
+$('#searchInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target.value.trim() === ADMIN_CODE){
+    e.preventDefault();
+    const inp = $('#searchInput'); if(inp) inp.value = '';
+    $('#searchBox')?.classList.remove('active');
+    setTimeout(() => openAdminPanel(), 100);
+    toast('خوش آمدی مدیر 🔓', 'success');
+  }
+});
+$('#searchToggle').addEventListener('click', () => {
+  const box = $('#searchBox');
+  box.classList.toggle('active');
+  if(box.classList.contains('active')) setTimeout(() => $('#searchInput').focus(), 100);
+});
+$('#searchClose').addEventListener('click', () => {
+  $('#searchBox').classList.remove('active');
+  $('#searchInput').value = '';
+});
+$('#menuBtn').addEventListener('click', () => {
+  openGradeSheet();
 });
 
 /* ===== COMMENTS ===== */
