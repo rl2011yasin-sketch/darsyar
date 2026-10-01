@@ -32,11 +32,7 @@ a{color:inherit;text-decoration:none}
 .brand-logo img{width:100%;height:100%;object-fit:cover;border-radius:11px}
 .brand-name{font-weight:800;font-size:17px;letter-spacing:-.3px;line-height:1.2}
 .brand-sub{font-size:10.5px;color:var(--mut);font-weight:500;line-height:1.2}
-.nav-desktop{display:flex;align-items:center;gap:4px;flex:1;margin-right:16px}
-@media(max-width:900px){.nav-desktop{display:none}}
-.nav-link{padding:8px 14px;border-radius:10px;font-size:13.5px;font-weight:600;color:var(--text2);transition:.15s;display:inline-flex;align-items:center;gap:6px}
-.nav-link:hover{background:var(--bg2);color:var(--text)}
-.nav-link.active{background:var(--pl);color:var(--p);font-weight:700}
+.header-spacer{flex:1}
 .icon-btn{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:var(--mut);transition:.15s;flex-shrink:0;background:var(--bg2)}
 .icon-btn:hover{background:var(--br2);color:var(--text)}
 .icon-btn:active{transform:scale(.92)}
@@ -46,9 +42,6 @@ a{color:inherit;text-decoration:none}
 .status-dot.saving{background:var(--p);animation:pulse 1s infinite}
 .status-dot.connecting{background:var(--warn);animation:pulse 1.4s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.search-header{display:none;align-items:center;gap:8px;background:var(--bg2);border:1.5px solid var(--br2);border-radius:12px;padding:8px 12px;min-width:180px;max-width:260px}
-@media(min-width:1000px){.search-header{display:flex}}
-.search-header input{flex:1;font-size:13px;background:transparent}
 
 /* ============ HERO ============ */
 .hero{background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 50%,#faf5ff 100%);padding:60px 20px 64px;text-align:center;position:relative;overflow:hidden}
@@ -96,25 +89,24 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 /* ============ ACCORDION (grade page) ============ */
 .acc-list{display:flex;flex-direction:column;gap:10px;padding-bottom:50px}
 .acc-item{background:var(--card);border:1.5px solid var(--br2);border-radius:16px;overflow:hidden;transition:.2s}
-.acc-item:hover{border-color:color-mix(in srgb,var(--p) 40%,var(--br2))}
+.acc-item:hover{border-color:color-mix(in srgb,var(--p) 40%,var(--br2));transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(99,102,241,.4)}
 .acc-head{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;transition:.15s}
 .acc-head:hover{background:var(--bg2)}
 .acc-icon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
 .acc-title{flex:1;font-size:15px;font-weight:800;letter-spacing:-.2px;color:var(--text)}
 .acc-count{font-size:11.5px;font-weight:700;background:var(--bg2);color:var(--mut);padding:3px 10px;border-radius:20px;flex-shrink:0}
-.acc-arrow{width:24px;height:24px;display:grid;place-items:center;color:var(--dim);font-size:20px;font-weight:700;transition:.3s;flex-shrink:0}
-.acc-item.open .acc-arrow{transform:rotate(-90deg)}
-.acc-item.open .acc-head{background:var(--bg2)}
-.acc-body{display:none;border-top:1px solid var(--br);padding:6px 0}
-.acc-item.open .acc-body{display:block;animation:slideDown .25s ease}
-@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.acc-link{display:flex;align-items:center;gap:12px;padding:12px 20px;font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s;color:var(--text2)}
-.acc-link:hover{background:var(--bg2);color:var(--p)}
-.acc-link .lbl{flex:1}
-.acc-empty{padding:16px 20px;font-size:13px;color:var(--dim);text-align:center;font-weight:600}
+.acc-arrow{width:24px;height:24px;display:grid;place-items:center;color:var(--dim);font-size:20px;font-weight:700;flex-shrink:0}
 
-/* ============ NOTES LIST (subject page) ============ */
-.notes-list{display:flex;flex-direction:column;gap:10px;padding-bottom:50px}
+/* ============ SUBJECT PAGE - SECTION BLOCKS ============ */
+.subject-page{padding-bottom:50px}
+.sec-block{margin-bottom:30px}
+.sec-header{display:flex;align-items:center;gap:10px;padding:0 4px 10px;margin-bottom:14px;border-bottom:2px solid var(--br)}
+.sec-header h3{font-size:16px;font-weight:800;letter-spacing:-.3px;color:var(--text)}
+.sec-icon{font-size:18px}
+.sec-count{font-size:11.5px;background:var(--pl);color:var(--p);padding:3px 10px;border-radius:20px;font-weight:700;margin-right:auto}
+
+/* ============ NOTES LIST ============ */
+.notes-list{display:flex;flex-direction:column;gap:10px}
 .note-row{background:var(--card);border:1.5px solid var(--br2);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:.2s}
 .note-row:hover{transform:translateX(-3px);border-color:var(--p);box-shadow:0 10px 24px -14px rgba(99,102,241,.5)}
 .note-row:active{transform:translateX(-1px)}
@@ -140,57 +132,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .screen.active{display:block;animation:fadeUp .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ============ SEARCH PAGE ============ */
-.search-big-box{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--br2);border-radius:16px;padding:14px 18px;margin-bottom:24px;transition:.2s;box-shadow:var(--sh)}
-.search-big-box:focus-within{border-color:var(--p);box-shadow:0 0 0 5px color-mix(in srgb,var(--p) 12%,transparent)}
-.search-big-box input{flex:1;font-size:15px;background:transparent;font-weight:500}
-.search-big-box svg{color:var(--dim);flex-shrink:0}
-.search-clear{width:30px;height:30px;border-radius:9px;background:var(--bg2);color:var(--mut);display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0}
-
-/* ============ LIBRARY ============ */
-.library-page{padding:20px 0 50px}
-.lib-grade{background:var(--card);border:1.5px solid var(--br2);border-radius:16px;margin-bottom:10px;overflow:hidden;transition:.2s}
-.lib-head{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;transition:.15s}
-.lib-head:hover{background:var(--bg2)}
-.lib-num{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;flex-shrink:0;box-shadow:0 8px 18px -8px rgba(99,102,241,.6)}
-.lib-title{font-weight:800;font-size:15px;letter-spacing:-.2px}
-.lib-meta{font-size:11.5px;color:var(--mut);font-weight:600;margin-top:3px}
-.lib-arrow{color:var(--dim);font-size:20px;transition:.3s;width:24px;height:24px;display:grid;place-items:center;font-weight:700}
-.lib-grade.open .lib-arrow{transform:rotate(-90deg)}
-.lib-subs{display:none;border-top:1px solid var(--br);padding:6px 0}
-.lib-grade.open .lib-subs{display:block;animation:slideDown .25s ease}
-.lib-sub{display:flex;align-items:center;gap:12px;padding:11px 20px;font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s}
-.lib-sub:hover{background:var(--bg2);color:var(--p)}
-.lib-sub-icon{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:15px;flex-shrink:0}
-.lib-sub-count{margin-right:auto;font-size:11.5px;color:var(--dim);font-weight:700;background:var(--bg2);padding:3px 10px;border-radius:20px}
-
-/* ============ PROFILE ============ */
-.profile-page{padding:24px 0 50px;max-width:600px;margin:0 auto}
-.profile-hero{background:linear-gradient(135deg,var(--p),var(--p2));border-radius:22px;padding:34px 22px;color:#fff;text-align:center;margin-bottom:18px;box-shadow:var(--sh2);position:relative;overflow:hidden}
-.profile-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:170px;height:170px;background:rgba(255,255,255,.1);border-radius:50%}
-.profile-avatar{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(10px);display:grid;place-items:center;color:#fff;font-size:34px;font-weight:800;margin:0 auto 14px;position:relative;z-index:1;border:3px solid rgba(255,255,255,.35)}
-.profile-name{font-size:19px;font-weight:800;margin-bottom:5px;position:relative;z-index:1}
-.profile-grade{font-size:13px;opacity:.9;position:relative;z-index:1;font-weight:500}
-.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
-.pstat{background:var(--card);border:1.5px solid var(--br2);border-radius:14px;padding:16px 8px;text-align:center}
-.pstat b{display:block;font-size:22px;font-weight:800;color:var(--p);letter-spacing:-.6px;margin-bottom:2px}
-.pstat span{font-size:11px;color:var(--mut);font-weight:700}
-.profile-menu{background:var(--card);border:1.5px solid var(--br2);border-radius:18px;overflow:hidden}
-.menu-item{display:flex;align-items:center;gap:14px;padding:15px 18px;width:100%;text-align:right;border-bottom:1px solid var(--br);font-size:14px;font-weight:600;transition:.15s;color:var(--text)}
-.menu-item:last-child{border-bottom:0}
-.menu-item:hover{background:var(--bg2)}
-.menu-icon{width:38px;height:38px;border-radius:11px;background:var(--pl);color:var(--p);display:grid;place-items:center;font-size:17px;flex-shrink:0}
-.menu-item .arrow{color:var(--dim);margin-right:auto;font-size:18px;font-weight:700}
-.profile-footer{font-size:11.5px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9}
-
-/* ============ BOTTOM NAV ============ */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:60;background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-top:1px solid var(--br);padding:8px 12px calc(8px + var(--sb));display:none;grid-template-columns:repeat(4,1fr);gap:4px}
-@media(max-width:900px){.bottom-nav{display:grid}}
-.nav-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 4px;border-radius:13px;color:var(--dim);font-size:10.5px;font-weight:700;transition:.18s}
-.nav-btn svg{width:23px;height:23px;transition:.2s}
-.nav-btn.active{color:var(--p);background:var(--pl)}
-.nav-btn:active{transform:scale(.94)}
-
 /* ============ DETAIL ============ */
 .detail{position:fixed;top:0;bottom:0;left:0;right:0;z-index:80;background:var(--bg);display:flex;flex-direction:column;animation:slideInRight .3s cubic-bezier(.2,.8,.2,1)}
 @keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
@@ -213,6 +154,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:20px}
 .nc-grade{font-size:11.5px;font-weight:700;color:var(--mut);background:var(--bg2);padding:4px 10px;border-radius:20px}
 .nc-lesson{font-size:11px;font-weight:800;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.nc-section{font-size:11.5px;font-weight:700;background:var(--bg2);color:var(--mut);padding:4px 10px;border-radius:20px}
 .note-title-lg{font-size:clamp(19px,3vw,25px);font-weight:800;line-height:1.5;margin-bottom:10px;letter-spacing:-.4px}
 .note-meta{font-size:12.5px;color:var(--dim);font-weight:600;display:flex;flex-wrap:wrap;gap:14px}
 .note-meta span{display:inline-flex;align-items:center;gap:5px}
@@ -345,6 +287,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .admin-item-body{flex:1;min-width:0}
 .admin-item-title{font-size:13.5px;font-weight:700;margin-bottom:5px;line-height:1.6}
 .admin-item-meta{font-size:11px;color:var(--dim);font-weight:600;display:flex;gap:8px;flex-wrap:wrap}
+.admin-item-sec{background:var(--pl);color:var(--p);padding:2px 8px;border-radius:20px;font-weight:800}
 .admin-item-actions{display:flex;gap:6px;flex-shrink:0}
 .admin-empty{background:var(--card);border-radius:14px;padding:44px 20px;text-align:center;border:2px dashed var(--br2);color:var(--mut);font-size:13.5px;line-height:2}
 
@@ -363,6 +306,8 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 .field .hint{font-size:11px;color:var(--dim);margin-top:6px;padding:0 4px;line-height:1.8}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:520px){.field-row{grid-template-columns:1fr}}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:640px){.field-row-3{grid-template-columns:1fr}}
 .content-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .ct-btn{padding:8px 12px;border-radius:9px;background:var(--card2);border:1.5px solid var(--br2);font-size:12px;font-weight:700;color:var(--mut);transition:.15s}
 .ct-btn:hover{background:var(--pl);color:var(--p);border-color:var(--p)}
@@ -410,13 +355,12 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 
 /* ============ FOOTER ============ */
 .footer{background:var(--card);border-top:1px solid var(--br);padding:44px 0 26px;margin-top:20px}
-@media(max-width:768px){.footer{padding:32px 0 100px}}
 .footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 20px;text-align:center}
 .footer-copy{font-size:12.5px;color:var(--dim);font-weight:600;line-height:2}
 
 /* ============ UTILS ============ */
 .hidden{display:none !important}
-.toast{position:fixed;bottom:calc(110px + var(--sb));left:50%;transform:translate(-50%,80px);background:#0f172a;color:#fff;padding:13px 24px;border-radius:14px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:.32s;z-index:2000;max-width:90vw;text-align:center;box-shadow:0 20px 40px -12px rgba(0,0,0,.5)}
+.toast{position:fixed;bottom:40px;left:50%;transform:translate(-50%,80px);background:#0f172a;color:#fff;padding:13px 24px;border-radius:14px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:.32s;z-index:2000;max-width:90vw;text-align:center;box-shadow:0 20px 40px -12px rgba(0,0,0,.5)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.success{background:var(--oktxt)}
 .toast.error{background:var(--dangtxt)}
@@ -434,7 +378,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
   .pdf-viewer{max-width:1100px;left:50%;transform:translateX(-50%)}
   .sheet{left:auto;right:24px;transform:translate(0,100%);bottom:24px;border-radius:24px}
   .sheet.show{transform:translate(0,0)}
-  .toast{bottom:40px}
 }
 </style>
 </head>
@@ -471,20 +414,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
           <div class="brand-sub">یادگیری آسان، در هر زمان و هر مکان</div>
         </div>
       </div>
-      
-      <nav class="nav-desktop" id="navDesktop">
-        <button class="nav-link active" data-nav="home" type="button">🏠 خانه</button>
-        <button class="nav-link" data-nav="search" type="button">🔍 جستجو</button>
-        <button class="nav-link" data-nav="library" type="button">📚 کتابخانه</button>
-        <button class="nav-link" data-nav="bookmarks" type="button">⭐ ذخیره‌ها</button>
-        <button class="nav-link" data-nav="profile" type="button">👤 پروفایل</button>
-      </nav>
-      
-      <div class="search-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input id="searchDesktop" placeholder="جستجو…" autocomplete="off">
-      </div>
-      
+      <div class="header-spacer"></div>
       <button class="icon-btn" id="themeToggle" type="button" title="حالت شب/روز">
         <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -514,7 +444,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
       </div>
     </section>
 
-    <!-- ==================== GRADE (subjects accordion) ==================== -->
+    <!-- ==================== GRADE (subjects list) ==================== -->
     <section class="screen" id="screen-grade">
       <div class="container">
         <div class="breadcrumb" id="gradeBreadcrumb"></div>
@@ -526,7 +456,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
       </div>
     </section>
 
-    <!-- ==================== SUBJECT (notes list) ==================== -->
+    <!-- ==================== SUBJECT (sections + notes) ==================== -->
     <section class="screen" id="screen-subject">
       <div class="container">
         <div class="breadcrumb" id="subjectBreadcrumb"></div>
@@ -534,90 +464,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
           <h1 id="subjectPageTitle">ریاضی نهم</h1>
           <p id="subjectPageSub">گام به گام ریاضی نهم</p>
         </div>
-        <div class="notes-list" id="subjectNotesList"></div>
-      </div>
-    </section>
-
-    <!-- ==================== SEARCH ==================== -->
-    <section class="screen" id="screen-search">
-      <div class="container">
-        <div style="padding:24px 0 50px">
-          <div class="section-head" style="margin-top:20px">
-            <h2>جستجو در جزوه‌ها</h2>
-            <p>نام درس، عنوان یا بخشی از متن را بنویس</p>
-          </div>
-          <div class="search-big-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-            <input id="searchInput" placeholder="مثلاً: ریاضی نهم، فصل اول…" autocomplete="off">
-            <button class="search-clear hidden" id="searchClear" type="button">✕</button>
-          </div>
-          <div class="notes-list" id="searchResults"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== LIBRARY ==================== -->
-    <section class="screen" id="screen-library">
-      <div class="container">
-        <div class="library-page">
-          <div class="section-head" style="margin-top:14px">
-            <h2>کتابخانه کامل</h2>
-            <p>همه پایه‌ها و درس‌ها در یک نگاه</p>
-          </div>
-          <div id="libraryList"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== BOOKMARKS ==================== -->
-    <section class="screen" id="screen-bookmarks">
-      <div class="container">
-        <div class="library-page">
-          <div class="section-head" style="margin-top:14px">
-            <h2>جزوه‌های ذخیره‌شده</h2>
-            <p id="bookmarkCount"></p>
-          </div>
-          <div class="notes-list" id="bookmarksList"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== PROFILE ==================== -->
-    <section class="screen" id="screen-profile">
-      <div class="container">
-        <div class="profile-page">
-          <div class="profile-hero">
-            <div class="profile-avatar" id="profileAv">👤</div>
-            <div class="profile-name" id="profileName">دانش‌آموز مهمان</div>
-            <div class="profile-grade" id="profileGrade">پایه نهم</div>
-          </div>
-          <div class="profile-stats">
-            <div class="pstat"><b id="pStatNotes">۰</b><span>جزوه</span></div>
-            <div class="pstat"><b id="pStatComments">۰</b><span>نظر</span></div>
-            <div class="pstat"><b id="pStatBookmarks">۰</b><span>ذخیره‌شده</span></div>
-          </div>
-          <div class="profile-menu">
-            <button class="menu-item" id="menuGrade" type="button">
-              <div class="menu-icon">🎓</div>
-              <div>تغییر پایه تحصیلی</div>
-              <span class="arrow">‹</span>
-            </button>
-            <button class="menu-item" id="menuName" type="button">
-              <div class="menu-icon">✏️</div>
-              <div>ویرایش نام نمایشی</div>
-              <span class="arrow">‹</span>
-            </button>
-            <button class="menu-item" id="menuSync" type="button">
-              <div class="menu-icon">🔄</div>
-              <div>به‌روزرسانی از GitHub</div>
-              <span class="arrow">‹</span>
-            </button>
-          </div>
-          <div class="profile-footer">
-            درسیار • نسخه ۲.۰.۰<br>
-            همراه همیشگی دانش‌آموزان ایرانی
-          </div>
-        </div>
+        <div class="subject-page" id="subjectSections"></div>
       </div>
     </section>
   </main>
@@ -630,25 +477,6 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
       </div>
     </div>
   </footer>
-
-  <nav class="bottom-nav">
-    <button class="nav-btn active" data-nav="home" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-      <span>خانه</span>
-    </button>
-    <button class="nav-btn" data-nav="search" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <span>جستجو</span>
-    </button>
-    <button class="nav-btn" data-nav="library" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      <span>کتابخانه</span>
-    </button>
-    <button class="nav-btn" data-nav="profile" type="button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
-      <span>پروفایل</span>
-    </button>
-  </nav>
 </div>
 
 <!-- DETAIL -->
@@ -763,18 +591,19 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
     <h3 id="editorTitle">جزوه جدید</h3>
   </div>
   <div class="editor-body">
-    <div class="field-row">
+    <div class="field-row-3">
       <div class="field"><label>پایه</label><select id="edGrade"></select></div>
       <div class="field"><label>درس</label><select id="edSubject"></select></div>
+      <div class="field"><label>بخش</label><select id="edSection"></select></div>
     </div>
     <div class="field"><label>عنوان</label><input id="edTitle" placeholder="مثلاً: جواب فصل ۱ ریاضی نهم (PDF و صفحه به صفحه)" maxlength="140"></div>
     <div class="field">
-      <label>شماره درس/فصل (اختیاری)</label>
+      <label>شماره فصل/درس (اختیاری)</label>
       <input id="edLessonNum" type="number" placeholder="خودکار از عنوان" min="1" max="99">
       <div class="hint" id="lessonHint">💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه</div>
     </div>
     <div class="field">
-      <label>متن جزوه</label>
+      <label>متن جزوه (اختیاری)</label>
       <div class="content-toolbar">
         <button type="button" class="ct-btn" data-insert="# "># عنوان</button>
         <button type="button" class="ct-btn" data-insert="## ">## زیرعنوان</button>
@@ -797,7 +626,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
           </div>
           <button type="button" class="btn btn-ghost btn-sm" id="btnChooseImg">انتخاب</button>
         </div>
-        <div class="hint">✅ عکس‌ها توی پوشه <code>images/</code> ذخیره می‌شن. روی هر عکس بزن تا کدش توی متن درج بشه.</div>
+        <div class="hint">✅ عکس‌ها توی پوشه <code>images/</code> ذخیره می‌شن.</div>
         <div class="img-list" id="imgList"></div>
       </div>
     </div>
@@ -809,7 +638,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
           <div class="pdf-upload-icon">📄</div>
           <div class="pdf-upload-info">
             <div class="pdf-upload-name" id="pdfUploadName">هیچ فایلی انتخاب نشده</div>
-            <div class="pdf-upload-size" id="pdfUploadSize">هر حجمی — توی پوشه pdfs/ ذخیره می‌شود</div>
+            <div class="pdf-upload-size" id="pdfUploadSize">توی پوشه pdfs/ ذخیره می‌شود</div>
           </div>
           <button type="button" class="btn btn-ghost btn-sm" id="btnChoosePdf">انتخاب</button>
           <button type="button" class="pdf-remove hidden" id="btnRemovePdf">✕</button>
@@ -838,9 +667,10 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
   <div class="editor-body">
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--p)"></span> مقصد</h4>
-      <div class="field-row">
+      <div class="field-row-3">
         <div class="field"><label>پایه</label><select id="bulkGrade"></select></div>
         <div class="field"><label>درس</label><select id="bulkSubject"></select></div>
+        <div class="field"><label>بخش</label><select id="bulkSection"></select></div>
       </div>
     </div>
     <div class="settings-section">
@@ -893,7 +723,7 @@ html[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e1b4b 0%,#2e10
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="ver">درسیار v2.0.0</div>
+<div class="ver">درسیار v2.1.0</div>
 
 <script>
 /* ============ CONSTANTS ============ */
@@ -916,18 +746,30 @@ const FONT_SIZE_KEY = 'darsyar_fontsize';
 const CACHE_KEY = 'darsyar_cache_v2';
 const ADMIN_CODE = 'darsyar2026';
 
+/* بخش‌های استاندارد هر درس */
+const SECTIONS = [
+  {id:'gam', name:'گام به گام', icon:'📘'},
+  {id:'jozve', name:'جزوه', icon:'📝'},
+  {id:'nemune', name:'نمونه سوال', icon:'📋'},
+  {id:'pasokh', name:'پاسخ سوالات متن', icon:'✍️'},
+  {id:'amoozesh', name:'آموزش تصویری', icon:'🎬'},
+];
+const DEFAULT_SECTION = 'jozve';
+const getSection = id => SECTIONS.find(s => s.id === id) || SECTIONS[1];
+const sectionName = id => getSection(id).name;
+const sectionIcon = id => getSection(id).icon;
+
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-function isDesktop(){ return window.innerWidth >= 900; }
 
 /* ===== تشخیص شماره درس ===== */
 const PD = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
 const norm = s => String(s).replace(/[۰-۹٠-٩]/g, d => PD[d] || d);
-const ORD = {'اول':1,'اولین':1,'یکم':1,'یک':1,'یه':1,'دوم':2,'دومین':2,'دو':2,'سوم':3,'سومین':3,'سه':3,'چهارم':4,'چهارمین':4,'چهار':4,'پنجم':5,'پنجمین':5,'پنج':5,'ششم':6,'ششمین':6,'شش':6,'هفتم':7,'هفتمین':7,'هفت':7,'هشتم':8,'هشتمین':8,'هشت':8,'نهم':9,'نهمین':9,'نه':9,'دهم':10,'دهمین':10,'ده':10,'یازدهم':11,'یازدهمین':11,'یازده':11,'دوازدهم':12,'دوازدهمین':12,'دوازده':12,'سیزدهم':13,'سیزدهمین':13,'سیزده':13,'چهاردهم':14,'چهاردهمین':14,'چهارده':14,'پانزدهم':15,'پانزدهمین':15,'پانزده':15,'شانزدهم':16,'شانزدهمین':16,'شانزده':16,'هفدهم':17,'هفدهمین':17,'هفده':17,'هجدهم':18,'هجدهمین':18,'هجده':18,'نوزدهم':19,'نوزدهمین':19,'نوزده':19,'بیستم':20,'بیستمین':20,'بیست':20};
+const ORD = {'اول':1,'اولین':1,'یکم':1,'یک':1,'دوم':2,'دومین':2,'دو':2,'سوم':3,'سومین':3,'سه':3,'چهارم':4,'چهارمین':4,'چهار':4,'پنجم':5,'پنجمین':5,'پنج':5,'ششم':6,'ششمین':6,'شش':6,'هفتم':7,'هفتمین':7,'هفت':7,'هشتم':8,'هشتمین':8,'هشت':8,'نهم':9,'نهمین':9,'نه':9,'دهم':10,'دهمین':10,'ده':10};
 const LP = ['درس','فصل','بخش','واحد','مبحث','گفتار','درسنامه'];
 function detectLessonNumber(text){
   if(!text) return null;
@@ -948,7 +790,6 @@ function detectLessonFromNote(note){
   if(note.lessonNum) return note.lessonNum;
   if(note.title){ const n = detectLessonNumber(note.title); if(n) return n; }
   if(note.pdfName){ const n = detectLessonNumber(note.pdfName); if(n) return n; }
-  if(note.content){ const n = detectLessonNumber(note.content); if(n) return n; }
   return null;
 }
 function sortNotes(a, b){
@@ -977,29 +818,9 @@ function utf8ToBase64(str){
   for(let i = 0; i < bytes.length; i += chunk) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
   return btoa(bin);
 }
-function detectBrowser(){
-  const ua = navigator.userAgent;
-  if(/Edg/i.test(ua)) return 'Edge';
-  if(/Chrome/i.test(ua)) return 'Chrome';
-  if(/Safari/i.test(ua)) return 'Safari';
-  if(/Firefox/i.test(ua)) return 'Firefox';
-  if(/Opera|OPR/i.test(ua)) return 'Opera';
-  return 'ناشناس';
-}
-function detectOS(){
-  const ua = navigator.userAgent;
-  if(/Android/i.test(ua)) return 'اندروید';
-  if(/iPhone|iPad|iPod/i.test(ua)) return 'iOS';
-  if(/Windows/i.test(ua)) return 'ویندوز';
-  if(/Mac/i.test(ua)) return 'مک';
-  if(/Linux/i.test(ua)) return 'لینوکس';
-  return 'نامشخص';
-}
-function detectDevice(){
-  const ua = navigator.userAgent;
-  if(/Mobile|Android|iPhone|iPad|iPod/i.test(ua)) return 'موبایل';
-  return 'دسکتاپ';
-}
+function detectBrowser(){ const ua=navigator.userAgent; if(/Edg/i.test(ua))return'Edge'; if(/Chrome/i.test(ua))return'Chrome'; if(/Safari/i.test(ua))return'Safari'; if(/Firefox/i.test(ua))return'Firefox'; return'ناشناس'; }
+function detectOS(){ const ua=navigator.userAgent; if(/Android/i.test(ua))return'اندروید'; if(/iPhone|iPad|iPod/i.test(ua))return'iOS'; if(/Windows/i.test(ua))return'ویندوز'; if(/Mac/i.test(ua))return'مک'; if(/Linux/i.test(ua))return'لینوکس'; return'نامشخص'; }
+function detectDevice(){ const ua=navigator.userAgent; if(/Mobile|Android|iPhone|iPad|iPod/i.test(ua))return'موبایل'; return'دسکتاپ'; }
 
 /* ===== STATE ===== */
 let store = { notes:{}, comments:{}, subjects:{}, stats:{ visits:0, users:{} }, updatedAt:0 };
@@ -1059,16 +880,10 @@ const getUserId = () => { let id = localStorage.getItem(USER_ID_KEY); if(!id){ i
 async function ghFetch(url, options = {}, retries = 2){
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 90000);
-  try{
-    const r = await fetch(url, { ...options, signal: controller.signal });
+  try{ const r = await fetch(url, { ...options, signal: controller.signal }); clearTimeout(timeout); return r; }
+  catch(e){
     clearTimeout(timeout);
-    return r;
-  }catch(e){
-    clearTimeout(timeout);
-    if(retries > 0 && (e.name === 'AbortError' || (e.message && e.message.includes('Failed to fetch')))){
-      await sleep(1500);
-      return ghFetch(url, options, retries - 1);
-    }
+    if(retries > 0 && (e.name === 'AbortError' || (e.message && e.message.includes('Failed to fetch')))){ await sleep(1500); return ghFetch(url, options, retries - 1); }
     throw e;
   }
 }
@@ -1083,10 +898,7 @@ async function githubGetMeta(path){
     if(!r.ok) throw new Error(`GitHub GET ${r.status}`);
     const data = await r.json();
     return { sha: data.sha, size: data.size };
-  }catch(e){
-    if(e.message && e.message.includes('404')) return null;
-    throw e;
-  }
+  }catch(e){ if(e.message && e.message.includes('404')) return null; throw e; }
 }
 async function githubPut(path, contentBase64, message, sha){
   const token = getToken();
@@ -1200,10 +1012,7 @@ async function loadFromGitHub(showLoad = true){
   }catch(e){
     console.warn('load err', e);
     setStatus('offline');
-    try{
-      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-      if(cached && cached.notes){ store = cached; refreshAll(); }
-    }catch(_){}
+    try{ const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); if(cached && cached.notes){ store = cached; refreshAll(); } }catch(_){}
     return false;
   }finally{ if(showLoad) setLoading(false); }
 }
@@ -1232,15 +1041,7 @@ async function registerVisit(){
   if(!store.stats) store.stats = { visits: 0, users: {} };
   if(!store.stats.users) store.stats.users = {};
   const existing = store.stats.users[userId] || { firstSeen: now, count: 0 };
-  store.stats.users[userId] = {
-    firstSeen: existing.firstSeen || now,
-    lastSeen: now,
-    count: (existing.count || 0) + 1,
-    browser: detectBrowser(),
-    os: detectOS(),
-    device: detectDevice(),
-    grade: state.grade
-  };
+  store.stats.users[userId] = { firstSeen: existing.firstSeen || now, lastSeen: now, count: (existing.count || 0) + 1, browser: detectBrowser(), os: detectOS(), device: detectDevice(), grade: state.grade };
   store.stats.visits = (store.stats.visits || 0) + 1;
   localStorage.setItem(CACHE_KEY, JSON.stringify(store));
   if(isAdmin){ try{ await saveDataToGitHub(); }catch(e){} }
@@ -1274,7 +1075,7 @@ function fmt(text){
     if(imgMatch){
       closeList();
       const alt = imgMatch[1], fname = imgMatch[2], url = getImageUrl(fname);
-      out.push(`<div class="note-img"><img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=&quot;padding:16px;text-align:center;color:var(--dim);font-size:13px&quot;>🖼 عکس یافت نشد: ${esc(fname)}</div>'">${alt ? `<div class="note-img-caption">${esc(alt)}</div>` : ''}</div>`);
+      out.push(`<div class="note-img"><img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')" onerror="this.style.display='none';this.parentNode.innerHTML='<div style=&quot;padding:16px;text-align:center;color:var(--dim);font-size:13px&quot;>🖼 عکس یافت نشد</div>'">${alt ? `<div class="note-img-caption">${esc(alt)}</div>` : ''}</div>`);
       continue;
     }
     l = l.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, fname) => {
@@ -1296,29 +1097,11 @@ function getImageUrl(fname){
   if(/^https?:\/\//i.test(fname)) return fname;
   return `${RAW_URL}/${IMG_DIR}/${fname}`;
 }
-function blobToBase64(blob){
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = e => res(e.target.result.split(',')[1]);
-    r.onerror = rej;
-    r.readAsDataURL(blob);
-  });
-}
-function fileToDataUrl(file){
-  return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(e.target.result); r.onerror = rej; r.readAsDataURL(file); });
-}
-function getPdfRawUrl(n){
-  if(!n) return null;
-  if(n.pdfFile) return `${RAW_URL}/${PDF_DIR}/${n.pdfFile}`;
-  if(n.pdfUrl) return n.pdfUrl;
-  return null;
-}
+function blobToBase64(blob){ return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(e.target.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); }); }
+function fileToDataUrl(file){ return new Promise((res, rej) => { const r = new FileReader(); r.onload = e => res(e.target.result); r.onerror = rej; r.readAsDataURL(file); }); }
+function getPdfRawUrl(n){ if(!n) return null; if(n.pdfFile) return `${RAW_URL}/${PDF_DIR}/${n.pdfFile}`; if(n.pdfUrl) return n.pdfUrl; return null; }
 function hasPdf(n){ return !!(n && (n.pdfUrl || n.pdfFile || (n.pdfData && n.pdfData.length))); }
-function hasImages(n){
-  if(!n) return false;
-  if(n.images && n.images.length) return true;
-  return /!\[[^\]]*\]\([^)]+\)/.test(n.content || '');
-}
+function hasImages(n){ if(!n) return false; if(n.images && n.images.length) return true; return /!\[[^\]]*\]\([^)]+\)/.test(n.content || ''); }
 
 /* ===== THEME ===== */
 function initTheme(){
@@ -1370,18 +1153,12 @@ $('#welcomeContinue').addEventListener('click', async () => {
   localStorage.setItem(GRADE_KEY, state.grade);
   localStorage.setItem(VISITED_KEY, '1');
   $('#welcomeOverlay').classList.add('hidden');
-  renderProfile();
   toast(`خوش اومدی! پایه ${GRADE_NAMES[state.grade]} انتخاب شد ✅`, 'success');
   if(isAdmin) await registerVisit();
 });
 
-/* ===== GRADE ICONS (SVG) ===== */
-function gradeIconSVG(){
-  // Simple square icons like hamyar
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="1.5"/></svg>`;
-}
-function gradeIconSpecial(g){
-  // Some grades have different icons (like hamyar: some books, some tools)
+/* ===== GRADE ICONS ===== */
+function gradeIconSVG(g){
   const icons = {
     1:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="1.5"/></svg>',
     2:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="1.5"/></svg>',
@@ -1393,42 +1170,36 @@ function gradeIconSpecial(g){
     8:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>',
     9:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="1.5"/></svg>'
   };
-  return icons[g] || gradeIconSVG();
+  return icons[g] || icons[1];
 }
 
 /* ===== RENDER HOME ===== */
 function renderHome(){
   $('#gradesGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => {
     return `<div class="grade-card" data-home-grade="${g}">
-      <div class="grade-icon">${gradeIconSpecial(g)}</div>
+      <div class="grade-icon">${gradeIconSVG(g)}</div>
       <div class="grade-label">پایه ${GRADE_NAMES[g]}</div>
     </div>`;
   }).join('');
 }
 
-/* ===== RENDER GRADE (accordion) ===== */
+/* ===== RENDER GRADE (subjects list) ===== */
 function renderGrade(){
   const grade = state.grade;
   const subs = getSubjects(grade);
   const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === grade);
   
-  // Breadcrumb
   $('#gradeBreadcrumb').innerHTML = `
     <a data-act="go-home">خانه</a>
     <span class="sep">›</span>
     <span class="cur">پایه ${GRADE_NAMES[grade]}</span>
   `;
   
-  // Page header
   const gradeWord = GRADE_NAMES[grade];
-  if(grade <= 6){
-    $('#gradePageTitle').textContent = `پایه ${gradeWord} دبستان: گام به گام، نمونه سوال و آموزش`;
-  } else {
-    $('#gradePageTitle').textContent = `پایه ${gradeWord} متوسطه: گام به گام، نمونه سوال و آموزش`;
-  }
+  if(grade <= 6) $('#gradePageTitle').textContent = `پایه ${gradeWord} دبستان: گام به گام، نمونه سوال و آموزش`;
+  else $('#gradePageTitle').textContent = `پایه ${gradeWord} متوسطه: گام به گام، نمونه سوال و آموزش`;
   $('#gradePageSub').textContent = 'کتاب مورد نظر خود را انتخاب کرده و به محتوای آموزشی دسترسی پیدا کنید';
   
-  // Accordion
   const el = $('#gradeAccList');
   if(!subs.length){
     el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📭</div><b>درسی موجود نیست</b><p>هنوز درسی برای این پایه اضافه نشده است.</p></div>`;
@@ -1438,34 +1209,23 @@ function renderGrade(){
   el.innerHTML = subs.map(s => {
     const st = subjStyle(s);
     const subjNotes = notes.filter(n => n.subject === s);
-    return `<div class="acc-item" data-acc="${esc(s)}">
-      <div class="acc-head" data-acc-toggle="${esc(s)}">
+    return `<div class="acc-item">
+      <div class="acc-head" data-open-subject="${esc(s)}">
         <div class="acc-icon" style="background:${st.bg};color:${st.c}">${st.i}</div>
         <div class="acc-title">${esc(s)} ${gradeWord}</div>
         <div class="acc-count">${fa(subjNotes.length)} جزوه</div>
         <div class="acc-arrow">‹</div>
       </div>
-      <div class="acc-body">
-        ${subjNotes.length ? subjNotes.sort(sortNotes).map((n, i) => {
-          const ln = detectLessonFromNote(n) || (i+1);
-          return `<div class="acc-link" data-act="open-note" data-id="${n.id}">
-            <span class="lbl">${esc(n.title || 'جزوه')}</span>
-            <span class="acc-arrow" style="font-size:16px">‹</span>
-          </div>`;
-        }).join('') : `<div class="acc-empty">هنوز جزوه‌ای برای این درس اضافه نشده</div>`}
-      </div>
     </div>`;
   }).join('');
 }
 
-/* ===== RENDER SUBJECT ===== */
+/* ===== RENDER SUBJECT (sections + notes) ===== */
 function renderSubject(){
   const grade = state.grade;
   const subject = state.subject;
   const gradeWord = GRADE_NAMES[grade];
-  const st = subjStyle(subject);
   
-  // Breadcrumb
   $('#subjectBreadcrumb').innerHTML = `
     <a data-act="go-home">خانه</a>
     <span class="sep">›</span>
@@ -1475,53 +1235,41 @@ function renderSubject(){
   `;
   
   $('#subjectPageTitle').textContent = `${esc(subject)} ${gradeWord}`;
-  $('#subjectPageSub').textContent = `گام به گام ${esc(subject)} ${gradeWord}`;
+  $('#subjectPageSub').textContent = `گام به گام، جزوه و نمونه سوالات ${esc(subject)} ${gradeWord}`;
   
   const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === grade && n.subject === subject).sort(sortNotes);
-  const el = $('#subjectNotesList');
+  const el = $('#subjectSections');
   
   if(!notes.length){
     el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📂</div><b>هنوز محتوایی نیست</b><p>برای «${esc(subject)}» هنوز جزوه‌ای اضافه نشده است.</p></div>`;
     return;
   }
   
-  el.innerHTML = notes.map((n, i) => {
-    const ln = detectLessonFromNote(n) || (i+1);
-    const hasP = hasPdf(n);
-    const hasI = hasImages(n);
-    return `<div class="note-row" data-act="open-note" data-id="${n.id}">
-      <div class="nr-num">${fa(ln)}</div>
-      <div class="nr-body">
-        <div class="nr-title">${esc(n.title || 'بدون عنوان')}</div>
-        <div class="nr-meta">
-          <span class="item">🕒 ${dateFa(n.ts)}</span>
-        </div>
+  /* گروه‌بندی بر اساس بخش */
+  const grouped = {};
+  notes.forEach(n => {
+    const sec = n.section || DEFAULT_SECTION;
+    if(!grouped[sec]) grouped[sec] = [];
+    grouped[sec].push(n);
+  });
+  
+  let html = '';
+  SECTIONS.forEach(sec => {
+    const list = grouped[sec.id];
+    if(!list || !list.length) return;
+    html += `<div class="sec-block">
+      <div class="sec-header">
+        <span class="sec-icon">${sec.icon}</span>
+        <h3>${sec.name} ${esc(subject)} ${gradeWord}</h3>
+        <span class="sec-count">${fa(list.length)} مورد</span>
       </div>
-      <div class="nr-tags">
-        ${hasP ? '<span class="nr-tag pdf">PDF</span>' : ''}
-        ${hasI ? '<span class="nr-tag img">🖼</span>' : ''}
+      <div class="notes-list">
+        ${list.map((n, i) => noteRowHTML(n, i)).join('')}
       </div>
-      <div class="nr-arrow">‹</div>
     </div>`;
-  }).join('');
-}
-
-/* ===== RENDER SEARCH ===== */
-function renderSearch(){
-  const q = state.searchQuery.trim().toLowerCase();
-  const el = $('#searchResults');
-  const clearBtn = $('#searchClear');
-  if(state.searchQuery) clearBtn.classList.remove('hidden'); else clearBtn.classList.add('hidden');
-  if(state.searchQuery.trim() === ADMIN_CODE){
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔓</div><b>خوش آمدی مدیر</b><p>در حال باز کردن پنل…</p></div>`;
-    setTimeout(() => { $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); openAdminPanel(); }, 400);
-    return;
-  }
-  if(!q){ el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><b>جستجو در جزوه‌ها</b><p>نام درس، عنوان یا بخشی از متن جزوه را بنویسید.</p></div>`; return; }
-  const all = Object.values(store.notes).filter(n => !n.deleted);
-  const results = all.filter(n => (n.title || '').toLowerCase().includes(q) || (n.subject || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)).sort(sortNotes);
-  if(!results.length){ el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">😶‍🌫️</div><b>نتیجه‌ای یافت نشد</b><p>برای «${esc(state.searchQuery)}» چیزی پیدا نشد.</p></div>`; return; }
-  el.innerHTML = results.map((n, i) => noteRowHTML(n, i)).join('');
+  });
+  
+  el.innerHTML = html;
 }
 
 function noteRowHTML(n, i){
@@ -1533,7 +1281,6 @@ function noteRowHTML(n, i){
     <div class="nr-body">
       <div class="nr-title">${esc(n.title || 'بدون عنوان')}</div>
       <div class="nr-meta">
-        <span class="item">پایه ${fa(n.grade)} • ${esc(n.subject)}</span>
         <span class="item">🕒 ${dateFa(n.ts)}</span>
       </div>
     </div>
@@ -1543,50 +1290,6 @@ function noteRowHTML(n, i){
     </div>
     <div class="nr-arrow">‹</div>
   </div>`;
-}
-
-/* ===== RENDER LIBRARY ===== */
-function renderLibrary(){
-  let html = '';
-  for(let g = 1; g <= 9; g++){
-    const subs = getSubjects(g);
-    const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === g);
-    html += `<div class="lib-grade">
-      <div class="lib-head" data-act="toggle-lib">
-        <div class="lib-num">${fa(g)}</div>
-        <div style="flex:1"><div class="lib-title">پایه ${GRADE_NAMES[g]}</div><div class="lib-meta">${fa(subs.length)} درس • ${fa(notes.length)} جزوه</div></div>
-        <div class="lib-arrow">‹</div>
-      </div>
-      <div class="lib-subs">${subs.map(s => { const st = subjStyle(s); const c = notes.filter(n => n.subject === s).length; return `<div class="lib-sub" data-act="lib-sub" data-g="${g}" data-s="${esc(s)}"><div class="lib-sub-icon" style="background:${st.bg};color:${st.c}">${st.i}</div><div style="flex:1">${esc(s)}</div><div class="lib-sub-count">${fa(c)} جزوه</div></div>`; }).join('')}</div>
-    </div>`;
-  }
-  $('#libraryList').innerHTML = html;
-}
-
-/* ===== RENDER BOOKMARKS ===== */
-function renderBookmarks(){
-  const el = $('#bookmarksList');
-  const cnt = $('#bookmarkCount');
-  const saved = bookmarks.map(id => store.notes[id]).filter(n => n && !n.deleted);
-  cnt.textContent = saved.length ? `${fa(saved.length)} جزوه ذخیره‌شده` : 'هنوز چیزی ذخیره نکردی';
-  if(!saved.length){
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⭐</div><b>هیچ جزوه‌ای ذخیره نشده</b><p>روی ستاره کنار هر جزوه بزن تا اینجا ذخیره بشه.</p></div>`;
-    return;
-  }
-  el.innerHTML = saved.map((n, i) => noteRowHTML(n, i)).join('');
-}
-
-/* ===== RENDER PROFILE ===== */
-function renderProfile(){
-  const name = localStorage.getItem(NAME_KEY) || 'دانش‌آموز مهمان';
-  $('#profileName').textContent = name;
-  $('#profileAv').textContent = (name.trim().charAt(0) || '👤').toUpperCase();
-  $('#profileGrade').textContent = `پایه ${GRADE_NAMES[state.grade]}`;
-  const notes = Object.values(store.notes).filter(n => !n.deleted);
-  const comments = Object.values(store.comments).filter(c => !c.deleted);
-  $('#pStatNotes').textContent = fa(notes.length);
-  $('#pStatComments').textContent = fa(comments.length);
-  $('#pStatBookmarks').textContent = fa(bookmarks.length);
 }
 
 /* ===== RENDER DETAIL ===== */
@@ -1621,11 +1324,12 @@ function renderDetail(){
         <span class="nc-chip" style="background:${st.bg};color:${st.c}">${st.i} ${esc(n.subject)}</span>
         <span class="nc-grade">پایه ${GRADE_NAMES[n.grade]}</span>
         ${lessonNum ? `<span class="nc-lesson">📖 فصل ${fa(lessonNum)}</span>` : ''}
+        <span class="nc-section">${sectionIcon(n.section || DEFAULT_SECTION)} ${sectionName(n.section || DEFAULT_SECTION)}</span>
       </div>
       <div class="note-title-lg">${esc(n.title || 'بدون عنوان')}</div>
       <div class="note-meta">
         <span>📅 ${dateFullFa(n.ts)}</span>
-        <span>⏱ ${fa(rt)} دقیقه مطالعه</span>
+        ${n.content ? `<span>⏱ ${fa(rt)} دقیقه مطالعه</span>` : ''}
       </div>
     </div>
     ${pdfHtml}
@@ -1639,10 +1343,6 @@ function refreshAll(){
   if(state.screen === 'home') renderHome();
   else if(state.screen === 'grade') renderGrade();
   else if(state.screen === 'subject') renderSubject();
-  else if(state.screen === 'search') renderSearch();
-  else if(state.screen === 'library') renderLibrary();
-  else if(state.screen === 'bookmarks') renderBookmarks();
-  else if(state.screen === 'profile') renderProfile();
   if(state.noteId) renderDetail();
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
 }
@@ -1748,22 +1448,13 @@ function showScreen(name){
   state.screen = name;
   $$('.screen').forEach(s => s.classList.remove('active'));
   const sc = document.getElementById('screen-' + name); if(sc) sc.classList.add('active');
-  $$('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
-  $$('.nav-link').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
   if(name === 'home') renderHome();
   else if(name === 'grade') renderGrade();
   else if(name === 'subject') renderSubject();
-  else if(name === 'search') renderSearch();
-  else if(name === 'library') renderLibrary();
-  else if(name === 'bookmarks') renderBookmarks();
-  else if(name === 'profile') renderProfile();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
 document.addEventListener('click', e => {
-  const navBtn = e.target.closest('[data-nav]');
-  if(navBtn){ e.preventDefault(); showScreen(navBtn.dataset.nav); return; }
-  
   const hg = e.target.closest('[data-home-grade]');
   if(hg){
     state.grade = +hg.dataset.homeGrade;
@@ -1774,26 +1465,20 @@ document.addEventListener('click', e => {
     return;
   }
   
+  const os = e.target.closest('[data-open-subject]');
+  if(os){
+    state.subject = os.dataset.openSubject;
+    state.noteId = null;
+    showScreen('subject');
+    return;
+  }
+  
   const t = e.target.closest('[data-act]');
   if(t){
     const act = t.dataset.act;
     if(act === 'go-home'){ showScreen('home'); return; }
     if(act === 'go-grade'){ showScreen('grade'); return; }
     if(act === 'open-note'){ openDetail(t.dataset.id); return; }
-    if(act === 'toggle-lib'){ const g = t.closest('.lib-grade'); if(g) g.classList.toggle('open'); return; }
-    if(act === 'lib-sub'){
-      state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null;
-      localStorage.setItem(GRADE_KEY, state.grade);
-      showScreen('subject');
-      return;
-    }
-  }
-  
-  const accToggle = e.target.closest('[data-acc-toggle]');
-  if(accToggle){
-    const item = accToggle.closest('.acc-item');
-    if(item) item.classList.toggle('open');
-    return;
   }
 });
 
@@ -1802,7 +1487,6 @@ function toggleBookmark(id){
   if(idx === -1){ bookmarks.push(id); toast('⭐ جزوه ذخیره شد', 'success'); }
   else { bookmarks.splice(idx, 1); toast('از ذخیره‌ها حذف شد'); }
   localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
-  renderBookmarks();
   if(state.noteId) renderDetail();
 }
 function openDetail(id){
@@ -1811,16 +1495,11 @@ function openDetail(id){
   renderDetail();
   setTimeout(updateProgress, 30);
 }
-function closeDetail(){
-  state.noteId = null; stopTts();
-  $('#detail').classList.add('hidden');
-  if(state.screen === 'bookmarks') renderBookmarks();
-}
+function closeDetail(){ state.noteId = null; stopTts(); $('#detail').classList.add('hidden'); }
 $('#detailBack').addEventListener('click', closeDetail);
 $('#themeToggle').addEventListener('click', toggleTheme);
 $('#brandClick').addEventListener('click', () => showScreen('home'));
 
-/* ===== HERO ===== */
 $('#heroStartBtn').addEventListener('click', () => {
   const grid = $('#gradesSectionHead');
   if(grid) grid.scrollIntoView({behavior:'smooth', block:'start'});
@@ -1886,7 +1565,7 @@ function stopTts(){
   const b = $('#toolTts'); if(b){ b.textContent = '🔊'; b.classList.remove('active'); }
 }
 
-/* ===== SHEET ===== */
+/* ===== SHEET (تغییر پایه) ===== */
 function openGradeSheet(){
   $('#gradeGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<button class="grade-opt ${g === state.grade ? 'active' : ''}" data-grade="${g}" type="button"><span class="num">${fa(g)}</span><span class="lbl">پایه</span></button>`).join('');
   $('#sheetOverlay').classList.add('show'); $('#sheet').classList.add('show');
@@ -1897,37 +1576,10 @@ $('#gradeGrid').addEventListener('click', e => {
   const b = e.target.closest('[data-grade]'); if(!b) return;
   state.grade = +b.dataset.grade; state.subject = null; state.noteId = null;
   localStorage.setItem(GRADE_KEY, state.grade);
-  closeSheet(); renderProfile();
+  closeSheet();
   if(state.screen === 'grade' || state.screen === 'subject') showScreen('grade');
   toast(`پایه ${GRADE_NAMES[state.grade]} انتخاب شد`, 'success');
 });
-$('#menuGrade').addEventListener('click', openGradeSheet);
-$('#menuName').addEventListener('click', () => {
-  const cur = localStorage.getItem(NAME_KEY) || '';
-  const v = prompt('نام نمایشی خود را وارد کنید:', cur);
-  if(v === null) return;
-  const n = v.trim();
-  if(n) localStorage.setItem(NAME_KEY, n); else localStorage.removeItem(NAME_KEY);
-  renderProfile(); toast('نام ذخیره شد', 'success');
-});
-$('#menuSync').addEventListener('click', async () => {
-  toast('در حال دریافت…');
-  await loadFromGitHub(false);
-  toast(isOnline ? 'به‌روزرسانی شد ✅' : 'اتصال برقرار نشد ⚠️', isOnline ? 'success' : 'error');
-});
-
-/* ===== SEARCH ===== */
-const handleSearch = debounce(q => { state.searchQuery = q; renderSearch(); }, 180);
-$('#searchInput').addEventListener('input', e => handleSearch(e.target.value));
-$('#searchClear').addEventListener('click', () => { $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); $('#searchInput').focus(); });
-const handleSearchDesktop = debounce(q => {
-  state.searchQuery = q;
-  if(q) showScreen('search');
-  renderSearch();
-  const inp = $('#searchInput');
-  if(inp) inp.value = q;
-}, 200);
-$('#searchDesktop').addEventListener('input', e => handleSearchDesktop(e.target.value));
 
 /* ===== COMMENTS ===== */
 document.addEventListener('input', e => {
@@ -1954,7 +1606,7 @@ document.addEventListener('submit', async e => {
 });
 
 /* ===== ADMIN ===== */
-let adminFilterGrade = 0;
+let adminFilterGrade = 0, adminFilterSection = '';
 function openAdminPanel(){ $('#admin').classList.remove('hidden'); renderAdmin(); }
 function toggleAdmin(){
   const a = $('#admin');
@@ -1972,25 +1624,30 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
   });
 });
 function renderAdminFilter(){
-  let html = `<select id="filterGrade" style="width:100%;padding:12px 14px;border:1.5px solid var(--br2);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="0">همه پایه‌ها</option>`;
+  let html = `<div class="field-row" style="margin-bottom:0"><select id="filterGrade" style="padding:12px 14px;border:1.5px solid var(--br2);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="0">همه پایه‌ها</option>`;
   for(let g = 1; g <= 9; g++) html += `<option value="${g}" ${adminFilterGrade === g ? 'selected' : ''}>پایه ${GRADE_NAMES[g]}</option>`;
-  html += `</select>`;
+  html += `</select><select id="filterSection" style="padding:12px 14px;border:1.5px solid var(--br2);border-radius:12px;font-size:13.5px;font-weight:600;background:var(--card);color:var(--text)"><option value="">همه بخش‌ها</option>`;
+  SECTIONS.forEach(s => html += `<option value="${s.id}" ${adminFilterSection === s.id ? 'selected' : ''}>${s.icon} ${s.name}</option>`);
+  html += `</select></div>`;
   $('#adminNotesFilter').innerHTML = html;
   document.getElementById('filterGrade').addEventListener('change', function(){ adminFilterGrade = +this.value; renderAdminNotes(); });
+  document.getElementById('filterSection').addEventListener('change', function(){ adminFilterSection = this.value; renderAdminNotes(); });
 }
 function renderAdminNotes(){
   const el = $('#adminNotesList');
   let notes = Object.values(store.notes).filter(n => !n.deleted);
   if(adminFilterGrade) notes = notes.filter(n => n.grade === adminFilterGrade);
+  if(adminFilterSection) notes = notes.filter(n => (n.section || DEFAULT_SECTION) === adminFilterSection);
   notes.sort(sortNotes);
   $('#tabNotesCount').textContent = fa(Object.values(store.notes).filter(n => !n.deleted).length);
-  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای ثبت نشده.</div>`; return; }
+  if(!notes.length){ el.innerHTML = `<div class="admin-empty">هنوز جزوه‌ای با این فیلتر پیدا نشد.</div>`; return; }
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
     const lessonNum = detectLessonFromNote(n);
     const tags = (hasPdf(n) ? '📄' : '') + (hasImages(n) ? '🖼' : '');
     const lessonBadge = lessonNum ? `<span class="admin-item-lesson">${fa(lessonNum)}</span>` : '';
-    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${tags}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${GRADE_NAMES[n.grade]}</span>${lessonNum ? `<span>•</span><span>📖 فصل ${fa(lessonNum)}</span>` : ''}<span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
+    const secId = n.section || DEFAULT_SECTION;
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${tags}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${GRADE_NAMES[n.grade]}</span><span>•</span><span class="admin-item-sec">${sectionIcon(secId)} ${sectionName(secId)}</span>${lessonNum ? `<span>•</span><span>📖 فصل ${fa(lessonNum)}</span>` : ''}</div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
@@ -2085,6 +1742,9 @@ function updateLessonHint(){
   if(t){ const n = detectLessonNumber(t); if(n){ $('#lessonHint').innerHTML = `🔮 تشخیص خودکار: <b>فصل ${fa(n)}</b>`; return; } }
   $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه`;
 }
+function populateSectionSelect(selectEl, selected){
+  selectEl.innerHTML = SECTIONS.map(s => `<option value="${s.id}" ${s.id === selected ? 'selected' : ''}>${s.icon} ${s.name}</option>`).join('');
+}
 function renderImgList(){
   const el = $('#imgList');
   if(!editingImages.length){ el.innerHTML = ''; $('#imgUploadName').textContent = 'هیچ عکسی انتخاب نشده'; $('#imgUploadSize').textContent = 'می‌تونی چند تا عکس با هم انتخاب کنی'; return; }
@@ -2139,6 +1799,7 @@ function openEditor(id){
     const n = store.notes[id]; if(!n) return;
     $('#editorTitle').textContent = 'ویرایش جزوه';
     gs.value = n.grade; populateSubjects(n.grade, n.subject);
+    populateSectionSelect($('#edSection'), n.section || DEFAULT_SECTION);
     $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl && !n.pdfFile ? n.pdfUrl : '';
     $('#edLessonNum').value = n.lessonNum || '';
     updateLessonHint();
@@ -2155,6 +1816,7 @@ function openEditor(id){
   } else {
     $('#editorTitle').textContent = 'جزوه جدید';
     gs.value = state.grade; populateSubjects(state.grade, state.subject);
+    populateSectionSelect($('#edSection'), DEFAULT_SECTION);
     $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = ''; $('#edLessonNum').value = '';
     updateLessonHint(); renderImgList(); resetPdfUpload();
     $('#editorDelete').classList.add('hidden');
@@ -2174,7 +1836,7 @@ function showPdfUpload(name, size, existing){
 }
 function resetPdfUpload(){
   $('#pdfUploadName').textContent = 'هیچ فایلی انتخاب نشده';
-  $('#pdfUploadSize').textContent = 'هر حجمی — توی پوشه pdfs/ ذخیره می‌شود';
+  $('#pdfUploadSize').textContent = 'توی پوشه pdfs/ ذخیره می‌شود';
   $('#pdfUploadArea').classList.remove('has-file');
   $('#btnRemovePdf').classList.add('hidden');
   $('#btnChoosePdf').textContent = 'انتخاب';
@@ -2218,6 +1880,7 @@ $('#editorSave').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   const grade = +$('#edGrade').value;
   const subject = $('#edSubject').value;
+  const section = $('#edSection').value;
   const title = $('#edTitle').value.trim();
   const content = $('#edContent').value.trim();
   const pdfUrlInput = $('#edPdfUrl').value.trim();
@@ -2225,7 +1888,7 @@ $('#editorSave').addEventListener('click', async () => {
   if(!title){ toast('عنوان را وارد کنید', 'error'); return; }
   if(!content && !pdfUrlInput && !editingPdfFile && !editingPdfExisting && !editingPdfExistingFile){ toast('حداقل متن یا PDF', 'error'); return; }
   const id = editingNoteId || uid();
-  const item = {kind:'note', id, grade, subject, title, content, ts:Date.now()};
+  const item = {kind:'note', id, grade, subject, section, title, content, ts:Date.now()};
   const lessonNum = manualLesson ? parseInt(manualLesson, 10) : detectLessonNumber(title);
   if(lessonNum) item.lessonNum = lessonNum;
   const btn = $('#editorSave'); btn.disabled = true;
@@ -2278,7 +1941,7 @@ $('#editorDelete').addEventListener('click', async () => {
   const old = store.notes[editingNoteId];
   const pdfD = old.pdfFile;
   const imgsD = (old.images || []).map(i => i.name);
-  const tomb = {kind:'note', id: editingNoteId, grade: old.grade, subject: old.subject, title:'', content:'', deleted:true, ts:Date.now()};
+  const tomb = {kind:'note', id: editingNoteId, grade: old.grade, subject: old.subject, section: old.section, title:'', content:'', deleted:true, ts:Date.now()};
   store.notes[tomb.id] = tomb;
   closeEditor(); renderAdmin();
   toast('در حال حذف…');
@@ -2297,6 +1960,7 @@ function openBulkEditor(){
   const gs = $('#bulkGrade');
   gs.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}" ${g === state.grade ? 'selected' : ''}>پایه ${GRADE_NAMES[g]}</option>`).join('');
   populateBulkSubjects(state.grade);
+  populateSectionSelect($('#bulkSection'), DEFAULT_SECTION);
   renderBulkList();
   $('#bulkProgressSection').style.display = 'none';
   $('#bulkFiles').value = '';
@@ -2345,8 +2009,9 @@ $('#bulkSave').addEventListener('click', async () => {
   if(!bulkFiles.length){ toast('حداقل یه فایل انتخاب کن', 'error'); return; }
   const grade = +$('#bulkGrade').value;
   const subject = $('#bulkSubject').value;
+  const section = $('#bulkSection').value;
   const total = bulkFiles.length;
-  if(!confirm(`${fa(total)} PDF به درس «${subject}» پایه ${GRADE_NAMES[grade]} اضافه بشه؟`)) return;
+  if(!confirm(`${fa(total)} PDF به بخش «${sectionName(section)}» درس «${subject}» پایه ${GRADE_NAMES[grade]} اضافه بشه؟`)) return;
   bulkStopFlag = false;
   $('#bulkSave').disabled = true;
   $('#bulkSave').textContent = '⏳ در حال آپلود…';
@@ -2369,7 +2034,7 @@ $('#bulkSave').addEventListener('click', async () => {
       const noteId = uid();
       const title = file.name.replace(/\.pdf$/i, '').trim() || 'بدون عنوان';
       const ln = file._lesson || detectLessonNumber(file.name);
-      const item = {kind:'note', id:noteId, grade, subject, title, content:'', pdfFile:filename, pdfName:file.name, pdfSize:result.size, ts:Date.now()};
+      const item = {kind:'note', id:noteId, grade, subject, section, title, content:'', pdfFile:filename, pdfName:file.name, pdfSize:result.size, ts:Date.now()};
       if(ln) item.lessonNum = ln;
       store.notes[noteId] = item;
       await saveDataToGitHub();
@@ -2452,7 +2117,7 @@ function toast(msg, type){
   }catch(e){}
   if(!isFirst){ state.grade = +(localStorage.getItem(GRADE_KEY) || 9); }
   document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
-  renderHome(); renderProfile(); renderLibrary(); renderBookmarks();
+  renderHome();
   await loadFromGitHub(true);
   if(!isFirst && isAdmin) await registerVisit();
   const params = new URLSearchParams(location.search);
@@ -2470,8 +2135,8 @@ function toast(msg, type){
       else if(!$('#bulkEditor').classList.contains('hidden') && !bulkStopFlag) closeBulkEditor();
     }
   });
-  if('speechSynthesis' in window) window.speechSynthesis.getSpeechSynthesis?.();
+  if('speechSynthesis' in window) window.speechSynthesis.getVoices();
 })();
 </script>
 </body>
-</html>
+  </html>
