@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{--p:#6366f1;--p2:#8b5cf6;--p3:#a855f7;--pl:#eef2ff;--pd:#4f46e5;--bg:#f6f7fb;--bg2:#eef1f8;--card:#fff;--card2:#fafbff;--text:#0f172a;--text2:#334155;--mut:#64748b;--dim:#94a3b8;--br:#eaedf3;--br2:#dde3ee;--ok:#10b981;--okbg:#ecfdf5;--oktxt:#059669;--dang:#ef4444;--dangbg:#fef2f2;--dangtxt:#dc2626;--warn:#f59e0b;--warnbg:#fffbeb;--warntxt:#d97706;--r:18px;--sb:env(safe-area-inset-bottom,0px);--sh:0 1px 2px rgba(15,23,42,.05);--sh2:0 20px 40px -18px rgba(99,102,241,.55);--max-w:640px}
+:root{--p:#6366f1;--p2:#8b5cf6;--p3:#a855f7;--pl:#eef2ff;--pd:#4f46e5;--bg:#f6f7fb;--bg2:#eef1f8;--card:#fff;--card2:#fafbff;--text:#0f172a;--text2:#334155;--mut:#64748b;--dim:#94a3b8;--br:#eaedf3;--br2:#dde3ee;--ok:#10b981;--okbg:#ecfdf5;--oktxt:#059669;--dang:#ef4444;--dangbg:#fef2f2;--dangtxt:#dc2626;--warn:#f59e0b;--warnbg:#fffbeb;--warntxt:#d97706;--r:18px;--sb:env(safe-area-inset-bottom,0px);--sh:0 1px 2px rgba(15,23,42,.05);--sh2:0 20px 40px -18px rgba(99,102,241,.55);--max-w:640px;--note-font:15px}
 html[data-theme="dark"]{--bg:#0b1020;--bg2:#0f172a;--card:#141b2d;--card2:#1a2237;--text:#f1f5f9;--text2:#cbd5e1;--mut:#94a3b8;--dim:#64748b;--br:#25304a;--br2:#334155;--pl:#1e1b4b}
 html,body{height:100%;overflow-x:hidden}
 body{font-family:Vazirmatn,'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;overscroll-behavior-y:none}
@@ -66,7 +66,11 @@ button{cursor:pointer;user-select:none}
 .nc-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sb,#eef2ff);color:var(--sc,#4f46e5)}
 .nc-grade{font-size:11px;font-weight:700;color:var(--mut);background:var(--bg2);padding:3px 9px;border-radius:20px}
 .nc-pdf{font-size:10.5px;font-weight:700;background:var(--dangbg);color:var(--dangtxt);padding:3px 8px;border-radius:20px}
+.nc-img{font-size:10.5px;font-weight:700;background:#f0fdf4;color:#16a34a;padding:3px 8px;border-radius:20px}
 .nc-lesson{font-size:11px;font-weight:800;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.nc-bookmark{position:absolute;top:12px;left:12px;width:28px;height:28px;border-radius:9px;background:var(--bg2);display:grid;place-items:center;font-size:14px;transition:.15s;border:1.5px solid var(--br);z-index:1}
+.nc-bookmark:active{transform:scale(.9)}
+.nc-bookmark.saved{background:#fef3c7;border-color:#fbbf24}
 .nc-title{font-size:15.5px;font-weight:700;line-height:1.65;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-preview{font-size:12.5px;color:var(--mut);line-height:1.9;padding-right:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .nc-foot{display:flex;align-items:center;gap:14px;padding-top:9px;margin-top:3px;border-top:1px solid var(--br);font-size:11px;color:var(--dim);font-weight:600;padding-right:8px}
@@ -114,23 +118,34 @@ button{cursor:pointer;user-select:none}
 .nav-btn:active{transform:scale(.94)}
 .detail{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);z-index:80;background:var(--bg);display:flex;flex-direction:column}
 .detail.hidden{display:none}
-.detail-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;display:flex;align-items:center;gap:11px}
+.detail-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--br);padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;display:flex;align-items:center;gap:8px}
 .back-btn{width:38px;height:38px;border-radius:12px;background:var(--bg2);display:grid;place-items:center;color:var(--text);flex-shrink:0;font-size:20px;font-weight:700;transition:.15s}
 .back-btn:active{background:var(--br);transform:scale(.94)}
 .detail-title{font-size:14.5px;font-weight:800;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.detail-tools{display:flex;gap:4px;flex-shrink:0}
+.tool-btn{width:34px;height:34px;border-radius:10px;background:var(--bg2);display:grid;place-items:center;color:var(--mut);transition:.15s;font-size:15px}
+.tool-btn:active{background:var(--br);transform:scale(.9)}
+.tool-btn.active{background:var(--pl);color:var(--p)}
 .detail-body{flex:1;overflow-y:auto;padding:16px 16px calc(28px + var(--sb))}
+.progress-bar-top{position:sticky;top:0;height:3px;background:var(--br);z-index:11;margin:-1px -16px 0}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .15s}
 .note-head{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1.5px solid var(--br);margin-bottom:13px}
 .chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
 .note-title{font-size:21px;font-weight:800;line-height:1.55;margin-bottom:8px}
-.note-meta{font-size:11.5px;color:var(--dim);font-weight:600}
-.note-content{background:var(--card);border-radius:var(--r);padding:22px 20px;box-shadow:var(--sh);border:1.5px solid var(--br);font-size:15px;line-height:2.15;color:var(--text2);margin-bottom:13px;word-break:break-word}
-.note-content h2{font-size:19px;font-weight:800;color:var(--pd);margin:18px 0 9px}
-.note-content h3{font-size:17px;font-weight:800;color:var(--p2);margin:16px 0 8px}
-.note-content h4{font-size:15.5px;font-weight:800;color:var(--text);margin:14px 0 7px}
+.note-meta{font-size:11.5px;color:var(--dim);font-weight:600;display:flex;flex-wrap:wrap;gap:10px}
+.note-meta span{display:inline-flex;align-items:center;gap:4px}
+.note-content{background:var(--card);border-radius:var(--r);padding:22px 20px;box-shadow:var(--sh);border:1.5px solid var(--br);font-size:var(--note-font);line-height:2.15;color:var(--text2);margin-bottom:13px;word-break:break-word;transition:font-size .2s}
+.note-content h2{font-size:1.27em;font-weight:800;color:var(--pd);margin:18px 0 9px}
+.note-content h3{font-size:1.13em;font-weight:800;color:var(--p2);margin:16px 0 8px}
+.note-content h4{font-size:1.03em;font-weight:800;color:var(--text);margin:14px 0 7px}
 .note-content p{margin:6px 0}
 .note-content ul{margin:8px 20px 8px 0;padding-right:6px}
 .note-content strong{color:var(--text);font-weight:800}
 .note-content .sp{height:8px}
+.note-content img{max-width:100%;height:auto;border-radius:12px;margin:12px 0;box-shadow:var(--sh);display:block}
+.note-img{position:relative;display:inline-block;max-width:100%;margin:12px 0}
+.note-img img{margin:0}
+.note-img-caption{font-size:11.5px;color:var(--dim);text-align:center;padding:6px 10px;font-weight:600}
 .pdf-box{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:var(--sh);border:1.5px solid var(--br);margin-bottom:13px}
 .pdf-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--br)}
 .pdf-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#ef4444,#dc2626);display:grid;place-items:center;color:#fff;font-size:23px;flex-shrink:0}
@@ -210,7 +225,6 @@ button{cursor:pointer;user-select:none}
 .pdf-loading.hidden{display:none}
 .pdf-loading b{color:#fff;font-size:15px;margin-bottom:6px}
 .pdf-loading p{font-size:13px;line-height:1.9;max-width:340px}
-.pdf-loading .btn{margin-top:14px}
 .spinner{width:40px;height:40px;border-radius:50%;border:3px solid rgba(148,163,184,.2);border-top-color:#6366f1;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .admin{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column}
@@ -254,6 +268,10 @@ button{cursor:pointer;user-select:none}
 .field .hint{font-size:11px;color:var(--dim);margin-top:5px;padding:0 4px;line-height:1.8}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:480px){.field-row{grid-template-columns:1fr}}
+.content-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.ct-btn{padding:7px 12px;border-radius:9px;background:var(--card2);border:1.5px solid var(--br);font-size:12px;font-weight:700;color:var(--mut);transition:.15s}
+.ct-btn:active{transform:scale(.95)}
+.ct-btn:hover{background:var(--pl);color:var(--p);border-color:var(--p)}
 .pdf-upload-area{display:flex;align-items:center;gap:10px;background:var(--card2);border:1.5px dashed var(--br2);border-radius:12px;padding:14px;cursor:pointer}
 .pdf-upload-area.has-file{background:var(--okbg);border-color:var(--ok);border-style:solid}
 .pdf-upload-icon{width:42px;height:42px;border-radius:12px;background:var(--dangbg);color:var(--dangtxt);display:grid;place-items:center;font-size:19px;flex-shrink:0}
@@ -261,6 +279,10 @@ button{cursor:pointer;user-select:none}
 .pdf-upload-name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pdf-upload-size{font-size:11px;color:var(--mut);font-weight:600;margin-top:2px}
 .pdf-remove{width:32px;height:32px;border-radius:10px;background:var(--dangbg);color:var(--dangtxt);display:grid;place-items:center;font-size:15px}
+.img-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;margin-top:10px}
+.img-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2);border:1.5px solid var(--br)}
+.img-thumb img{width:100%;height:100%;object-fit:cover}
+.img-thumb-remove{position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:7px;background:rgba(220,38,38,.9);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
 .editor-actions{display:flex;gap:8px;padding:14px 18px calc(14px + var(--sb));border-top:1px solid var(--br);background:var(--card);max-width:700px;margin:0 auto;width:100%;flex-wrap:wrap}
 .editor-actions .spacer{flex:1}
 .settings-section{background:var(--card);border-radius:var(--r);border:1.5px solid var(--br);padding:18px;margin-bottom:14px}
@@ -277,8 +299,6 @@ button{cursor:pointer;user-select:none}
 .bulk-item.error{background:var(--dangbg);border-color:var(--dangtxt)}
 .bulk-item.active{background:var(--pl);border-color:var(--p);animation:pulseLight 1.2s infinite}
 @keyframes pulseLight{0%,100%{opacity:1}50%{opacity:.7}}
-
-/* User Stats */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;margin-bottom:16px}
 .stat-big{background:var(--card);border-radius:14px;padding:16px;border:1.5px solid var(--br);text-align:center}
 .stat-big .num{font-size:28px;font-weight:800;color:var(--p);letter-spacing:-1px;line-height:1.1;margin-bottom:4px}
@@ -291,7 +311,6 @@ button{cursor:pointer;user-select:none}
 .user-meta{font-size:10.5px;color:var(--mut);font-weight:600}
 .user-badge{padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:800;background:var(--pl);color:var(--p);flex-shrink:0}
 .user-badge.online{background:var(--okbg);color:var(--oktxt)}
-
 .hidden{display:none !important}
 .loading-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);z-index:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-overlay.hidden{display:none}
@@ -301,6 +320,7 @@ button{cursor:pointer;user-select:none}
 .progress-track{width:220px;height:6px;background:var(--br);border-radius:10px;overflow:hidden}
 .progress-fill-bar{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));transition:width .3s;border-radius:10px;width:0%}
 .ver{position:fixed;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--dim);opacity:.4;z-index:1;pointer-events:none}
+.credit{font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9}
 .desktop-sidebar{display:none}
 @media(min-width:900px){
   :root{--max-w:100%}
@@ -380,7 +400,7 @@ button{cursor:pointer;user-select:none}
       </div>
     </div>
     <div class="hspace"></div>
-    <button class="icon-btn" id="themeToggle" type="button">
+    <button class="icon-btn" id="themeToggle" type="button" title="حالت شب/روز">
       <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
     <div class="status-dot" id="statusDot"></div>
@@ -424,6 +444,11 @@ button{cursor:pointer;user-select:none}
       <div id="libraryList"></div>
     </section>
 
+    <section class="screen" id="screen-bookmarks">
+      <div class="section"><h2>⭐ جزوه‌های ذخیره‌شده</h2><span class="count" id="bookmarkCount"></span></div>
+      <div class="notes" id="bookmarksList"></div>
+    </section>
+
     <section class="screen" id="screen-profile">
       <div class="profile-card">
         <div class="profile-av" id="profileAv">👤</div>
@@ -433,21 +458,21 @@ button{cursor:pointer;user-select:none}
       <div class="stat-grid">
         <div class="stat-card"><b id="pStatNotes">۰</b><span>جزوه</span></div>
         <div class="stat-card"><b id="pStatComments">۰</b><span>نظر</span></div>
-        <div class="stat-card"><b id="pStatSubjects">۰</b><span>درس</span></div>
+        <div class="stat-card"><b id="pStatBookmarks">۰</b><span>ذخیره‌شده</span></div>
       </div>
       <div class="menu">
         <button class="menu-item" id="menuGrade" type="button"><div class="menu-icon">🎓</div><div>تغییر پایه تحصیلی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuName" type="button"><div class="menu-icon">✏️</div><div>ویرایش نام نمایشی</div><span class="arrow">‹</span></button>
         <button class="menu-item" id="menuSync" type="button"><div class="menu-icon">🔄</div><div>به‌روزرسانی از GitHub</div><span class="arrow">‹</span></button>
       </div>
-      <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:22px;line-height:1.9">درسیار • نسخه 1.0.5</p>
+      <p class="credit">درسیار • نسخه ۱.۰.۵<br>ساخته‌شده با ❤️ برای دانش‌آموزان</p>
     </section>
   </main>
 
   <nav class="bottom-nav">
     <button class="nav-btn active" data-nav="home" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>خانه</span></button>
     <button class="nav-btn" data-nav="search" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>جستجو</span></button>
-    <button class="nav-btn" data-nav="library" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>کتابخانه</span></button>
+    <button class="nav-btn" data-nav="bookmarks" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>ذخیره‌ها</span></button>
     <button class="nav-btn" data-nav="profile" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg><span>پروفایل</span></button>
   </nav>
 </div>
@@ -457,7 +482,15 @@ button{cursor:pointer;user-select:none}
   <div class="detail-header">
     <button class="back-btn" id="detailBack" type="button">‹</button>
     <div class="detail-title" id="detailTitle">جزوه</div>
+    <div class="detail-tools">
+      <button class="tool-btn" id="toolTts" type="button" title="خواندن با صدا">🔊</button>
+      <button class="tool-btn" id="toolFontDown" type="button" title="کوچک‌تر">A-</button>
+      <button class="tool-btn" id="toolFontUp" type="button" title="بزرگ‌تر">A+</button>
+      <button class="tool-btn" id="toolBookmark" type="button" title="ذخیره">⭐</button>
+      <button class="tool-btn" id="toolShare" type="button" title="اشتراک">📤</button>
+    </div>
   </div>
+  <div class="progress-bar-top"><div class="progress-fill" id="progressFill"></div></div>
   <div class="detail-body" id="detailBody"></div>
 </div>
 
@@ -479,6 +512,18 @@ button{cursor:pointer;user-select:none}
   </div>
 </div>
 
+<!-- IMAGE VIEWER -->
+<div class="pdf-viewer hidden" id="imgViewer" style="background:#0b1020">
+  <div class="pdf-viewer-header">
+    <button class="back-btn" id="imgViewerClose" type="button">✕</button>
+    <div class="pdf-viewer-title" id="imgViewerTitle">تصویر</div>
+    <a class="btn btn-ghost btn-sm" id="imgViewerDownload" download style="background:rgba(255,255,255,.15);color:#fff">⬇</a>
+  </div>
+  <div class="pdf-viewer-body" style="display:grid;place-items:center;padding:20px">
+    <img id="imgViewerFrame" style="max-width:100%;max-height:100%;border-radius:12px" alt="">
+  </div>
+</div>
+
 <!-- SHEET -->
 <div class="sheet-overlay" id="sheetOverlay"></div>
 <div class="sheet" id="sheet">
@@ -487,7 +532,7 @@ button{cursor:pointer;user-select:none}
   <div class="grade-grid" id="gradeGrid"></div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 <div class="admin hidden" id="admin">
   <div class="admin-header">
     <div class="admin-logo"><img src="icon.png" alt="" onerror="this.parentNode.innerHTML='🛠'"></div>
@@ -507,7 +552,7 @@ button{cursor:pointer;user-select:none}
         <button class="btn btn-primary" id="btnBulkUpload" type="button">📦 آپلود گروهی</button>
         <button class="btn btn-ghost" id="btnNewNote" type="button">＋ جزوه تکی</button>
         <button class="btn btn-ghost" id="btnRefreshNotes" type="button">🔄 دریافت</button>
-        <button class="btn btn-ghost" id="btnResortNotes" type="button">🔢 مرتب‌سازی هوشمند</button>
+        <button class="btn btn-ghost" id="btnResortNotes" type="button">🔢 مرتب‌سازی</button>
       </div>
       <div id="adminNotesFilter" style="margin-bottom:14px"></div>
       <div class="admin-list" id="adminNotesList"></div>
@@ -517,28 +562,20 @@ button{cursor:pointer;user-select:none}
       <div class="admin-list" id="adminSubjectsList"></div>
     </div>
     <div class="admin-panel" id="panel-users">
-      <div class="admin-actions">
-        <button class="btn btn-ghost" id="btnRefreshUsers" type="button">🔄 به‌روزرسانی آمار</button>
-      </div>
+      <div class="admin-actions"><button class="btn btn-ghost" id="btnRefreshUsers" type="button">🔄 به‌روزرسانی آمار</button></div>
       <div id="usersStats"></div>
     </div>
     <div class="admin-panel" id="panel-settings">
       <div class="settings-section">
         <h4><span class="dot" style="background:var(--ok)"></span> اتصال به GitHub</h4>
-        <div class="field">
-          <label>مخزن GitHub</label>
-          <input id="setGhRepo" dir="ltr" style="text-align:left" readonly>
-        </div>
-        <div class="field">
-          <label>توکن GitHub</label>
-          <input id="setGhToken" type="password" placeholder="ghp_..." dir="ltr" style="text-align:left">
-        </div>
+        <div class="field"><label>مخزن GitHub</label><input id="setGhRepo" dir="ltr" style="text-align:left" readonly></div>
+        <div class="field"><label>توکن GitHub</label><input id="setGhToken" type="password" placeholder="ghp_..." dir="ltr" style="text-align:left"></div>
         <button class="btn btn-primary btn-block" id="btnSaveGh" type="button">💾 ذخیره و اتصال</button>
         <button class="btn btn-ghost btn-block" id="btnDisconnect" type="button" style="margin-top:8px">🔓 قطع اتصال</button>
         <div id="ghStatus" style="margin-top:12px;font-size:12px;color:var(--mut);line-height:1.9"></div>
       </div>
       <div class="settings-section">
-        <h4><span class="dot" style="background:var(--p)"></span> آمار کلی</h4>
+        <h4><span class="dot" style="background:var(--p)"></span> آمار</h4>
         <div id="adminStats" style="font-size:13px;color:var(--mut);line-height:2.2"></div>
       </div>
     </div>
@@ -564,7 +601,33 @@ button{cursor:pointer;user-select:none}
     </div>
     <div class="field">
       <label>متن جزوه</label>
-      <textarea id="edContent" class="content-area" placeholder="متن جزوه..."></textarea>
+      <div class="content-toolbar">
+        <button type="button" class="ct-btn" data-insert="# "># عنوان</button>
+        <button type="button" class="ct-btn" data-insert="## ">## زیرعنوان</button>
+        <button type="button" class="ct-btn" data-insert="- ">• لیست</button>
+        <button type="button" class="ct-btn" data-insert="**متن مهم**">** پررنگ</button>
+        <button type="button" class="ct-btn" id="ctInsertImage">📷 عکس</button>
+      </div>
+      <textarea id="edContent" class="content-area" placeholder="متن جزوه...&#10;&#10;# عنوان&#10;## زیرعنوان&#10;- آیتم&#10;**متن مهم**&#10;![توضیح عکس](اسم-عکس)"></textarea>
+      <div class="hint">
+        💡 برای عکس: یا از دکمه «📷 عکس» استفاده کن، یا بنویس <code>![توضیح](اسم-عکس)</code>
+      </div>
+    </div>
+    <div class="settings-section">
+      <h4><span class="dot" style="background:#16a34a"></span> عکس‌های جزوه</h4>
+      <div class="field">
+        <input type="file" id="edImgFile" accept="image/*" multiple style="display:none">
+        <div class="pdf-upload-area" id="imgUploadArea">
+          <div class="pdf-upload-icon" style="background:#f0fdf4;color:#16a34a">🖼</div>
+          <div class="pdf-upload-info">
+            <div class="pdf-upload-name" id="imgUploadName">هیچ عکسی انتخاب نشده</div>
+            <div class="pdf-upload-size" id="imgUploadSize">می‌تونی چند تا عکس با هم انتخاب کنی</div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="btnChooseImg">انتخاب</button>
+        </div>
+        <div class="hint">✅ عکس‌ها توی پوشه images/ ذخیره می‌شن. روی هر عکس بزن تا کدش توی متن درج بشه.</div>
+        <div class="img-list" id="imgList"></div>
+      </div>
     </div>
     <div class="settings-section">
       <h4><span class="dot" style="background:var(--dang)"></span> PDF (اختیاری)</h4>
@@ -662,13 +725,14 @@ button{cursor:pointer;user-select:none}
 
 <script>
 /* =========================================================
-   درسیار v1.0.5 — با آمار کاربران + فیکس PDF
+   درسیار v1.0.5 — با عکس، ذخیره، TTS و امکانات جدید
    ========================================================= */
 const GH_OWNER = 'rl2011yasin-sketch';
 const GH_REPO = 'darsyar';
 const GH_BRANCH = 'main';
 const DATA_FILE = 'data.json';
 const PDF_DIR = 'pdfs';
+const IMG_DIR = 'images';
 const GH_API = 'https://api.github.com';
 const RAW_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}`;
 const TOKEN_KEY = 'darsyar_admin_token';
@@ -677,6 +741,8 @@ const GRADE_KEY = 'darsyar_grade';
 const VISITED_KEY = 'darsyar_visited';
 const NAME_KEY = 'darsyar_name';
 const USER_ID_KEY = 'darsyar_user_id';
+const BOOKMARK_KEY = 'darsyar_bookmarks_v105';
+const FONT_SIZE_KEY = 'darsyar_fontsize';
 const CACHE_KEY = 'darsyar_cache_v105';
 const ADMIN_CODE = 'darsyar2026';
 
@@ -691,31 +757,17 @@ function isDesktop(){ return window.innerWidth >= 900; }
 /* ===== تشخیص شماره درس ===== */
 const PERSIAN_DIGITS = {'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};
 function normalizeDigits(str){ return String(str).replace(/[۰-۹٠-٩]/g, d => PERSIAN_DIGITS[d] || d); }
-
 const PERSIAN_ORDINALS = {
-  'اول':1,'اولین':1,'یکم':1,'یک':1,'یه':1,
-  'دوم':2,'دومین':2,'دو':2,
-  'سوم':3,'سومین':3,'سه':3,
-  'چهارم':4,'چهارمین':4,'چهار':4,
-  'پنجم':5,'پنجمین':5,'پنج':5,
-  'ششم':6,'ششمین':6,'شش':6,
-  'هفتم':7,'هفتمین':7,'هفت':7,
-  'هشتم':8,'هشتمین':8,'هشت':8,
-  'نهم':9,'نهمین':9,'نه':9,
-  'دهم':10,'دهمین':10,'ده':10,
-  'یازدهم':11,'یازدهمین':11,'یازده':11,
-  'دوازدهم':12,'دوازدهمین':12,'دوازده':12,
-  'سیزدهم':13,'سیزدهمین':13,'سیزده':13,
-  'چهاردهم':14,'چهاردهمین':14,'چهارده':14,
-  'پانزدهم':15,'پانزدهمین':15,'پانزده':15,
-  'شانزدهم':16,'شانزدهمین':16,'شانزده':16,
-  'هفدهم':17,'هفدهمین':17,'هفده':17,
-  'هجدهم':18,'هجدهمین':18,'هجده':18,
-  'نوزدهم':19,'نوزدهمین':19,'نوزده':19,
-  'بیستم':20,'بیستمین':20,'بیست':20
+  'اول':1,'اولین':1,'یکم':1,'یک':1,'یه':1,'دوم':2,'دومین':2,'دو':2,'سوم':3,'سومین':3,'سه':3,
+  'چهارم':4,'چهارمین':4,'چهار':4,'پنجم':5,'پنجمین':5,'پنج':5,'ششم':6,'ششمین':6,'شش':6,
+  'هفتم':7,'هفتمین':7,'هفت':7,'هشتم':8,'هشتمین':8,'هشت':8,'نهم':9,'نهمین':9,'نه':9,
+  'دهم':10,'دهمین':10,'ده':10,'یازدهم':11,'یازدهمین':11,'یازده':11,'دوازدهم':12,'دوازدهمین':12,'دوازده':12,
+  'سیزدهم':13,'سیزدهمین':13,'سیزده':13,'چهاردهم':14,'چهاردهمین':14,'چهارده':14,
+  'پانزدهم':15,'پانزدهمین':15,'پانزده':15,'شانزدهم':16,'شانزدهمین':16,'شانزده':16,
+  'هفدهم':17,'هفدهمین':17,'هفده':17,'هجدهم':18,'هجدهمین':18,'هجده':18,
+  'نوزدهم':19,'نوزدهمین':19,'نوزده':19,'بیستم':20,'بیستمین':20,'بیست':20
 };
 const LESSON_PREFIXES = ['درس','فصل','بخش','واحد','مبحث','گفتار','درسنامه'];
-
 function detectLessonNumber(text){
   if(!text) return null;
   let str = normalizeDigits(String(text).trim());
@@ -763,15 +815,17 @@ function timeAgo(ts){
 }
 function formatSize(b){ if(!b) return ''; if(b < 1024) return fa(b)+' بایت'; if(b < 1024*1024) return fa((b/1024).toFixed(0))+' KB'; return fa((b/1024/1024).toFixed(1))+' MB'; }
 function debounce(fn, ms){ let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
-
+function readingTime(text){
+  const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+  const min = Math.max(1, Math.ceil(words / 180));
+  return min;
+}
 function utf8ToBase64(str){
   const bytes = new TextEncoder().encode(str);
   let bin = ''; const chunk = 0x8000;
   for(let i = 0; i < bytes.length; i += chunk) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
   return btoa(bin);
 }
-
-/* ===== تشخیص دستگاه و مرورگر ===== */
 function detectBrowser(){
   const ua = navigator.userAgent;
   if(/Chrome/i.test(ua) && !/Edg/i.test(ua)) return 'Chrome';
@@ -802,9 +856,13 @@ let isAdmin = false;
 const state = { screen:'home', grade:7, subject:null, noteId:null, searchQuery:'' };
 let draft = {name:'', text:''};
 let editingPdfFile = null, editingPdfExisting = null, editingPdfExistingFile = '', editingPdfExistingName = '', editingPdfExistingSize = 0;
+let editingImages = []; // { file?, name, dataUrl?, uploaded?, size? }
 let bulkFiles = [], bulkStopFlag = false;
 let welcomeSelectedGrade = null;
 let currentPdfBlobUrl = null;
+let currentImgUrl = null;
+let noteFontSize = +(localStorage.getItem(FONT_SIZE_KEY) || 15);
+let bookmarks = JSON.parse(localStorage.getItem(BOOKMARK_KEY) || '[]');
 
 const TEXTBOOK = {
   1:['ریاضی','علوم','فارسی','قرآن','هدیه‌های آسمان'],
@@ -841,9 +899,7 @@ const getUserId = () => {
   return id;
 };
 
-/* =========================================================
-   GitHub API
-   ========================================================= */
+/* ===== GitHub API ===== */
 async function ghFetch(url, options = {}, retries = 2){
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 90000);
@@ -860,7 +916,6 @@ async function ghFetch(url, options = {}, retries = 2){
     throw e;
   }
 }
-
 async function githubGetMeta(path){
   const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`;
   const headers = { 'Accept': 'application/vnd.github.v3+json' };
@@ -871,13 +926,12 @@ async function githubGetMeta(path){
     if(r.status === 404) return null;
     if(!r.ok) throw new Error(`GitHub GET ${r.status}`);
     const data = await r.json();
-    return { sha: data.sha, size: data.size, download_url: data.download_url };
+    return { sha: data.sha, size: data.size };
   }catch(e){
     if(e.message && e.message.includes('404')) return null;
     throw e;
   }
 }
-
 async function githubPut(path, contentBase64, message, sha){
   const token = getToken();
   if(!token) throw new Error('توکن تنظیم نشده');
@@ -896,32 +950,42 @@ async function githubPut(path, contentBase64, message, sha){
   if(!r.ok) throw new Error(`خطای GitHub ${r.status}`);
   return await r.json();
 }
-
 async function uploadPdfFile(filename, base64Data){
   const path = `${PDF_DIR}/${filename}`;
   let sha = null;
   try{ const meta = await githubGetMeta(path); if(meta) sha = meta.sha; }catch(e){}
   await githubPut(path, base64Data, `📄 آپلود PDF: ${filename}`, sha);
-  await sleep(800);
+  await sleep(600);
   const verify = await githubGetMeta(path);
-  if(!verify) throw new Error('آپلود تأیید نشد');
+  if(!verify) throw new Error('آپلود PDF تأیید نشد');
   if(verify.size < 100) throw new Error('فایل خالی');
-  return { size: verify.size, sha: verify.sha };
+  return { size: verify.size };
 }
-
-async function deletePdfFile(filename){
+async function uploadImageFile(filename, base64Data){
+  const path = `${IMG_DIR}/${filename}`;
+  let sha = null;
+  try{ const meta = await githubGetMeta(path); if(meta) sha = meta.sha; }catch(e){}
+  await githubPut(path, base64Data, `🖼 آپلود عکس: ${filename}`, sha);
+  await sleep(500);
+  const verify = await githubGetMeta(path);
+  if(!verify) throw new Error('آپلود عکس تأیید نشد');
+  return { size: verify.size };
+}
+async function deleteFileFromGitHub(dir, filename){
   const token = getToken(); if(!token) return false;
   try{
-    const meta = await githubGetMeta(`${PDF_DIR}/${filename}`); if(!meta) return false;
-    const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${PDF_DIR}/${filename}`;
+    const meta = await githubGetMeta(`${dir}/${filename}`); if(!meta) return false;
+    const url = `${GH_API}/repos/${GH_OWNER}/${GH_REPO}/contents/${dir}/${filename}`;
     const r = await ghFetch(url, {
       method: 'DELETE',
       headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `حذف PDF: ${filename}`, sha: meta.sha, branch: GH_BRANCH })
+      body: JSON.stringify({ message: `حذف: ${filename}`, sha: meta.sha, branch: GH_BRANCH })
     });
     return r.ok;
   }catch(e){ return false; }
 }
+const deletePdfFile = (f) => deleteFileFromGitHub(PDF_DIR, f);
+const deleteImageFile = (f) => deleteFileFromGitHub(IMG_DIR, f);
 
 function mergeNotes(localN, remoteN){
   const merged = {};
@@ -963,17 +1027,13 @@ async function loadFromGitHub(showLoad = true){
     store.notes = mergeNotes(store.notes || {}, data.notes || {});
     store.comments = mergeMap(store.comments || {}, data.comments || {});
     store.subjects = mergeMap(store.subjects || {}, data.subjects || {});
-    // آمار: ادغام
     const remoteStats = data.stats || {};
     if(!store.stats) store.stats = { visits: 0, users: {} };
     if(remoteStats.visits > (store.stats.visits || 0)) store.stats.visits = remoteStats.visits;
     if(remoteStats.users){
-      const allUsers = { ...(store.stats.users || {}), ...remoteStats.users };
-      // ادغام کاربران (هر کاربری که دیرتر دیده شده)
-      Object.entries(store.stats.users || {}).forEach(([k, v]) => {
-        if(remoteStats.users?.[k]){
-          allUsers[k] = (v.lastSeen || 0) > (remoteStats.users[k].lastSeen || 0) ? v : remoteStats.users[k];
-        }
+      const allUsers = { ...(store.stats.users || {}) };
+      Object.entries(remoteStats.users).forEach(([k, v]) => {
+        if(!allUsers[k] || (v.lastSeen || 0) > (allUsers[k].lastSeen || 0)) allUsers[k] = v;
       });
       store.stats.users = allUsers;
     }
@@ -1004,11 +1064,8 @@ async function saveDataToGitHub(){
     cleanNotes[k] = rest;
   });
   const cleanStore = {
-    notes: cleanNotes,
-    comments: store.comments,
-    subjects: store.subjects,
-    stats: store.stats,
-    updatedAt: store.updatedAt
+    notes: cleanNotes, comments: store.comments, subjects: store.subjects,
+    stats: store.stats, updatedAt: store.updatedAt
   };
   const content = utf8ToBase64(JSON.stringify(cleanStore));
   let sha = null;
@@ -1021,13 +1078,11 @@ async function saveDataToGitHub(){
   return true;
 }
 
-/* ===== ثبت بازدید کاربر ===== */
 async function registerVisit(){
   const userId = getUserId();
   const now = Date.now();
   if(!store.stats) store.stats = { visits: 0, users: {} };
   if(!store.stats.users) store.stats.users = {};
-  
   const existing = store.stats.users[userId] || { firstSeen: now, count: 0 };
   store.stats.users[userId] = {
     firstSeen: existing.firstSeen || now,
@@ -1039,17 +1094,9 @@ async function registerVisit(){
     grade: state.grade
   };
   store.stats.visits = (store.stats.visits || 0) + 1;
-  
   localStorage.setItem(CACHE_KEY, JSON.stringify(store));
-  
-  // ارسال به GitHub (فقط اگه ادمین باشه)
   if(isAdmin){
-    try{
-      await saveDataToGitHub();
-      console.log('✅ بازدید ثبت شد');
-    }catch(e){
-      console.warn('ثبت بازدید ناموفق:', e);
-    }
+    try{ await saveDataToGitHub(); }catch(e){ console.warn('visit save failed'); }
   }
 }
 
@@ -1076,12 +1123,34 @@ function hideProgress(){
   $('#progressFillBar').style.width = '0%';
 }
 
+/* ===== قالب‌بندی متن + پردازش عکس ===== */
 function fmt(text){
   const lines = String(text || '').split('\n');
   const out = []; let inList = false;
   const closeList = () => { if(inList){ out.push('</ul>'); inList = false; } };
   for(const raw of lines){
     let l = esc(raw).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // پردازش عکس: ![alt](filename)
+    const imgMatch = l.match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/);
+    if(imgMatch){
+      closeList();
+      const alt = imgMatch[1];
+      const fname = imgMatch[2];
+      const url = getImageUrl(fname);
+      out.push(`<div class="note-img">
+        <img src="${esc(url)}" alt="${esc(alt)}" loading="lazy"
+          onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')"
+          onerror="this.style.display='none';this.parentNode.innerHTML='<div style=&quot;padding:16px;text-align:center;color:var(--dim);font-size:13px&quot;>🖼 عکس یافت نشد: ${esc(fname)}</div>'">
+        ${alt ? `<div class="note-img-caption">${esc(alt)}</div>` : ''}
+      </div>`);
+      continue;
+    }
+    // پردازش inline image (وسط متن)
+    l = l.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, fname) => {
+      const url = getImageUrl(fname);
+      return `<img src="${esc(url)}" alt="${esc(alt)}" loading="lazy"
+        onclick="openImgViewer('${esc(url)}','${esc(alt||fname)}')" style="display:inline-block;max-width:100%;height:auto;border-radius:10px;margin:8px 0;vertical-align:middle">`;
+    });
     if(/^###\s/.test(l)){ closeList(); out.push('<h4>' + l.slice(4) + '</h4>'); }
     else if(/^##\s/.test(l)){ closeList(); out.push('<h3>' + l.slice(3) + '</h3>'); }
     else if(/^#\s/.test(l)){ closeList(); out.push('<h2>' + l.slice(2) + '</h2>'); }
@@ -1093,6 +1162,12 @@ function fmt(text){
   return out.join('');
 }
 
+function getImageUrl(fname){
+  if(!fname) return '';
+  if(/^https?:\/\//i.test(fname)) return fname;
+  return `${RAW_URL}/${IMG_DIR}/${fname}`;
+}
+
 function blobToBase64(blob){
   return new Promise((res, rej) => {
     const r = new FileReader();
@@ -1101,7 +1176,14 @@ function blobToBase64(blob){
     r.readAsDataURL(blob);
   });
 }
-
+function fileToDataUrl(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
 function getPdfRawUrl(n){
   if(!n) return null;
   if(n.pdfFile) return `${RAW_URL}/${PDF_DIR}/${n.pdfFile}`;
@@ -1109,7 +1191,13 @@ function getPdfRawUrl(n){
   return null;
 }
 function hasPdf(n){ return !!(n && (n.pdfUrl || n.pdfFile || (n.pdfData && n.pdfData.length))); }
+function hasImages(n){
+  if(!n) return false;
+  if(n.images && n.images.length) return true;
+  return /!\[[^\]]*\]\([^)]+\)/.test(n.content || '');
+}
 
+/* ===== تم ===== */
 function initTheme(){
   const saved = localStorage.getItem(THEME_KEY);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1131,6 +1219,7 @@ function updateThemeIcon(theme){
     : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 }
 
+/* ===== Welcome ===== */
 function initWelcome(){
   const visited = localStorage.getItem(VISITED_KEY);
   const savedGrade = localStorage.getItem(GRADE_KEY);
@@ -1144,10 +1233,8 @@ function renderWelcomeGrid(){
   const grid = $('#welcomeGradeGrid');
   grid.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `
     <button class="welcome-grade-btn ${welcomeSelectedGrade === g ? 'active' : ''}" data-wg="${g}" type="button">
-      <span class="gnum">${fa(g)}</span>
-      <span class="glbl">پایه</span>
-    </button>
-  `).join('');
+      <span class="gnum">${fa(g)}</span><span class="glbl">پایه</span>
+    </button>`).join('');
   $('#welcomeContinue').disabled = !welcomeSelectedGrade;
 }
 $('#welcomeGradeGrid').addEventListener('click', e => {
@@ -1161,12 +1248,12 @@ $('#welcomeContinue').addEventListener('click', async () => {
   localStorage.setItem(GRADE_KEY, state.grade);
   localStorage.setItem(VISITED_KEY, '1');
   $('#welcomeOverlay').classList.add('hidden');
-  renderHome(); renderProfile(); renderLibrary(); renderSidebar();
+  renderHome(); renderProfile(); renderLibrary(); renderSidebar(); renderBookmarks();
   toast(`خوش اومدی! پایه ${fa(state.grade)}م انتخاب شد ✅`, 'success');
-  // ثبت بازدید بعد از انتخاب پایه
   if(isAdmin) await registerVisit();
 });
 
+/* ===== Sidebar ===== */
 function renderSidebar(){
   if(!isDesktop()) return;
   const sb = $('#desktopSidebar');
@@ -1225,6 +1312,7 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(() => { if(isDesktop()) renderSidebar(); }, 200);
 });
 
+/* ===== رندر ===== */
 function renderHome(){
   const notes = Object.values(store.notes).filter(n => !n.deleted && n.grade === state.grade).sort(sortNotes);
   const subs = getSubjects(state.grade);
@@ -1253,19 +1341,23 @@ function renderHome(){
 function noteCard(n){
   const st = subjStyle(n.subject);
   const cc = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).length;
-  const preview = (n.content || '').replace(/[#*\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 110);
+  const preview = (n.content || '').replace(/!\[[^\]]*\]\([^)]+\)/g,'[عکس]').replace(/[#*\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 110);
   const lessonNum = detectLessonFromNote(n);
   const lessonBadge = lessonNum ? `<span class="nc-lesson">📖 درس ${fa(lessonNum)}</span>` : '';
+  const rt = readingTime(n.content);
+  const isSaved = bookmarks.includes(n.id);
   return `<article class="note-card" data-act="open" data-id="${n.id}" style="--sc:${st.c};--sb:${st.bg}">
+    <button class="nc-bookmark ${isSaved ? 'saved' : ''}" data-bookmark="${n.id}" type="button" title="ذخیره">${isSaved ? '★' : '☆'}</button>
     <div class="nc-top">
       <span class="nc-chip">${st.i} ${esc(n.subject)}</span>
       <span class="nc-grade">پایه ${fa(n.grade)}</span>
       ${lessonBadge}
       ${hasPdf(n) ? '<span class="nc-pdf">📄 PDF</span>' : ''}
+      ${hasImages(n) ? '<span class="nc-img">🖼 عکس</span>' : ''}
     </div>
     <div class="nc-title">${esc(n.title || 'بدون عنوان')}</div>
     <div class="nc-preview">${esc(preview)}${preview.length >= 110 ? '…' : ''}</div>
-    <div class="nc-foot"><span>💬 ${fa(cc)} نظر</span><span>🕒 ${dateFa(n.ts)}</span></div>
+    <div class="nc-foot"><span>💬 ${fa(cc)} نظر</span><span>⏱ ${fa(rt)} دقیقه</span><span>🕒 ${dateFa(n.ts)}</span></div>
   </article>`;
 }
 
@@ -1296,6 +1388,18 @@ function renderLibrary(){
   $('#libraryList').innerHTML = html;
 }
 
+function renderBookmarks(){
+  const el = $('#bookmarksList');
+  const cnt = $('#bookmarkCount');
+  const savedNotes = bookmarks.map(id => store.notes[id]).filter(n => n && !n.deleted);
+  cnt.textContent = savedNotes.length ? `${fa(savedNotes.length)} جزوه` : '';
+  if(!savedNotes.length){
+    el.innerHTML = `<div class="empty"><div class="empty-icon">⭐</div><b>هیچ جزوه‌ای ذخیره نشده</b><p>روی ستاره کنار هر جزوه بزن تا اینجا ذخیره بشه.</p></div>`;
+    return;
+  }
+  el.innerHTML = savedNotes.map(noteCard).join('');
+}
+
 function renderProfile(){
   const name = localStorage.getItem(NAME_KEY) || 'دانش‌آموز مهمان';
   $('#profileName').textContent = name;
@@ -1306,7 +1410,7 @@ function renderProfile(){
   const subs = new Set(notes.map(n => n.subject));
   $('#pStatNotes').textContent = fa(notes.length);
   $('#pStatComments').textContent = fa(comments.length);
-  $('#pStatSubjects').textContent = fa(subs.size);
+  $('#pStatBookmarks').textContent = fa(bookmarks.length);
 }
 
 function renderDetail(){
@@ -1315,6 +1419,9 @@ function renderDetail(){
   const st = subjStyle(n.subject);
   $('#detailTitle').textContent = n.title || 'جزوه';
   const lessonNum = detectLessonFromNote(n);
+  const isSaved = bookmarks.includes(n.id);
+  $('#toolBookmark').textContent = isSaved ? '★' : '⭐';
+  $('#toolBookmark').classList.toggle('active', isSaved);
   const comments = Object.values(store.comments).filter(c => !c.deleted && c.noteId === n.id).sort((a,b) => a.ts - b.ts);
   const avColors = ['#6366f1','#8b5cf6','#ec4899','#f59e0b','#10b981','#0ea5e9','#ef4444'];
   const avColor = name => avColors[(name.charCodeAt(0) || 0) % avColors.length];
@@ -1326,8 +1433,10 @@ function renderDetail(){
   if(hasPdf(n)){
     const pdfName = n.pdfName || 'جزوه.pdf';
     const pdfSize = n.pdfSize || 0;
-    pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${pdfSize ? formatSize(pdfSize) : (n.pdfUrl && !n.pdfFile ? 'لینک خارجی' : 'ذخیره‌شده')}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
+    pdfHtml = `<div class="pdf-box"><div class="pdf-head"><div class="pdf-icon">📄</div><div class="pdf-info"><div class="pdf-label">فایل PDF</div><div class="pdf-name">${esc(pdfName)}</div><div class="pdf-size">${pdfSize ? formatSize(pdfSize) : 'ذخیره‌شده'}</div></div></div><div class="pdf-actions"><button class="btn btn-primary btn-sm" onclick="openPdfViewer()" type="button">👁 مشاهده</button><button class="btn btn-ghost btn-sm" onclick="downloadPdf()" type="button">⬇ دانلود</button></div></div>`;
   }
+  const rt = readingTime(n.content);
+  document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
   $('#detailBody').innerHTML = `
     <div class="note-head">
       <div class="chips-row">
@@ -1336,10 +1445,13 @@ function renderDetail(){
         ${lessonNum ? `<span class="nc-lesson">📖 درس ${fa(lessonNum)}</span>` : ''}
       </div>
       <div class="note-title">${esc(n.title || 'بدون عنوان')}</div>
-      <div class="note-meta">آخرین به‌روزرسانی: ${dateFullFa(n.ts)}</div>
+      <div class="note-meta">
+        <span>📅 ${dateFullFa(n.ts)}</span>
+        <span>⏱ ${fa(rt)} دقیقه مطالعه</span>
+      </div>
     </div>
     ${pdfHtml}
-    <article class="note-content">${fmt(n.content || '')}</article>
+    <article class="note-content" id="noteContentText">${fmt(n.content || '')}</article>
     <section class="comments"><h3>💬 نظرات ${comments.length ? `<span class="cnt-pill">${fa(comments.length)}</span>` : ''}</h3><div>${commentsHtml}</div>
       ${isAdmin ? `<form class="cmt-form" id="cmtForm"><input id="cName" placeholder="نام شما (اختیاری)" maxlength="30" value="${esc(draft.name || localStorage.getItem(NAME_KEY) || '')}"><textarea id="cText" placeholder="نظر خود را بنویسید…" rows="3" maxlength="800">${esc(draft.text || '')}</textarea><button type="submit">📨 ارسال نظر</button></form>` : ''}
     </section>`;
@@ -1349,22 +1461,20 @@ function refreshAll(){
   if(state.screen === 'home') renderHome();
   else if(state.screen === 'search') renderSearch();
   else if(state.screen === 'library') renderLibrary();
+  else if(state.screen === 'bookmarks') renderBookmarks();
   else if(state.screen === 'profile') renderProfile();
   if(state.noteId) renderDetail();
   if(!$('#admin').classList.contains('hidden')) renderAdmin();
   renderSidebar();
 }
 
-/* =========================================================
-   PDF Viewer — با retry
-   ========================================================= */
+/* ===== PDF Viewer ===== */
 function setPdfStatus(title, text, showRetry, showSpinner){
   $('#pdfLoadingTitle').textContent = title;
   $('#pdfLoadingText').textContent = text;
   $('#pdfRetryBtn').classList.toggle('hidden', !showRetry);
   $('#pdfSpinner').style.display = showSpinner ? 'block' : 'none';
 }
-
 async function fetchPdfWithRetry(url, maxRetries = 3){
   for(let i = 0; i < maxRetries; i++){
     try{
@@ -1375,21 +1485,15 @@ async function fetchPdfWithRetry(url, maxRetries = 3){
         if(blob.size > 100) return blob;
       }
       if(r.status === 404){
-        // فایل شاید هنوز آماده نیست، صبر کن و دوباره
-        if(i < maxRetries - 1){
-          await sleep(2000);
-          continue;
-        }
+        if(i < maxRetries - 1){ await sleep(2000); continue; }
         return null;
       }
     }catch(e){
-      console.warn('PDF fetch attempt', i+1, 'failed:', e);
       if(i < maxRetries - 1) await sleep(1500);
     }
   }
   return null;
 }
-
 window.openPdfViewer = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
@@ -1398,8 +1502,6 @@ window.openPdfViewer = async function(){
   $('#pdfViewerTitle').textContent = pdfName;
   $('#pdfViewer').classList.remove('hidden');
   frame.src = 'about:blank';
-  
-  // PDF base64 قدیمی
   if(n.pdfData && n.pdfData.length){
     try{
       setPdfStatus('در حال باز کردن…', 'فایل داخلی', false, true);
@@ -1412,52 +1514,30 @@ window.openPdfViewer = async function(){
       frame.src = url; dl.href = url; dl.setAttribute('download', pdfName);
       $('#pdfLoading').classList.add('hidden');
       return;
-    }catch(e){
-      setPdfStatus('خطا', 'فایل PDF خراب است', false, false);
-      return;
-    }
+    }catch(e){ setPdfStatus('خطا', 'فایل PDF خراب است', false, false); return; }
   }
-  
   const url = getPdfRawUrl(n);
-  if(!url){
-    setPdfStatus('PDF یافت نشد', 'این جزوه فایل PDF ندارد', false, false);
-    return;
-  }
-  
+  if(!url){ setPdfStatus('PDF یافت نشد', 'این جزوه فایل PDF ندارد', false, false); return; }
   setPdfStatus('در حال بارگذاری PDF…', 'لطفاً صبر کن', false, true);
-  
   const blob = await fetchPdfWithRetry(url, 3);
   if(!blob){
-    setPdfStatus(
-      '⏳ PDF آماده نیست',
-      'ممکنه آپلود هنوز کامل نشده باشه. ۱-۲ دقیقه صبر کن و دوباره تلاش کن.',
-      true, false
-    );
+    setPdfStatus('⏳ PDF آماده نیست', 'ممکنه آپلود هنوز کامل نشده باشه. ۱-۲ دقیقه صبر کن و دوباره تلاش کن.', true, false);
     return;
   }
-  
   try{
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
     currentPdfBlobUrl = blobUrl;
     frame.src = blobUrl; dl.href = blobUrl; dl.setAttribute('download', pdfName);
     $('#pdfLoading').classList.add('hidden');
-  }catch(e){
-    setPdfStatus('خطا', 'مشکل در نمایش PDF', true, false);
-  }
+  }catch(e){ setPdfStatus('خطا', 'مشکل در نمایش PDF', true, false); }
 };
-
-$('#pdfRetryBtn').addEventListener('click', () => {
-  $('#pdfLoading').classList.remove('hidden');
-  window.openPdfViewer();
-});
-
+$('#pdfRetryBtn').addEventListener('click', () => { $('#pdfLoading').classList.remove('hidden'); window.openPdfViewer(); });
 window.downloadPdf = async function(){
   const n = store.notes[state.noteId]; if(!n) return;
   const pdfName = n.pdfName || 'document.pdf';
   if(currentPdfBlobUrl){
-    const a = document.createElement('a');
-    a.href = currentPdfBlobUrl; a.download = pdfName;
+    const a = document.createElement('a'); a.href = currentPdfBlobUrl; a.download = pdfName;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     toast('📥 دانلود شروع شد', 'success'); return;
   }
@@ -1466,11 +1546,10 @@ window.downloadPdf = async function(){
   toast('در حال دانلود…');
   try{
     const blob = await fetchPdfWithRetry(url, 3);
-    if(!blob) throw new Error('not ready');
+    if(!blob) throw new Error();
     const pdfBlob = new Blob([blob], {type: 'application/pdf'});
     const blobUrl = URL.createObjectURL(pdfBlob);
-    const a = document.createElement('a');
-    a.href = blobUrl; a.download = pdfName;
+    const a = document.createElement('a'); a.href = blobUrl; a.download = pdfName;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
     toast('📥 دانلود شروع شد', 'success');
@@ -1482,6 +1561,21 @@ $('#pdfViewerClose').addEventListener('click', () => {
   if(currentPdfBlobUrl){ try{ URL.revokeObjectURL(currentPdfBlobUrl); }catch(e){} currentPdfBlobUrl = null; }
 });
 
+/* ===== Image Viewer ===== */
+window.openImgViewer = function(url, name){
+  if(currentImgUrl){ try{ URL.revokeObjectURL(currentImgUrl); }catch(e){} currentImgUrl = null; }
+  $('#imgViewerTitle').textContent = name || 'تصویر';
+  $('#imgViewerFrame').src = url;
+  $('#imgViewerDownload').href = url;
+  $('#imgViewerDownload').setAttribute('download', name || 'image');
+  $('#imgViewer').classList.remove('hidden');
+};
+$('#imgViewerClose').addEventListener('click', () => {
+  $('#imgViewer').classList.add('hidden');
+  $('#imgViewerFrame').src = '';
+});
+
+/* ===== Navigation ===== */
 function showScreen(name){
   state.screen = name;
   $$('.screen').forEach(s => s.classList.remove('active'));
@@ -1490,6 +1584,7 @@ function showScreen(name){
   if(name === 'home') renderHome();
   if(name === 'search') renderSearch();
   if(name === 'library') renderLibrary();
+  if(name === 'bookmarks') renderBookmarks();
   if(name === 'profile') renderProfile();
   window.scrollTo({top:0});
 }
@@ -1497,6 +1592,13 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', e => { e.preventDefault(); showScreen(btn.dataset.nav); });
 });
 document.addEventListener('click', e => {
+  const bm = e.target.closest('[data-bookmark]');
+  if(bm){
+    e.stopPropagation();
+    e.preventDefault();
+    toggleBookmark(bm.dataset.bookmark);
+    return;
+  }
   const t = e.target.closest('[data-act]'); if(!t) return;
   const act = t.dataset.act;
   if(act === 'subj'){ state.subject = t.dataset.s; renderHome(); renderSidebar(); }
@@ -1505,12 +1607,83 @@ document.addEventListener('click', e => {
   else if(act === 'toggle-lib'){ const g = t.closest('.lib-grade'); if(g) g.classList.toggle('open'); }
   else if(act === 'lib-sub'){ state.grade = +t.dataset.g; state.subject = t.dataset.s; state.noteId = null; localStorage.setItem(GRADE_KEY, state.grade); showScreen('home'); renderSidebar(); }
 });
-function openDetail(id){ state.noteId = id; draft = {name:'', text:''}; $('#detail').classList.remove('hidden'); renderDetail(); }
-function closeDetail(){ state.noteId = null; $('#detail').classList.add('hidden'); refreshAll(); }
+function toggleBookmark(id){
+  const idx = bookmarks.indexOf(id);
+  if(idx === -1){ bookmarks.push(id); toast('⭐ جزوه ذخیره شد', 'success'); }
+  else { bookmarks.splice(idx, 1); toast('از ذخیره‌ها حذف شد'); }
+  localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bookmarks));
+  refreshAll();
+}
+function openDetail(id){ state.noteId = id; draft = {name:'', text:''}; $('#detail').classList.remove('hidden'); renderDetail(); setTimeout(updateProgress, 30); }
+function closeDetail(){ state.noteId = null; stopTts(); $('#detail').classList.add('hidden'); refreshAll(); }
 $('#detailBack').addEventListener('click', closeDetail);
 $('#themeToggle').addEventListener('click', toggleTheme);
 $('#brandClick').addEventListener('click', () => showScreen('home'));
 
+/* ===== Detail tools ===== */
+function updateProgress(){
+  const body = $('#detailBody');
+  if(!body) return;
+  const max = body.scrollHeight - body.clientHeight;
+  const pct = max > 0 ? (body.scrollTop / max) * 100 : 0;
+  $('#progressFill').style.width = pct + '%';
+}
+document.addEventListener('scroll', updateProgress, true);
+$('#toolBookmark').addEventListener('click', () => { if(state.noteId) toggleBookmark(state.noteId); });
+$('#toolShare').addEventListener('click', async () => {
+  if(!state.noteId) return;
+  const n = store.notes[state.noteId]; if(!n) return;
+  const url = location.href.split('?')[0] + '?n=' + state.noteId;
+  const text = `${n.title || 'جزوه'}\n${url}`;
+  try{
+    if(navigator.share){ await navigator.share({ title: n.title, text: n.title, url }); }
+    else { await navigator.clipboard.writeText(text); toast('لینک کپی شد ✅', 'success'); }
+  }catch(e){ toast('کپی نشد', 'error'); }
+});
+$('#toolFontUp').addEventListener('click', () => {
+  noteFontSize = Math.min(24, noteFontSize + 1);
+  localStorage.setItem(FONT_SIZE_KEY, noteFontSize);
+  document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
+  toast(`اندازه متن: ${fa(noteFontSize)}`);
+});
+$('#toolFontDown').addEventListener('click', () => {
+  noteFontSize = Math.max(12, noteFontSize - 1);
+  localStorage.setItem(FONT_SIZE_KEY, noteFontSize);
+  document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
+  toast(`اندازه متن: ${fa(noteFontSize)}`);
+});
+
+/* ===== Text to Speech ===== */
+let ttsUtterance = null;
+let isSpeaking = false;
+$('#toolTts').addEventListener('click', () => {
+  if(isSpeaking){ stopTts(); return; }
+  const n = store.notes[state.noteId]; if(!n) return;
+  const textToRead = (n.content || '').replace(/!\[[^\]]*\]\([^)]+\)/g, '').replace(/[#*\-]/g, '').replace(/\n+/g, '. ').trim();
+  if(!textToRead){ toast('متنی برای خواندن نیست', 'error'); return; }
+  if(!('speechSynthesis' in window)){ toast('مرورگرت پشتیبانی نمی‌کنه', 'error'); return; }
+  window.speechSynthesis.cancel();
+  ttsUtterance = new SpeechSynthesisUtterance(textToRead);
+  ttsUtterance.lang = 'fa-IR';
+  ttsUtterance.rate = 0.95;
+  const voices = window.speechSynthesis.getVoices();
+  const faVoice = voices.find(v => v.lang && v.lang.startsWith('fa'));
+  if(faVoice) ttsUtterance.voice = faVoice;
+  ttsUtterance.onend = () => { isSpeaking = false; $('#toolTts').textContent = '🔊'; $('#toolTts').classList.remove('active'); };
+  ttsUtterance.onerror = () => { isSpeaking = false; $('#toolTts').textContent = '🔊'; $('#toolTts').classList.remove('active'); };
+  window.speechSynthesis.speak(ttsUtterance);
+  isSpeaking = true;
+  $('#toolTts').textContent = '⏹';
+  $('#toolTts').classList.add('active');
+  toast('🔊 در حال خواندن…');
+});
+function stopTts(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  isSpeaking = false;
+  const btn = $('#toolTts'); if(btn){ btn.textContent = '🔊'; btn.classList.remove('active'); }
+}
+
+/* ===== Grade Sheet ===== */
 function openGradeSheet(){
   $('#gradeGrid').innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<button class="grade-opt ${g === state.grade ? 'active' : ''}" data-grade="${g}" type="button"><span class="num">${fa(g)}</span><span class="lbl">پایه</span></button>`).join('');
   $('#sheetOverlay').classList.add('show'); $('#sheet').classList.add('show');
@@ -1538,11 +1711,10 @@ $('#menuSync').addEventListener('click', async () => {
   await loadFromGitHub(false);
   toast(isOnline ? 'به‌روزرسانی شد ✅' : 'اتصال برقرار نشد ⚠️', isOnline ? 'success' : 'error');
 });
+
 const handleSearch = debounce(q => { state.searchQuery = q; renderSearch(); }, 180);
 $('#searchInput').addEventListener('input', e => handleSearch(e.target.value));
-$('#searchClear').addEventListener('click', () => {
-  $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); $('#searchInput').focus();
-});
+$('#searchClear').addEventListener('click', () => { $('#searchInput').value = ''; state.searchQuery = ''; renderSearch(); $('#searchInput').focus(); });
 document.addEventListener('input', e => {
   if(e.target.id === 'cName') draft.name = e.target.value;
   if(e.target.id === 'cText') draft.text = e.target.value;
@@ -1597,9 +1769,9 @@ function renderAdminNotes(){
   el.innerHTML = notes.map(n => {
     const st = subjStyle(n.subject);
     const lessonNum = detectLessonFromNote(n);
-    const pdfTag = hasPdf(n) ? '📄' : '';
+    const tags = (hasPdf(n) ? '📄' : '') + (hasImages(n) ? '🖼' : '');
     const lessonBadge = lessonNum ? `<span class="admin-item-lesson">${fa(lessonNum)}</span>` : '';
-    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${pdfTag}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span>${lessonNum ? `<span>•</span><span>📖 درس ${fa(lessonNum)}</span>` : ''}<span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
+    return `<div class="admin-item"><div class="admin-item-icon" style="background:${st.bg};color:${st.c}">${st.i}${lessonBadge}</div><div class="admin-item-body"><div class="admin-item-title">${esc(n.title || 'بدون عنوان')} ${tags}</div><div class="admin-item-meta"><span>${esc(n.subject)}</span><span>•</span><span>پایه ${fa(n.grade)}</span>${lessonNum ? `<span>•</span><span>📖 درس ${fa(lessonNum)}</span>` : ''}<span>•</span><span>${dateFa(n.ts)}</span></div></div><div class="admin-item-actions"><button class="btn btn-ghost btn-sm" data-admin-edit="${n.id}" type="button">✏️</button></div></div>`;
   }).join('');
   el.querySelectorAll('[data-admin-edit]').forEach(b => b.addEventListener('click', () => openEditor(b.dataset.adminEdit)));
 }
@@ -1614,87 +1786,47 @@ function renderAdminSubjects(){
   }).join('');
   el.querySelectorAll('[data-admin-del-subj]').forEach(b => b.addEventListener('click', () => deleteSubject(b.dataset.adminDelSubj)));
 }
-
-/* ===== Users Tab ===== */
 function renderUsers(){
   const el = $('#usersStats');
   if(!store.stats) store.stats = { visits: 0, users: {} };
   const users = store.stats.users || {};
   const usersArr = Object.entries(users).map(([id, data]) => ({ id, ...data }));
   usersArr.sort((a, b) => (b.lastSeen || 0) - (a.lastSeen || 0));
-  
   const total = usersArr.length;
   const now = Date.now();
   const online = usersArr.filter(u => (now - (u.lastSeen || 0)) < 5 * 60 * 1000).length;
   const visits = store.stats.visits || 0;
-  
   $('#tabUsersCount').textContent = fa(total);
-  
   let html = `<div class="stats-grid">
-    <div class="stat-big">
-      <div class="ico">👥</div>
-      <div class="num">${fa(total)}</div>
-      <div class="lbl">کاربر یکتا</div>
-    </div>
-    <div class="stat-big">
-      <div class="ico">👁</div>
-      <div class="num">${fa(visits)}</div>
-      <div class="lbl">کل بازدیدها</div>
-    </div>
-    <div class="stat-big">
-      <div class="ico">🟢</div>
-      <div class="num">${fa(online)}</div>
-      <div class="lbl">آنلاین (۵ دقیقه)</div>
-    </div>
+    <div class="stat-big"><div class="ico">👥</div><div class="num">${fa(total)}</div><div class="lbl">کاربر یکتا</div></div>
+    <div class="stat-big"><div class="ico">👁</div><div class="num">${fa(visits)}</div><div class="lbl">کل بازدیدها</div></div>
+    <div class="stat-big"><div class="ico">🟢</div><div class="num">${fa(online)}</div><div class="lbl">آنلاین (۵ دقیقه)</div></div>
   </div>`;
-  
   if(!usersArr.length){
-    html += `<div class="admin-empty">هنوز آماری ثبت نشده.<br><br>ℹ️ آمار از این به بعد ثبت می‌شه. هر بار که کسی وارد اپ می‌شه، یه بازدید ثبت می‌شه.</div>`;
+    html += `<div class="admin-empty">هنوز آماری ثبت نشده.</div>`;
   } else {
     html += `<div style="font-size:13px;font-weight:800;color:var(--mut);margin:16px 0 10px;padding:0 4px">📋 لیست کاربران (${fa(total)} نفر):</div>`;
     html += usersArr.map(u => {
       const isOnlineNow = (now - (u.lastSeen || 0)) < 5 * 60 * 1000;
-      const initial = (u.grade ? `کلاس ${fa(u.grade)}` : 'کاربر');
-      return `<div class="user-row">
-        <div class="user-av">${fa(u.grade || 0)}</div>
-        <div class="user-info">
-          <div class="user-name">${initial}${u.device === 'موبایل' ? ' 📱' : ' 💻'}</div>
-          <div class="user-meta">${esc(u.browser || '?')} • ${esc(u.os || '?')} • ${timeAgo(u.lastSeen || 0)}</div>
-        </div>
-        <div class="user-badge ${isOnlineNow ? 'online' : ''}">
-          ${isOnlineNow ? 'آنلاین' : fa(u.count || 1) + ' بازدید'}
-        </div>
-      </div>`;
+      return `<div class="user-row"><div class="user-av">${fa(u.grade || 0)}</div><div class="user-info"><div class="user-name">${u.grade ? 'پایه ' + fa(u.grade) : 'کاربر'}${u.device === 'موبایل' ? ' 📱' : ' 💻'}</div><div class="user-meta">${esc(u.browser || '?')} • ${esc(u.os || '?')} • ${timeAgo(u.lastSeen || 0)}</div></div><div class="user-badge ${isOnlineNow ? 'online' : ''}">${isOnlineNow ? 'آنلاین' : fa(u.count || 1) + ' بازدید'}</div></div>`;
     }).join('');
   }
-  
   el.innerHTML = html;
 }
-$('#btnRefreshUsers').addEventListener('click', async () => {
-  toast('در حال دریافت آمار…');
-  await loadFromGitHub(false);
-  renderUsers();
-  toast('به‌روز شد ✅', 'success');
-});
-
+$('#btnRefreshUsers').addEventListener('click', async () => { toast('در حال دریافت…'); await loadFromGitHub(false); renderUsers(); toast('به‌روز شد ✅', 'success'); });
 function renderAdminSettings(){
   $('#setGhRepo').value = `${GH_OWNER}/${GH_REPO}`;
   $('#setGhToken').value = getToken();
   const statusEl = $('#ghStatus');
-  if(isAdmin){
-    statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}`;
-    statusEl.style.color = 'var(--oktxt)';
-  } else {
-    statusEl.innerHTML = `⚠️ <b>توکن تنظیم نشده</b><br>فقط می‌توانی بخوانی.`;
-    statusEl.style.color = 'var(--warntxt)';
-  }
+  if(isAdmin){ statusEl.innerHTML = `✅ <b>متصل به GitHub</b><br>مخزن: ${GH_OWNER}/${GH_REPO}`; statusEl.style.color = 'var(--oktxt)'; }
+  else { statusEl.innerHTML = `⚠️ <b>توکن تنظیم نشده</b><br>فقط می‌توانی بخوانی.`; statusEl.style.color = 'var(--warntxt)'; }
   const nCount = Object.values(store.notes).filter(n => !n.deleted).length;
   const cCount = Object.values(store.comments).filter(c => !c.deleted).length;
   const sCount = Object.values(store.subjects).filter(s => !s.deleted).length;
   const pdfFiles = Object.values(store.notes).filter(n => !n.deleted && n.pdfFile).length;
-  const withLesson = Object.values(store.notes).filter(n => !n.deleted && detectLessonFromNote(n)).length;
+  const imgFiles = Object.values(store.notes).filter(n => !n.deleted && n.images && n.images.length).length;
   const sizeBytes = new Blob([JSON.stringify(store)]).size;
-  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>📖 با شماره درس: <b>${fa(withLesson)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF: <b>${fa(pdfFiles)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
+  $('#adminStats').innerHTML = `📝 جزوه‌ها: <b>${fa(nCount)}</b><br>💬 نظرات: <b>${fa(cCount)}</b><br>📚 درس‌ها: <b>${fa(sCount)}</b><br>📄 PDF: <b>${fa(pdfFiles)}</b><br>🖼 جزوه‌های عکس‌دار: <b>${fa(imgFiles)}</b><br>💾 حجم data.json: <b>${formatSize(sizeBytes)}</b>`;
 }
 function renderAdmin(){ renderAdminFilter(); renderAdminNotes(); renderAdminSubjects(); renderUsers(); renderAdminSettings(); }
 $('#btnSaveGh').addEventListener('click', async () => {
@@ -1709,16 +1841,13 @@ $('#btnSaveGh').addEventListener('click', async () => {
 });
 $('#btnDisconnect').addEventListener('click', () => {
   if(!confirm('توکن حذف شود؟')) return;
-  setToken(''); isAdmin = false;
-  renderAdminSettings();
+  setToken(''); isAdmin = false; renderAdminSettings();
   toast('توکن حذف شد', 'success');
 });
-
 $('#btnResortNotes').addEventListener('click', async () => {
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   if(!confirm('همه جزوه‌ها بر اساس شماره درس مرتب بشن؟')) return;
-  setLoading(true, 'در حال مرتب‌سازی…');
-  showProgress(30);
+  setLoading(true, 'در حال مرتب‌سازی…'); showProgress(30);
   let count = 0;
   Object.values(store.notes).forEach(n => {
     if(n.deleted) return;
@@ -1740,10 +1869,58 @@ function updateLessonHint(){
   if(title){ const n = detectLessonNumber(title); if(n){ $('#lessonHint').innerHTML = `🔮 تشخیص خودکار: <b>درس ${fa(n)}</b>`; return; } }
   $('#lessonHint').innerHTML = `💡 اگه خالی بذاری، خودکار از عنوان پیدا می‌شه`;
 }
+function renderImgList(){
+  const el = $('#imgList');
+  if(!editingImages.length){ el.innerHTML = ''; $('#imgUploadName').textContent = 'هیچ عکسی انتخاب نشده'; $('#imgUploadSize').textContent = 'می‌تونی چند تا عکس با هم انتخاب کنی'; return; }
+  $('#imgUploadName').textContent = `${fa(editingImages.length)} عکس آماده`;
+  const total = editingImages.reduce((s, i) => s + (i.size || 0), 0);
+  $('#imgUploadSize').textContent = total ? `${formatSize(total)}` : 'روی هر عکس بزن تا کدش کپی بشه';
+  el.innerHTML = editingImages.map((img, i) => `
+    <div class="img-thumb" title="بزن تا کد درج بشه" data-img-insert="${i}">
+      <img src="${img.dataUrl || img.url}" alt="">
+      <button class="img-thumb-remove" data-img-remove="${i}" type="button">✕</button>
+    </div>`).join('');
+}
+$('#imgList').addEventListener('click', e => {
+  const rm = e.target.closest('[data-img-remove]');
+  if(rm){
+    e.stopPropagation();
+    editingImages.splice(+rm.dataset.imgRemove, 1);
+    renderImgList();
+    return;
+  }
+  const ins = e.target.closest('[data-img-insert]');
+  if(ins){
+    const img = editingImages[+ins.dataset.imgInsert];
+    if(!img) return;
+    insertTextAtCursor('#edContent', `\n![${img.alt || ''}](${img.name})\n`);
+    toast('✅ کد عکس درج شد');
+  }
+});
+function insertTextAtCursor(selector, text){
+  const el = $(selector); if(!el) return;
+  const start = el.selectionStart ?? el.value.length;
+  const end = el.selectionEnd ?? el.value.length;
+  const val = el.value;
+  el.value = val.slice(0, start) + text + val.slice(end);
+  el.selectionStart = el.selectionEnd = start + text.length;
+  el.focus();
+  el.dispatchEvent(new Event('input'));
+}
+$('#ctInsertImage').addEventListener('click', () => { if(editingImages.length){ const last = editingImages[editingImages.length - 1]; insertTextAtCursor('#edContent', `\n![${last.alt || ''}](${last.name})\n`); toast('✅ کد آخرین عکس درج شد'); } else { $('#edImgFile').click(); } });
+document.querySelectorAll('.ct-btn[data-insert]').forEach(b => {
+  b.addEventListener('click', () => {
+    const t = b.dataset.insert;
+    const textarea = $('#edContent');
+    if(t === '**متن مهم**'){ insertTextAtCursor('#edContent', '**متن مهم**'); }
+    else { insertTextAtCursor('#edContent', '\n' + t); }
+  });
+});
 function openEditor(id){
   if(!isAdmin){ toast('ابتدا توکن را وارد کن', 'error'); return; }
   editingNoteId = id || null;
   editingPdfFile = null; editingPdfExisting = null; editingPdfExistingFile = ''; editingPdfExistingName = ''; editingPdfExistingSize = 0;
+  editingImages = [];
   const gradeSel = $('#edGrade');
   gradeSel.innerHTML = Array.from({length:9}, (_, i) => i + 1).map(g => `<option value="${g}">پایه ${fa(g)}م</option>`).join('');
   if(id){
@@ -1753,6 +1930,10 @@ function openEditor(id){
     $('#edTitle').value = n.title || ''; $('#edContent').value = n.content || ''; $('#edPdfUrl').value = n.pdfUrl && !n.pdfFile ? n.pdfUrl : '';
     $('#edLessonNum').value = n.lessonNum || '';
     updateLessonHint();
+    if(n.images && n.images.length){
+      editingImages = n.images.map(im => ({ name: im.name, url: getImageUrl(im.name), size: im.size || 0, uploaded: true }));
+    }
+    renderImgList();
     if(n.pdfFile){
       editingPdfExistingFile = n.pdfFile; editingPdfExistingName = n.pdfName || 'file.pdf'; editingPdfExistingSize = n.pdfSize || 0;
       showPdfUpload(editingPdfExistingName, editingPdfExistingSize, true);
@@ -1766,6 +1947,7 @@ function openEditor(id){
     gradeSel.value = state.grade; populateSubjects(state.grade);
     $('#edTitle').value = ''; $('#edContent').value = ''; $('#edPdfUrl').value = ''; $('#edLessonNum').value = '';
     updateLessonHint();
+    renderImgList();
     resetPdfUpload();
     $('#editorDelete').classList.add('hidden');
   }
@@ -1795,7 +1977,7 @@ $('#edLessonNum').addEventListener('input', updateLessonHint);
 $('#edGrade').addEventListener('change', function(){ populateSubjects(+this.value); });
 $('#editorBack').addEventListener('click', closeEditor);
 $('#editorCancel').addEventListener('click', closeEditor);
-function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; }
+function closeEditor(){ $('#editor').classList.add('hidden'); editingNoteId = null; editingImages = []; }
 $('#btnChoosePdf').addEventListener('click', (e) => { e.stopPropagation(); $('#edPdfFile').click(); });
 $('#pdfUploadArea').addEventListener('click', () => $('#edPdfFile').click());
 $('#btnRemovePdf').addEventListener('click', (e) => {
@@ -1808,6 +1990,21 @@ $('#edPdfFile').addEventListener('change', e => {
   if(file.type !== 'application/pdf'){ toast('فقط PDF', 'error'); resetPdfUpload(); return; }
   editingPdfFile = file; editingPdfExisting = null; editingPdfExistingFile = '';
   showPdfUpload(file.name, file.size, false);
+});
+/* Image selection */
+$('#btnChooseImg').addEventListener('click', (e) => { e.stopPropagation(); $('#edImgFile').click(); });
+$('#imgUploadArea').addEventListener('click', () => $('#edImgFile').click());
+$('#edImgFile').addEventListener('change', async e => {
+  const files = Array.from(e.target.files || []);
+  for(const f of files){
+    if(!f.type.startsWith('image/')) continue;
+    if(f.size > 5 * 1024 * 1024){ toast(`«${f.name}» بزرگ‌تر از ۵ مگه`, 'error'); continue; }
+    const dataUrl = await fileToDataUrl(f);
+    editingImages.push({ file: f, name: f.name, dataUrl, size: f.size, alt: f.name.replace(/\.[^.]+$/, '') });
+  }
+  e.target.value = '';
+  renderImgList();
+  if(files.length) toast(`✅ ${fa(editingImages.length)} عکس آماده`);
 });
 
 $('#editorSave').addEventListener('click', async () => {
@@ -1826,12 +2023,28 @@ $('#editorSave').addEventListener('click', async () => {
   if(lessonNum) item.lessonNum = lessonNum;
   const btn = $('#editorSave'); btn.disabled = true;
   try{
+    // ==== آپلود عکس‌ها ====
+    const newImages = [];
+    for(const img of editingImages){
+      if(img.uploaded){ newImages.push({ name: img.name, size: img.size || 0 }); continue; }
+      const filename = `img_${id}_${Date.now().toString(36)}_${(newImages.length+1)}.${(img.file.name.split('.').pop()||'jpg').toLowerCase()}`;
+      setLoading(true, `در حال آپلود عکس ${fa(newImages.length+1)} از ${fa(editingImages.length)}…`, img.file.name);
+      showProgress(20 + (newImages.length / editingImages.length) * 30);
+      const base64 = await blobToBase64(img.file);
+      const result = await uploadImageFile(filename, base64);
+      // rename در content
+      if(content.includes(`](${img.name})`)){
+        item.content = item.content.replace(new RegExp(`\\]\\(${img.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\)`, 'g'), `](${filename})`);
+      }
+      newImages.push({ name: filename, size: result.size });
+    }
+    if(newImages.length) item.images = newImages;
+    
+    // ==== PDF ====
     if(editingPdfFile){
-      setLoading(true, `آماده‌سازی PDF (${(editingPdfFile.size/1024/1024).toFixed(2)} MB)…`, '');
-      showProgress(20);
+      setLoading(true, 'در حال آپلود PDF…', editingPdfFile.name);
+      showProgress(60);
       const base64Data = await blobToBase64(editingPdfFile);
-      setLoading(true, 'در حال آپلود به GitHub…', 'لطفاً صبر کن');
-      showProgress(50);
       const filename = `note_${id}_${Date.now().toString(36)}.pdf`;
       const result = await uploadPdfFile(filename, base64Data);
       showProgress(80);
@@ -1844,12 +2057,13 @@ $('#editorSave').addEventListener('click', async () => {
     } else if(pdfUrlInput){
       item.pdfUrl = pdfUrlInput; item.pdfName = pdfUrlInput.split('/').pop()?.split('?')[0] || 'file.pdf';
     }
+    
     store.notes[id] = item;
     setLoading(true, 'در حال ذخیره data.json…', '');
     showProgress(90);
     await saveDataToGitHub();
     showProgress(100);
-    await sleep(500);
+    await sleep(400);
     closeEditor(); renderAdmin(); renderHome();
     toast(editingNoteId ? '✅ ویرایش ذخیره شد' : '✅ جزوه منتشر شد', 'success');
   }catch(err){ console.error(err); toast('❌ خطا: ' + err.message, 'error'); }
@@ -1861,12 +2075,17 @@ $('#editorDelete').addEventListener('click', async () => {
   if(!confirm('این جزوه حذف شود؟')) return;
   const oldNote = store.notes[editingNoteId];
   const pdfToDelete = oldNote.pdfFile;
+  const imgsToDelete = (oldNote.images || []).map(i => i.name);
   const tomb = {kind:'note', id: editingNoteId, grade: oldNote.grade, subject: oldNote.subject, title:'', content:'', deleted:true, ts:Date.now()};
   store.notes[tomb.id] = tomb;
   closeEditor(); renderAdmin(); renderHome();
   toast('در حال حذف…');
-  try{ await saveDataToGitHub(); if(pdfToDelete) deletePdfFile(pdfToDelete).catch(()=>{}); toast('✅ حذف شد', 'success'); }
-  catch(e){ toast('خطا: ' + e.message, 'error'); }
+  try{
+    await saveDataToGitHub();
+    if(pdfToDelete) deletePdfFile(pdfToDelete).catch(()=>{});
+    imgsToDelete.forEach(f => deleteImageFile(f).catch(()=>{}));
+    toast('✅ حذف شد', 'success');
+  }catch(e){ toast('خطا: ' + e.message, 'error'); }
 });
 
 /* ===== Bulk ===== */
@@ -1890,13 +2109,7 @@ function populateBulkSubjects(grade){
 }
 function renderBulkList(){
   const el = $('#bulkList');
-  if(!bulkFiles.length){
-    el.innerHTML = '';
-    $('#bulkUploadName').textContent = 'برای انتخاب کلیک کن';
-    $('#bulkUploadSize').textContent = 'چند تا PDF رو با هم انتخاب کن';
-    $('#bulkUploadArea').classList.remove('has-file');
-    return;
-  }
+  if(!bulkFiles.length){ el.innerHTML = ''; $('#bulkUploadName').textContent = 'برای انتخاب کلیک کن'; $('#bulkUploadSize').textContent = 'چند تا PDF رو با هم انتخاب کن'; $('#bulkUploadArea').classList.remove('has-file'); return; }
   const totalMB = bulkFiles.reduce((s, f) => s + f.size, 0) / 1024 / 1024;
   $('#bulkUploadName').textContent = `${fa(bulkFiles.length)} فایل انتخاب شد`;
   $('#bulkUploadSize').textContent = `حجم کل: ${totalMB.toFixed(1)} مگابایت`;
@@ -1958,8 +2171,7 @@ $('#bulkSave').addEventListener('click', async () => {
       if(lessonNum) item.lessonNum = lessonNum;
       store.notes[noteId] = item;
       await saveDataToGitHub();
-      file._status = 'done';
-      ok++;
+      file._status = 'done'; ok++;
     }catch(e){ console.error(e); file._status = 'error'; err++; }
     renderBulkList();
     $('#bulkOkCount').textContent = fa(ok);
@@ -2026,30 +2238,24 @@ function toast(msg, type){
   toastT = setTimeout(() => el.classList.remove('show'), 4000);
 }
 
-/* =========================================================
-   INIT
-   ========================================================= */
+/* ===== INIT ===== */
 (async function init(){
   initTheme();
   isAdmin = !!getToken();
   const isFirst = initWelcome();
   try{
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-    if(cached && cached.notes){
-      store = cached;
-      if(!store.stats) store.stats = { visits: 0, users: {} };
-    }
+    if(cached && cached.notes){ store = cached; if(!store.stats) store.stats = { visits: 0, users: {} }; }
   }catch(e){}
-  if(!isFirst){
-    state.grade = +(localStorage.getItem(GRADE_KEY) || 7);
-  }
-  renderHome(); renderProfile(); renderLibrary();
+  if(!isFirst){ state.grade = +(localStorage.getItem(GRADE_KEY) || 7); }
+  document.documentElement.style.setProperty('--note-font', noteFontSize + 'px');
+  renderHome(); renderProfile(); renderLibrary(); renderBookmarks();
   if(isDesktop()) renderSidebar();
   await loadFromGitHub(true);
-  // ثبت بازدید (اگه کاربر قبلی و مدیر هست)
-  if(!isFirst && isAdmin){
-    await registerVisit();
-  }
+  if(!isFirst && isAdmin) await registerVisit();
+  // اگه URL پارامتر n= داشت، جزوه رو باز کن
+  const params = new URLSearchParams(location.search);
+  if(params.get('n') && store.notes[params.get('n')]) openDetail(params.get('n'));
   setInterval(() => { if(!state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false); }, 120000);
   document.addEventListener('visibilitychange', () => {
     if(!document.hidden && !state.noteId && $('#admin').classList.contains('hidden')) loadFromGitHub(false);
@@ -2057,11 +2263,13 @@ function toast(msg, type){
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape'){
       if(!$('#pdfViewer').classList.contains('hidden')) $('#pdfViewerClose').click();
+      else if(!$('#imgViewer').classList.contains('hidden')) $('#imgViewerClose').click();
       else if(state.noteId) closeDetail();
       else if($('#sheet').classList.contains('show')) closeSheet();
       else if(!$('#bulkEditor').classList.contains('hidden') && !bulkStopFlag) closeBulkEditor();
     }
   });
+  if('speechSynthesis' in window) window.speechSynthesis.getVoices();
 })();
 </script>
 </body>
